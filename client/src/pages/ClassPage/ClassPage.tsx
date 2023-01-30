@@ -1,9 +1,6 @@
-import DiaryDay from '../../components/DiaryDay/DiaryDay';
+import { useState } from 'react';
 import PupilsList from '../../components/PuppilsList/PupilsList';
-import PupilList from '../../components/PuppilsList/PupilsList';
-import { getMonth } from '../../helpers/dataHelper';
-import { setEndWeek, setStartWeek } from '../../reducers/scheduleReducer';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import TabContent from '../../components/Tabs/Tabs';
 
 export type IPupil = {
   id: string;
@@ -133,17 +130,46 @@ const classData: IClass = {
   ],
 };
 
+const tabsList = [
+  { title: 'Список класса', content: <PupilsList {...classData} /> },
+  { title: 'Фото класса', content: 'Photo' },
+  { title: 'Наш учитель', content: 'TeacherInfo или редирект на страницу учителя' },
+];
+
+export type ITabsList = {
+  title: string;
+  content: JSX.Element | string;
+};
+
 const ClassPage = () => {
-  const dispatch = useAppDispatch();
-  const startWeek = useAppSelector((state) => state.schedule.startWeek);
-  const endWeek = useAppSelector((state) => state.schedule.endWeek);
+  const [active, setActive] = useState<number>(0);
+
+  const openTab = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const currentTab = e.target as HTMLButtonElement;
+    const activeTab = Number(currentTab.dataset.index);
+    setActive(activeTab);
+  };
 
   return (
     <div>
       <h3>{classData.name}</h3>
       <div>
-        <p>Наш класс</p>
-        <PupilsList {...classData} />
+        {/* <PupilsList {...classData} /> */}
+        <div>
+          <div className="tab">
+            {tabsList.map((n, i) => (
+              <button
+                className={`tablinks ${i === active ? 'active' : ''}`}
+                onClick={openTab}
+                data-index={i}
+                key={i}
+              >
+                {n.title}
+              </button>
+            ))}
+          </div>
+          {tabsList[active] && <TabContent {...tabsList[active]} />}
+        </div>
       </div>
     </div>
   );
