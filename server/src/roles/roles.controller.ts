@@ -9,14 +9,22 @@ import { RolesService } from "./roles.service";
 export class RolesController {
   constructor(private roleService: RolesService) {}
 
-  @ApiOperation({ summary: "Create a user role"})
+  @ApiOperation({ summary: "Create a user role" })
   @ApiResponse({ status: 200, type: Role })
   @Post()
   create(@Body() dto: CreateRoleDto) {
     return this.roleService.createRole(dto);
   }
 
-  @ApiOperation({ summary: "Get a user role by value"})
+  @ApiOperation({ summary: "Get all roles" })
+  @ApiResponse({ status: 200, type: [Role] })
+  @ApiResponse({ status: 404, description: "Roles not found" })
+  @Get()
+  getAll() {
+    return this.roleService.getRoles();
+  }
+
+  @ApiOperation({ summary: "Get a role by value" })
   @ApiResponse({ status: 200, type: Role })
   @Get("/:value")
   getByValue(@Param("value") value: string) {

@@ -10,14 +10,14 @@ async function run() {
     .setTitle("School Book")
     .setDescription("Documentation REST API")
     .setVersion("1.0.0")
-    .build()
-  
+    .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("/api/docs", app, document);
 
   await app.listen(PORT, () => {
     console.log(`Server started on port = ${PORT}`);
-  })
+  });
 }
 
 run();
