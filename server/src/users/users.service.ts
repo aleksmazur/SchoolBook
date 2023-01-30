@@ -44,4 +44,30 @@ export class UsersService {
     }
     return users;
   }
+
+  async getUserByID(id: number) {
+    const user = await this.userRepository.findOne({
+      where: { id },
+    });
+    if (!user) {
+      throw new HttpException(
+        `User with ID '${id}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return user;
+  }
+
+  async deleteUserByID(id: number) {
+    const user = await this.userRepository.findOne({
+      where: { id },
+    });
+    if (!user) {
+      throw new HttpException(
+        `User with ID '${id}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    await user.destroy();
+  }
 }
