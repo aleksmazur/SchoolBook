@@ -1,24 +1,23 @@
 import { IClass, IPupil } from '../../pages/ClassPage/ClassPage';
-import { useAppSelector } from '../../store/hooks';
-import PupilItem from '../Pupil/Pupil';
+import PupilItem from '../PupilItem/PupilItem';
 
 const PupilsList = ({ pupils }: IClass) => {
-  //   const startDayToWeek = useAppSelector((state) => state.schedule.startWeek);
-
-  console.log(pupils);
-
   return (
-    <div className="pupilsList__container">
+    <div className="pupilsList__table">
       <table>
         <thead>
           <tr>
-            <th className="pupilsList">
-              {pupils.map((pupil: IPupil, ind: number) => {
-                return <PupilItem {...pupil} key={ind} />;
-              })}
-            </th>
+            <th></th>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+            <th>Адресс</th>
           </tr>
         </thead>
+        <tbody>
+          {pupils.map((pupil: IPupil, ind: number) => {
+            return <PupilItem {...pupil} key={ind} />;
+          })}
+        </tbody>
       </table>
     </div>
   );
