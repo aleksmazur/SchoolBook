@@ -1,0 +1,12 @@
+.schedule__list {
+
+}
+
+.schedule__item {
+    margin: 20px;
+}
+
+.schedule__lesson {
+    display: block;
+    margin: 5px;
+}

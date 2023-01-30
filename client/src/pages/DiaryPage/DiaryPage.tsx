@@ -3,13 +3,13 @@ import { getMonth } from '../../helpers/dataHelper';
 import { setEndWeek, setStartWeek } from '../../reducers/scheduleReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
-const schedule = [
+export const schedule = [
   ['математика', 'русский', 'труд'],
   ['литература', 'белорусский', 'физкультура'],
   ['литература', 'математика', 'физкультура'],
   ['литература', 'изо', 'физкультура'],
   ['литература', 'труд', 'физкультура'],
-  [],
+  ['', '', ''],
 ];
 
 const DiaryPage = () => {
