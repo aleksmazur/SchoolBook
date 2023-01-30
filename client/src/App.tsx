@@ -4,6 +4,7 @@ import MainPage from './pages/MainPage/MainPage';
 import Page404 from './pages/Page404/Page404';
 import SchedulePage from './pages/SchedulePage/SchedulePage';
 import './app.css';
+import ClassPage from './pages/ClassPage/ClassPage';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="diary" element={<DiaryPage />} />
         <Route path="schedule" element={<SchedulePage />} />
+        <Route path="class" element={<ClassPage />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </div>
