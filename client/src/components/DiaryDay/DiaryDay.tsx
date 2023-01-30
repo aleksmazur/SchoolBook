@@ -1,4 +1,4 @@
-import { getWeekDay } from '../../pages/SchedulePage/SchedulePage';
+import { getWeekDay } from '../../helpers/dataHelper';
 import { useAppSelector } from '../../store/hooks';
 import Lesson from '../Lesson/Lesson';
 
