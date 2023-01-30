@@ -3,7 +3,7 @@ type ILesson = {
 };
 
 const Lesson = ({ lesson }: ILesson) => {
-  return <div className="schedule__lesson">{lesson}</div>;
+  return <td className="schedule__lesson">{lesson}</td>;
 };
 
 export default Lesson;
