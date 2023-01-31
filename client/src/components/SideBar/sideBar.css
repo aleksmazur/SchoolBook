@@ -1,0 +1,53 @@
+.sidebar__ul {
+    list-style: none;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+}
+
+.sidebar__li {
+    display: flex;
+    gap: 15px;
+    padding: 10px 16px;
+    cursor: pointer;
+    align-items: center;
+    text-decoration: none;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar__li:hover {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 5px;
+}
+
+.sidebar__li.active {
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px #2b1a1a80;
+}
+
+.sidebar__li-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+}
+
+.icon-main {
+    background-image: url(./../../assets/svg/main.svg);
+}
+.icon-schedule {
+    background-image: url(./../../assets/svg/schedule.svg);
+}
+.icon-diary {
+    background-image: url(./../../assets/svg/diary.svg);
+}
+.icon-class {
+    background-image: url(./../../assets/svg/class.svg);
+}

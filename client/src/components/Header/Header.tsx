@@ -29,7 +29,12 @@ export function Header() {
   return (
     <header className="header">
       <div className="header__home-button">
+<<<<<<< HEAD
         <Link to="/">{t('header.schoolBook')}</Link>
+=======
+        <div className="header__logo"></div>
+        <Link to="/">School Book</Link>
+>>>>>>> 8d04cbe (feat: add asidebar)
       </div>
       <div className="header__button-block">
         {!localStorage.getItem('token') && (

@@ -8,6 +8,7 @@ import './i18n';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Modal } from './components/Modal/Modal';
+import '@fontsource/roboto/300.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
