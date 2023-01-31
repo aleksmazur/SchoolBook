@@ -5,9 +5,11 @@ import './pupilItem.css';
 const PupilItem = ({ name, id, birth, address }: IPupil) => {
   const navigate = useNavigate();
 
+  const pupilId: number = +id.split('_')[1];
+
   return (
-    <tr className={+id.slice(3) % 2 ? 'tr__honest' : 'tr__odd'}>
-      <td className="pupil__item_id">{id.slice(3)}. </td>
+    <tr className={pupilId % 2 ? 'tr__honest' : 'tr__odd'}>
+      <td className="pupil__item_id">{pupilId}. </td>
       <td className="pupil__item_name" onClick={() => navigate(`/pupils/${id}`)}>
         {name}
       </td>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PhotoSlider from '../../components/PhotoSlider/PhotoSlider';
 import PupilsList from '../../components/PuppilsList/PupilsList';
 import TabContent from '../../components/Tabs/Tabs';
 
@@ -132,7 +133,7 @@ const classData: IClass = {
 
 const tabsList = [
   { title: 'Список класса', content: <PupilsList {...classData} /> },
-  { title: 'Фото класса', content: 'Photo' },
+  { title: 'Фото класса', content: <PhotoSlider /> },
   { title: 'Наш учитель', content: 'TeacherInfo или редирект на страницу учителя' },
 ];
 
@@ -142,7 +143,7 @@ export type ITabsList = {
 };
 
 const ClassPage = () => {
-  const [active, setActive] = useState<number>(0);
+  const [active, setActive] = useState(0);
 
   const openTab = (e: React.MouseEvent<HTMLButtonElement>) => {
     const currentTab = e.target as HTMLButtonElement;
@@ -154,17 +155,16 @@ const ClassPage = () => {
     <div>
       <h3>{classData.name}</h3>
       <div>
-        {/* <PupilsList {...classData} /> */}
         <div>
           <div className="tab">
-            {tabsList.map((n, i) => (
+            {tabsList.map((tab, i) => (
               <button
                 className={`tablinks ${i === active ? 'active' : ''}`}
                 onClick={openTab}
                 data-index={i}
                 key={i}
               >
-                {n.title}
+                {tab.title}
               </button>
             ))}
           </div>
