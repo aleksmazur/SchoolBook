@@ -14,6 +14,7 @@
     display: flex;
     gap: 2px;
     justify-content: center;
+    margin: 20px auto;
 }
 .tablinks:first-child {
 	border-radius: 8px 0 0 8px;

@@ -3,8 +3,8 @@ import DiaryPage from './pages/DiaryPage/DiaryPage';
 import MainPage from './pages/MainPage/MainPage';
 import Page404 from './pages/Page404/Page404';
 import SchedulePage from './pages/SchedulePage/SchedulePage';
-import './app.css';
 import ClassPage from './pages/ClassPage/ClassPage';
+import './app.css';
 
 const App = () => {
   return (

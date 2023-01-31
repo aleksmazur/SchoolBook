@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PhotoSlider from '../../components/PhotoSlider/PhotoSlider';
 import PupilsList from '../../components/PuppilsList/PupilsList';
 import TabContent from '../../components/Tabs/Tabs';
+import TeacherItem from '../../components/TeacherItem/TeacherItem';
 
 export type IPupil = {
   id: string;
@@ -13,12 +14,14 @@ export type IPupil = {
 export type IClass = {
   id: string;
   name: string;
+  teacherId: string;
   pupils: IPupil[];
 };
 
 const classData: IClass = {
   id: '1a',
   name: '1A',
+  teacherId: '1a_teacher',
   pupils: [
     {
       id: '1a_1',
@@ -134,7 +137,10 @@ const classData: IClass = {
 const tabsList = [
   { title: 'Список класса', content: <PupilsList {...classData} /> },
   { title: 'Фото класса', content: <PhotoSlider /> },
-  { title: 'Наш учитель', content: 'TeacherInfo или редирект на страницу учителя' },
+  {
+    title: 'Классный руководитель',
+    content: <TeacherItem {...classData} />,
+  },
 ];
 
 export type ITabsList = {

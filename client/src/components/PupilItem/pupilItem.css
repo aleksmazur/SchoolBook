@@ -4,7 +4,8 @@
 	margin-bottom: 20px;
 }
 
-.pupil__item_name {
+.pupil__item_name,
+.teacher__item_name {
     cursor: pointer;
 }
 
