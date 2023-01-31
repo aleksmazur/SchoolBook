@@ -6,6 +6,7 @@ import { store } from './store/store';
 
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { Modal } from './components/Modal/Modal';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -14,6 +15,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <App />
+        <Modal />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

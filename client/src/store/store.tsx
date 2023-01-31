@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import scheduleReducer from '../reducers/scheduleReducer';
+import modalReducer from '../reducers/modalReducer';
 
 export const store = configureStore({
   reducer: {
     schedule: scheduleReducer,
+    modal: modalReducer,
   },
 });
 
