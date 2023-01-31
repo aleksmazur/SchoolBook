@@ -1,7 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import scheduleReducer from '../reducers/scheduleReducer';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    schedule: scheduleReducer,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;

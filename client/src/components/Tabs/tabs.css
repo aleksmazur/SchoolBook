@@ -1,0 +1,24 @@
+.tablinks {
+    cursor: pointer;
+    background: #f3f3f3;
+    font-weight: bold;
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+.active {
+    background: #d8d8d8;
+}
+.tab {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    margin: 20px auto;
+}
+.tablinks:first-child {
+	border-radius: 8px 0 0 8px;
+}
+.tablinks:last-child {
+	border-radius: 0 8px 8px 0;
+}
