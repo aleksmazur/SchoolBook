@@ -15,6 +15,10 @@
     color: rgba(255, 87, 87, 0.747);
 }
 
+/* .header__container {
+    max-width: 1200px;
+} */
+
 .header__button-block {
     display: flex;
     justify-content: space-between;
