@@ -4,7 +4,7 @@
     padding: 0;
 }
 
-/* :root[data-theme="light"] {
+:root[data-theme="light"] {
   --bg-header: white;
   --color-text: black;
 }
@@ -13,4 +13,3 @@
   --bg-header: #2b3e51;
   --color-text: white;
 }
- */
