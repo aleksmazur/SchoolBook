@@ -18,18 +18,12 @@ export const Modal = () => {
           <form id="signIn" className="form registration-form" method="post">
             <div>
               <div className="input-block__wrapper">
-                <label htmlFor="user_email">Email</label>
-                <input type="email" name="email" id="user_email" autoComplete="off" required />
+                <label htmlFor="user_login">Login</label>
+                <input name="login" id="user_login" />
               </div>
               <div className="input-block__wrapper">
                 <label htmlFor="user_password">Пароль</label>
-                <input
-                  type="password"
-                  name="password"
-                  id="user_password"
-                  autoComplete="off"
-                  required
-                />
+                <input type="password" name="password" id="user_password" />
               </div>
             </div>
             <button className="btn-block__signin" type="submit">
@@ -37,7 +31,7 @@ export const Modal = () => {
             </button>
             <div className="form__link-block">
               <p>У вас нет профиля?</p>
-              <p>Попросите Логин и пароль у классного руководителя</p>
+              <p>Попросите логин и пароль у классного руководителя</p>
             </div>
           </form>
           <span className="close__modal" onClick={() => closingModal()}></span>

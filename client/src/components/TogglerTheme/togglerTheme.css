@@ -4,9 +4,11 @@
     transform: translate(-50%, -50%);
     margin-top: 20px;
 }
-input {
+
+#toggler {
     display: none;
 }
+
 .slider {
     position: absolute;
     top: 0;
