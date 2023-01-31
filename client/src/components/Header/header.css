@@ -1,0 +1,23 @@
+.header {
+    background: var(--bg-header);
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header__button-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header__home-button {
+    display: flex;
+}
+
+.header__home-button a {
+    color: var(--color-text);
+}
