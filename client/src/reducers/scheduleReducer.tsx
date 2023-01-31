@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export type ScheduleState = {
+export type IScheduleState = {
   todayDay: number;
   startWeek: number;
   endWeek: number;
 };
 
-const initialState: ScheduleState = {
+const initialState: IScheduleState = {
   todayDay: new Date().getDay(),
   startWeek:
     new Date().getDay() === 1

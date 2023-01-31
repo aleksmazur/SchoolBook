@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface IModalState {
+type IModalState = {
   activeModal: boolean;
-}
+};
 
 const initialState: IModalState = {
   activeModal: false,
