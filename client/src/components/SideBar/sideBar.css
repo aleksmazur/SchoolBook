@@ -11,7 +11,7 @@
     display: flex;
     gap: 15px;
     padding: 8px 16px;
-    margin-top: 5px;
+    margin-bottom: 5px;
     cursor: pointer;
     align-items: center;
     text-decoration: none;
@@ -42,14 +42,14 @@ a {
 }
 
 .icon-main {
-    background-image: url(./../../assets/svg/main.svg);
+    background: url(./../../assets/svg/main.svg) center center no-repeat;
 }
 .icon-schedule {
-    background-image: url(./../../assets/svg/schedule.svg);
+    background: url(./../../assets/svg/schedule.svg) center center no-repeat;
 }
 .icon-diary {
-    background-image: url(./../../assets/svg/diary.svg);
+    background: url(./../../assets/svg/diary.svg) center center no-repeat;
 }
 .icon-class {
-    background-image: url(./../../assets/svg/class.svg);
+    background: url(./../../assets/svg/class.svg) center center no-repeat;
 }
