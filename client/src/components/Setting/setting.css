@@ -1,0 +1,26 @@
+.setting-modal {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    width: 15%;
+    max-width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding: 50px 0;
+    background-color: #fff;
+    transition: 0.4s linear;
+    overflow: auto;
+    flex-wrap: wrap;
+    left:10%;
+    top: 80%;
+    background-color: rgb(92 92 92 / 80%);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.close__modal.close__setting {
+    right: 5px;
+    top: 5px;
+}
