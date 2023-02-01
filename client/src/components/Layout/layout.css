@@ -1,0 +1,4 @@
+.content-container {
+    min-width: 100vw;
+    min-height: calc(100vh - 120px);
+}

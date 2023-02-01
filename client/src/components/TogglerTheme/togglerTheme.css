@@ -1,8 +1,9 @@
 .switch {
     width: 70px;
     height: 30px;
-    transform: translate(-50%, -50%);
-    margin-top: 20px;
+    transform: translate(0%, -50%);
+    display: block;
+    margin: auto;
 }
 
 #toggler {
@@ -47,17 +48,17 @@
     transition: all 1.4s;
 }
 
-input:checked + .slider {
+#toggler:checked + .slider {
     background-color: transparent;
 }
-input:checked + .slider:before, input:checked + .slider:after {
+#toggler:checked + .slider:before, #toggler:checked + .slider:after {
     transform: translateX(35px);
     background-color: white;
 }
-input:checked + .slider:after {
+#toggler:checked + .slider:after {
     background-color: black;  
 }
-input:checked ~ .wave {
+#toggler:checked ~ .wave {
     display: block;
     background-color: rgb(154, 237, 248);
 }

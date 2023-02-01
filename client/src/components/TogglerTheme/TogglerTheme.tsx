@@ -6,7 +6,7 @@ const themes = {
   dark: 'dark',
 };
 
-const Toggle = () => {
+const TogglerTheme = () => {
   const { theme, setTheme } = useTheme();
 
   const changeTheme = () => {
@@ -23,4 +23,4 @@ const Toggle = () => {
   );
 };
 
-export default Toggle;
+export default TogglerTheme;
