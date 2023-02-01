@@ -1,8 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateChildrenDto {
-  @ApiProperty({ example: "Ivan", description: "First child name" })
+  @ApiProperty({
+    example: "Ivan",
+    description: "First child name"
+  })
   readonly firstName: string;
+
   @ApiProperty({
     example: "Petrov",
     description: "Last child name",

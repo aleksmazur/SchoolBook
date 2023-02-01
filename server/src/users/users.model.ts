@@ -3,13 +3,17 @@ import {
   BelongsToMany,
   Column,
   DataType,
+  ForeignKey,
   HasMany,
+  HasOne,
   Model,
   Table,
 } from "sequelize-typescript";
 import { UserRoles } from "../roles/user-roles.model";
 import { Role } from "../roles/roles.model";
 import { Children } from "../childrens/childrens.model";
+import { UserChildrens } from "./dto/user-childrens.model";
+import { ClassRoom } from "../classes/classes.model";
 
 interface UserCreationAttrs {
   username: string;
@@ -46,8 +50,11 @@ export class User extends Model<User, UserCreationAttrs> {
   lastName: string;
 
   @BelongsToMany(() => Role, () => UserRoles)
-  role: Role;
+  role: Role[];
 
-  @HasMany(() => Children)
+  @BelongsToMany(() => Children, () => UserChildrens)
   childrens: Children[];
+
+  @HasOne(() => ClassRoom)
+  class: ClassRoom
 }

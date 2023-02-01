@@ -1,13 +1,15 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {
   BelongsTo,
+  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
   Model,
   Table,
 } from "sequelize-typescript";
-import { ClassRoom } from "src/classes/classes.model";
+import { ClassRoom } from "../classes/classes.model";
+import { UserChildrens } from "../users/dto/user-childrens.model";
 import { User } from "../users/users.model";
 
 interface ChildrenCreationAttrs {
@@ -47,6 +49,6 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   @Column
   parentId: number;
 
-  @BelongsTo(() => User)
-  parent: User;
+  @BelongsToMany(() => User, () => UserChildrens)
+  parents: User[];
 }

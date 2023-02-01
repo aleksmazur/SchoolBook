@@ -1,7 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
+import { Children } from "../childrens/childrens.model";
 import { Role } from "../roles/roles.model";
 import { RolesService } from "../roles/roles.service";
+import { AddRoleDto } from "./dto/add-role.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from "./users.model";
 
@@ -14,8 +16,9 @@ export class UsersService {
 
   async createUser(dto: CreateUserDto) {
     const user = await this.userRepository.create(dto);
-    const role = await this.roleService.getRoleByValue("parent");
-    await user.$set("role", [role.id]);
+    const userRole = await this.roleService.getRoleByValue("parent");
+    await user.$set("role", [userRole.id]);
+    user.role = [userRole];
     return user;
   }
 
@@ -34,6 +37,9 @@ export class UsersService {
           model: Role,
           where: { value },
         },
+        {
+          model: Children
+        }
       ],
     });
     if (!users.length) {
@@ -69,5 +75,27 @@ export class UsersService {
       );
     }
     await user.destroy();
+  }
+
+  async getUserByUsername(username: string) {
+    const user = await this.userRepository.findOne({
+      where: {username},
+      include:{all: true}
+    });
+    return user;
+  }
+
+  async addUserRole(dto: AddRoleDto) {
+    const user = await this.userRepository.findByPk(dto.userId);
+    const role = await this.roleService.getRoleByValue(dto.value);
+    if (role && user) {
+      const alreadyHasRole = await user.$has("role", role.id);
+      if (alreadyHasRole) {
+        throw new HttpException("User already has this role", HttpStatus.BAD_REQUEST);
+      }
+      await user.$add("role", role.id);
+      return new HttpException(`Role added for ID '${role.id}'`, HttpStatus.CREATED);
+    }
+    throw new HttpException("User or role not found", HttpStatus.NOT_FOUND);
   }
 }

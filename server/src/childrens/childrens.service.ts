@@ -1,15 +1,19 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { User } from '../users/users.model';
+import { UsersService } from '../users/users.service';
 import { Children } from './childrens.model';
 import { CreateChildrenDto } from './dto/create-children.dto';
 
 @Injectable()
 export class ChildrensService {
-  constructor(@InjectModel(Children) private childrensRepository: typeof Children) {}
+  constructor(@InjectModel(Children) private childrensRepository: typeof Children,
+  private userService: UsersService) {}
 
   async createChildren(dto: CreateChildrenDto) {
     const children = await this.childrensRepository.create(dto);
+    const childrenParent = await this.userService.getUserByID(dto.parentId);
+    await children.$set("parents", [childrenParent.id]);
+    children.parents = [childrenParent];
     return children;
   }
 
@@ -22,14 +26,7 @@ export class ChildrensService {
   }
 
   async getChildrensByParent(id: number) {
-    const childrens = await this.childrensRepository.findAll({
-      include: [
-        {
-          model: User,
-          where: { id },
-        },
-      ],
-    });
+    const childrens = await this.childrensRepository.findAll({where: { id }});
     if (!childrens.length) {
       throw new HttpException(
         `Childrens by parent ID '${id}' not found`,
