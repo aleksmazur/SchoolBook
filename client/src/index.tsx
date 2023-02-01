@@ -11,8 +11,7 @@ import { Modal } from './components/Modal/Modal';
 import '@fontsource/roboto/300.css';
 import '@fontsource/neucha';
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const container = document.getElementById('root')!;
+const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
