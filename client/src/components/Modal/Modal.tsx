@@ -26,7 +26,7 @@ export const Modal = () => {
                 <input type="password" name="password" id="user_password" />
               </div>
             </div>
-            <button className="btn-block__signin" type="submit">
+            <button className="btn-block__signin btn" type="submit">
               Войти
             </button>
             <div className="form__link-block">
