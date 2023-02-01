@@ -6,6 +6,14 @@
     justify-content: space-around;
     align-items: center;
 }
+.header__logo {
+    font-family: 'Allura', cursive;
+    font-size: 40px;
+}
+
+.header__logo span {
+    color: rgba(255, 87, 87, 0.747);
+}
 
 .header__button-block {
     display: flex;
@@ -20,4 +28,5 @@
 
 .header__home-button a {
     color: var(--color-text);
+    text-decoration: none;
 }
