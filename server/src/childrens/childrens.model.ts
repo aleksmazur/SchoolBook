@@ -7,6 +7,7 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
+import { ClassRoom } from "src/classes/classes.model";
 import { User } from "../users/users.model";
 
 interface ChildrenCreationAttrs {
@@ -16,7 +17,7 @@ interface ChildrenCreationAttrs {
   parentId: number;
 }
 
-@Table({ tableName: "childrens" })
+@Table({ tableName: "childrens", createdAt: false, updatedAt: false })
 export class Children extends Model<Children, ChildrenCreationAttrs> {
   @ApiProperty({ example: "1", description: "Unique identifier" })
   @Column({
@@ -35,9 +36,12 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   lastName: string;
 
-  @ApiProperty({ example: "1A", description: "Class name" })
-  @Column({ type: DataType.STRING, allowNull: false })
-  className: string;
+  @ForeignKey(() => ClassRoom)
+  @Column
+  classId: number;
+
+  @BelongsTo(() => ClassRoom)
+  class: ClassRoom;
 
   @ForeignKey(() => User)
   @Column

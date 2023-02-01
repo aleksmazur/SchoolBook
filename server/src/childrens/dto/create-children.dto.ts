@@ -9,10 +9,10 @@ export class CreateChildrenDto {
   })
   readonly lastName: string;
   @ApiProperty({
-    example: "1A",
-    description: "Class name",
+    example: "2",
+    description: "Class ID",
   })
-  readonly className: string;
+  readonly classId: number;
 
   @ApiProperty({
     example: "2",

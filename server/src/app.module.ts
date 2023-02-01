@@ -8,6 +8,8 @@ import { Role } from "./roles/roles.model";
 import { UserRoles } from "./roles/user-roles.model";
 import { ChildrensModule } from './childrens/childrens.module';
 import { Children } from "./childrens/childrens.model";
+import { ClassesModule } from './classes/classes.module';
+import { ClassRoom } from "./classes/classes.model";
 
 @Module({
   controllers: [],
@@ -23,12 +25,13 @@ import { Children } from "./childrens/childrens.model";
       username: process.env.POSTGRES_USER || "postgres",
       password: process.env.POSTGRES_PASSWORD || "root",
       database: process.env.POSTGRES_DB || "schoolbook",
-      models: [User, Role, UserRoles, Children],
+      models: [User, Role, UserRoles, Children, ClassRoom],
       autoLoadModels: true
     }),
     UsersModule,
     RolesModule,
     ChildrensModule,
+    ClassesModule,
   ],
 })
 export class AppModule {}

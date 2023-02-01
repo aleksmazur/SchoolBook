@@ -14,9 +14,11 @@ import { Children } from "../childrens/childrens.model";
 interface UserCreationAttrs {
   username: string;
   password: string;
+  firstName: string;
+  lastName: string;
 }
 
-@Table({ tableName: "users" })
+@Table({ tableName: "users", createdAt: false, updatedAt: false })
 export class User extends Model<User, UserCreationAttrs> {
   @ApiProperty({ example: "1", description: "Unique identifier" })
   @Column({
@@ -34,6 +36,14 @@ export class User extends Model<User, UserCreationAttrs> {
   @ApiProperty({ example: "123qwerty123", description: "Username password" })
   @Column({ type: DataType.STRING, allowNull: false })
   password: string;
+
+  @ApiProperty({ example: "Daria", description: "First name user" })
+  @Column({ type: DataType.STRING, allowNull: false })
+  firstName: string;
+
+  @ApiProperty({ example: "Bukina", description: "Last name user" })
+  @Column({ type: DataType.STRING, allowNull: false })
+  lastName: string;
 
   @BelongsToMany(() => Role, () => UserRoles)
   role: Role;
