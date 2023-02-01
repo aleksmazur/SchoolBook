@@ -1,11 +1,13 @@
 import { getWeekDay } from '../../helpers/dataHelper';
 import { IScheduleDay } from '../../interfaces/IShedule';
 import { useAppSelector } from '../../store/hooks';
+import './diaryDay.css';
 
 const DiaryDay = ({ lessons, index }: IScheduleDay) => {
   const startDayToWeek = useAppSelector((state) => state.schedule.startWeek);
+  const today = new Date(Date.now()).getDay() - 1;
   return (
-    <div className="diary__item">
+    <div className={index === today ? 'diary__item current' : 'diary__item'} data-day={index}>
       <table>
         <thead>
           <tr>

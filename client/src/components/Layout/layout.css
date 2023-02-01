@@ -3,13 +3,13 @@
     min-width: 100vw;
     min-height: calc(100vh - 120px);
 } */
-/* .app-contain {
-} */
 
 .content-container {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
+    min-height: calc(100vh - 120px);
+    background-color: rgba(0, 0, 0, 0.12);
 }
 
 .content-area {
@@ -23,5 +23,5 @@
     padding: 10px;
     width: 100%;
     height: 100%;
-    min-height: 80vh;
+    min-height: 100%;
 }

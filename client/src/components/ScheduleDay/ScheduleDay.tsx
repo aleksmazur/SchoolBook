@@ -14,9 +14,9 @@ const ScheduleDay = ({ lessons, index }: IScheduleDay) => {
       <table>
         <thead>
           <tr>
-            <td></td>
-            <td>Время</td>
-            <td>Урок</td>
+            <th></th>
+            <th>Время</th>
+            <th>Урок</th>
           </tr>
         </thead>
         <tbody>

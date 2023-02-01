@@ -2,6 +2,7 @@ import DiaryDay from '../../components/DiaryDay/DiaryDay';
 import { getMonth } from '../../helpers/dataHelper';
 import { setEndWeek, setStartWeek } from '../../reducers/scheduleReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import './diary.css';
 
 export const schedule = [
   ['математика', 'русский', 'труд'],
@@ -29,7 +30,7 @@ const DiaryPage = () => {
 
   const renderShedule = () => {
     return (
-      <div className="schedule__list">
+      <div className="diary__list">
         {schedule.map((lessons, index) => {
           return <DiaryDay lessons={lessons} key={index} index={index}></DiaryDay>;
         })}
@@ -39,17 +40,22 @@ const DiaryPage = () => {
 
   return (
     <div>
-      <p>Дневник</p>
-      <div>
-        Старт недели {new Date(startWeek).getDate()}, {getMonth(new Date(startWeek).getMonth())},
-        {new Date(startWeek).getFullYear()}
+      <h3>Дневник</h3>
+      <div className="week__control">
+        <div onClick={() => onChangeWeekPrev()} className="arrow">
+          &#8592;
+        </div>
+        <div>
+          {new Date(startWeek).getDate()}, {getMonth(new Date(startWeek).getMonth())}{' '}
+          {new Date(startWeek).getFullYear()}
+          {' - '}
+          {new Date(endWeek).getDate()}, {getMonth(new Date(endWeek).getMonth())}{' '}
+          {new Date(endWeek).getFullYear()}
+        </div>
+        <div onClick={() => onChangeWeekNext()} className="arrow">
+          &#8594;
+        </div>
       </div>
-      <div>
-        Конец недели {new Date(endWeek).getDate()}, {getMonth(new Date(endWeek).getMonth())},
-        {new Date(endWeek).getFullYear()}
-      </div>
-      <div onClick={() => onChangeWeekPrev()}>предыдущая</div>
-      <div onClick={() => onChangeWeekNext()}>следующая</div>
       <div>{renderShedule()}</div>
     </div>
   );

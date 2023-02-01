@@ -15,7 +15,7 @@ const renderShedule = () => {
 const SchedulePage = () => {
   return (
     <div>
-      <p>Расписание</p>
+      <h3>Расписание</h3>
       {renderShedule()}
     </div>
   );

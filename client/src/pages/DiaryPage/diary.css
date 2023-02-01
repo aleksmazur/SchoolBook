@@ -1,0 +1,43 @@
+.diary__list {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+}
+
+.diary__item[data-day="0"] {
+    grid-column: 1 ;
+    grid-row: 1 / 2;
+}
+.diary__item[data-day="1"] {
+    grid-column: 1 ;
+    grid-row: 2 / 3;
+}
+.diary__item[data-day="2"] {
+    grid-column: 1 ;
+    grid-row: 3 / 4;
+}
+.diary__item[data-day="3"] {
+    grid-column: 2 ;
+    grid-row: 1 / 2;
+}
+.diary__item[data-day="4"] {
+    grid-column: 2 ;
+    grid-row: 2 / 3;
+}
+.diary__item[data-day="5"] {
+    grid-column: 2 ;
+    grid-row: 3 / 4;
+}
+.diary__item.current {
+    border: 2px solid #f1d760;
+    border-radius: 10px;
+}
+
+.week__control {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.arrow {
+    cursor: pointer;
+}

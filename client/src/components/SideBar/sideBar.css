@@ -10,11 +10,15 @@
 .sidebar__li {
     display: flex;
     gap: 15px;
-    padding: 10px 16px;
+    padding: 8px 16px;
+    margin-top: 5px;
     cursor: pointer;
     align-items: center;
     text-decoration: none;
-    width: 100%;
+    width: 200px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    transition: all 0.5s;
 }
 
 a {
@@ -23,14 +27,12 @@ a {
 }
 
 .sidebar__li:hover {
-    text-decoration: none;
-    background-color: rgba(0, 0, 0, 0.04);
-    border-radius: 5px;
+    background-color: hsl(49, 84%, 66%, 30%);
 }
 
 .sidebar__li.active {
-    border-radius: 5px;
-    box-shadow: 2px 2px 6px #2b1a1a80;
+    background-color: #f1d760;
+;
 }
 
 .sidebar__li-icon {

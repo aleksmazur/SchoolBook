@@ -4,6 +4,10 @@
     height: 60px;
     background-color: var(--bg-header);
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border-radius: 5px;
 }
 
 .rsschool svg {

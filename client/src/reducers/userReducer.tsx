@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { authUser } from '../thunks/user';
+// import { authUser } from '../thunks/user';
 
 export type IUserState = {
   token: {
@@ -40,19 +40,19 @@ const userReducer = createSlice({
       state.token = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(authUser.pending, (state, action) => {
-        //preloader
-      })
-      .addCase(authUser.fulfilled, (state, action) => {
-        state.token = action.payload;
-        localStorage.setItem('token', action.payload.token);
-      })
-      .addCase(authUser.rejected, (state, action) => {
-        //error
-      });
-  },
+  //   extraReducers: (builder) => {
+  //     builder
+  //       .addCase(authUser.pending, (state, action) => {
+  //         //preloader
+  //       })
+  //       .addCase(authUser.fulfilled, (state, action) => {
+  //         state.token = action.payload;
+  //         localStorage.setItem('token', action.payload.token);
+  //       })
+  //       .addCase(authUser.rejected, (state, action) => {
+  //         //error
+  //       });
+  //   },
 });
 
 export default userReducer.reducer;

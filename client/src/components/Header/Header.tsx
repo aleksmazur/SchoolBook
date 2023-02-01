@@ -29,16 +29,13 @@ export function Header() {
   return (
     <header className="header">
       <div className="header__home-button">
-<<<<<<< HEAD
-        <Link to="/">{t('header.schoolBook')}</Link>
-=======
-        <div className="header__logo"></div>
-        <Link to="/">School Book</Link>
->>>>>>> 8d04cbe (feat: add asidebar)
+        <div className="header__logo">
+          <Link to="/">{t('header.schoolBook')}</Link>
+        </div>
       </div>
       <div className="header__button-block">
         {!localStorage.getItem('token') && (
-          <button className="header__login" onClick={() => openModal()}>
+          <button className="header__login btn" onClick={() => openModal()}>
             {t('header.login')}
           </button>
         )}

@@ -2,21 +2,38 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 :root[data-theme="light"] {
-  --bg-header: white;
+  --bg-header: #5da4a4;
   --color-text: black;
-  --color-setting-btn: #2b3e51;
-  --option-bg: #2b3e51;
+  --color-setting-btn: #28384d;;
+  --option-bg: #28384d;;
   --option-text: white;
 }
 
 :root[data-theme="dark"] {
-  --bg-header: #394a4d;
+  --bg-header: #28384d;
   --color-text: white;
-  --color-setting-btn: white;
-  --option-bg: rgb(154, 237, 248);
+  --color-setting-btn: #5da4a4;
+  --option-bg: #f1d760;
   --option-text: black;
+}
+
+.btn {
+    display: flex;
+    gap: 15px;
+    padding: 8px 16px;
+    margin-top: 5px;
+    cursor: pointer;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    transition: all 0.5s;
+    border: none;
+}
+
+.btn:hover {
+    background-color: rgb(241, 214, 95);
 }
