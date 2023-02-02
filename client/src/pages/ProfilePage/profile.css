@@ -1,0 +1,15 @@
+.profile__content {
+    display: flex;
+    gap: 40px;
+}
+
+.profile__image {
+    width: 120px;
+    height: 120px;
+    background-image: url('./../../assets/svg/profile.svg')
+}
+
+.profile__info h3, .profile__info div {
+    border-bottom: 1px dotted black;
+    padding: 5px 20px;
+}

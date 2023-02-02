@@ -10,7 +10,7 @@ const PupilItem = ({ name, id, birth, address }: IPupil) => {
   return (
     <tr className={pupilId % 2 ? 'tr__honest' : 'tr__odd'}>
       <td className="pupil__item_id">{pupilId}. </td>
-      <td className="pupil__item_name" onClick={() => navigate(`/pupils/${id}`)}>
+      <td className="pupil__item_name" onClick={() => navigate(`/children/${pupilId}`)}>
         {name}
       </td>
       <td className="pupil__item_birht">{birth}</td>

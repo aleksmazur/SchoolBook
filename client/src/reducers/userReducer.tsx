@@ -9,8 +9,9 @@ export type IUserState = {
     id: string | null;
     login: string | null;
     password: string | null;
-    name?: string | null;
+    name: string | null;
     role: string | null;
+    relative: string | null;
   };
 };
 
@@ -24,6 +25,7 @@ const initialState: IUserState = {
     password: null,
     name: null,
     role: null,
+    relative: null,
   },
 };
 
