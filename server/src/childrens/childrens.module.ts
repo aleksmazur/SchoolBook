@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UserChildrens } from '../users/dto/user-childrens.model';
 import { UsersModule } from '../users/users.module';
@@ -12,7 +12,10 @@ import { ChildrensService } from './childrens.service';
   providers: [ChildrensService],
   imports: [
     SequelizeModule.forFeature([Children, User, UserChildrens]),
-    UsersModule
+    forwardRef(() => UsersModule),
   ],
+  exports: [
+    ChildrensService
+  ]
 })
 export class ChildrensModule {}

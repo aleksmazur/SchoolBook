@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ClassRoom } from './classes.model';
 import { ClassesService } from './classes.service';
@@ -20,7 +20,9 @@ export class ClassesController {
   @ApiResponse({ status: 200, type: [ClassRoom] })
   @ApiQuery({ name: "teacher", required: false })
   @Get()
-  getAll(@Query("teacher") teacherId?: number) {
+  getAll(
+    @Query("teacher") teacherId?: number
+  ) {
     if (teacherId) {
       return this.classService.getClassesByTeacher(teacherId);
     }

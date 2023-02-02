@@ -8,6 +8,7 @@ import { UserChildrens } from "./dto/user-childrens.model";
 import { UsersController } from "./users.controller";
 import { User } from "./users.model";
 import { UsersService } from "./users.service";
+import { ChildrensModule } from "src/childrens/childrens.module";
 
 @Module({
   controllers: [UsersController],
@@ -15,6 +16,7 @@ import { UsersService } from "./users.service";
   imports: [
     SequelizeModule.forFeature([User, Role, UserRoles, UserChildrens]), 
     RolesModule,
+    forwardRef(() => ChildrensModule),
     forwardRef(() => AuthModule)
   ],
   exports: [

@@ -12,6 +12,25 @@ export class CreateChildrenDto {
     description: "Last child name",
   })
   readonly lastName: string;
+
+  @ApiProperty({
+    example: "Denisovich",
+    description: "Middle child name",
+  })
+  readonly middleName: string;
+
+  @ApiProperty({
+    example: "street Stroitelei, 12, flat 52",
+    description: "Adress of child",
+  })
+  readonly adress: string;
+
+  @ApiProperty({
+    example: "12.01.2012",
+    description: "Date of birthday"
+  })
+  readonly birthday: string;
+
   @ApiProperty({
     example: "2",
     description: "Class ID",

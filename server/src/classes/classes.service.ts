@@ -32,7 +32,7 @@ export class ClassesService {
     });
     if (!classes.length) {
       throw new HttpException(
-        `Childrens by parent ID '${id}' not found`,
+        `Classes by teacher ID '${id}' not found`,
         HttpStatus.NOT_FOUND,
       );
     }

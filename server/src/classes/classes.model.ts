@@ -4,9 +4,11 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from "sequelize-typescript";
+import { Children } from "src/childrens/childrens.model";
 import { User } from "../users/users.model";
 
 interface ClassRoomCreationAttrs {
@@ -35,4 +37,7 @@ export class ClassRoom extends Model<ClassRoom, ClassRoomCreationAttrs> {
 
   @BelongsTo(() => User)
   classTeacher: User;
+
+  @HasMany(() => Children)
+  childrens: [Children]
 }

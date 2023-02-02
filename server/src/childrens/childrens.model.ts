@@ -38,6 +38,18 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   lastName: string;
 
+  @ApiProperty({ example: "Denisovich", description: "Middle child name" })
+  @Column({ type: DataType.STRING, allowNull: true })
+  middleName: string;
+
+  @ApiProperty({ example: "street Stroitelei, 12, flat 52", description: "Adress of child" })
+  @Column({ type: DataType.STRING, allowNull: false })
+  adress: string;
+
+  @ApiProperty({ example: "12.01.2012", description: "Date of birthday" })
+  @Column({ type: DataType.DATE, allowNull: false })
+  birthday: string;
+
   @ForeignKey(() => ClassRoom)
   @Column
   classId: number;
