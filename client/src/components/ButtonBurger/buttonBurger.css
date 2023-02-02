@@ -5,6 +5,9 @@
     cursor: pointer;
     position: relative;
     margin: 20px 0 10px 10px;
+    position: absolute;
+    margin: 20px 0 30px 10px;
+    top: 0;
 }
 
 .nav-burger::before, .nav-burger::after, .nav-burger span {
