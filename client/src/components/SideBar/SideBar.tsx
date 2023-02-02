@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../store/hooks';
+// import { useAppSelector } from '../../store/hooks';
 import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import './sideBar.css';
 import { isMobile } from 'react-device-detect';
@@ -21,13 +21,16 @@ const SideBar = () => {
       setActive(activeTab);
     }
   };
-  
+
   /* const { role, id } = useAppSelector((state) => state.userInfo.userInfo); */
   const [role, id] = ['parent', 1];
 
   return (
     <>
-      <ul onClick={toggleActiveNav} className={isMobile && !activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}>
+      <ul
+        onClick={toggleActiveNav}
+        className={isMobile && !activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}
+      >
         <Link to="/">
           <li className={`sidebar__li ${'main' === active ? 'active' : ''}`} data-link="main">
             <div className="sidebar__li-icon icon-main"></div>
