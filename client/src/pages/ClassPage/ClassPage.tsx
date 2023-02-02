@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import PhotoSlider from '../../components/PhotoSlider/PhotoSlider';
 import PupilsList from '../../components/PuppilsList/PupilsList';
@@ -134,21 +135,23 @@ const classData: IClass = {
   ],
 };
 
-const tabsList = [
-  { title: 'Список класса', content: <PupilsList {...classData} /> },
-  { title: 'Фото класса', content: <PhotoSlider /> },
-  {
-    title: 'Классный руководитель',
-    content: <TeacherItem {...classData} />,
-  },
-];
-
 export type ITabsList = {
   title: string;
   content: JSX.Element | string;
 };
 
 const ClassPage = () => {
+  const { t } = useTranslation();
+
+  const tabsList = [
+    { title: `${t('class.classList')}`, content: <PupilsList {...classData} /> },
+    { title: `${t('class.classPhotos')}`, content: <PhotoSlider /> },
+    {
+      title: `${t('class.teacher')}`,
+      content: <TeacherItem {...classData} />,
+    },
+  ];
+
   const [active, setActive] = useState(0);
 
   const openTab = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -159,7 +162,7 @@ const ClassPage = () => {
 
   return (
     <div>
-      <h3>{classData.name}</h3>
+      <h2>{classData.name}</h2>
       <div>
         <div>
           <div className="tab">

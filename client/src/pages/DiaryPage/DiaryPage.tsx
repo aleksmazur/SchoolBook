@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import DiaryDay from '../../components/DiaryDay/DiaryDay';
 import { getMonth } from '../../helpers/dataHelper';
 import { setEndWeek, setStartWeek } from '../../reducers/scheduleReducer';
@@ -14,6 +15,8 @@ export const schedule = [
 ];
 
 const DiaryPage = () => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
   const startWeek = useAppSelector((state) => state.schedule.startWeek);
   const endWeek = useAppSelector((state) => state.schedule.endWeek);
@@ -40,7 +43,7 @@ const DiaryPage = () => {
 
   return (
     <div>
-      <h3>Дневник</h3>
+      <h2>{t('diary.diaryTitle')}</h2>
       <div className="week__control">
         <div onClick={() => onChangeWeekPrev()} className="arrow">
           &#8592;
