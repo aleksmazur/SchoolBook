@@ -5,15 +5,21 @@ import './diaryDay.css';
 
 const DiaryDay = ({ lessons, index }: IScheduleDay) => {
   const startDayToWeek = useAppSelector((state) => state.schedule.startWeek);
-  const today = new Date(Date.now()).getDay() - 1;
+  const currentDay = new Date(Date.now()).getDate();
+  const currentMonth = new Date(Date.now()).getMonth();
+  const day = new Date(startDayToWeek + index * 24 * 60 * 60 * 1000).getDate();
+  const month = new Date(startDayToWeek + index * 24 * 60 * 60 * 1000).getMonth();
   return (
-    <div className={index === today ? 'diary__item current' : 'diary__item'} data-day={index}>
+    <div
+      className={
+        '' + day + month === '' + currentDay + currentMonth ? 'diary__item current' : 'diary__item'
+      }
+    >
       <table>
         <thead>
           <tr>
             <th className="lesson">
-              {getWeekDay(new Date(startDayToWeek + index * 24 * 60 * 60 * 1000).getDay())},
-              {new Date(startDayToWeek + index * 24 * 60 * 60 * 1000).getDate()}
+              {getWeekDay(new Date(startDayToWeek + index * 24 * 60 * 60 * 1000).getDay())}, {day}
             </th>
             <th className="hw">Домашнее задание</th>
             <th className="mark">Отметка</th>

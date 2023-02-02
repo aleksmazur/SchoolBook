@@ -7,11 +7,15 @@ import './lesson.css';
 
 const ScheduleDay = ({ lessons, index }: IScheduleDay) => {
   const startDayToWeek = useAppSelector((state) => state.schedule.startWeek);
+  const today = new Date(Date.now()).getDay() - 1;
 
   return (
-    <div className="schedule__item">
+    <div>
       <p>{getWeekDay(new Date(startDayToWeek + index * 24 * 60 * 60 * 1000).getDay())}</p>
-      <table>
+      <table
+        className={index === today ? 'schedule__item current' : 'schedule__item'}
+        data-day={index}
+      >
         <thead>
           <tr>
             <th></th>

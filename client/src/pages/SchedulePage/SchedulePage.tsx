@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import ScheduleDay from '../../components/ScheduleDay/ScheduleDay';
 import { schedule } from '../DiaryPage/DiaryPage';
 import './schedule.css';
@@ -13,9 +14,11 @@ const renderShedule = () => {
 };
 
 const SchedulePage = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
-      <h3>Расписание</h3>
+      <h2>{t('schedule.scheduleTitle')}</h2>
       {renderShedule()}
     </div>
   );

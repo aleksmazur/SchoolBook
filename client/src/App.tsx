@@ -7,6 +7,7 @@ import SchedulePage from './pages/SchedulePage/SchedulePage';
 import ClassPage from './pages/ClassPage/ClassPage';
 import { Layout } from './components/Layout/Layout';
 import './app.css';
+import NewsPage from './pages/NewsPage/NewsPage';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           {/* <Route path="teacher/:id" element={<TeacherPage />} /> */}
           <Route path="schedule" element={<SchedulePage />} />
           <Route path="class" element={<ClassPage />} />
+          <Route path="news" element={<NewsPage />} />
           <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>

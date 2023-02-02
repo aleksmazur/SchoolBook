@@ -58,6 +58,10 @@ a {
     background: url(./../../assets/svg/class.svg) center center no-repeat;
 }
 
+.icon-news {
+    background: url(./../../assets/svg/news.svg) center center no-repeat;
+}
+
 .icon-profile {
     background: url(./../../assets/svg/profile.svg) center center no-repeat;
 }
