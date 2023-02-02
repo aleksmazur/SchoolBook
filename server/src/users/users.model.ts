@@ -54,5 +54,5 @@ export class User extends Model<User, UserCreationAttrs> {
   childrens: Children[];
 
   @HasOne(() => ClassRoom)
-  class: ClassRoom
+  class: ClassRoom;
 }

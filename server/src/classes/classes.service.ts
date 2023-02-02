@@ -1,12 +1,14 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { User } from '../users/users.model';
-import { ClassRoom } from './classes.model';
-import { CreateClassRoomDto } from './dto/create-classroom.dto';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/sequelize";
+import { User } from "../users/users.model";
+import { ClassRoom } from "./classes.model";
+import { CreateClassRoomDto } from "./dto/create-classroom.dto";
 
 @Injectable()
 export class ClassesService {
-  constructor(@InjectModel(ClassRoom) private classesRepository: typeof ClassRoom) {}
+  constructor(
+    @InjectModel(ClassRoom) private classesRepository: typeof ClassRoom,
+  ) {}
 
   async createClassRoom(dto: CreateClassRoomDto) {
     const classRoom = await this.classesRepository.create(dto);
@@ -14,7 +16,9 @@ export class ClassesService {
   }
 
   async getAllClasses() {
-    const classes = await this.classesRepository.findAll({ include: { all: true }});
+    const classes = await this.classesRepository.findAll({
+      include: { all: true },
+    });
     if (!classes.length) {
       throw new HttpException(`Classes not found!`, HttpStatus.NOT_FOUND);
     }

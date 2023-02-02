@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Children } from './childrens.model';
-import { ChildrensService } from './childrens.service';
-import { CreateChildrenDto } from './dto/create-children.dto';
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Children } from "./childrens.model";
+import { ChildrensService } from "./childrens.service";
+import { CreateChildrenDto } from "./dto/create-children.dto";
 
 @ApiTags("Childrens")
-@Controller('childrens')
+@Controller("childrens")
 export class ChildrensController {
   constructor(private childrenService: ChildrensService) {}
 

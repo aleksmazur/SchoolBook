@@ -39,5 +39,5 @@ export class ClassRoom extends Model<ClassRoom, ClassRoomCreationAttrs> {
   classTeacher: User;
 
   @HasMany(() => Children)
-  childrens: [Children]
+  childrens: [Children];
 }

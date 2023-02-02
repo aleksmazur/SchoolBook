@@ -14,13 +14,11 @@ import { ChildrensModule } from "src/childrens/childrens.module";
   controllers: [UsersController],
   providers: [UsersService],
   imports: [
-    SequelizeModule.forFeature([User, Role, UserRoles, UserChildrens]), 
+    SequelizeModule.forFeature([User, Role, UserRoles, UserChildrens]),
     RolesModule,
     forwardRef(() => ChildrensModule),
-    forwardRef(() => AuthModule)
+    forwardRef(() => AuthModule),
   ],
-  exports: [
-    UsersService
-  ]
+  exports: [UsersService],
 })
 export class UsersModule {}

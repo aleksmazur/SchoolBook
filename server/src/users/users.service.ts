@@ -1,4 +1,10 @@
-import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { ChildrensService } from "../childrens/childrens.service";
 import { Children } from "../childrens/childrens.model";
@@ -13,7 +19,7 @@ export class UsersService {
   constructor(
     @InjectModel(User) private userRepository: typeof User,
     private roleService: RolesService,
-    @Inject(forwardRef(() => ChildrensService)) 
+    @Inject(forwardRef(() => ChildrensService))
     private childrenService: ChildrensService,
   ) {}
 
@@ -41,8 +47,8 @@ export class UsersService {
           where: { value },
         },
         {
-          model: Children
-        }
+          model: Children,
+        },
       ],
     });
     if (!users.length) {
@@ -57,7 +63,7 @@ export class UsersService {
   async getUserByID(id: number) {
     const user = await this.userRepository.findOne({
       where: { id },
-      include: {all: true}
+      include: { all: true },
     });
     if (!user) {
       throw new HttpException(
@@ -83,8 +89,8 @@ export class UsersService {
 
   async getUserByUsername(username: string) {
     const user = await this.userRepository.findOne({
-      where: {username},
-      include:{all: true}
+      where: { username },
+      include: { all: true },
     });
     return user;
   }
@@ -95,10 +101,16 @@ export class UsersService {
     if (role && user) {
       const alreadyHasRole = await user.$has("role", role.id);
       if (alreadyHasRole) {
-        throw new HttpException("User already has this role", HttpStatus.BAD_REQUEST);
+        throw new HttpException(
+          "User already has this role",
+          HttpStatus.BAD_REQUEST,
+        );
       }
       await user.$add("role", role.id);
-      return new HttpException(`Role added for ID '${role.id}'`, HttpStatus.CREATED);
+      return new HttpException(
+        `Role added for ID '${role.id}'`,
+        HttpStatus.CREATED,
+      );
     }
     throw new HttpException("User or role not found", HttpStatus.NOT_FOUND);
   }
@@ -109,10 +121,16 @@ export class UsersService {
     if (role && user) {
       const alreadyHasRole = await user.$has("role", role.id);
       if (alreadyHasRole) {
-        throw new HttpException("User already has this role", HttpStatus.BAD_REQUEST);
+        throw new HttpException(
+          "User already has this role",
+          HttpStatus.BAD_REQUEST,
+        );
       }
       await user.$set("role", role.id);
-      throw new HttpException(`Role change for ID '${role.id}'`, HttpStatus.CREATED);
+      throw new HttpException(
+        `Role change for ID '${role.id}'`,
+        HttpStatus.CREATED,
+      );
     }
     throw new HttpException("User or role not found", HttpStatus.NOT_FOUND);
   }
@@ -123,7 +141,10 @@ export class UsersService {
   }
 
   async getUserChildren(userId: number, childId: number) {
-    const children = await this.childrenService.getChildrenByParent(userId, childId);
+    const children = await this.childrenService.getChildrenByParent(
+      userId,
+      childId,
+    );
     return children;
   }
 }

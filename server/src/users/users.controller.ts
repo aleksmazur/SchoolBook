@@ -11,7 +11,13 @@ import {
   Req,
   UseGuards,
 } from "@nestjs/common";
-import { ApiHeader, ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+  ApiHeader,
+  ApiOperation,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from "@nestjs/swagger";
 import { Children } from "src/childrens/childrens.model";
 import { Role } from "../auth/role-auth.decorator";
 import { RoleGuard } from "../auth/role.guard";
@@ -73,7 +79,7 @@ export class UsersController {
   @Get("childrens/:userId/:childId")
   getUserChildren(
     @Param("userId") userId: number,
-    @Param("childId") childId: number
+    @Param("childId") childId: number,
   ) {
     return this.usersService.getUserChildren(userId, childId);
   }
@@ -88,8 +94,14 @@ export class UsersController {
 
   @ApiOperation({ summary: "Add user role" })
   @ApiResponse({ status: HttpStatus.CREATED, type: AddRoleDto })
-  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "User or role not found" })
-  @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: "User already has this role"})
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: "User or role not found",
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: "User already has this role",
+  })
   @Post("/role")
   addRole(@Body() dto: AddRoleDto) {
     return this.usersService.addUserRole(dto);
@@ -97,8 +109,14 @@ export class UsersController {
 
   @ApiOperation({ summary: "Change user role" })
   @ApiResponse({ status: HttpStatus.CREATED, type: AddRoleDto })
-  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "User or role not found" })
-  @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: "User already has this role"})
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: "User or role not found",
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: "User already has this role",
+  })
   @Put("/role/update")
   changeRole(@Body() dto: AddRoleDto) {
     return this.usersService.changeUserRole(dto);

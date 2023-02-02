@@ -42,7 +42,10 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: true })
   middleName: string;
 
-  @ApiProperty({ example: "street Stroitelei, 12, flat 52", description: "Adress of child" })
+  @ApiProperty({
+    example: "street Stroitelei, 12, flat 52",
+    description: "Adress of child",
+  })
   @Column({ type: DataType.STRING, allowNull: false })
   adress: string;
 

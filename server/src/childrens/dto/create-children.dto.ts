@@ -3,7 +3,7 @@ import { ApiProperty } from "@nestjs/swagger";
 export class CreateChildrenDto {
   @ApiProperty({
     example: "Ivan",
-    description: "First child name"
+    description: "First child name",
   })
   readonly firstName: string;
 
@@ -27,7 +27,7 @@ export class CreateChildrenDto {
 
   @ApiProperty({
     example: "12.01.2012",
-    description: "Date of birthday"
+    description: "Date of birthday",
   })
   readonly birthday: string;
 

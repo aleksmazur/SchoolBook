@@ -6,11 +6,11 @@ import { UsersModule } from "./users/users.module";
 import { RolesModule } from "./roles/roles.module";
 import { Role } from "./roles/roles.model";
 import { UserRoles } from "./roles/user-roles.model";
-import { ChildrensModule } from './childrens/childrens.module';
+import { ChildrensModule } from "./childrens/childrens.module";
 import { Children } from "./childrens/childrens.model";
-import { ClassesModule } from './classes/classes.module';
+import { ClassesModule } from "./classes/classes.module";
 import { ClassRoom } from "./classes/classes.model";
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from "./auth/auth.module";
 import { UserChildrens } from "./users/dto/user-childrens.model";
 
 @Module({
@@ -28,7 +28,7 @@ import { UserChildrens } from "./users/dto/user-childrens.model";
       password: process.env.POSTGRES_PASSWORD || "root",
       database: process.env.POSTGRES_DB || "schoolbook",
       models: [User, Role, UserRoles, Children, ClassRoom, UserChildrens],
-      autoLoadModels: true
+      autoLoadModels: true,
     }),
     UsersModule,
     RolesModule,
