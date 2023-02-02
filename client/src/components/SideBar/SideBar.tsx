@@ -11,7 +11,7 @@ const SideBar = () => {
   const [role, id] = ['parent', 1];
   return (
     <>
-      <ul className={isMobile && activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}>
+      <ul className={isMobile && !activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}>
         <Link to="/">
           <li className="sidebar__li active">
             <div className="sidebar__li-icon icon-main"></div>
