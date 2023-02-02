@@ -1,3 +1,7 @@
 .schedule__item {
-    margin: 20px;
+    margin: 10px;
+}
+
+.schedule__list {
+    text-align: left;
 }

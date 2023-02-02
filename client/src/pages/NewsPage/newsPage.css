@@ -4,6 +4,18 @@
     gap: 20px;
 }
 
+.school__info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f1d760;
+    box-shadow: 2px 2px 6px #2b1a1a80;
+    max-width: 340px;
+}
+
 .main__percents {
     display: flex;
     justify-content: center;

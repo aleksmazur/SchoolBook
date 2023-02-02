@@ -27,7 +27,8 @@
     grid-column: 2 ;
     grid-row: 3 / 4;
 }
-.diary__item.current {
+.diary__item.current,
+.schedule__item.current {
     border: 2px solid #f1d760;
     border-radius: 10px;
 }
