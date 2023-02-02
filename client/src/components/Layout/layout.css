@@ -3,6 +3,9 @@
     min-width: 100vw;
     min-height: calc(100vh - 120px);
 } */
+.app-contain {
+    position: relative;
+}
 
 .content-container {
     max-width: 1200px;

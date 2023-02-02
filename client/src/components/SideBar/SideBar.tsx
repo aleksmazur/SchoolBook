@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
+import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import './sideBar.css';
+import { isMobile } from 'react-device-detect';
 
 const SideBar = () => {
+  const [activeSidebar, setActiveSideBar] = useState(false);
   const navigate = window.location.pathname.slice(1);
 
   const [active, setActive] = useState(navigate === '' ? 'main' : navigate);
@@ -17,14 +21,23 @@ const SideBar = () => {
       setActive(activeTab);
     }
   };
+  
+  /* const { role, id } = useAppSelector((state) => state.userInfo.userInfo); */
+  const [role, id] = ['parent', 1];
 
   return (
     <>
-      <ul onClick={toggleActiveNav} className="sidebar__ul">
+      <ul onClick={toggleActiveNav} className={isMobile && !activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}>
         <Link to="/">
           <li className={`sidebar__li ${'main' === active ? 'active' : ''}`} data-link="main">
             <div className="sidebar__li-icon icon-main"></div>
             <div className="sidebar__li-text">Главная</div>
+          </li>
+        </Link>
+        <Link to={`${role}/${id}`}>
+          <li className="sidebar__li">
+            <div className="sidebar__li-icon icon-profile"></div>
+            <div className="sidebar__li-text">Профиль</div>
           </li>
         </Link>
         <Link to="/diary">
@@ -49,6 +62,7 @@ const SideBar = () => {
           </li>
         </Link>
       </ul>
+      {isMobile && <ButtonBurger isOpen={activeSidebar} setActiveSideBar={setActiveSideBar} />}
     </>
   );
 };

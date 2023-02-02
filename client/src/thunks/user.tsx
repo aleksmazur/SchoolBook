@@ -8,7 +8,7 @@ export interface ILogin {
 
 export const authUser = createAsyncThunk('user/auth', async (login: ILogin) => {
   try {
-    const response = await fetch(`${BASE_URL}/signin`, {
+    const response = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       body: JSON.stringify(login),
       headers: {
