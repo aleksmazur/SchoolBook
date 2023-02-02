@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
 import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import './sideBar.css';
+import { isMobile } from 'react-device-detect';
 
 const SideBar = () => {
   const [activeSidebar, setActiveSideBar] = useState(false);
@@ -10,7 +11,7 @@ const SideBar = () => {
   const [role, id] = ['parent', 1];
   return (
     <>
-      <ul className={activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}>
+      <ul className={isMobile && activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}>
         <Link to="/">
           <li className="sidebar__li active">
             <div className="sidebar__li-icon icon-main"></div>
@@ -42,7 +43,7 @@ const SideBar = () => {
           </li>
         </Link>
       </ul>
-      <ButtonBurger isOpen={activeSidebar} setActiveSideBar={setActiveSideBar} />
+      {isMobile && <ButtonBurger isOpen={activeSidebar} setActiveSideBar={setActiveSideBar} />}
     </>
   );
 };
