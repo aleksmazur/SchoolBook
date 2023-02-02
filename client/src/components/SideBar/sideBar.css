@@ -57,3 +57,7 @@ a {
 .icon-class {
     background-image: url(./../../assets/svg/class.svg);
 }
+
+.icon-profile {
+    background-image: url(./../../assets/svg/profile.svg);
+}
