@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import './sideBar.css';
 
 const SideBar = () => {
+  const [activeSidebar, setActiveSideBar] = useState(false);
   return (
     <>
-      <ul className="sidebar__ul">
+      <ul className={activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}>
         <Link to="/">
           <li className="sidebar__li active">
             <div className="sidebar__li-icon icon-main"></div>
@@ -30,6 +33,7 @@ const SideBar = () => {
           </li>
         </Link>
       </ul>
+      <ButtonBurger isOpen={activeSidebar} setActiveSideBar={setActiveSideBar} />
     </>
   );
 };
