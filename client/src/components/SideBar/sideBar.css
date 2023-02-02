@@ -1,14 +1,14 @@
 .sidebar__ul, .sidebar__ul-none {
-    list-style: none;
-    padding: 40px 40px 0 10px;
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
-    align-items:flex-start;
+    list-style: none;
+    padding: 10px;
+    position: relative;
 }
-.sidebar__ul {
-    position: absolute;
-    transition: 0.5s;
-    left: -200%;
+
+.sidebar__ul-none {
+    display: none;
 }
 
 .sidebar__li {
