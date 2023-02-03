@@ -16,7 +16,10 @@ export const authUser = createAsyncThunk('user/auth', async (login: ILogin) => {
       },
     });
     if (response.status === 403) {
-      throw new Error('User was not founded or incorrect password!');
+      throw new Error('Incorrect Password');
+    }
+    if (response.status === 401) {
+      throw new Error('User was not founded');
     }
     const data = await response.json();
     return data;
