@@ -25,7 +25,7 @@
     transition: all 0.5s;
 }
 
-a {
+.sidebar__ul a {
     text-decoration: none;
     color: inherit;
 }

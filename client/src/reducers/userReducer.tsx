@@ -1,8 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserFromToken } from '../components/Header/Header';
-import { authUser } from '../thunks/user';
+import { authUser, getChildrenByParent } from '../thunks/user';
 import jwt_decode from 'jwt-decode';
+
+type IClass = {
+  id: number;
+  className: string;
+  classTeacherId: number;
+};
+
+export type IChildren = {
+  adress: string;
+  birthday: string;
+  class: IClass;
+  classId: number;
+  firstName: string;
+  id: number;
+  lastName: string;
+  middleName: string;
+  parentId: number;
+};
 
 export type IUserState = {
   token: {
@@ -13,6 +31,7 @@ export type IUserState = {
     username: string | null;
     name: string | null;
     role: string | null;
+    children: IChildren[] | null;
   };
 };
 
@@ -25,6 +44,7 @@ const initialState: IUserState = {
     username: null,
     name: null,
     role: null,
+    children: null,
   },
 };
 
@@ -52,7 +72,11 @@ const userReducer = createSlice({
       .addCase(authUser.fulfilled, (state, action) => {
         state.token = action.payload;
         localStorage.setItem('token', action.payload.token);
+      })
+      .addCase(getChildrenByParent.fulfilled, (state, action) => {
+        state.userInfo.children = action.payload;
       });
+
     // .addCase(authUser.rejected, (state, action) => {
     //error
     // });

@@ -27,3 +27,18 @@ export const authUser = createAsyncThunk('user/auth', async (login: ILogin) => {
     throw new Error((err as Error).message);
   }
 });
+
+export const getChildrenByParent = createAsyncThunk('user/getChildren', async (id: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/childrens/${id}`, {
+      method: 'GET',
+    });
+    if (response.status === 404) {
+      throw new Error('Childrens not found');
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw new Error((err as Error).message);
+  }
+});
