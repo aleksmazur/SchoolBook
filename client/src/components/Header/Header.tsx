@@ -1,9 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { toggleActiveModal } from '../../reducers/modalReducer';
-import { setToken } from '../../reducers/userReducer';
+import { setServiceInfo, setToken, setUserInfo } from '../../reducers/userReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import jwt_decode from 'jwt-decode';
 import './header.css';
+import { useEffect } from 'react';
+
+export type IUserFromToken = {
+  exp: number;
+  iat: number;
+  id: string;
+  role: {
+    description: string;
+    id: number;
+    value: string;
+  }[];
+  username: string;
+};
 
 export function Header() {
   const dispatch = useAppDispatch();
@@ -11,10 +26,27 @@ export function Header() {
   const { t } = useTranslation();
   const tokenState = useAppSelector((state) => state.userInfo.token.token);
   const token = (tokenState || localStorage.getItem('token')) as string;
-  const userName = 'user';
+  let userName = t('header.userName');
+
   if (token) {
-    //менять userName получая его из информации о пользователе
+    const decodedToken: IUserFromToken = jwt_decode(token);
+    userName = decodedToken.username;
   }
+
+  useEffect(() => {
+    if (token) {
+      const decodedToken: IUserFromToken = jwt_decode(token);
+      dispatch(setUserInfo({ username: decodedToken.username }));
+      dispatch(setToken(token));
+      dispatch(setServiceInfo(token));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(setServiceInfo(token));
+    }
+  }, [token]);
 
   const logoutUser = () => {
     dispatch(setToken({ token: null }));
@@ -35,16 +67,19 @@ export function Header() {
       </div>
       <div className="header__button-block">
         {!localStorage.getItem('token') && (
-          <button className="header__login btn" onClick={() => openModal()}>
-            {t('header.login')}
-          </button>
+          <>
+            <div className="header__username">{userName}</div>
+            <button className="header__login btn" onClick={() => openModal()}>
+              {t('header.login')}
+            </button>
+          </>
         )}
         {localStorage.getItem('token') && (
           <div className="header__user-name-block">
-            <span>{userName}</span>
-            <span className="header__action-button" onClick={logoutUser}>
+            <div className="header__username">{userName}</div>
+            <button className="header__action-button btn" onClick={logoutUser}>
               {t('header.logout')}
-            </span>
+            </button>
           </div>
         )}
       </div>

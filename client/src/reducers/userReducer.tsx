@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from '@reduxjs/toolkit';
-// import { authUser } from '../thunks/user';
+import { IUserFromToken } from '../components/Header/Header';
+import { authUser } from '../thunks/user';
+import jwt_decode from 'jwt-decode';
 
 export type IUserState = {
   token: {
@@ -7,11 +10,9 @@ export type IUserState = {
   };
   userInfo: {
     id: string | null;
-    login: string | null;
-    password: string | null;
+    username: string | null;
     name: string | null;
     role: string | null;
-    relative: string | null;
   };
 };
 
@@ -21,11 +22,9 @@ const initialState: IUserState = {
   },
   userInfo: {
     id: null,
-    login: null,
-    password: null,
+    username: null,
     name: null,
     role: null,
-    relative: null,
   },
 };
 
@@ -34,28 +33,31 @@ const userReducer = createSlice({
   initialState,
   reducers: {
     setUserInfo(state, action) {
-      state.userInfo.login = action.payload.login;
-      state.userInfo.password = action.payload.password;
-      state.userInfo.id = action.payload.id;
+      state.userInfo.username = action.payload.username;
+    },
+    setServiceInfo(state, action) {
+      const decodedToken: IUserFromToken = jwt_decode(action.payload);
+      state.userInfo.id = decodedToken.id;
+      state.userInfo.role = decodedToken.role[0].value;
     },
     setToken(state, action) {
       state.token = action.payload;
     },
   },
-  //   extraReducers: (builder) => {
-  //     builder
-  //       .addCase(authUser.pending, (state, action) => {
-  //         //preloader
-  //       })
-  //       .addCase(authUser.fulfilled, (state, action) => {
-  //         state.token = action.payload;
-  //         localStorage.setItem('token', action.payload.token);
-  //       })
-  //       .addCase(authUser.rejected, (state, action) => {
-  //         //error
-  //       });
-  //   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(authUser.pending, (state, action) => {
+        //preloader
+      })
+      .addCase(authUser.fulfilled, (state, action) => {
+        state.token = action.payload;
+        localStorage.setItem('token', action.payload.token);
+      });
+    // .addCase(authUser.rejected, (state, action) => {
+    //error
+    // });
+  },
 });
 
 export default userReducer.reducer;
-export const { setUserInfo, setToken } = userReducer.actions;
+export const { setUserInfo, setServiceInfo, setToken } = userReducer.actions;

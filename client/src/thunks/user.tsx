@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_URL } from '../constants/baseUrl';
 
 export interface ILogin {
-  login: string;
+  username: string;
   password: string;
 }
 

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
 import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import './sideBar.css';
 import { isMobile } from 'react-device-detect';
@@ -9,6 +9,7 @@ import { isMobile } from 'react-device-detect';
 const SideBar = () => {
   const { t } = useTranslation();
   const [activeSidebar, setActiveSideBar] = useState(false);
+  const { role, id } = useAppSelector((state) => state.userInfo.userInfo);
   const navigate = window.location.pathname.slice(1);
 
   const [active, setActive] = useState(navigate === '' ? 'main' : navigate);
@@ -24,9 +25,6 @@ const SideBar = () => {
     }
   };
 
-  /* const { role, id } = useAppSelector((state) => state.userInfo.userInfo); */
-  const [role, id] = ['parent', 1];
-
   return (
     <>
       <ul
@@ -40,9 +38,9 @@ const SideBar = () => {
           </li>
         </Link>
         <Link to={`${role}/${id}`}>
-          <li className="sidebar__li">
+          <li className={`sidebar__li ${'profile' === active ? 'active' : ''}`} data-link="profile">
             <div className="sidebar__li-icon icon-profile"></div>
-            <div className="sidebar__li-text">Профиль</div>
+            <div className="sidebar__li-text">{t('sidebar.profile')}</div>
           </li>
         </Link>
         <Link to="/diary">

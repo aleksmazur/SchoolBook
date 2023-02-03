@@ -2,7 +2,8 @@
     "header": {
       "schoolBook": "School Book",
       "login": "Log in",
-      "logout": "Log out"
+      "logout": "Log out",
+      "userName": "Guest"
     },
     "footer":  {
         
@@ -11,6 +12,7 @@
         "main": "Main",
         "diary": "Diary",
         "schedule": "Schedule",
+        "profile": "Profile",
         "class": "Class",
         "news": "News"
     },

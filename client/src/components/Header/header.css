@@ -39,3 +39,8 @@
     padding-left: 40px;
     padding-top: 10px;
 }
+
+.header__user-name-block {
+    display: flex;
+    align-items: center;
+}
