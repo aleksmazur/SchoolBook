@@ -50,6 +50,9 @@ export class AuthService {
 
   private async validateUser(userDto: LogiUserDto) {
     const user = await this.userService.getUserByUsername(userDto.username);
+    if (!user) {
+      throw new HttpException(`User with username '${userDto.username}' not found!`, HttpStatus.FORBIDDEN);
+    }
     const passwordEquals = await bcrypt.compare(
       userDto.password,
       user.password,
@@ -57,8 +60,6 @@ export class AuthService {
     if (user && passwordEquals) {
       return user;
     }
-    throw new UnauthorizedException({
-      message: "Wrong username or password",
-    });
+    throw new HttpException(`Incorrect password for user '${userDto.username}'`, HttpStatus.UNAUTHORIZED);
   }
 }
