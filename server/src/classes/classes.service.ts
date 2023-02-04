@@ -42,4 +42,18 @@ export class ClassesService {
     }
     return classes;
   }
+
+  async getClass(id: number) {
+    const classItem = await this.classesRepository.findOne({
+      where: { id },
+      include: { all: true },
+    });
+    if (!classItem) {
+      throw new HttpException(
+        `Class with ID '${id}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return classItem;
+  }
 }

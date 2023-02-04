@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Query,
 } from "@nestjs/common";
@@ -31,5 +32,12 @@ export class ClassesController {
       return this.classService.getClassesByTeacher(teacherId);
     }
     return this.classService.getAllClasses();
+  }
+
+  @ApiOperation({ summary: "Get class from ID" })
+  @ApiResponse({ status: 200, type: ClassRoom })
+  @Get(":id")
+  getClassByID(@Param("id") id: number) {
+    return this.classService.getClass(id);
   }
 }
