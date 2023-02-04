@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { IClass } from '../../pages/ClassPage/ClassPage';
+import { useAppSelector } from '../../store/hooks';
 
-const TeacherItem = ({ teacherId }: IClass) => {
+const TeacherItem = () => {
   const navigate = useNavigate();
+  const teacherId = useAppSelector((state) => state.classInfo.classInfo.classTeacherId);
 
   return (
-    <div className="teacher__item_name" onClick={() => navigate(`/pupils/${teacherId}`)}>
-      *getTeacherName*
+    <div className="teacher__item_name" onClick={() => navigate(`/pupils`)}>
+      *getTeacherName* {teacherId}
     </div>
   );
 };

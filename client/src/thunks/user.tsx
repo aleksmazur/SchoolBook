@@ -42,3 +42,33 @@ export const getChildrenByParent = createAsyncThunk('user/getChildren', async (i
     throw new Error((err as Error).message);
   }
 });
+
+export const getParrentById = createAsyncThunk('user/getParrentById', async (id: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/${id}`, {
+      method: 'GET',
+    });
+    if (response.status === 404) {
+      throw new Error('User not found');
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw new Error((err as Error).message);
+  }
+});
+
+export const getChildrenById = createAsyncThunk('user/getChildrenById', async (id: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/childrens/${id}`, {
+      method: 'GET',
+    });
+    if (response.status === 404) {
+      throw new Error('User not found');
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw new Error((err as Error).message);
+  }
+});

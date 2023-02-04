@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserFromToken } from '../components/Header/Header';
-import { authUser, getChildrenByParent } from '../thunks/user';
+import { authUser, getChildrenById, getChildrenByParent, getParrentById } from '../thunks/user';
 import jwt_decode from 'jwt-decode';
 
 type IClass = {
@@ -19,20 +19,23 @@ export type IChildren = {
   id: number;
   lastName: string;
   middleName: string;
+  fullName: string;
   parentId: number;
+};
+
+type IUserInfo = {
+  id: string | null;
+  username: string | null;
+  fullName: string | null;
+  role: string | null;
+  children: IChildren[] | null;
 };
 
 export type IUserState = {
   token: {
     token: string | null;
   };
-  userInfo: {
-    id: string | null;
-    username: string | null;
-    name: string | null;
-    role: string | null;
-    children: IChildren[] | null;
-  };
+  userInfo: IUserInfo;
 };
 
 const initialState: IUserState = {
@@ -42,7 +45,7 @@ const initialState: IUserState = {
   userInfo: {
     id: null,
     username: null,
-    name: null,
+    fullName: null,
     role: null,
     children: null,
   },
@@ -54,6 +57,7 @@ const userReducer = createSlice({
   reducers: {
     setUserInfo(state, action) {
       state.userInfo.username = action.payload.username;
+      state.userInfo.fullName = action.payload.fullName;
     },
     setServiceInfo(state, action) {
       const decodedToken: IUserFromToken = jwt_decode(action.payload);

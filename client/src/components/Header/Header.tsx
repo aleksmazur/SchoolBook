@@ -18,6 +18,7 @@ export type IUserFromToken = {
     value: string;
   }[];
   username: string;
+  fullName: string;
 };
 
 export function Header() {
@@ -36,7 +37,7 @@ export function Header() {
   useEffect(() => {
     if (token) {
       const decodedToken: IUserFromToken = jwt_decode(token);
-      dispatch(setUserInfo({ username: decodedToken.username }));
+      dispatch(setUserInfo({ username: decodedToken.username, fullName: decodedToken.fullName }));
       dispatch(setToken(token));
       dispatch(setServiceInfo(token));
     }

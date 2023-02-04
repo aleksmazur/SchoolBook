@@ -25,7 +25,7 @@ const App = () => {
             }
           />
           <Route
-            path="parent/:id"
+            path=":parent/:id"
             element={
               <RequireAuth>
                 <ProfilePage />
@@ -33,7 +33,7 @@ const App = () => {
             }
           />
           <Route
-            path="children/:id"
+            path=":children/:id"
             element={
               <RequireAuth>
                 <ProfilePage />
@@ -50,7 +50,7 @@ const App = () => {
             }
           />
           <Route
-            path="class"
+            path="class/:id"
             element={
               <RequireAuth>
                 <ClassPage />

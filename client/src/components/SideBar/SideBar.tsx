@@ -6,12 +6,13 @@ import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import { isMobile } from 'react-device-detect';
 import { getChildrenByParent } from '../../thunks/user';
 import './sideBar.css';
+import { getClassByID } from '../../thunks/classes';
 
 const SideBar = () => {
   const { t } = useTranslation();
   const [activeSidebar, setActiveSideBar] = useState(false);
-  const { role, id, children } = useAppSelector((state) => state.userInfo.userInfo);
-
+  const { userInfo } = useAppSelector((state) => state.userInfo);
+  const { role, id, children } = userInfo;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -22,8 +23,16 @@ const SideBar = () => {
     }
   }, [id]);
 
-  const navigate = window.location.pathname.slice(1);
+  useEffect(() => {
+    if (role === 'parent') {
+      if (children) {
+        dispatch(getClassByID(children[0].classId));
+      }
+    }
+  }, [children]);
 
+  const path = window.location.pathname.split('/');
+  const navigate = path[path.length - 2];
   const [active, setActive] = useState(navigate === '' ? 'main' : navigate);
 
   const toggleActiveNav = (e: React.MouseEvent<HTMLElement>) => {
@@ -50,7 +59,12 @@ const SideBar = () => {
           </li>
         </Link>
         <Link to={`${role}/${id}`}>
-          <li className={`sidebar__li ${'profile' === active ? 'active' : ''}`} data-link="profile">
+          <li
+            className={`sidebar__li ${
+              'parent' === active || 'children' === active ? 'active' : ''
+            }`}
+            data-link={role}
+          >
             <div className="sidebar__li-icon icon-profile"></div>
             <div className="sidebar__li-text">{t('sidebar.profile')}</div>
           </li>
@@ -70,7 +84,7 @@ const SideBar = () => {
             <div className="sidebar__li-text">{t('sidebar.schedule')}</div>
           </li>
         </Link>
-        <Link to="/class">
+        <Link to={children ? `/class/${children[0].classId}` : '/class'}>
           <li className={`sidebar__li ${'class' === active ? 'active' : ''}`} data-link="class">
             <div className="sidebar__li-icon icon-class"></div>
             <div className="sidebar__li-text">{t('sidebar.class')}</div>
