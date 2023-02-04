@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
+import { Children } from "src/childrens/childrens.model";
 import { User } from "../users/users.model";
 import { ClassRoom } from "./classes.model";
 import { CreateClassRoomDto } from "./dto/create-classroom.dto";
@@ -17,7 +18,18 @@ export class ClassesService {
 
   async getAllClasses() {
     const classes = await this.classesRepository.findAll({
-      include: { all: true },
+      // include: { all: true },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password", "username"]
+          },
+        },
+        {
+          model: Children
+        }
+      ]
     });
     if (!classes.length) {
       throw new HttpException(`Classes not found!`, HttpStatus.NOT_FOUND);
@@ -30,6 +42,9 @@ export class ClassesService {
       include: [
         {
           model: User,
+          attributes: {
+            exclude: ["password", "username"]
+          },
           where: { id },
         },
       ],
@@ -46,7 +61,17 @@ export class ClassesService {
   async getClass(id: number) {
     const classItem = await this.classesRepository.findOne({
       where: { id },
-      include: { all: true },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password", "username"]
+          },
+        },
+        {
+          model: Children
+        }
+      ]
     });
     if (!classItem) {
       throw new HttpException(

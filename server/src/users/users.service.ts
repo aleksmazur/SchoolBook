@@ -13,6 +13,7 @@ import { RolesService } from "../roles/roles.service";
 import { AddRoleDto } from "./dto/add-role.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from "./users.model";
+import { instanceToPlain } from "class-transformer";
 
 @Injectable()
 export class UsersService {
@@ -35,7 +36,12 @@ export class UsersService {
   }
 
   async getAllUsers() {
-    const users = await this.userRepository.findAll({ include: { all: true } });
+    const users = await this.userRepository.findAll({
+      attributes: {
+        exclude: ['password']
+      },
+      include: { all: true } 
+    });
     if (!users.length) {
       throw new HttpException(`Users not found!`, HttpStatus.NOT_FOUND);
     }
@@ -44,6 +50,9 @@ export class UsersService {
 
   async getUsersByRole(value: string) {
     const users = await this.userRepository.findAll({
+      attributes: {
+        exclude: ["password"]
+      },
       include: [
         {
           model: Role,
@@ -65,6 +74,9 @@ export class UsersService {
 
   async getUserByID(id: number) {
     const user = await this.userRepository.findOne({
+      attributes: {
+        exclude: ["password"]
+      },
       where: { id },
       include: { all: true },
     });
@@ -92,6 +104,9 @@ export class UsersService {
 
   async getUserByUsername(username: string) {
     const user = await this.userRepository.findOne({
+      attributes: {
+        exclude: ["password"]
+      },
       where: { username },
       include: { all: true },
     });

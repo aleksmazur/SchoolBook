@@ -7,6 +7,7 @@ import {
 } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { ClassRoom } from "src/classes/classes.model";
+import { User } from "src/users/users.model";
 // import { User } from 'src/users/users.model';
 import { UsersService } from "../users/users.service";
 import { Children } from "./childrens.model";
@@ -19,7 +20,6 @@ export class ChildrensService {
     @Inject(forwardRef(() => UsersService))
     private userService: UsersService,
   ) {}
-  // private userService: UsersService) {}
 
   async createChildren(dto: CreateChildrenDto) {
     const children = await this.childrensRepository.create(dto);
@@ -31,7 +31,17 @@ export class ChildrensService {
 
   async getAllChildrens() {
     const childrens = await this.childrensRepository.findAll({
-      include: { all: true },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password", "username"]
+          },
+        },
+        {
+          model: ClassRoom
+        }
+      ]
     });
     if (!childrens.length) {
       throw new HttpException(`Childrens not found!`, HttpStatus.NOT_FOUND);

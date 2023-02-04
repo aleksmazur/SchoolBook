@@ -14,6 +14,7 @@ import { Role } from "../roles/roles.model";
 import { Children } from "../childrens/childrens.model";
 import { UserChildrens } from "./dto/user-childrens.model";
 import { ClassRoom } from "../classes/classes.model";
+import { Exclude } from "class-transformer";
 
 interface UserCreationAttrs {
   username: string;
