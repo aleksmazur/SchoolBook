@@ -2,7 +2,7 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
-  UnauthorizedException,
+  // UnauthorizedException,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { UsersService } from "../users/users.service";
@@ -42,7 +42,12 @@ export class AuthService {
   }
 
   private async generateToken(user: User) {
-    const payload = { username: user.username, id: user.id, role: user.role, fullName: user.fullName };
+    const payload = {
+      username: user.username,
+      id: user.id,
+      role: user.role,
+      fullName: user.fullName,
+    };
     return {
       token: this.jwtService.sign(payload),
     };
@@ -51,7 +56,10 @@ export class AuthService {
   private async validateUser(userDto: LogiUserDto) {
     const user = await this.userService.getUserByUsername(userDto.username);
     if (!user) {
-      throw new HttpException(`User with username '${userDto.username}' not found!`, HttpStatus.FORBIDDEN);
+      throw new HttpException(
+        `User with username '${userDto.username}' not found!`,
+        HttpStatus.FORBIDDEN,
+      );
     }
     const passwordEquals = await bcrypt.compare(
       userDto.password,
@@ -60,6 +68,9 @@ export class AuthService {
     if (user && passwordEquals) {
       return user;
     }
-    throw new HttpException(`Incorrect password for user '${userDto.username}'`, HttpStatus.UNAUTHORIZED);
+    throw new HttpException(
+      `Incorrect password for user '${userDto.username}'`,
+      HttpStatus.UNAUTHORIZED,
+    );
   }
 }

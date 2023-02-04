@@ -35,13 +35,13 @@ export class ChildrensService {
         {
           model: User,
           attributes: {
-            exclude: ["password", "username"]
+            exclude: ["password", "username"],
           },
         },
         {
-          model: ClassRoom
-        }
-      ]
+          model: ClassRoom,
+        },
+      ],
     });
     if (!childrens.length) {
       throw new HttpException(`Childrens not found!`, HttpStatus.NOT_FOUND);
@@ -78,5 +78,26 @@ export class ChildrensService {
       );
     }
     return child;
+  }
+
+  async getChildren(id: number) {
+    const children = await this.childrensRepository.findOne({
+      where: { id },
+      include: [
+        {
+          model: ClassRoom,
+        },
+        {
+          model: User,
+        },
+      ],
+    });
+    if (!children) {
+      throw new HttpException(
+        `Children with ID '${id}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return children;
   }
 }

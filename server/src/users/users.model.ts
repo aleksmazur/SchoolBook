@@ -14,7 +14,6 @@ import { Role } from "../roles/roles.model";
 import { Children } from "../childrens/childrens.model";
 import { UserChildrens } from "./dto/user-childrens.model";
 import { ClassRoom } from "../classes/classes.model";
-import { Exclude } from "class-transformer";
 
 interface UserCreationAttrs {
   username: string;
@@ -49,8 +48,8 @@ export class User extends Model<User, UserCreationAttrs> {
   @ApiProperty({ example: "Bukina", description: "Last name user" })
   @Column({ type: DataType.STRING, allowNull: false })
   lastName: string;
- 
-  @Column({ type: DataType.STRING})
+
+  @Column({ type: DataType.STRING })
   fullName: string;
 
   @BeforeCreate

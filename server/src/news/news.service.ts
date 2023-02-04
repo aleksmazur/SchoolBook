@@ -1,7 +1,7 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { CreateNewsDto } from './dto/create-news.dto';
-import { News } from './news.model';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/sequelize";
+import { CreateNewsDto } from "./dto/create-news.dto";
+import { News } from "./news.model";
 
 @Injectable()
 export class NewsService {
@@ -11,7 +11,7 @@ export class NewsService {
     const news = await this.newsRepository.create(dto);
     return news;
   }
-  
+
   async getAllNews() {
     const news = await this.newsRepository.findAll({
       include: { all: true },

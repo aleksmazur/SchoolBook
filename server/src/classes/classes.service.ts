@@ -23,13 +23,13 @@ export class ClassesService {
         {
           model: User,
           attributes: {
-            exclude: ["password", "username"]
+            exclude: ["password", "username"],
           },
         },
         {
-          model: Children
-        }
-      ]
+          model: Children,
+        },
+      ],
     });
     if (!classes.length) {
       throw new HttpException(`Classes not found!`, HttpStatus.NOT_FOUND);
@@ -43,7 +43,7 @@ export class ClassesService {
         {
           model: User,
           attributes: {
-            exclude: ["password", "username"]
+            exclude: ["password", "username"],
           },
           where: { id },
         },
@@ -65,13 +65,13 @@ export class ClassesService {
         {
           model: User,
           attributes: {
-            exclude: ["password", "username"]
+            exclude: ["password", "username"],
           },
         },
         {
-          model: Children
-        }
-      ]
+          model: Children,
+        },
+      ],
     });
     if (!classItem) {
       throw new HttpException(

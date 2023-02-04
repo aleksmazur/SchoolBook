@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Query,
-} from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { ClassRoom } from "./classes.model";
 import { ClassesService } from "./classes.service";
@@ -34,7 +27,7 @@ export class ClassesController {
     return this.classService.getAllClasses();
   }
 
-  @ApiOperation({ summary: "Get class from ID" })
+  @ApiOperation({ summary: "Get class by ID" })
   @ApiResponse({ status: 200, type: ClassRoom })
   @Get(":id")
   getClassByID(@Param("id") id: number) {

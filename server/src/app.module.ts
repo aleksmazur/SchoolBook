@@ -12,8 +12,6 @@ import { ClassesModule } from "./classes/classes.module";
 import { ClassRoom } from "./classes/classes.model";
 import { AuthModule } from "./auth/auth.module";
 import { UserChildrens } from "./users/dto/user-childrens.model";
-import { NewsService } from './news/news.service';
-import { NewsController } from './news/news.controller';
 import { NewsModule } from "./news/news.module";
 import { News } from "./news/news.model";
 

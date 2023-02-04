@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Children } from "./childrens.model";
 import { ChildrensService } from "./childrens.service";
@@ -25,5 +25,12 @@ export class ChildrensController {
       return this.childrenService.getChildrensByParent(parentId);
     }
     return this.childrenService.getAllChildrens();
+  }
+
+  @ApiOperation({ summary: "Get children by ID" })
+  @ApiResponse({ status: 200, type: Children })
+  @Get(":id")
+  getChildrenByID(@Param("id") id: number) {
+    return this.childrenService.getChildren(id);
   }
 }

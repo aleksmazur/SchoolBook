@@ -23,7 +23,10 @@ export class RolesService {
   async getRoleByValue(value: string) {
     const role = await this.roleRepository.findOne({ where: { value } });
     if (!role) {
-      throw new HttpException(`Role '${value}' not found!`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `Role '${value}' not found!`,
+        HttpStatus.NOT_FOUND,
+      );
     }
     return role;
   }

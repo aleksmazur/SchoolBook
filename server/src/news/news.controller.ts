@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateNewsDto } from './dto/create-news.dto';
-import { News } from './news.model';
-import { NewsService } from './news.service';
+import { Body, Controller, Get, Post } from "@nestjs/common";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { CreateNewsDto } from "./dto/create-news.dto";
+import { News } from "./news.model";
+import { NewsService } from "./news.service";
 
 @ApiTags("News")
 @Controller("news")

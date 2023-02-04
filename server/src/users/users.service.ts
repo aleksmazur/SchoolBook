@@ -13,7 +13,6 @@ import { RolesService } from "../roles/roles.service";
 import { AddRoleDto } from "./dto/add-role.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from "./users.model";
-import { instanceToPlain } from "class-transformer";
 
 @Injectable()
 export class UsersService {
@@ -27,7 +26,10 @@ export class UsersService {
   async createUser(dto: CreateUserDto) {
     const userRole = await this.roleService.getRoleByValue("parent");
     if (!userRole) {
-      throw new HttpException(`Add the 'parent' role to the database before creating the user`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `Add the 'parent' role to the database before creating the user`,
+        HttpStatus.NOT_FOUND,
+      );
     }
     const user = await this.userRepository.create(dto);
     await user.$set("role", [userRole.id]);
@@ -38,9 +40,9 @@ export class UsersService {
   async getAllUsers() {
     const users = await this.userRepository.findAll({
       attributes: {
-        exclude: ['password']
+        exclude: ["password"],
       },
-      include: { all: true } 
+      include: { all: true },
     });
     if (!users.length) {
       throw new HttpException(`Users not found!`, HttpStatus.NOT_FOUND);
@@ -51,7 +53,7 @@ export class UsersService {
   async getUsersByRole(value: string) {
     const users = await this.userRepository.findAll({
       attributes: {
-        exclude: ["password"]
+        exclude: ["password"],
       },
       include: [
         {
@@ -75,7 +77,7 @@ export class UsersService {
   async getUserByID(id: number) {
     const user = await this.userRepository.findOne({
       attributes: {
-        exclude: ["password"]
+        exclude: ["password"],
       },
       where: { id },
       include: { all: true },
@@ -105,7 +107,7 @@ export class UsersService {
   async getUserByUsername(username: string) {
     const user = await this.userRepository.findOne({
       attributes: {
-        exclude: ["password"]
+        exclude: ["password"],
       },
       where: { username },
       include: { all: true },
