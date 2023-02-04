@@ -1,5 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {
+  BeforeCreate,
+  BeforeUpdate,
   BelongsToMany,
   Column,
   DataType,
@@ -46,6 +48,15 @@ export class User extends Model<User, UserCreationAttrs> {
   @ApiProperty({ example: "Bukina", description: "Last name user" })
   @Column({ type: DataType.STRING, allowNull: false })
   lastName: string;
+ 
+  @Column({ type: DataType.STRING})
+  fullName: string;
+
+  @BeforeCreate
+  @BeforeUpdate
+  static setFullName(instance: User) {
+    instance.fullName = `${instance.firstName} ${instance.lastName}`;
+  }
 
   @BelongsToMany(() => Role, () => UserRoles)
   role: Role[];

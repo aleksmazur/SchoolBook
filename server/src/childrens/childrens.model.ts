@@ -1,5 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {
+  BeforeCreate,
+  BeforeUpdate,
   BelongsTo,
   BelongsToMany,
   Column,
@@ -42,6 +44,15 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: true })
   middleName: string;
 
+  @Column({ type: DataType.STRING})
+  fullName: string;
+
+  @BeforeCreate
+  @BeforeUpdate
+  static setFullName(instance: Children) {
+    instance.fullName = `${instance.firstName} ${instance.lastName} ${instance.middleName}`;
+  }
+  
   @ApiProperty({
     example: "street Stroitelei, 12, flat 52",
     description: "Adress of child",
