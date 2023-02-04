@@ -1,20 +1,9 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getChildrenByParent } from '../../thunks/user';
+import { useAppSelector } from '../../store/hooks';
 import './profile.css';
 
 const ProfilePage = () => {
   const { userInfo } = useAppSelector((state) => state.userInfo);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (userInfo.role === 'parent') {
-      if (userInfo.id) {
-        dispatch(getChildrenByParent(userInfo.id));
-      }
-    }
-  }, [userInfo.id]);
 
   const renderInfoChildren = () => {
     if (userInfo.role === 'parent' && userInfo.children) {

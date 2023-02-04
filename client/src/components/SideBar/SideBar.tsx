@@ -1,15 +1,27 @@
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import ButtonBurger from '../ButtonBurger/ButtonBurger';
-import './sideBar.css';
 import { isMobile } from 'react-device-detect';
+import { getChildrenByParent } from '../../thunks/user';
+import './sideBar.css';
 
 const SideBar = () => {
   const { t } = useTranslation();
   const [activeSidebar, setActiveSideBar] = useState(false);
-  const { role, id } = useAppSelector((state) => state.userInfo.userInfo);
+  const { role, id, children } = useAppSelector((state) => state.userInfo.userInfo);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (role === 'parent') {
+      if (id) {
+        dispatch(getChildrenByParent(id));
+      }
+    }
+  }, [id]);
+
   const navigate = window.location.pathname.slice(1);
 
   const [active, setActive] = useState(navigate === '' ? 'main' : navigate);
