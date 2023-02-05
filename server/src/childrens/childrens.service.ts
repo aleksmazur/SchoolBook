@@ -7,8 +7,8 @@ import {
 } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { ClassRoom } from "src/classes/classes.model";
+import { Grade } from "src/grades/grades.model";
 import { User } from "src/users/users.model";
-// import { User } from 'src/users/users.model';
 import { UsersService } from "../users/users.service";
 import { Children } from "./childrens.model";
 import { CreateChildrenDto } from "./dto/create-children.dto";
@@ -41,6 +41,9 @@ export class ChildrensService {
         {
           model: ClassRoom,
         },
+        {
+          model: Grade,
+        }
       ],
     });
     if (!childrens.length) {

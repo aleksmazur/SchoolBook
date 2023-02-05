@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { Children } from "src/childrens/childrens.model";
+import { Children } from "../childrens/childrens.model";
+import { Subject } from "../subjects/subjects.model";
 import { User } from "../users/users.model";
 import { ClassRoom } from "./classes.model";
 import { CreateClassRoomDto } from "./dto/create-classroom.dto";
@@ -29,6 +30,9 @@ export class ClassesService {
         {
           model: Children,
         },
+        {
+          model: Subject,
+        }
       ],
     });
     if (!classes.length) {

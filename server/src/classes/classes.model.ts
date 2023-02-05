@@ -8,7 +8,8 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { Children } from "src/childrens/childrens.model";
+import { Subject } from "../subjects/subjects.model";
+import { Children } from "../childrens/childrens.model";
 import { User } from "../users/users.model";
 
 interface ClassRoomCreationAttrs {
@@ -40,4 +41,7 @@ export class ClassRoom extends Model<ClassRoom, ClassRoomCreationAttrs> {
 
   @HasMany(() => Children)
   childrens: [Children];
+
+  @HasMany(() => Subject)
+  subjects: [Subject]
 }

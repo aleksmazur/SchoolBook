@@ -7,9 +7,11 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from "sequelize-typescript";
+import { Grade } from "src/grades/grades.model";
 import { ClassRoom } from "../classes/classes.model";
 import { UserChildrens } from "../users/dto/user-childrens.model";
 import { User } from "../users/users.model";
@@ -80,4 +82,7 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
 
   @BelongsToMany(() => User, () => UserChildrens)
   parents: User[];
+
+  @HasMany(() => Grade)
+  grades: [Grade];
 }
