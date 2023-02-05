@@ -11,7 +11,8 @@ const PupilCard = () => {
   const dispatch = useAppDispatch();
 
   const { classInfo } = useAppSelector((state) => state.classInfo);
-  const { fullName, birthday, adress, parents } = useAppSelector(
+  const { children } = useAppSelector((state) => state.userInfo.userInfo);
+  const { fullName, birthday, adress, parents, id } = useAppSelector(
     (state) => state.classInfo.currentPupil
   );
 
@@ -43,7 +44,7 @@ const PupilCard = () => {
               {' '}
               Дата рождения: {moment(birthday).utc().format('YYYY-MM-DD')}
             </div>
-            <div className="pupil__adress">Адрес {adress}</div>
+            <div className="pupil__adress">Адрес: {adress}</div>
             <div className="pupil__class">
               Класс: <Link to={`/class/${classInfo.id}`}>{classInfo.className}</Link>
             </div>
@@ -53,6 +54,12 @@ const PupilCard = () => {
                 {parents ? renderInfoParents() : 'Нет зарегистрированных родителей'}
               </div>
             }
+            {children && id === children[0].id && (
+              <div className="pupil__progress">
+                <Link to={`/diary`}>Смотреть дневник</Link>
+                <Link to={`/progress`}>Смотреть успеваемость</Link>
+              </div>
+            )}
           </div>
         </div>
       )}

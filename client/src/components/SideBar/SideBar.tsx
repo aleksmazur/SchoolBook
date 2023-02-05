@@ -55,7 +55,7 @@ const SideBar = () => {
         className={isMobile && !activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}
       >
         <Link to="/">
-          <li className={`sidebar__li ${'main' === active ? 'active' : ''}`} data-link="main">
+          <li className={`sidebar__li ${'' === active ? 'active' : ''}`} data-link="main">
             <div className="sidebar__li-icon icon-main"></div>
             <div className="sidebar__li-text">{t('sidebar.main')}</div>
           </li>

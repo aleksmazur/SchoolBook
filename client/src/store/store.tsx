@@ -4,6 +4,7 @@ import scheduleReducer from '../reducers/scheduleReducer';
 import modalReducer from '../reducers/modalReducer';
 import settingReducer from '../reducers/settingReducer';
 import classReducer from '../reducers/classReducer';
+import newsReducer from '../reducers/newsReducer';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     schedule: scheduleReducer,
     modal: modalReducer,
     setting: settingReducer,
+    news: newsReducer,
   },
 });
 

@@ -61,7 +61,7 @@ const classReducer = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getClassByID.pending, (state, action) => {
+      .addCase(getClassByID.pending, () => {
         //preloader
       })
       .addCase(getClassByID.fulfilled, (state, action) => {
