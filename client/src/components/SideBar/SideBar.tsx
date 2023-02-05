@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import { isMobile } from 'react-device-detect';
@@ -14,6 +14,10 @@ const SideBar = () => {
   const { userInfo } = useAppSelector((state) => state.userInfo);
   const { role, id, children } = userInfo;
   const dispatch = useAppDispatch();
+  const path = window.location.pathname.split('/');
+  const navigate = path[1];
+  const [active, setActive] = useState(navigate === '' ? 'main' : navigate);
+  const location = useLocation();
 
   useEffect(() => {
     if (role === 'parent') {
@@ -31,9 +35,7 @@ const SideBar = () => {
     }
   }, [children]);
 
-  const path = window.location.pathname.split('/');
-  const navigate = path[path.length - 2];
-  const [active, setActive] = useState(navigate === '' ? 'main' : navigate);
+  useEffect(() => setActive(navigate), [location, setActive]);
 
   const toggleActiveNav = (e: React.MouseEvent<HTMLElement>) => {
     const currentTab = e.target as HTMLLIElement;

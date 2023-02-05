@@ -62,7 +62,7 @@ export const Modal = () => {
             <button
               className="btn-block__signin btn"
               type="submit"
-              onClick={handleSubmit(onSubmitForm)}
+              onClick={handleSubmit(onSubmitForm)} // почему 2 обработчика формы и кнопки
             >
               {t('auth.loginBtn')}
             </button>

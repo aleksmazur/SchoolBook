@@ -9,6 +9,7 @@ import { Layout } from './components/Layout/Layout';
 import './app.css';
 import NewsPage from './pages/NewsPage/NewsPage';
 import { RequireAuth } from './hoc/RequireAuth';
+import PupilCard from './components/PupilCard/PupilCard';
 
 const App = () => {
   return (
@@ -32,14 +33,14 @@ const App = () => {
               </RequireAuth>
             }
           />
-          <Route
+          {/* <Route
             path=":children/:id"
             element={
               <RequireAuth>
                 <ProfilePage />
               </RequireAuth>
             }
-          />
+          /> */}
           {/* <Route path="teacher/:id" element={<TeacherPage />} /> */}
           <Route
             path="schedule"
@@ -54,6 +55,14 @@ const App = () => {
             element={
               <RequireAuth>
                 <ClassPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="class/children/:id"
+            element={
+              <RequireAuth>
+                <PupilCard />
               </RequireAuth>
             }
           />

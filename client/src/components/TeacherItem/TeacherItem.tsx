@@ -3,11 +3,13 @@ import { useAppSelector } from '../../store/hooks';
 
 const TeacherItem = () => {
   const navigate = useNavigate();
-  const teacherId = useAppSelector((state) => state.classInfo.classInfo.classTeacherId);
+  const { firstName, lastName, id } = useAppSelector(
+    (state) => state.classInfo.classInfo.classTeacher!
+  );
 
   return (
-    <div className="teacher__item_name" onClick={() => navigate(`/pupils`)}>
-      *getTeacherName* {teacherId}
+    <div className="teacher__item_name" onClick={() => navigate(`/class/teacher/${id}`)}>
+      {firstName + ' ' + lastName}
     </div>
   );
 };

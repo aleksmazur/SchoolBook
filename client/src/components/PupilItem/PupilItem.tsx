@@ -15,7 +15,7 @@ const PupilItem = ({ pupil, num }: IPropsPupil) => {
   return (
     <tr className={id % 2 ? 'tr__honest' : 'tr__odd'}>
       <td className="pupil__item_id">{num + 1}. </td>
-      <td className="pupil__item_name" onClick={() => navigate(`/children/${id}`)}>
+      <td className="pupil__item_name" onClick={() => navigate(`/class/children/${id}`)}>
         {lastName} {firstName}
       </td>
       <td className="pupil__item_birht">{moment(birthday).utc().format('YYYY-MM-DD')}</td>
