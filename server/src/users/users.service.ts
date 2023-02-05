@@ -106,9 +106,6 @@ export class UsersService {
 
   async getUserByUsername(username: string) {
     const user = await this.userRepository.findOne({
-      attributes: {
-        exclude: ["password"],
-      },
       where: { username },
       include: { all: true },
     });
