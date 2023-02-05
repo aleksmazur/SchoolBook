@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateGradeDto } from './dto/create-grade.dto';
-import { Grade } from './grades.model';
-import { GradesService } from './grades.service';
+import { Body, Controller, Get, Post } from "@nestjs/common";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { CreateGradeDto } from "./dto/create-grade.dto";
+import { Grade } from "./grades.model";
+import { GradesService } from "./grades.service";
 
 @ApiTags("Grades")
-@Controller('grades')
+@Controller("grades")
 export class GradesController {
   constructor(private gradesService: GradesService) {}
 

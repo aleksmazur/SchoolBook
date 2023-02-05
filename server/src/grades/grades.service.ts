@@ -1,13 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { CreateGradeDto } from './dto/create-grade.dto';
-import { Grade } from './grades.model';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/sequelize";
+import { CreateGradeDto } from "./dto/create-grade.dto";
+import { Grade } from "./grades.model";
 
 @Injectable()
 export class GradesService {
-  constructor(
-    @InjectModel(Grade) private gradesRepository: typeof Grade,
-  ) {}
+  constructor(@InjectModel(Grade) private gradesRepository: typeof Grade) {}
 
   async createGrade(dto: CreateGradeDto) {
     const grade = await this.gradesRepository.create(dto);

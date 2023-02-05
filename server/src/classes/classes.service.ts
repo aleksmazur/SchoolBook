@@ -32,7 +32,7 @@ export class ClassesService {
         },
         {
           model: Subject,
-        }
+        },
       ],
     });
     if (!classes.length) {

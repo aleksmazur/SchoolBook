@@ -33,11 +33,17 @@ export class Subject extends Model<Subject, SubjectCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   name: string;
 
-  @ApiProperty({ example: "Complete exercise number 1", description: "Homework context" })
+  @ApiProperty({
+    example: "Complete exercise number 1",
+    description: "Homework context",
+  })
   @Column({ type: DataType.STRING, allowNull: true })
   homework: string;
 
-  @ApiProperty({ example: "2023-02-06T08:45:00", description: "Date of the subject" })
+  @ApiProperty({
+    example: "2023-02-06T08:45:00",
+    description: "Date of the subject",
+  })
   @Column({ type: DataType.DATE, allowNull: false })
   date: string;
 
@@ -49,5 +55,5 @@ export class Subject extends Model<Subject, SubjectCreationAttrs> {
   class: ClassRoom;
 
   @HasMany(() => Grade)
-  grades: [Grade]
+  grades: [Grade];
 }

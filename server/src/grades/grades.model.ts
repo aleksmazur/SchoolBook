@@ -37,7 +37,7 @@ export class Grade extends Model<Grade, GradeCreationAttrs> {
   childrenId: number;
 
   @BelongsTo(() => Children)
-  children: Children
+  children: Children;
 
   @ApiProperty({ example: "4", description: "ID of subject" })
   @ForeignKey(() => Subject)
@@ -45,5 +45,5 @@ export class Grade extends Model<Grade, GradeCreationAttrs> {
   subjectId: number;
 
   @BelongsTo(() => Subject)
-  subject: Subject
+  subject: Subject;
 }

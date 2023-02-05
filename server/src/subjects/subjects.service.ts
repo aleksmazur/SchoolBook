@@ -1,7 +1,7 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { CreateSubjectDto } from './dto/create-subject.dto';
-import { Subject } from './subjects.model';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/sequelize";
+import { CreateSubjectDto } from "./dto/create-subject.dto";
+import { Subject } from "./subjects.model";
 
 @Injectable()
 export class SubjectsService {

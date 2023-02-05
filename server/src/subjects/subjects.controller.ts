@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateSubjectDto } from './dto/create-subject.dto';
-import { Subject } from './subjects.model';
-import { SubjectsService } from './subjects.service';
+import { Body, Controller, Get, Post } from "@nestjs/common";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { CreateSubjectDto } from "./dto/create-subject.dto";
+import { Subject } from "./subjects.model";
+import { SubjectsService } from "./subjects.service";
 
 @ApiTags("Subjects")
-@Controller('subjects')
+@Controller("subjects")
 export class SubjectsController {
   constructor(private subjectsService: SubjectsService) {}
 

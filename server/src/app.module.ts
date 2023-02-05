@@ -14,9 +14,9 @@ import { AuthModule } from "./auth/auth.module";
 import { UserChildrens } from "./users/dto/user-childrens.model";
 import { NewsModule } from "./news/news.module";
 import { News } from "./news/news.model";
-import { SubjectsModule } from './subjects/subjects.module';
+import { SubjectsModule } from "./subjects/subjects.module";
 import { Subject } from "./subjects/subjects.model";
-import { GradesModule } from './grades/grades.module';
+import { GradesModule } from "./grades/grades.module";
 import { Grade } from "./grades/grades.model";
 
 @Module({
@@ -31,7 +31,17 @@ import { Grade } from "./grades/grades.model";
       username: process.env.POSTGRES_USER || "postgres",
       password: process.env.POSTGRES_PASSWORD || "root",
       database: process.env.POSTGRES_DB || "schoolbook",
-      models: [User, Role, UserRoles, Children, ClassRoom, UserChildrens, News, Subject, Grade],
+      models: [
+        User,
+        Role,
+        UserRoles,
+        Children,
+        ClassRoom,
+        UserChildrens,
+        News,
+        Subject,
+        Grade,
+      ],
       autoLoadModels: true,
     }),
     UsersModule,

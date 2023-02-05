@@ -43,7 +43,7 @@ export class ChildrensService {
         },
         {
           model: Grade,
-        }
+        },
       ],
     });
     if (!childrens.length) {

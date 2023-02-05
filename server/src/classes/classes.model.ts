@@ -43,5 +43,5 @@ export class ClassRoom extends Model<ClassRoom, ClassRoomCreationAttrs> {
   childrens: [Children];
 
   @HasMany(() => Subject)
-  subjects: [Subject]
+  subjects: [Subject];
 }
