@@ -26,7 +26,7 @@ const ScheduleDay = ({ lessons, index }: IScheduleDay) => {
         <tbody>
           {lessons.map((lesson, ind: number) => {
             return (
-              <tr className={ind % 2 ? 'lesson__odd' : 'lesson__honest'} key={ind}>
+              <tr key={ind}>
                 <td className="num">{ind + 1}.</td>
                 <td className="time">
                   {timeSlots[ind]['start']} – {timeSlots[ind]['end']}

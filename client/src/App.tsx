@@ -10,6 +10,7 @@ import './app.css';
 import NewsPage from './pages/NewsPage/NewsPage';
 import { RequireAuth } from './hoc/RequireAuth';
 import PupilCard from './components/PupilCard/PupilCard';
+import GradesPage from './pages/GradesPage/GradesPage';
 
 const App = () => {
   return (
@@ -22,6 +23,14 @@ const App = () => {
             element={
               <RequireAuth>
                 <DiaryPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="grades"
+            element={
+              <RequireAuth>
+                <GradesPage />
               </RequireAuth>
             }
           />
