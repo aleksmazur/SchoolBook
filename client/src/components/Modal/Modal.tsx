@@ -36,6 +36,7 @@ export const Modal = () => {
       navigate('/', { replace: true });
       closingModal();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return (
@@ -43,12 +44,7 @@ export const Modal = () => {
       <div className="modal__content">
         <div className="modal__body" onClick={(e) => e.stopPropagation()}>
           <h2 className="modal__title">{t('auth.authTitle')}</h2>
-          <form
-            id="signIn"
-            className="form registration-form"
-            method="post"
-            onSubmit={handleSubmit(onSubmitForm)}
-          >
+          <form id="signIn" className="form registration-form" method="post">
             <div>
               <div className="input-block__wrapper">
                 <label htmlFor="user_login">{t('auth.login')}</label>
@@ -62,7 +58,7 @@ export const Modal = () => {
             <button
               className="btn-block__signin btn"
               type="submit"
-              onClick={handleSubmit(onSubmitForm)} // почему 2 обработчика формы и кнопки
+              onClick={handleSubmit(onSubmitForm)}
             >
               {t('auth.loginBtn')}
             </button>
