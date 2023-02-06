@@ -70,7 +70,7 @@ const userReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(authUser.pending, (state, action) => {
+      .addCase(authUser.pending, () => {
         //preloader
       })
       .addCase(authUser.fulfilled, (state, action) => {

@@ -3,7 +3,7 @@ import { IChildren } from './userReducer';
 import { getClassByID } from '../thunks/classes';
 import { getChildrenById } from '../thunks/user';
 
-type ITeacher = {
+export type ITeacher = {
   id: number;
   username: string;
   password: string;

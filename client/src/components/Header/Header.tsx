@@ -41,13 +41,13 @@ export function Header() {
       dispatch(setToken(token));
       dispatch(setServiceInfo(token));
     }
-  }, []);
+  }, [dispatch, token]);
 
   useEffect(() => {
     if (token) {
       dispatch(setServiceInfo(token));
     }
-  }, [token]);
+  }, [dispatch, token]);
 
   const logoutUser = () => {
     dispatch(setToken({ token: null }));
