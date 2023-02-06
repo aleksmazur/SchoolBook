@@ -18,7 +18,7 @@ const PupilCard = () => {
 
   useEffect(() => {
     dispatch(getChildrenById(String(pupilId)));
-  }, [pupilId]);
+  }, [pupilId, dispatch]);
 
   const renderInfoParents = () => {
     if (parents) {

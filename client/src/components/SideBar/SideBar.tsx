@@ -25,7 +25,7 @@ const SideBar = () => {
         dispatch(getChildrenByParent(id));
       }
     }
-  }, [id]);
+  }, [dispatch, id, role]);
 
   useEffect(() => {
     if (role === 'parent') {
@@ -33,9 +33,9 @@ const SideBar = () => {
         dispatch(getClassByID(children[0].classId));
       }
     }
-  }, [children]);
+  }, [children, dispatch, role]);
 
-  useEffect(() => setActive(navigate), [location, setActive]);
+  useEffect(() => setActive(navigate), [location, navigate, setActive]);
 
   const toggleActiveNav = (e: React.MouseEvent<HTMLElement>) => {
     const currentTab = e.target as HTMLLIElement;
