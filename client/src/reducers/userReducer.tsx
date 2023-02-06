@@ -1,18 +1,41 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from '@reduxjs/toolkit';
-// import { authUser } from '../thunks/user';
+import { IUserFromToken } from '../components/Header/Header';
+import { authUser, getChildrenByParent } from '../thunks/user';
+import jwt_decode from 'jwt-decode';
+
+type IClass = {
+  id: number;
+  className: string;
+  classTeacherId: number;
+};
+
+export type IChildren = {
+  adress: string;
+  birthday: string;
+  class: IClass;
+  classId: number;
+  firstName: string;
+  id: number;
+  lastName: string;
+  middleName: string;
+  fullName: string;
+  parentId: number;
+};
+
+type IUserInfo = {
+  id: string | null;
+  username: string | null;
+  fullName: string | null;
+  role: string | null;
+  children: IChildren[] | null;
+};
 
 export type IUserState = {
   token: {
     token: string | null;
   };
-  userInfo: {
-    id: string | null;
-    login: string | null;
-    password: string | null;
-    name: string | null;
-    role: string | null;
-    relative: string | null;
-  };
+  userInfo: IUserInfo;
 };
 
 const initialState: IUserState = {
@@ -21,11 +44,10 @@ const initialState: IUserState = {
   },
   userInfo: {
     id: null,
-    login: null,
-    password: null,
-    name: null,
+    username: null,
+    fullName: null,
     role: null,
-    relative: null,
+    children: null,
   },
 };
 
@@ -34,28 +56,35 @@ const userReducer = createSlice({
   initialState,
   reducers: {
     setUserInfo(state, action) {
-      state.userInfo.login = action.payload.login;
-      state.userInfo.password = action.payload.password;
-      state.userInfo.id = action.payload.id;
+      state.userInfo.username = action.payload.username;
+      state.userInfo.fullName = action.payload.fullName;
+    },
+    setServiceInfo(state, action) {
+      const decodedToken: IUserFromToken = jwt_decode(action.payload);
+      state.userInfo.id = decodedToken.id;
+      state.userInfo.role = decodedToken.role[0].value;
     },
     setToken(state, action) {
       state.token = action.payload;
     },
   },
-  //   extraReducers: (builder) => {
-  //     builder
-  //       .addCase(authUser.pending, (state, action) => {
-  //         //preloader
-  //       })
-  //       .addCase(authUser.fulfilled, (state, action) => {
-  //         state.token = action.payload;
-  //         localStorage.setItem('token', action.payload.token);
-  //       })
-  //       .addCase(authUser.rejected, (state, action) => {
-  //         //error
-  //       });
-  //   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(authUser.pending, (state, action) => {
+        //preloader
+      })
+      .addCase(authUser.fulfilled, (state, action) => {
+        state.token = action.payload;
+        localStorage.setItem('token', action.payload.token);
+      })
+      .addCase(getChildrenByParent.fulfilled, (state, action) => {
+        state.userInfo.children = action.payload;
+      });
+    // .addCase(authUser.rejected, (state, action) => {
+    //error
+    // });
+  },
 });
 
 export default userReducer.reducer;
-export const { setUserInfo, setToken } = userReducer.actions;
+export const { setUserInfo, setServiceInfo, setToken } = userReducer.actions;

@@ -1,7 +1,10 @@
-import { IClass, IPupil } from '../../pages/ClassPage/ClassPage';
+import { IChildren } from '../../reducers/userReducer';
+import { useAppSelector } from '../../store/hooks';
 import PupilItem from '../PupilItem/PupilItem';
 
-const PupilsList = ({ pupils }: IClass) => {
+const PupilsList = () => {
+  const childrens = useAppSelector((state) => state.classInfo.classInfo.childrens);
+
   return (
     <div className="pupilsList__table">
       <table>
@@ -10,13 +13,15 @@ const PupilsList = ({ pupils }: IClass) => {
             <th></th>
             <th>ФИО</th>
             <th>Дата рождения</th>
-            <th>Адресс</th>
+            <th>Адрес</th>
           </tr>
         </thead>
         <tbody>
-          {pupils.map((pupil: IPupil, ind: number) => {
-            return <PupilItem {...pupil} key={ind} />;
-          })}
+          {childrens
+            ? childrens.map((pupil: IChildren, ind: number) => {
+                return <PupilItem pupil={pupil} key={ind} num={ind} />;
+              })
+            : null}
         </tbody>
       </table>
     </div>

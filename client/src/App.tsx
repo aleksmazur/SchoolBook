@@ -8,6 +8,8 @@ import ClassPage from './pages/ClassPage/ClassPage';
 import { Layout } from './components/Layout/Layout';
 import './app.css';
 import NewsPage from './pages/NewsPage/NewsPage';
+import { RequireAuth } from './hoc/RequireAuth';
+import PupilCard from './components/PupilCard/PupilCard';
 
 const App = () => {
   return (
@@ -15,13 +17,63 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
-          <Route path="diary" element={<DiaryPage />} />
-          <Route path="parent/:id" element={<ProfilePage />} />
-          <Route path="children/:id" element={<ProfilePage />} />
+          <Route
+            path="diary"
+            element={
+              <RequireAuth>
+                <DiaryPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path=":parent/:id"
+            element={
+              <RequireAuth>
+                <ProfilePage />
+              </RequireAuth>
+            }
+          />
+          {/* <Route
+            path=":children/:id"
+            element={
+              <RequireAuth>
+                <ProfilePage />
+              </RequireAuth>
+            }
+          /> */}
           {/* <Route path="teacher/:id" element={<TeacherPage />} /> */}
-          <Route path="schedule" element={<SchedulePage />} />
-          <Route path="class" element={<ClassPage />} />
-          <Route path="news" element={<NewsPage />} />
+          <Route
+            path="schedule"
+            element={
+              <RequireAuth>
+                <SchedulePage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="class/:id"
+            element={
+              <RequireAuth>
+                <ClassPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="class/children/:id"
+            element={
+              <RequireAuth>
+                <PupilCard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="news"
+            element={
+              <RequireAuth>
+                <NewsPage />
+              </RequireAuth>
+            }
+          />
           <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>

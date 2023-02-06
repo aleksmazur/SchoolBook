@@ -13,7 +13,10 @@ const initialState: IScheduleState = {
       ? new Date().getTime()
       : new Date().getTime() -
         (new Date().getDay() === 0 ? 6 : new Date().getDay() - 1) * 24 * 60 * 60 * 1000,
-  endWeek: new Date().getTime() + 24 * 60 * 60 * 1000 * 6,
+  endWeek:
+    new Date().getDay() !== 0
+      ? new Date().getTime() + 24 * 60 * 60 * 1000 * 6
+      : new Date().getTime(),
 };
 
 const scheduleReducer = createSlice({

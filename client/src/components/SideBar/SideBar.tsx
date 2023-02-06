@@ -1,17 +1,41 @@
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-// import { useAppSelector } from '../../store/hooks';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import ButtonBurger from '../ButtonBurger/ButtonBurger';
-import './sideBar.css';
 import { isMobile } from 'react-device-detect';
+import { getChildrenByParent } from '../../thunks/user';
+import './sideBar.css';
+import { getClassByID } from '../../thunks/classes';
 
 const SideBar = () => {
   const { t } = useTranslation();
   const [activeSidebar, setActiveSideBar] = useState(false);
-  const navigate = window.location.pathname.slice(1);
-
+  const { userInfo } = useAppSelector((state) => state.userInfo);
+  const { role, id, children } = userInfo;
+  const dispatch = useAppDispatch();
+  const path = window.location.pathname.split('/');
+  const navigate = path[1];
   const [active, setActive] = useState(navigate === '' ? 'main' : navigate);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (role === 'parent') {
+      if (id) {
+        dispatch(getChildrenByParent(id));
+      }
+    }
+  }, [dispatch, id, role]);
+
+  useEffect(() => {
+    if (role === 'parent') {
+      if (children) {
+        dispatch(getClassByID(children[0].classId));
+      }
+    }
+  }, [children, dispatch, role]);
+
+  useEffect(() => setActive(navigate), [location, navigate, setActive]);
 
   const toggleActiveNav = (e: React.MouseEvent<HTMLElement>) => {
     const currentTab = e.target as HTMLLIElement;
@@ -24,9 +48,6 @@ const SideBar = () => {
     }
   };
 
-  /* const { role, id } = useAppSelector((state) => state.userInfo.userInfo); */
-  const [role, id] = ['parent', 1];
-
   return (
     <>
       <ul
@@ -34,15 +55,20 @@ const SideBar = () => {
         className={isMobile && !activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}
       >
         <Link to="/">
-          <li className={`sidebar__li ${'main' === active ? 'active' : ''}`} data-link="main">
+          <li className={`sidebar__li ${'' === active ? 'active' : ''}`} data-link="main">
             <div className="sidebar__li-icon icon-main"></div>
             <div className="sidebar__li-text">{t('sidebar.main')}</div>
           </li>
         </Link>
         <Link to={`${role}/${id}`}>
-          <li className="sidebar__li">
+          <li
+            className={`sidebar__li ${
+              'parent' === active || 'children' === active ? 'active' : ''
+            }`}
+            data-link={role}
+          >
             <div className="sidebar__li-icon icon-profile"></div>
-            <div className="sidebar__li-text">Профиль</div>
+            <div className="sidebar__li-text">{t('sidebar.profile')}</div>
           </li>
         </Link>
         <Link to="/diary">
@@ -60,7 +86,7 @@ const SideBar = () => {
             <div className="sidebar__li-text">{t('sidebar.schedule')}</div>
           </li>
         </Link>
-        <Link to="/class">
+        <Link to={children ? `/class/${children[0].classId}` : '/class'}>
           <li className={`sidebar__li ${'class' === active ? 'active' : ''}`} data-link="class">
             <div className="sidebar__li-icon icon-class"></div>
             <div className="sidebar__li-text">{t('sidebar.class')}</div>

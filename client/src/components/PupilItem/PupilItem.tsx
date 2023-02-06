@@ -1,20 +1,25 @@
-import { useNavigate } from 'react-router-dom';
-import { IPupil } from '../../pages/ClassPage/ClassPage';
+import { Link, useNavigate } from 'react-router-dom';
+import { IChildren } from '../../reducers/userReducer';
+import moment from 'moment';
 import './pupilItem.css';
 
-const PupilItem = ({ name, id, birth, address }: IPupil) => {
-  const navigate = useNavigate();
+type IPropsPupil = {
+  pupil: IChildren;
+  num: number;
+};
 
-  const pupilId: number = +id.split('_')[1];
+const PupilItem = ({ pupil, num }: IPropsPupil) => {
+  const navigate = useNavigate();
+  const { id, firstName, lastName, birthday, adress } = pupil;
 
   return (
-    <tr className={pupilId % 2 ? 'tr__honest' : 'tr__odd'}>
-      <td className="pupil__item_id">{pupilId}. </td>
-      <td className="pupil__item_name" onClick={() => navigate(`/children/${pupilId}`)}>
-        {name}
+    <tr className={id % 2 ? 'tr__honest' : 'tr__odd'}>
+      <td className="pupil__item_id">{num + 1}. </td>
+      <td className="pupil__item_name" onClick={() => navigate(`/class/children/${id}`)}>
+        <Link to={`/class/children/${id}`}>{lastName + ' ' + firstName}</Link>
       </td>
-      <td className="pupil__item_birht">{birth}</td>
-      <td className="pupil__item_adress">{address}</td>
+      <td className="pupil__item_birht">{moment(birthday).utc().format('YYYY-MM-DD')}</td>
+      <td className="pupil__item_adress">{adress}</td>
     </tr>
   );
 };

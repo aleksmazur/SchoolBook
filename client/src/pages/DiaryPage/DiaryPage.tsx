@@ -20,7 +20,6 @@ const DiaryPage = () => {
   const dispatch = useAppDispatch();
   const startWeek = useAppSelector((state) => state.schedule.startWeek);
   const endWeek = useAppSelector((state) => state.schedule.endWeek);
-
   const onChangeWeekNext = () => {
     dispatch(setStartWeek(startWeek + 24 * 60 * 60 * 1000 * 7));
     dispatch(setEndWeek(endWeek + 24 * 60 * 60 * 1000 * 7));
