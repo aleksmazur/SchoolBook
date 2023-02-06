@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import { isMobile } from 'react-device-detect';
@@ -14,6 +14,10 @@ const SideBar = () => {
   const { userInfo } = useAppSelector((state) => state.userInfo);
   const { role, id, children } = userInfo;
   const dispatch = useAppDispatch();
+  const path = window.location.pathname.split('/');
+  const navigate = path[1];
+  const [active, setActive] = useState(navigate === '' ? 'main' : navigate);
+  const location = useLocation();
 
   useEffect(() => {
     if (role === 'parent') {
@@ -21,7 +25,7 @@ const SideBar = () => {
         dispatch(getChildrenByParent(id));
       }
     }
-  }, [id]);
+  }, [dispatch, id, role]);
 
   useEffect(() => {
     if (role === 'parent') {
@@ -29,11 +33,9 @@ const SideBar = () => {
         dispatch(getClassByID(children[0].classId));
       }
     }
-  }, [children]);
+  }, [children, dispatch, role]);
 
-  const path = window.location.pathname.split('/');
-  const navigate = path[path.length - 2];
-  const [active, setActive] = useState(navigate === '' ? 'main' : navigate);
+  useEffect(() => setActive(navigate), [location, navigate, setActive]);
 
   const toggleActiveNav = (e: React.MouseEvent<HTMLElement>) => {
     const currentTab = e.target as HTMLLIElement;
@@ -53,7 +55,7 @@ const SideBar = () => {
         className={isMobile && !activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}
       >
         <Link to="/">
-          <li className={`sidebar__li ${'main' === active ? 'active' : ''}`} data-link="main">
+          <li className={`sidebar__li ${'' === active ? 'active' : ''}`} data-link="main">
             <div className="sidebar__li-icon icon-main"></div>
             <div className="sidebar__li-text">{t('sidebar.main')}</div>
           </li>

@@ -43,7 +43,7 @@ const ClassPage = () => {
         dispatch(getClassByID(children[0].classId));
       }
     }
-  }, []);
+  }, [children, role, dispatch]);
 
   return (
     <div>

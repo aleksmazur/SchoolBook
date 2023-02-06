@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserFromToken } from '../components/Header/Header';
-import { authUser, getChildrenById, getChildrenByParent, getParrentById } from '../thunks/user';
+import { authUser, getChildrenByParent } from '../thunks/user';
 import jwt_decode from 'jwt-decode';
 
 type IClass = {
@@ -80,7 +80,6 @@ const userReducer = createSlice({
       .addCase(getChildrenByParent.fulfilled, (state, action) => {
         state.userInfo.children = action.payload;
       });
-
     // .addCase(authUser.rejected, (state, action) => {
     //error
     // });

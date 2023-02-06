@@ -1,15 +1,20 @@
-.profile__content {
+.pupil__content {
     display: flex;
     gap: 40px;
 }
 
-.profile__image {
+.pupil__image {
     width: 120px;
     height: 120px;
     background: url('./../../assets/svg/profile.svg') center center / contain no-repeat;
 }
 
-.profile__info h3, .profile__info div {
+.pupil__info h3, .pupil__info div {
     border-bottom: 1px dotted black;
     padding: 5px 20px;
+}
+
+.pupil__progress {
+    display: flex;
+    flex-direction: column;
 }

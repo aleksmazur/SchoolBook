@@ -31,7 +31,7 @@ export function Header() {
 
   if (token) {
     const decodedToken: IUserFromToken = jwt_decode(token);
-    userName = decodedToken.username;
+    userName = decodedToken.fullName;
   }
 
   useEffect(() => {

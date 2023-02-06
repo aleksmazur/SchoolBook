@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IChildren } from '../../reducers/userReducer';
 import moment from 'moment';
 import './pupilItem.css';
@@ -15,8 +15,8 @@ const PupilItem = ({ pupil, num }: IPropsPupil) => {
   return (
     <tr className={id % 2 ? 'tr__honest' : 'tr__odd'}>
       <td className="pupil__item_id">{num + 1}. </td>
-      <td className="pupil__item_name" onClick={() => navigate(`/children/${id}`)}>
-        {lastName} {firstName}
+      <td className="pupil__item_name" onClick={() => navigate(`/class/children/${id}`)}>
+        <Link to={`/class/children/${id}`}>{lastName + ' ' + firstName}</Link>
       </td>
       <td className="pupil__item_birht">{moment(birthday).utc().format('YYYY-MM-DD')}</td>
       <td className="pupil__item_adress">{adress}</td>

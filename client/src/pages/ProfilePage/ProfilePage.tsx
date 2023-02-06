@@ -11,7 +11,7 @@ const ProfilePage = () => {
         return (
           <p key={ind}>
             <span>Ученик: </span>
-            <Link to={`/children/${child.id}`}>
+            <Link to={`/class/children/${child.id}`}>
               {child.lastName} {child.firstName} {child.middleName}
             </Link>
             <span>, обучается в классе: </span>
