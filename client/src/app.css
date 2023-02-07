@@ -15,7 +15,5 @@
     opacity: 0.2;
     z-index: -10;
     background-image: url(./assets/desc_bg.jpeg);
-    background-repeat: no-repeat;
-    background-position: 50% 0;
-    background-size: cover;
-  }
+    background-repeat: repeat;
+}

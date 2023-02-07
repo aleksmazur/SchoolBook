@@ -13,7 +13,7 @@ const PupilItem = ({ pupil, num }: IPropsPupil) => {
   const { id, firstName, lastName, birthday, adress } = pupil;
 
   return (
-    <tr className={id % 2 ? 'tr__honest' : 'tr__odd'}>
+    <tr>
       <td className="pupil__item_id">{num + 1}. </td>
       <td className="pupil__item_name" onClick={() => navigate(`/class/children/${id}`)}>
         <Link to={`/class/children/${id}`}>{lastName + ' ' + firstName}</Link>

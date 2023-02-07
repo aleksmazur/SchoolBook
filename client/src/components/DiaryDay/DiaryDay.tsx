@@ -28,7 +28,7 @@ const DiaryDay = ({ lessons, index }: IScheduleDay) => {
         <tbody>
           {lessons.map((lesson, ind) => {
             return (
-              <tr className={ind % 2 ? 'lesson__odd' : 'lesson__honest'} key={`${ind}_${lesson}`}>
+              <tr key={`${ind}_${lesson}`}>
                 <td className="num">
                   {ind + 1}. {lesson}
                 </td>

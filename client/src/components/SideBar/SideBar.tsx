@@ -71,12 +71,6 @@ const SideBar = () => {
             <div className="sidebar__li-text">{t('sidebar.profile')}</div>
           </li>
         </Link>
-        <Link to="/diary">
-          <li className={`sidebar__li ${'diary' === active ? 'active' : ''}`} data-link="diary">
-            <div className="sidebar__li-icon icon-diary"></div>
-            <div className="sidebar__li-text">{t('sidebar.diary')}</div>
-          </li>
-        </Link>
         <Link to="/schedule">
           <li
             className={`sidebar__li ${'schedule' === active ? 'active' : ''}`}
@@ -84,6 +78,18 @@ const SideBar = () => {
           >
             <div className="sidebar__li-icon icon-schedule"></div>
             <div className="sidebar__li-text">{t('sidebar.schedule')}</div>
+          </li>
+        </Link>
+        <Link to="/diary">
+          <li className={`sidebar__li ${'diary' === active ? 'active' : ''}`} data-link="diary">
+            <div className="sidebar__li-icon icon-diary"></div>
+            <div className="sidebar__li-text">{t('sidebar.diary')}</div>
+          </li>
+        </Link>
+        <Link to="/grades">
+          <li className={`sidebar__li ${'grades' === active ? 'active' : ''}`} data-link="grades">
+            <div className="sidebar__li-icon icon-grades"></div>
+            <div className="sidebar__li-text">{t('sidebar.grades')}</div>
           </li>
         </Link>
         <Link to={children ? `/class/${children[0].classId}` : '/class'}>
