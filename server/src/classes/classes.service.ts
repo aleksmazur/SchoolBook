@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
+import { Sequelize } from "sequelize-typescript";
 import { Children } from "../childrens/childrens.model";
 import { Subject } from "../subjects/subjects.model";
 import { User } from "../users/users.model";
@@ -74,6 +75,10 @@ export class ClassesService {
         },
         {
           model: Children,
+          separate: true,
+          order: [
+            ["fullName", "ASC"]
+          ]
         },
       ],
     });
