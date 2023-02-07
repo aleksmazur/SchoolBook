@@ -36,6 +36,7 @@ export type IUserState = {
     token: string | null;
   };
   userInfo: IUserInfo;
+  errorUser: string | null | undefined;
 };
 
 const initialState: IUserState = {
@@ -49,6 +50,7 @@ const initialState: IUserState = {
     role: null,
     children: null,
   },
+  errorUser: null,
 };
 
 const userReducer = createSlice({
@@ -76,6 +78,10 @@ const userReducer = createSlice({
       .addCase(authUser.fulfilled, (state, action) => {
         state.token = action.payload;
         localStorage.setItem('token', action.payload.token);
+        state.errorUser = null;
+      })
+      .addCase(authUser.rejected, (state, action) => {
+        state.errorUser = action.error.message;
       })
       .addCase(getChildrenByParent.fulfilled, (state, action) => {
         state.userInfo.children = action.payload;

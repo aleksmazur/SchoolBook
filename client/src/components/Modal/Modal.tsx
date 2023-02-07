@@ -17,6 +17,7 @@ export const Modal = () => {
   const { register, handleSubmit } = useForm<ILogin>({
     mode: 'onSubmit',
   });
+  const { errorUser } = useAppSelector((state) => state.userInfo);
 
   const closingModal = () => {
     dispatch(toggleActiveModal());
@@ -55,6 +56,7 @@ export const Modal = () => {
                 <input id="user_password" {...register('password')} type="password" />
               </div>
             </div>
+            <div className="error__text">{errorUser}</div>
             <button
               className="btn-block__signin btn"
               type="submit"
