@@ -52,9 +52,9 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   @BeforeCreate
   @BeforeUpdate
   static setFullName(instance: Children) {
-    instance.fullName = `${instance.firstName} ${instance.lastName}`;
+    instance.fullName = `${instance.lastName} ${instance.firstName}`;
     if (instance.middleName !== undefined) {
-      instance.fullName = `${instance.firstName} ${instance.lastName} ${instance.middleName}`;
+      instance.fullName = `${instance.lastName} ${instance.firstName} ${instance.middleName}`;
     }
   }
 

@@ -55,7 +55,7 @@ export class User extends Model<User, UserCreationAttrs> {
   @BeforeCreate
   @BeforeUpdate
   static setFullName(instance: User) {
-    instance.fullName = `${instance.firstName} ${instance.lastName}`;
+    instance.fullName = `${instance.lastName} ${instance.firstName}`;
   }
 
   @BelongsToMany(() => Role, () => UserRoles)
