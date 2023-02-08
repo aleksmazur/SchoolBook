@@ -1,4 +1,4 @@
-const weekDayArray = [
+/* const weekDayArray = [
   'Воскресенье',
   'Понедельник',
   'Вторник',
@@ -6,7 +6,7 @@ const weekDayArray = [
   'Четверг',
   'Пятница',
   'Суббота',
-];
+]; */
 const monthArray = [
   'Январь',
   'Феврaль',
@@ -21,11 +21,11 @@ const monthArray = [
   'Ноябрь',
   'Декабрь',
 ];
-
+/* 
 export const getWeekDay = (dayId: number) => {
   return weekDayArray[dayId];
 };
-
+ */
 export const getMonth = (monthId: number) => monthArray[monthId];
 
 // const newsList = [

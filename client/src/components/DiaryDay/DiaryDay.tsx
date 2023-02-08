@@ -1,9 +1,14 @@
-import { getWeekDay } from '../../helpers/dataHelper';
 import { IScheduleDay } from '../../interfaces/IShedule';
 import { useAppSelector } from '../../store/hooks';
 import './diaryDay.css';
 
-const DiaryDay = ({ lessons, index }: IScheduleDay) => {
+type IDiaryProps = {
+  lessons: IScheduleDay[];
+  index: number;
+  dayWeek: string;
+};
+
+const DiaryDay = ({ lessons, index, dayWeek }: IDiaryProps) => {
   const startDayToWeek = useAppSelector((state) => state.schedule.startWeek);
   const currentDay = new Date(Date.now()).getDate();
   const currentMonth = new Date(Date.now()).getMonth();
@@ -19,7 +24,7 @@ const DiaryDay = ({ lessons, index }: IScheduleDay) => {
         <thead>
           <tr>
             <th className="lesson">
-              {getWeekDay(new Date(startDayToWeek + index * 24 * 60 * 60 * 1000).getDay())}, {day}
+              {dayWeek}, {day}
             </th>
             <th className="hw">Домашнее задание</th>
             <th className="mark">Отметка</th>
@@ -28,9 +33,9 @@ const DiaryDay = ({ lessons, index }: IScheduleDay) => {
         <tbody>
           {lessons.map((lesson, ind) => {
             return (
-              <tr key={`${ind}_${lesson}`}>
+              <tr className={ind % 2 ? 'lesson__odd' : 'lesson__honest'} key={`${ind}_${lesson}`}>
                 <td className="num">
-                  {ind + 1}. {lesson}
+                  {ind + 1}. {lesson.name}
                 </td>
                 <td className="homework"></td>
                 <td className="grade"></td>

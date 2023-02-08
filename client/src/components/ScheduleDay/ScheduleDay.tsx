@@ -1,17 +1,19 @@
-import { timeSlots } from '../../constants/timeSlots';
-import { getWeekDay } from '../../helpers/dataHelper';
 import { IScheduleDay } from '../../interfaces/IShedule';
-import { useAppSelector } from '../../store/hooks';
 import Lesson from '../Lesson/Lesson';
 import './lesson.css';
 
-const ScheduleDay = ({ lessons, index }: IScheduleDay) => {
-  const startDayToWeek = useAppSelector((state) => state.schedule.startWeek);
+type IScheduleDayProps = {
+  lessons: IScheduleDay[];
+  index: number;
+  day: string;
+};
+
+const ScheduleDay = ({ lessons, index, day }: IScheduleDayProps) => {
   const today = new Date(Date.now()).getDay() - 1;
 
   return (
     <div>
-      <p>{getWeekDay(new Date(startDayToWeek + index * 24 * 60 * 60 * 1000).getDay())}</p>
+      <p>{day.charAt(0).toUpperCase() + day.slice(1)}</p>
       <table
         className={index === today ? 'schedule__item current' : 'schedule__item'}
         data-day={index}
@@ -26,12 +28,12 @@ const ScheduleDay = ({ lessons, index }: IScheduleDay) => {
         <tbody>
           {lessons.map((lesson, ind: number) => {
             return (
-              <tr key={ind}>
+              <tr className={ind % 2 ? 'lesson__odd' : 'lesson__honest'} key={ind}>
                 <td className="num">{ind + 1}.</td>
                 <td className="time">
-                  {timeSlots[ind]['start']} – {timeSlots[ind]['end']}
+                  {lesson.startTime} – {lesson.endTime}
                 </td>
-                <Lesson lesson={lesson} key={`${lesson}_${ind}`} />
+                <Lesson lesson={lesson.name} key={`${lesson}_${ind}`} />
               </tr>
             );
           })}
