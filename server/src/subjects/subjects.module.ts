@@ -5,11 +5,15 @@ import { ClassRoom } from "../classes/classes.model";
 import { SubjectsController } from "./subjects.controller";
 import { Subject } from "./subjects.model";
 import { SubjectsService } from "./subjects.service";
+import { GradesModule } from "src/grades/grades.module";
 
 @Module({
   providers: [SubjectsService],
   controllers: [SubjectsController],
-  imports: [SequelizeModule.forFeature([Subject, ClassRoom, Grade])],
+  imports: [
+    SequelizeModule.forFeature([Subject, ClassRoom, Grade]),
+    GradesModule
+  ],
   exports: [SubjectsService],
 })
 export class SubjectsModule {}

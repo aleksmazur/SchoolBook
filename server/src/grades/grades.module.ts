@@ -10,5 +10,8 @@ import { GradesService } from "./grades.service";
   providers: [GradesService],
   controllers: [GradesController],
   imports: [SequelizeModule.forFeature([Grade, Children, Subject])],
+  exports: [
+    GradesService
+  ]
 })
 export class GradesModule {}

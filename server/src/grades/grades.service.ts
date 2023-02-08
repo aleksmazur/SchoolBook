@@ -21,4 +21,14 @@ export class GradesService {
     }
     return grades;
   }
+
+  async getGradesByChildren(childrenId: number) {
+    const grades = await this.gradesRepository.findAll(({
+      where: { childrenId }
+    }))
+    if (!grades) {
+      throw new HttpException(`Grades for childrend '${childrenId}' not found!`, HttpStatus.NOT_FOUND);
+    }
+    return grades;
+  }
 }

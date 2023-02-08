@@ -8,12 +8,6 @@ export class SheduleService {
 
   async getScheduleByClassId(classId: number) {
     const subjects = await this.subjectsService.findByClassId(classId);
-    if (!subjects.length) {
-      throw new HttpException(
-        `Subjects for class ID '${classId}' not found!`,
-        HttpStatus.NOT_FOUND,
-      );
-    }
     const currentWeek = moment().week();
     const schedule = subjects
       .filter((subject) => {
