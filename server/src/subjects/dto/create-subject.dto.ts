@@ -17,7 +17,7 @@ export class CreateSubjectDto {
   readonly classId: number;
 
   @ApiProperty({
-    example: "2023-02-06T08:45:00",
+    example: "2023-02-06 08:45",
     description: "Date of the subject",
   })
   readonly date: string;

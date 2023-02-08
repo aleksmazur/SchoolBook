@@ -1,5 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {
+  AfterCreate,
+  AfterFind,
+  BeforeCreate,
+  BeforeUpdate,
   BelongsTo,
   Column,
   DataType,
@@ -10,6 +14,7 @@ import {
 } from "sequelize-typescript";
 import { ClassRoom } from "../classes/classes.model";
 import { Grade } from "../grades/grades.model";
+import * as moment from "moment-timezone";
 
 interface SubjectCreationAttrs {
   name: string;
@@ -41,11 +46,47 @@ export class Subject extends Model<Subject, SubjectCreationAttrs> {
   homework: string;
 
   @ApiProperty({
-    example: "2023-02-06T08:45:00",
+    example: "2023-02-06 08:45:00",
     description: "Date of the subject",
   })
-  @Column({ type: DataType.DATE, allowNull: false })
-  date: string;
+  @Column({ type: "timestamp", allowNull: false })
+  date: string | Date;
+
+  @BeforeCreate
+  @AfterCreate
+  @BeforeUpdate
+  static async saveDateInUTC(instance: Subject) {
+    const assignedTime = moment(instance.date).format("YYYY-MM-DD HH:mm");
+    instance.date = assignedTime;
+  }
+
+  @AfterFind
+  static async convertToLocal(instance: Subject[]) {
+    for (const subject of instance) {
+      const assignedTime = moment(subject.date).format('YYYY-MM-DD HH:mm');
+      subject.date = assignedTime;
+    }
+  }
+
+  @Column({ type: DataType.STRING })
+  startTime: string;
+
+  @BeforeCreate
+  @BeforeUpdate
+  static setStartTime(instance: Subject) {
+    const startTime = moment(instance.date).format('HH:mm');
+    instance.startTime = startTime;
+  }
+
+  @Column({ type: DataType.STRING })
+  endTime: string;
+
+  @BeforeCreate
+  @BeforeUpdate
+  static async setEndTime(instance: Subject) {
+    const endTime = moment(instance.date).add(45, 'minutes').format('HH:mm');
+    instance.endTime = endTime;
+  }
 
   @ForeignKey(() => ClassRoom)
   @Column

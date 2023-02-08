@@ -2,7 +2,6 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { CreateSubjectDto } from "./dto/create-subject.dto";
 import { Subject } from "./subjects.model";
-
 @Injectable()
 export class SubjectsService {
   constructor(
@@ -21,6 +20,18 @@ export class SubjectsService {
     if (!subjects.length) {
       throw new HttpException(`Subjects not found!`, HttpStatus.NOT_FOUND);
     }
+    return subjects;
+  }
+
+  async findByClassId(classId: number) {
+    const subjects = await this.subjectsRepository.findAll({
+      where: {
+        classId,
+      },
+      attributes: {
+        exclude: ["homework"]
+      }
+    });
     return subjects;
   }
 }
