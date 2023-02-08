@@ -63,7 +63,7 @@ export class Subject extends Model<Subject, SubjectCreationAttrs> {
   @AfterFind
   static async convertToLocal(instance: Subject[]) {
     for (const subject of instance) {
-      const assignedTime = moment(subject.date).format('YYYY-MM-DD HH:mm');
+      const assignedTime = moment(subject.date).format("YYYY-MM-DD HH:mm");
       subject.date = assignedTime;
     }
   }
@@ -74,7 +74,7 @@ export class Subject extends Model<Subject, SubjectCreationAttrs> {
   @BeforeCreate
   @BeforeUpdate
   static setStartTime(instance: Subject) {
-    const startTime = moment(instance.date).format('HH:mm');
+    const startTime = moment(instance.date).format("HH:mm");
     instance.startTime = startTime;
   }
 
@@ -84,7 +84,7 @@ export class Subject extends Model<Subject, SubjectCreationAttrs> {
   @BeforeCreate
   @BeforeUpdate
   static async setEndTime(instance: Subject) {
-    const endTime = moment(instance.date).add(45, 'minutes').format('HH:mm');
+    const endTime = moment(instance.date).add(45, "minutes").format("HH:mm");
     instance.endTime = endTime;
   }
 

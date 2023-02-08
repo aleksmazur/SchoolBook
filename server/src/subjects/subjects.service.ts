@@ -29,8 +29,8 @@ export class SubjectsService {
         classId,
       },
       attributes: {
-        exclude: ["homework"]
-      }
+        exclude: ["homework"],
+      },
     });
     return subjects;
   }

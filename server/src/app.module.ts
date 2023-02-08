@@ -18,7 +18,7 @@ import { SubjectsModule } from "./subjects/subjects.module";
 import { Subject } from "./subjects/subjects.model";
 import { GradesModule } from "./grades/grades.module";
 import { Grade } from "./grades/grades.model";
-import { SheduleModule } from './shedule/shedule.module';
+import { SheduleModule } from "./shedule/shedule.module";
 
 @Module({
   imports: [
@@ -54,6 +54,6 @@ import { SheduleModule } from './shedule/shedule.module';
     SubjectsModule,
     GradesModule,
     SheduleModule,
-  ]
+  ],
 })
 export class AppModule {}

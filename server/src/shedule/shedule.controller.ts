@@ -1,9 +1,9 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { SheduleService } from './shedule.service';
+import { Controller, Get, Param } from "@nestjs/common";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { SheduleService } from "./shedule.service";
 
 @ApiTags("Shedule")
-@Controller('shedule')
+@Controller("shedule")
 export class SheduleController {
   constructor(private sheduleService: SheduleService) {}
 
