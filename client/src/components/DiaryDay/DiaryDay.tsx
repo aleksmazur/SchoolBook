@@ -1,14 +1,17 @@
-import { IScheduleDay } from '../../interfaces/IShedule';
+import { getWeekDay } from '../../helpers/dataHelper';
+import { IDiaryDay } from '../../reducers/diaryReducer';
 import { useAppSelector } from '../../store/hooks';
 import './diaryDay.css';
 
 type IDiaryProps = {
-  lessons: IScheduleDay[];
+  lessons: IDiaryDay[];
   index: number;
-  dayWeek: string;
+  date: string;
 };
 
-const DiaryDay = ({ lessons, index, dayWeek }: IDiaryProps) => {
+const DiaryDay = ({ lessons, index, date }: IDiaryProps) => {
+  const dayFromDate = new Date(date).getDay();
+
   const startDayToWeek = useAppSelector((state) => state.schedule.startWeek);
   const currentDay = new Date(Date.now()).getDate();
   const currentMonth = new Date(Date.now()).getMonth();
@@ -24,7 +27,7 @@ const DiaryDay = ({ lessons, index, dayWeek }: IDiaryProps) => {
         <thead>
           <tr>
             <th className="lesson">
-              {dayWeek}, {day}
+              {getWeekDay(dayFromDate)}, {day}
             </th>
             <th className="hw">Домашнее задание</th>
             <th className="mark">Отметка</th>
@@ -37,8 +40,8 @@ const DiaryDay = ({ lessons, index, dayWeek }: IDiaryProps) => {
                 <td className="num">
                   {ind + 1}. {lesson.name}
                 </td>
-                <td className="homework"></td>
-                <td className="grade"></td>
+                <td className="homework">{lesson.homework}</td>
+                <td className="grade">{lesson.grade}</td>
               </tr>
             );
           })}
