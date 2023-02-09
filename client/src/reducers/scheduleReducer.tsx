@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IShedule } from '../interfaces/IShedule';
+import { getSchedule } from '../thunks/schedule';
 
 export type IScheduleState = {
   todayDay: number;
   startWeek: number;
   endWeek: number;
+  schedule: IShedule | null;
 };
 
 const initialState: IScheduleState = {
@@ -17,6 +20,7 @@ const initialState: IScheduleState = {
     new Date().getDay() !== 0
       ? new Date().getTime() + 24 * 60 * 60 * 1000 * 6
       : new Date().getTime(),
+  schedule: null,
 };
 
 const scheduleReducer = createSlice({
@@ -29,6 +33,15 @@ const scheduleReducer = createSlice({
     setEndWeek(state, action) {
       state.endWeek = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getSchedule.pending, () => {
+        //preloader
+      })
+      .addCase(getSchedule.fulfilled, (state, action) => {
+        state.schedule = action.payload;
+      });
   },
 });
 

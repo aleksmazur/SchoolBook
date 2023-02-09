@@ -1,4 +1,12 @@
 export type IScheduleDay = {
-  lessons: string[];
-  index: number;
+  id: number;
+  name: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  classId: number;
+};
+
+export type IShedule = {
+  [day: string]: IScheduleDay[];
 };

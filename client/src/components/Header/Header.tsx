@@ -35,7 +35,6 @@ export function Header() {
   }
 
   useEffect(() => {
-    prompt('Login: larry12, pass: paduwuneze');
     if (token) {
       const decodedToken: IUserFromToken = jwt_decode(token);
       dispatch(setUserInfo({ username: decodedToken.username, fullName: decodedToken.fullName }));
