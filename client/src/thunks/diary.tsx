@@ -6,7 +6,7 @@ export const getDiary = createAsyncThunk(
   async (params: { idPupil: number; idClass: number; week: number; year: number }) => {
     try {
       const response = await fetch(
-        `${BASE_URL}/diary/${params.idClass}/${26}?week=${params.week}&year=${params.year}`,
+        `${BASE_URL}/diary/${params.idClass}/${params.idPupil}?week=${params.week}&year=${params.year}`,
         {
           method: 'GET',
         }

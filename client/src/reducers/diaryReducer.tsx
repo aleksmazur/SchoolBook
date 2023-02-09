@@ -19,11 +19,13 @@ export type IDiaryDay = {
 export type IDiaryState = {
   diary: IDiary | null;
   week: number;
+  year: number;
 };
 
 const initialState: IDiaryState = {
   diary: null,
   week: 0,
+  year: 2023,
 };
 
 const diaryReducer = createSlice({
@@ -32,6 +34,9 @@ const diaryReducer = createSlice({
   reducers: {
     setWeek(state, action) {
       state.week = action.payload;
+    },
+    setYear(state, action) {
+      state.year = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -46,4 +51,4 @@ const diaryReducer = createSlice({
 });
 
 export default diaryReducer.reducer;
-export const { setWeek } = diaryReducer.actions;
+export const { setWeek, setYear } = diaryReducer.actions;
