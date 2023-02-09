@@ -5,9 +5,10 @@ export type INewsItem = { id: number | null; title: string | null; content: stri
 
 type INews = {
   news: INewsItem[];
+  isLoader: boolean;
 };
 
-const initialState: INews = { news: [{ id: null, title: null, content: null }] };
+const initialState: INews = { news: [{ id: null, title: null, content: null }], isLoader: false };
 
 const newsReducer = createSlice({
   name: 'news',
@@ -15,11 +16,12 @@ const newsReducer = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getNews.pending, () => {
-        //preloader
+      .addCase(getNews.pending, (state) => {
+        state.isLoader = true;
       })
       .addCase(getNews.fulfilled, (state, action) => {
         state.news = action.payload;
+        state.isLoader = false;
       });
   },
 });

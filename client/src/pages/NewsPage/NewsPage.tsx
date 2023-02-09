@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import NewsItem from '../../components/NewsItem/NewsItem';
+import Preloader from '../../components/Preloader/Preloader';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getNews } from '../../thunks/news';
 import './newsPage.css';
 
 const NewsPage = () => {
   const { t } = useTranslation();
-  const { news } = useAppSelector((store) => store.news);
+  const { news, isLoader } = useAppSelector((store) => store.news);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,11 +25,15 @@ const NewsPage = () => {
       </div>
 
       <h2>{t('news.newsTitle')}</h2>
-      <div className="news__list">
-        {news.map((newsItem, index) => {
-          return <NewsItem {...newsItem} key={index} />;
-        })}
-      </div>
+      {isLoader ? (
+        <Preloader />
+      ) : (
+        <div className="news__list">
+          {news.map((newsItem, index) => {
+            return <NewsItem {...newsItem} key={index} />;
+          })}
+        </div>
+      )}
     </div>
   );
 };

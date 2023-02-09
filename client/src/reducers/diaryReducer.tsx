@@ -24,6 +24,7 @@ export type IDiaryState = {
   errorDiary: string | null | undefined;
   startWeek: string | null;
   endWeek: string | null;
+  isLoader: boolean;
 };
 
 const initialState: IDiaryState = {
@@ -33,6 +34,7 @@ const initialState: IDiaryState = {
   errorDiary: null,
   startWeek: null,
   endWeek: null,
+  isLoader: false,
 };
 
 const diaryReducer = createSlice({
@@ -48,17 +50,19 @@ const diaryReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getDiary.pending, () => {
-        //preloader
+      .addCase(getDiary.pending, (state) => {
+        state.isLoader = true;
       })
       .addCase(getDiary.fulfilled, (state, action) => {
         state.diary = action.payload;
         state.startWeek = Object.keys(action.payload)[0];
         state.endWeek = Object.keys(action.payload)[Object.keys(action.payload).length - 1];
         state.errorDiary = null;
+        state.isLoader = false;
       })
       .addCase(getDiary.rejected, (state, action) => {
         state.errorDiary = action.error.message;
+        state.isLoader = false;
       });
   },
 });
