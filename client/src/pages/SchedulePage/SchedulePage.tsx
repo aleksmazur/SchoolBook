@@ -15,7 +15,7 @@ const SchedulePage = () => {
     if (idClass) {
       dispatch(getSchedule(idClass));
     }
-  }, []);
+  }, [idClass, dispatch]);
 
   return (
     <div>
