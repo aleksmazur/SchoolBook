@@ -20,18 +20,19 @@ export class SheduleService {
           acc[day] = [];
         }
         acc[day].push(subject);
-        acc[day].sort(
-          (
-            a: { date: moment.MomentInput },
-            b: { date: moment.MomentInput },
-          ) => {
+        return acc;
+      }, {});
+      const sortedSchedule = {};
+      const daysOfWeek = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
+      daysOfWeek.forEach(day => {
+        if (schedule[day]) {
+          sortedSchedule[day] = schedule[day].sort((a: { date: moment.MomentInput; }, b: { date: moment.MomentInput; }) => {
             const startTimeA = moment(a.date);
             const startTimeB = moment(b.date);
             return startTimeA.diff(startTimeB);
-          },
-        );
-        return acc;
-      }, {});
-    return schedule;
+          });
+        }
+      });
+    return sortedSchedule;
   }
 }

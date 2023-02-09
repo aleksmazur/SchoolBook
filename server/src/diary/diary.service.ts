@@ -32,7 +32,7 @@ export class DiaryService {
     }
   
     const subjectsByDay = filteredSubjects.reduce((acc, subject) => {
-      const day = moment(subject.date).locale("ru").format('L');
+      const day = moment(subject.date).format('YYYY.MM.DD');
       if (!acc[day]) {
         acc[day] = [];
       }
@@ -49,6 +49,12 @@ export class DiaryService {
       );
       return acc;
     }, {});
-    return subjectsByDay;
+    const sortedSubjectsByDay = Object.entries(subjectsByDay)
+      .sort((a, b) => moment(a[0], "YYYY.MM.DD").diff(moment(b[0], 'YYYY.MM.DD')))
+      .reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      }, {});
+    return sortedSubjectsByDay;
   }
 }
