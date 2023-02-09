@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getChildrenById } from '../../thunks/user';
+import Preloader from '../Preloader/Preloader';
 import './pupil.css';
 
 const PupilCard = () => {
@@ -12,9 +13,10 @@ const PupilCard = () => {
 
   const { classInfo } = useAppSelector((state) => state.classInfo);
   const { children } = useAppSelector((state) => state.userInfo.userInfo);
-  const { fullName, birthday, adress, parents, id } = useAppSelector(
+  const { fullName, birthday, adress, parents, id, isLoading } = useAppSelector(
     (state) => state.classInfo.currentPupil
   );
+  console.log(isLoading);
 
   useEffect(() => {
     dispatch(getChildrenById(String(pupilId)));
@@ -35,7 +37,9 @@ const PupilCard = () => {
 
   return (
     <div className="pupil">
-      {fullName && (
+      {isLoading ? (
+        <Preloader />
+      ) : (
         <div className="pupil__content">
           <div className="pupil__image" />
           <div className="pupil__info">

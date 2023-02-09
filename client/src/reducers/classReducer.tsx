@@ -21,6 +21,7 @@ type IPupil = {
   middleName: string | null;
   fullName: string | null;
   parents: [{ fullName: string | null }];
+  isLoading: boolean;
 };
 
 export type IClass = {
@@ -52,6 +53,7 @@ const initialState: IClass = {
     middleName: null,
     fullName: null,
     parents: [{ fullName: null }],
+    isLoading: false,
   },
 };
 
@@ -62,14 +64,18 @@ const classReducer = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getClassByID.pending, () => {
-        //preloader
+        // preloader
       })
       .addCase(getClassByID.fulfilled, (state, action) => {
         state.classInfo = action.payload;
       })
+      .addCase(getChildrenById.pending, (state) => {
+        state.currentPupil.isLoading = true;
+      })
       .addCase(getChildrenById.fulfilled, (state, action) => {
         state.currentPupil = action.payload;
         state.currentPupil.parents = action.payload.parents;
+        state.currentPupil.isLoading = false;
       });
   },
 });
