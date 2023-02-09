@@ -22,6 +22,7 @@ const DiaryDay = ({ lessons, index, date }: IDiaryProps) => {
       className={
         '' + day + month === '' + currentDay + currentMonth ? 'diary__item current' : 'diary__item'
       }
+      data-day={index}
     >
       <table>
         <thead>

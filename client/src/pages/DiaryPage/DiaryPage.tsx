@@ -14,7 +14,7 @@ const DiaryPage = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { startWeek, endWeek } = useAppSelector((state) => state.schedule);
-  const { diary, week, year } = useAppSelector((state) => state.diary);
+  const { diary, week, year, errorDiary } = useAppSelector((state) => state.diary);
   const { children } = useAppSelector((state) => state.userInfo.userInfo);
   const idClass = useAppSelector((state) => state.classInfo.classInfo.id);
 
@@ -24,6 +24,8 @@ const DiaryPage = () => {
     const days = Math.floor((currentDate.getTime() - startDate.getTime()) / 86400000 + 1);
     return Math.ceil(days / 7);
   };
+
+  console.log(errorDiary);
 
   useEffect(() => {
     dispatch(setWeek(getWeekNumber()));
@@ -77,12 +79,16 @@ const DiaryPage = () => {
         </div>
       </div>
 
-      <div className="diary__list">
-        {diary &&
-          Object.keys(diary).map((date, index) => (
-            <DiaryDay lessons={diary[date]} index={index} key={index} date={date}></DiaryDay>
-          ))}
-      </div>
+      {!errorDiary ? (
+        <div className="diary__list">
+          {diary &&
+            Object.keys(diary).map((date, index) => (
+              <DiaryDay lessons={diary[date]} index={index} key={index} date={date}></DiaryDay>
+            ))}
+        </div>
+      ) : (
+        <div className="error__text">{errorDiary}</div>
+      )}
     </div>
   );
 };

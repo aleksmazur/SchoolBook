@@ -20,12 +20,14 @@ export type IDiaryState = {
   diary: IDiary | null;
   week: number;
   year: number;
+  errorDiary: string | null | undefined;
 };
 
 const initialState: IDiaryState = {
   diary: null,
   week: 0,
   year: 2023,
+  errorDiary: null,
 };
 
 const diaryReducer = createSlice({
@@ -46,6 +48,10 @@ const diaryReducer = createSlice({
       })
       .addCase(getDiary.fulfilled, (state, action) => {
         state.diary = action.payload;
+        state.errorDiary = null;
+      })
+      .addCase(getDiary.rejected, (state, action) => {
+        state.errorDiary = action.error.message;
       });
   },
 });
