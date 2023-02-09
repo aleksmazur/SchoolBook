@@ -9,16 +9,14 @@ export class DiaryController {
 
   @ApiOperation({ summary: "Get diary by children ID" })
   @ApiQuery({ name: "week", required: false })
+  @ApiQuery({ name: "year", required: false })
   @Get("/:classid/:childrenid")
   getChildrenDiary(
     @Param("classid") classid: number,
     @Param("childrenid") childrenid: number,
-    @Query("week") week?: number
+    @Query("week") week?: number,
+    @Query("year") year?: number
   ) {
-    if (!week) {
-      return this.diaryService.getChildrenDiaryByClass(classid, childrenid);
-    } else {
-      return this.diaryService.getChildrenDiaryByClass(classid, childrenid, week);
-    }
+    return this.diaryService.getChildrenDiaryByClass(classid, childrenid, week, year);
   }
 }
