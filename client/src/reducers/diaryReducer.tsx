@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getWeekNumber } from '../helpers/dataHelper';
 import { getDiary } from '../thunks/diary';
 
 type IDiary = {
@@ -21,13 +22,17 @@ export type IDiaryState = {
   week: number;
   year: number;
   errorDiary: string | null | undefined;
+  startWeek: string | null;
+  endWeek: string | null;
 };
 
 const initialState: IDiaryState = {
   diary: null,
-  week: 0,
+  week: getWeekNumber(),
   year: 2023,
   errorDiary: null,
+  startWeek: null,
+  endWeek: null,
 };
 
 const diaryReducer = createSlice({
@@ -48,6 +53,8 @@ const diaryReducer = createSlice({
       })
       .addCase(getDiary.fulfilled, (state, action) => {
         state.diary = action.payload;
+        state.startWeek = Object.keys(action.payload)[0];
+        state.endWeek = Object.keys(action.payload)[Object.keys(action.payload).length - 1];
         state.errorDiary = null;
       })
       .addCase(getDiary.rejected, (state, action) => {

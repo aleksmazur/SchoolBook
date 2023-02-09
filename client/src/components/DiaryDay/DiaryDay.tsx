@@ -1,6 +1,5 @@
 import { getWeekDay } from '../../helpers/dataHelper';
 import { IDiaryDay } from '../../reducers/diaryReducer';
-import { useAppSelector } from '../../store/hooks';
 import './diaryDay.css';
 
 type IDiaryProps = {
@@ -11,24 +10,17 @@ type IDiaryProps = {
 
 const DiaryDay = ({ lessons, index, date }: IDiaryProps) => {
   const dayFromDate = new Date(date).getDay();
+  const todayDay = new Date(Date.now()).getDay() - 1;
 
-  const startDayToWeek = useAppSelector((state) => state.schedule.startWeek);
-  const currentDay = new Date(Date.now()).getDate();
-  const currentMonth = new Date(Date.now()).getMonth();
-  const day = new Date(startDayToWeek + index * 24 * 60 * 60 * 1000).getDate();
-  const month = new Date(startDayToWeek + index * 24 * 60 * 60 * 1000).getMonth();
   return (
-    <div
-      className={
-        '' + day + month === '' + currentDay + currentMonth ? 'diary__item current' : 'diary__item'
-      }
-      data-day={index}
-    >
+    <div className={index === todayDay ? 'diary__item current' : 'diary__item'} data-day={index}>
       <table>
         <thead>
           <tr>
             <th className="lesson">
-              {getWeekDay(dayFromDate)}, {day}
+              {getWeekDay(dayFromDate)}
+              <br />
+              <span>{date}</span>
             </th>
             <th className="hw">Домашнее задание</th>
             <th className="mark">Отметка</th>

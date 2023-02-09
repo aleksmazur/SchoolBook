@@ -4,32 +4,26 @@ import DiaryDay from '../../components/DiaryDay/DiaryDay';
 import { MAX_WEEK_IN_YEAR } from '../../constants/week';
 import { getMonth } from '../../helpers/dataHelper';
 import { setWeek, setYear } from '../../reducers/diaryReducer';
-import { setEndWeek, setStartWeek } from '../../reducers/scheduleReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getDiary } from '../../thunks/diary';
+import { getSchedule } from '../../thunks/schedule';
 
 import './diary.css';
 
 const DiaryPage = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { startWeek, endWeek } = useAppSelector((state) => state.schedule);
-  const { diary, week, year, errorDiary } = useAppSelector((state) => state.diary);
+  const { diary, week, year, errorDiary, startWeek, endWeek } = useAppSelector(
+    (state) => state.diary
+  );
   const { children } = useAppSelector((state) => state.userInfo.userInfo);
   const idClass = useAppSelector((state) => state.classInfo.classInfo.id);
 
-  const getWeekNumber = () => {
-    const currentDate = new Date();
-    const startDate = new Date(currentDate.getFullYear(), 0, 1);
-    const days = Math.floor((currentDate.getTime() - startDate.getTime()) / 86400000 + 1);
-    return Math.ceil(days / 7);
-  };
-
-  console.log(errorDiary);
-
   useEffect(() => {
-    dispatch(setWeek(getWeekNumber()));
-  }, [dispatch]);
+    if (idClass) {
+      dispatch(getSchedule(idClass));
+    }
+  }, [idClass, dispatch]);
 
   useEffect(() => {
     if (children && idClass) {
@@ -39,8 +33,6 @@ const DiaryPage = () => {
   }, [dispatch, week, children, idClass, year]);
 
   const onChangeWeekNext = () => {
-    dispatch(setStartWeek(startWeek + 24 * 60 * 60 * 1000 * 7));
-    dispatch(setEndWeek(endWeek + 24 * 60 * 60 * 1000 * 7));
     if (week + 1 > MAX_WEEK_IN_YEAR) {
       dispatch(setWeek(0));
       dispatch(setYear(year + 1));
@@ -50,8 +42,6 @@ const DiaryPage = () => {
   };
 
   const onChangeWeekPrev = () => {
-    dispatch(setStartWeek(startWeek - 24 * 60 * 60 * 1000 * 7));
-    dispatch(setEndWeek(endWeek - 24 * 60 * 60 * 1000 * 7));
     if (week - 1 < 0) {
       dispatch(setWeek(MAX_WEEK_IN_YEAR));
       dispatch(setYear(year - 1));
@@ -67,13 +57,15 @@ const DiaryPage = () => {
         <div onClick={() => onChangeWeekPrev()} className="arrow">
           &#8592;
         </div>
-        <div>
-          {new Date(startWeek).getDate()}, {getMonth(new Date(startWeek).getMonth())}{' '}
-          {new Date(startWeek).getFullYear()}
-          {' - '}
-          {new Date(endWeek).getDate()}, {getMonth(new Date(endWeek).getMonth())}{' '}
-          {new Date(endWeek).getFullYear()}
-        </div>
+        {startWeek && endWeek && !errorDiary && (
+          <div>
+            {new Date(startWeek).getDate()}, {getMonth(new Date(startWeek).getMonth())}{' '}
+            {new Date(startWeek).getFullYear()}
+            {' - '}
+            {new Date(endWeek).getDate()}, {getMonth(new Date(endWeek).getMonth())}{' '}
+            {new Date(endWeek).getFullYear()}
+          </div>
+        )}
         <div onClick={() => onChangeWeekNext()} className="arrow">
           &#8594;
         </div>
