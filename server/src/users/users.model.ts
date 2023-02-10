@@ -66,4 +66,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
   @HasOne(() => ClassRoom)
   class: ClassRoom;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  profilePic: string;
 }

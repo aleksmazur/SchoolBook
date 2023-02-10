@@ -8,8 +8,11 @@ import {
   Post,
   Put,
   Query,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
 import {
   // ApiHeader,
   ApiOperation,
@@ -22,6 +25,7 @@ import { Role } from "../auth/role-auth.decorator";
 import { RoleGuard } from "../auth/role.guard";
 import { AddRoleDto } from "./dto/add-role.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
+import { EditProfileDto } from "./dto/edit-profile.dto";
 import { User } from "./users.model";
 import { UsersService } from "./users.service";
 
@@ -119,5 +123,15 @@ export class UsersController {
   @Put("/role/update")
   changeRole(@Body() dto: AddRoleDto) {
     return this.usersService.changeUserRole(dto);
+  }
+
+  @ApiOperation({ summary: "Change profile" })
+  @Put("/edit/profile")
+  @UseInterceptors(FileInterceptor("profilePic"))
+  changeProfile(
+    @Body() dto: EditProfileDto,
+    @UploadedFile() image
+  ) {
+    return this.usersService.editProfile(dto, image);
   }
 }

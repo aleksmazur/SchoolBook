@@ -9,6 +9,7 @@ import { UsersController } from "./users.controller";
 import { User } from "./users.model";
 import { UsersService } from "./users.service";
 import { ChildrensModule } from "src/childrens/childrens.module";
+import { FilesModule } from "src/files/files.module";
 
 @Module({
   controllers: [UsersController],
@@ -18,6 +19,7 @@ import { ChildrensModule } from "src/childrens/childrens.module";
     RolesModule,
     forwardRef(() => ChildrensModule),
     forwardRef(() => AuthModule),
+    FilesModule
   ],
   exports: [UsersService],
 })

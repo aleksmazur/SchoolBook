@@ -13,6 +13,8 @@ import { RolesService } from "../roles/roles.service";
 import { AddRoleDto } from "./dto/add-role.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from "./users.model";
+import { EditProfileDto } from "./dto/edit-profile.dto";
+import { FilesService } from "src/files/files.service";
 
 @Injectable()
 export class UsersService {
@@ -21,6 +23,7 @@ export class UsersService {
     private roleService: RolesService,
     @Inject(forwardRef(() => ChildrensService))
     private childrenService: ChildrensService,
+    private filesService: FilesService
   ) {}
 
   async createUser(dto: CreateUserDto) {
@@ -163,5 +166,18 @@ export class UsersService {
       childId,
     );
     return children;
+  }
+
+  async editProfile(dto: EditProfileDto, image) {
+    const fileName = await this.filesService.createFile(image);
+    const user = await this.userRepository.findByPk(dto.id);
+    if (!user) {
+      throw new HttpException(`User with ID '${dto.id}' not found`, HttpStatus.NOT_FOUND);
+    }
+    if (!fileName) {
+      throw new HttpException(`Filename was not generated!`, HttpStatus.NOT_FOUND);
+    }
+    await user.update({ profilePic: fileName });
+    return user;
   }
 }
