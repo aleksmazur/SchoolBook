@@ -20,11 +20,17 @@ import { GradesModule } from "./grades/grades.module";
 import { Grade } from "./grades/grades.model";
 import { SheduleModule } from "./shedule/shedule.module";
 import { DiaryModule } from './diary/diary.module';
+import { FilesModule } from './files/files.module';
+import { ServeStaticModule } from "@nestjs/serve-static";
+import * as path from "path";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: path.resolve(__dirname, 'static'),
     }),
     SequelizeModule.forRoot({
       dialect: "postgres",
@@ -56,6 +62,7 @@ import { DiaryModule } from './diary/diary.module';
     GradesModule,
     SheduleModule,
     DiaryModule,
+    FilesModule,
   ],
 })
 export class AppModule {}
