@@ -16,3 +16,22 @@ export const getClassByID = createAsyncThunk('classes/get', async (id: number) =
     throw new Error((err as Error).message);
   }
 });
+
+export const getClassByIDTeacher = createAsyncThunk(
+  'classByTeacher/get',
+  async (idTeacher: string) => {
+    try {
+      const response = await fetch(`${BASE_URL}/classes/?teacher=${idTeacher}`, {
+        method: 'GET',
+      });
+      if (response.status === 404) {
+        throw new Error('Classs not Found');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  }
+);

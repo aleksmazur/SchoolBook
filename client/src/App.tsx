@@ -11,6 +11,7 @@ import NewsPage from './pages/NewsPage/NewsPage';
 import { RequireAuth } from './hoc/RequireAuth';
 import PupilCard from './components/PupilCard/PupilCard';
 import GradesPage from './pages/GradesPage/GradesPage';
+import JournalPage from './pages/JournalPage/JournalPage';
 
 const App = () => {
   return (
@@ -42,15 +43,14 @@ const App = () => {
               </RequireAuth>
             }
           />
-          {/* <Route
-            path=":children/:id"
+          <Route
+            path="/journal"
             element={
               <RequireAuth>
-                <ProfilePage />
+                <JournalPage />
               </RequireAuth>
             }
-          /> */}
-          {/* <Route path="teacher/:id" element={<TeacherPage />} /> */}
+          />
           <Route
             path="schedule"
             element={

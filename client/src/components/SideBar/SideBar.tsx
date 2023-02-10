@@ -6,13 +6,14 @@ import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import { isMobile } from 'react-device-detect';
 import { getChildrenByParent } from '../../thunks/user';
 import './sideBar.css';
-import { getClassByID } from '../../thunks/classes';
+import { getClassByID, getClassByIDTeacher } from '../../thunks/classes';
 
 const SideBar = () => {
   const { t } = useTranslation();
   const [activeSidebar, setActiveSideBar] = useState(false);
   const { userInfo } = useAppSelector((state) => state.userInfo);
   const { role, id, children } = userInfo;
+  const classInfo = useAppSelector((state) => state.classInfo.classInfo);
   const dispatch = useAppDispatch();
   const path = window.location.pathname.split('/');
   const navigate = path[1];
@@ -28,12 +29,16 @@ const SideBar = () => {
   }, [dispatch, id, role]);
 
   useEffect(() => {
-    if (role === 'parent') {
-      if (children) {
-        dispatch(getClassByID(children[0].classId));
+    if (role === 'parent' && children) {
+      dispatch(getClassByID(children[0].classId));
+    }
+    if (role === 'teacher' && id) {
+      dispatch(getClassByIDTeacher(id));
+      if (role === 'teacher' && id && classInfo.id) {
+        dispatch(getClassByID(classInfo.id));
       }
     }
-  }, [children, dispatch, role]);
+  }, [children, dispatch, id, role, userInfo.id, classInfo.id]);
 
   useEffect(() => setActive(navigate), [location, navigate, setActive]);
 
@@ -80,19 +85,33 @@ const SideBar = () => {
             <div className="sidebar__li-text">{t('sidebar.schedule')}</div>
           </li>
         </Link>
-        <Link to="/diary">
-          <li className={`sidebar__li ${'diary' === active ? 'active' : ''}`} data-link="diary">
-            <div className="sidebar__li-icon icon-diary"></div>
-            <div className="sidebar__li-text">{t('sidebar.diary')}</div>
-          </li>
-        </Link>
-        <Link to="/grades">
-          <li className={`sidebar__li ${'grades' === active ? 'active' : ''}`} data-link="grades">
-            <div className="sidebar__li-icon icon-grades"></div>
-            <div className="sidebar__li-text">{t('sidebar.grades')}</div>
-          </li>
-        </Link>
-        <Link to={children ? `/class/${children[0].classId}` : '/class'}>
+        {role === 'teacher' ? (
+          <Link to="/journal">
+            <li
+              className={`sidebar__li ${'journal' === active ? 'active' : ''}`}
+              data-link="journal"
+            >
+              <div className="sidebar__li-icon icon-diary"></div>
+              <div className="sidebar__li-text">{t('sidebar.journal')}</div>
+            </li>
+          </Link>
+        ) : (
+          <Link to="/diary">
+            <li className={`sidebar__li ${'diary' === active ? 'active' : ''}`} data-link="diary">
+              <div className="sidebar__li-icon icon-diary"></div>
+              <div className="sidebar__li-text">{t('sidebar.diary')}</div>
+            </li>
+          </Link>
+        )}
+        {role === 'parent' ? (
+          <Link to="/grades">
+            <li className={`sidebar__li ${'grades' === active ? 'active' : ''}`} data-link="grades">
+              <div className="sidebar__li-icon icon-grades"></div>
+              <div className="sidebar__li-text">{t('sidebar.grades')}</div>
+            </li>
+          </Link>
+        ) : null}
+        <Link to={children ? `/class/${children[0].classId}` : `/class/${classInfo.id}`}>
           <li className={`sidebar__li ${'class' === active ? 'active' : ''}`} data-link="class">
             <div className="sidebar__li-icon icon-class"></div>
             <div className="sidebar__li-text">{t('sidebar.class')}</div>

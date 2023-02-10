@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IChildren } from './userReducer';
-import { getClassByID } from '../thunks/classes';
+import { getClassByID, getClassByIDTeacher } from '../thunks/classes';
 import { getChildrenById } from '../thunks/user';
 
 export type ITeacher = {
   id: number;
-  username: string;
-  password: string;
   firstName: string;
   lastName: string;
+  fullName: string;
 };
 
 type IPupil = {
@@ -68,6 +67,13 @@ const classReducer = createSlice({
       })
       .addCase(getClassByID.fulfilled, (state, action) => {
         state.classInfo = action.payload;
+      })
+      .addCase(getClassByIDTeacher.pending, () => {
+        // preloader
+      })
+      .addCase(getClassByIDTeacher.fulfilled, (state, action) => {
+        // удалить [0]
+        state.classInfo = action.payload[0];
       })
       .addCase(getChildrenById.pending, (state) => {
         state.currentPupil.isLoading = true;

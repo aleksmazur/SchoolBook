@@ -15,7 +15,8 @@
         "schedule": "Schedule",
         "profile": "Profile",
         "class": "Class",
-        "news": "News"
+        "news": "News",
+        "journal": "Journal"
     },
     "main": {
         "schoolBook": "School Book",
