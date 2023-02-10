@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { useAppDispatch } from '../../store/hooks';
+//import { useAppDispatch } from '../../store/hooks';
 import './inputGrade.css';
 
 type IProps = {
@@ -10,9 +10,9 @@ export const InputGrade = ({ setIsInput }: IProps) => {
   const [valueGrade, setNewGrade] = useState<string>('');
 
   const updateGrade = async () => {
-    const newGrade = {
+    /* const newGrade = {
       value: valueGrade,
-    };
+    }; */
     setIsInput(false);
     console.log('оценка обновлена');
   };
