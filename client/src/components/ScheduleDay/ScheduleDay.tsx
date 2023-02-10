@@ -1,9 +1,9 @@
-import { IScheduleDay } from '../../interfaces/IShedule';
+import { ISсheduleDay } from '../../interfaces/ISchedule';
 import Lesson from '../Lesson/Lesson';
 import './lesson.css';
 
 type IScheduleDayProps = {
-  lessons: IScheduleDay[];
+  lessons: ISсheduleDay[];
   index: number;
   day: string;
 };

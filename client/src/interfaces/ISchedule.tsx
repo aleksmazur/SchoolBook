@@ -1,4 +1,4 @@
-export type IScheduleDay = {
+export type ISсheduleDay = {
   id: number;
   name: string;
   date: string;
@@ -7,6 +7,6 @@ export type IScheduleDay = {
   classId: number;
 };
 
-export type IShedule = {
-  [day: string]: IScheduleDay[];
+export type ISсhedule = {
+  [day: string]: ISсheduleDay[];
 };
