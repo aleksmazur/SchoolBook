@@ -2,6 +2,7 @@
 	width: 100%;
 	border: none;
 	margin-bottom: 20px;
+    overflow: scroll;
 }
 
 .pupil__item_name,
@@ -13,7 +14,7 @@ table thead th {
 	font-weight: bold;
 	text-align: left;
 	border: none;
-	padding: 10px 15px;
+	padding: 10px;
 	background: #d8d8d8;
 	font-size: 14px;
 }
@@ -26,7 +27,7 @@ table thead tr th:last-child {
 table tbody td {
 	text-align: left;
 	border: none;
-	padding: 10px 15px;
+	padding: 10px;
 	font-size: 14px;
 	vertical-align: top;
 }

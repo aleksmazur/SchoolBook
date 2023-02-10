@@ -11,6 +11,11 @@
     position: relative;
 }
 
+.github__group {
+    display: flex;
+    gap: 10px;
+}
+
 .rsschool svg {
     width: 100%;
     height: 35px;

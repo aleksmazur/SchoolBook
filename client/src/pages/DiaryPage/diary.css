@@ -42,3 +42,11 @@
 .arrow {
     cursor: pointer;
 }
+
+.diary__item thead tr th:last-child {
+    width: 70px;
+}
+
+.diary__item thead tr th:nth-child(1) {
+    width: 170px;
+}

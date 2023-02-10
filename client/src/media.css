@@ -1,0 +1,45 @@
+@media ( max-width: 1200px) {
+
+}
+
+@media ( max-width: 991px) {
+    .diary__list {
+        display: block;
+    }
+}
+
+@media ( max-width: 767px) {
+    .footer {
+        font-size: 12px;
+    }
+    .github__group {
+        flex-direction: column;
+        gap: 0px;
+    }
+}
+
+@media ( max-width: 575px) {
+    .header {
+        padding: 0 10px 0 20px;
+    }
+    .header__logo {
+        font-size: 32px;
+    }
+    .header__user-name-block {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+    }
+    .header__username {
+        margin-top: -5px;
+    }
+    .header__action-button {
+        margin-right: 0px;
+    }
+    .profile__content {
+        flex-direction: column;
+    }
+    /* .sidebar__li {
+        width: calc(100vw - 20px);
+        height: 40px;
+    } */
+}
