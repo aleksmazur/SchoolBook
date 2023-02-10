@@ -6,6 +6,7 @@ import { User } from "../users/users.model";
 import { ChildrensController } from "./childrens.controller";
 import { Children } from "./childrens.model";
 import { ChildrensService } from "./childrens.service";
+import { FilesModule } from "src/files/files.module";
 
 @Module({
   controllers: [ChildrensController],
@@ -13,6 +14,7 @@ import { ChildrensService } from "./childrens.service";
   imports: [
     SequelizeModule.forFeature([Children, User, UserChildrens]),
     forwardRef(() => UsersModule),
+    FilesModule
   ],
   exports: [ChildrensService],
 })

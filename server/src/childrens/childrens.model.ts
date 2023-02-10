@@ -85,4 +85,7 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
 
   @HasMany(() => Grade)
   grades: [Grade];
+
+  @Column({ type: DataType.STRING, allowNull: true })
+  profilePic: string;
 }

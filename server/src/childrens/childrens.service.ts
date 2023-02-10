@@ -7,11 +7,13 @@ import {
 } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { ClassRoom } from "src/classes/classes.model";
+import { FilesService } from "src/files/files.service";
 import { Grade } from "src/grades/grades.model";
 import { User } from "src/users/users.model";
 import { UsersService } from "../users/users.service";
 import { Children } from "./childrens.model";
 import { CreateChildrenDto } from "./dto/create-children.dto";
+import { EditProfileDto } from "./dto/edit-profile.dto";
 
 @Injectable()
 export class ChildrensService {
@@ -19,6 +21,7 @@ export class ChildrensService {
     @InjectModel(Children) private childrensRepository: typeof Children,
     @Inject(forwardRef(() => UsersService))
     private userService: UsersService,
+    private filesService: FilesService
   ) {}
 
   async createChildren(dto: CreateChildrenDto) {
@@ -101,6 +104,19 @@ export class ChildrensService {
         HttpStatus.NOT_FOUND,
       );
     }
+    return children;
+  }
+
+  async editProfile(dto: EditProfileDto, image) {
+    const fileName = await this.filesService.createFile(image);
+    const children = await this.childrensRepository.findByPk(dto.id);
+    if (!children) {
+      throw new HttpException(`Children with ID '${dto.id}' not found`, HttpStatus.NOT_FOUND);
+    }
+    if (!fileName) {
+      throw new HttpException(`Filename was not generated!`, HttpStatus.NOT_FOUND);
+    }
+    await children.update({ profilePic: fileName });
     return children;
   }
 }
