@@ -10,9 +10,10 @@ type IPropsPupil = {
   fullName: string;
   birthday?: string;
   adress?: string;
+  diary?: boolean;
 };
 
-const PupilItem = ({ num, id, fullName, birthday, adress }: IPropsPupil) => {
+const PupilItem = ({ num, id, fullName, birthday, adress, diary }: IPropsPupil) => {
   const navigate = useNavigate();
   const [isInput, setIsInput] = useState(false);
 
@@ -31,7 +32,7 @@ const PupilItem = ({ num, id, fullName, birthday, adress }: IPropsPupil) => {
           <InputGrade setIsInput={setIsInput} />
         </td>
       ) : (
-        <td onClick={() => setIsInput(true)}>4</td>
+        diary && <td onClick={() => setIsInput(true)}>4</td>
       )}
     </tr>
   );

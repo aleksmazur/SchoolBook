@@ -21,7 +21,15 @@ const PupilsInJornal = () => {
         <tbody>
           {childrens
             ? childrens.map((pupil: IChildren, ind: number) => {
-                return <PupilItem key={ind} num={ind} id={pupil.id} fullName={pupil.fullName} />;
+                return (
+                  <PupilItem
+                    key={ind}
+                    num={ind}
+                    id={pupil.id}
+                    fullName={pupil.fullName}
+                    diary={true}
+                  />
+                );
               })
             : null}
         </tbody>
