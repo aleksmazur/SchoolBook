@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { InputGrade } from '../InputGrade/InputGrade';
 import moment from 'moment';
 import './pupilItem.css';
 
@@ -12,6 +14,7 @@ type IPropsPupil = {
 
 const PupilItem = ({ num, id, fullName, birthday, adress }: IPropsPupil) => {
   const navigate = useNavigate();
+  const [isInput, setIsInput] = useState(false);
 
   return (
     <tr>
@@ -23,6 +26,13 @@ const PupilItem = ({ num, id, fullName, birthday, adress }: IPropsPupil) => {
         <td className="pupil__item_birht">{moment(birthday).utc().format('YYYY-MM-DD')}</td>
       )}
       {adress && <td className="pupil__item_adress">{adress}</td>}
+      {isInput ? (
+        <td className="cell__grade">
+          <InputGrade setIsInput={setIsInput} />
+        </td>
+      ) : (
+        <td onClick={() => setIsInput(true)}>4</td>
+      )}
     </tr>
   );
 };
