@@ -4,6 +4,7 @@ import './profile.css';
 
 const ProfilePage = () => {
   const { userInfo } = useAppSelector((state) => state.userInfo);
+  const { classInfo } = useAppSelector((state) => state.classInfo);
 
   const renderInfoChildren = () => {
     if (userInfo.role === 'parent' && userInfo.children) {
@@ -32,7 +33,12 @@ const ProfilePage = () => {
           <div className="profile__role"> Роль {userInfo.role}</div>
           <div className="profile__email">Логин {userInfo.username}</div>
           <div className="profile__info-relative">
-            {userInfo.children ? renderInfoChildren() : 'Нет зарегистрированных детей'}
+            {userInfo.children ? renderInfoChildren() : null}
+            {userInfo.role === 'teacher' ? (
+              <span>
+                Учитель в <Link to={`/class/${classInfo.id}`}>{classInfo.className}</Link>
+              </span>
+            ) : null}
           </div>
         </div>
       </div>

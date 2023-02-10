@@ -1,25 +1,39 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { IChildren } from '../../reducers/userReducer';
+import { InputGrade } from '../InputGrade/InputGrade';
 import moment from 'moment';
 import './pupilItem.css';
 
 type IPropsPupil = {
-  pupil: IChildren;
   num: number;
+  id: number;
+  fullName: string;
+  birthday?: string;
+  adress?: string;
+  diary?: boolean;
 };
 
-const PupilItem = ({ pupil, num }: IPropsPupil) => {
+const PupilItem = ({ num, id, fullName, birthday, adress, diary }: IPropsPupil) => {
   const navigate = useNavigate();
-  const { id, firstName, lastName, birthday, adress } = pupil;
+  const [isInput, setIsInput] = useState(false);
 
   return (
     <tr>
       <td className="pupil__item_id">{num + 1}. </td>
       <td className="pupil__item_name" onClick={() => navigate(`/class/children/${id}`)}>
-        <Link to={`/class/children/${id}`}>{lastName + ' ' + firstName}</Link>
+        <Link to={`/class/children/${id}`}>{fullName}</Link>
       </td>
-      <td className="pupil__item_birht">{moment(birthday).utc().format('YYYY-MM-DD')}</td>
-      <td className="pupil__item_adress">{adress}</td>
+      {birthday && (
+        <td className="pupil__item_birht">{moment(birthday).utc().format('YYYY-MM-DD')}</td>
+      )}
+      {adress && <td className="pupil__item_adress">{adress}</td>}
+      {isInput ? (
+        <td className="cell__grade">
+          <InputGrade setIsInput={setIsInput} />
+        </td>
+      ) : (
+        diary && <td onClick={() => setIsInput(true)}>4</td>
+      )}
     </tr>
   );
 };

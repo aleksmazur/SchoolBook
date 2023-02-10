@@ -9,7 +9,7 @@ import TeacherItem from '../../components/TeacherItem/TeacherItem';
 
 export type ITabsList = {
   title: string;
-  content: JSX.Element | string;
+  content?: JSX.Element | string;
 };
 
 const ClassPage = () => {

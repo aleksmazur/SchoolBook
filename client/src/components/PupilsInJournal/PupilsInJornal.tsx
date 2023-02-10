@@ -2,7 +2,7 @@ import { IChildren } from '../../reducers/userReducer';
 import { useAppSelector } from '../../store/hooks';
 import PupilItem from '../PupilItem/PupilItem';
 
-const PupilsList = () => {
+const PupilsInJornal = () => {
   const childrens = useAppSelector((state) => state.classInfo.classInfo.childrens);
 
   return (
@@ -10,10 +10,12 @@ const PupilsList = () => {
       <table>
         <thead>
           <tr>
-            <th></th>
+            <th>Даты</th>
             <th>ФИО</th>
-            <th>Дата рождения</th>
-            <th>Адрес</th>
+            <th>21.02</th>
+            <th>21.02</th>
+            <th>21.02</th>
+            <th>21.02</th>
           </tr>
         </thead>
         <tbody>
@@ -25,8 +27,7 @@ const PupilsList = () => {
                     num={ind}
                     id={pupil.id}
                     fullName={pupil.fullName}
-                    birthday={pupil.birthday}
-                    adress={pupil.adress}
+                    diary={true}
                   />
                 );
               })
@@ -37,4 +38,4 @@ const PupilsList = () => {
   );
 };
 
-export default PupilsList;
+export default PupilsInJornal;

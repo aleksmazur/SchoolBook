@@ -16,7 +16,6 @@ const PupilCard = () => {
   const { fullName, birthday, adress, parents, id, isLoading } = useAppSelector(
     (state) => state.classInfo.currentPupil
   );
-  console.log(isLoading);
 
   useEffect(() => {
     dispatch(getChildrenById(String(pupilId)));
