@@ -4,6 +4,7 @@ import { Column, DataType, Model, Table } from "sequelize-typescript";
 interface NewsCreationAttrs {
   title: string;
   content: string;
+  image: string;
 }
 
 @Table({ tableName: "news", updatedAt: false })
@@ -31,4 +32,7 @@ export class News extends Model<News, NewsCreationAttrs> {
   })
   @Column({ type: DataType.TEXT, unique: false, allowNull: false })
   content: string;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  image: string;
 }

@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateNewsDto } from "./dto/create-news.dto";
 import { News } from "./news.model";
@@ -12,8 +13,12 @@ export class NewsController {
   @ApiOperation({ summary: "Create a news" })
   @ApiResponse({ status: 200, type: News })
   @Post()
-  create(@Body() dto: CreateNewsDto) {
-    return this.newsService.createNews(dto);
+  @UseInterceptors(FileInterceptor("image"))
+  create(
+    @Body() dto: CreateNewsDto,
+    @UploadedFile() image
+  ) {
+    return this.newsService.createNews(dto, image);
   }
 
   @ApiOperation({ summary: "Get all classes" })
