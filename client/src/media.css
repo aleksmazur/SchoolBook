@@ -38,6 +38,9 @@
     .profile__content {
         flex-direction: column;
     }
+    .pupil__content {
+        flex-direction: column;
+    }
     /* .sidebar__li {
         width: calc(100vw - 20px);
         height: 40px;
