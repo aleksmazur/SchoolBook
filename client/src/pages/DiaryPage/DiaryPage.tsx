@@ -17,7 +17,7 @@ const DiaryPage = () => {
   const { diary, week, year, errorDiary, startWeek, endWeek, isLoader } = useAppSelector(
     (state) => state.diary
   );
-  const { children } = useAppSelector((state) => state.userInfo.userInfo);
+  const { children, role } = useAppSelector((state) => state.userInfo.userInfo);
   const idClass = useAppSelector((state) => state.classInfo.classInfo.id);
 
   useEffect(() => {
@@ -49,6 +49,10 @@ const DiaryPage = () => {
     } else {
       dispatch(setWeek(week - 1));
     }
+  };
+
+  const subscribeDiary = () => {
+    console.log('Дневник подписан!');
   };
 
   return (
@@ -85,6 +89,11 @@ const DiaryPage = () => {
             </div>
           ) : (
             <div className="error__text">{errorDiary}</div>
+          )}
+          {role === 'parent' && (
+            <button className="diary__action-button btn" onClick={subscribeDiary}>
+              {t('diary.subscribe')}
+            </button>
           )}
         </>
       )}

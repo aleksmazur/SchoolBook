@@ -30,7 +30,8 @@
         "newsTitle": "Школьные новости"
     },
     "diary": {
-        "diaryTitle": "Дневник"
+        "diaryTitle": "Дневник",
+        "subscribe": "Подписать"
     },
     "schedule": {
         "scheduleTitle": "Расписание"

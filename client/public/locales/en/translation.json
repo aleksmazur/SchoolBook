@@ -30,7 +30,8 @@
         "newsTitle": "School news"
     },
     "diary": {
-        "diaryTitle": "School diary"
+        "diaryTitle": "School diary",
+        "subscribe": "Subscribe"
     },
     "schedule": {
         "scheduleTitle": "Schedule"
