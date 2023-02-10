@@ -9,21 +9,23 @@ const Footer = () => {
     <footer className="footer">
       {settingStatus ? <Setting /> : <SettingBtn />}
       <p className="copyright">©2023</p>
-      <p className="github">
-        <a href="https://github.com/aleksmazur/" target="_blank" rel="noreferrer">
-          Aleksandra Mazur
-        </a>
-      </p>
-      <p className="github">
-        <a href="https://github.com/Arzhanik-Anastasia" target="_blank" rel="noreferrer">
-          Arzhanik Anastasia
-        </a>
-      </p>
-      <p className="github">
-        <a href="https://github.com/wowblvck" target="_blank" rel="noreferrer">
-          Indar Basto
-        </a>
-      </p>
+      <div className="github__group">
+        <p className="github">
+          <a href="https://github.com/aleksmazur/" target="_blank" rel="noreferrer">
+            Aleksandra Mazur
+          </a>
+        </p>
+        <p className="github">
+          <a href="https://github.com/Arzhanik-Anastasia" target="_blank" rel="noreferrer">
+            Arzhanik Anastasia
+          </a>
+        </p>
+        <p className="github">
+          <a href="https://github.com/wowblvck" target="_blank" rel="noreferrer">
+            Indar Basto
+          </a>
+        </p>
+      </div>
       <p className="rsschool">
         <a href="https://rs.school/js/" target="_blank" rel="noreferrer">
           <svg

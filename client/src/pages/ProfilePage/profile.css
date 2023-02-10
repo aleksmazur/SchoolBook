@@ -1,6 +1,7 @@
 .profile__content {
     display: flex;
     gap: 40px;
+    align-items: center;
 }
 
 .profile__image {

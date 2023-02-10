@@ -6,13 +6,24 @@ type IBurger = {
   setActiveSideBar: Dispatch<SetStateAction<boolean>>;
 };
 
-const ButtonBurger = ({ isOpen, setActiveSideBar }: IBurger) => (
-  <div
-    className={isOpen ? 'nav-burger active-burger' : 'nav-burger'}
-    onClick={() => setActiveSideBar(!isOpen)}
-  >
-    <span></span>
-  </div>
-);
+const ButtonBurger = ({ isOpen, setActiveSideBar }: IBurger) => {
+  const openMenu = (e: React.MouseEvent<HTMLElement>) => {
+    const currentEl = e.currentTarget as HTMLLIElement;
+    const contentArea = currentEl.parentElement?.lastChild as HTMLLIElement;
+    console.log(contentArea);
+    if (isOpen) {
+      contentArea.classList.remove('content-area-none');
+    } else {
+      contentArea.classList.add('content-area-none');
+    }
+    setActiveSideBar(!isOpen);
+  };
+
+  return (
+    <div className={isOpen ? 'nav-burger active-burger' : 'nav-burger'} onClick={openMenu}>
+      <span></span>
+    </div>
+  );
+};
 
 export default ButtonBurger;

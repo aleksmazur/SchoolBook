@@ -28,3 +28,7 @@
     height: 100%;
     min-height: 100%;
 }
+
+.content-area-none {
+    display: none;
+}

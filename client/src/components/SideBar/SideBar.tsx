@@ -46,6 +46,14 @@ const SideBar = () => {
       const activeTab = currentTab.dataset.link as string;
       setActive(activeTab);
     }
+    if (isMobile) {
+      setActiveSideBar(false);
+      const currentTargetTab = e.currentTarget as HTMLLIElement;
+      const contentArea = currentTargetTab.parentElement?.lastChild as HTMLLIElement;
+      contentArea.classList.remove('content-area-none');
+      console.log(currentTargetTab);
+      console.log(contentArea);
+    }
   };
 
   return (
