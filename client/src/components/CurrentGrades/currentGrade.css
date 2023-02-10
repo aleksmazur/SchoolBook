@@ -1,7 +1,0 @@
-.subject_grade {
-    display: flex;
-}
-
-.subject_grade:nth-child(even){
-	background: #f3f3f3;
-}
