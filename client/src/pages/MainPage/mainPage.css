@@ -1,0 +1,52 @@
+.main__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main__percents {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* .main__percents {
+    margin: 20px;
+} */
+
+.main__percents-item {
+    width: 30%;
+}
+
+.main__percents-20 {
+    height: 70px;
+    width: 100%;
+    background: url(./../../assets/svg/20up.svg) center center / contain no-repeat;
+}
+
+.main__percents-80 {
+    height: 70px;
+    width: 100%;
+    background: url(./../../assets/svg/80down.svg) center center / contain no-repeat;
+}
+
+.main__percents-15 {
+    height: 70px;
+    width: 100%;
+    background: url(./../../assets/svg/15up.svg) center center / contain no-repeat;
+}
+
+.main__percents-20-text {
+    margin-top: 10px;
+    color: #0e9bd0;
+}
+
+.main__percents-80-text {
+    margin-top: 10px;
+    color: #f81010;
+}
+
+.main__percents-15-text {
+    margin-top: 10px;
+    color: #009646;
+}

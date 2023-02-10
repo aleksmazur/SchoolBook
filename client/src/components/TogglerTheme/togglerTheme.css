@@ -1,0 +1,64 @@
+.switch {
+    width: 70px;
+    height: 30px;
+    transform: translate(0%, -50%);
+    display: block;
+    margin: 50px 0 0px 0;
+}
+
+#toggler {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+    background-color: #00243a;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 1.4s;
+}
+.slider:before, .slider:after {
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 30px;
+    transition: 0.4s;
+}
+
+.slider:after {
+    background-color: white;
+}
+.wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 30px;
+    border-radius: 40px;
+    transition: all 1.4s;
+}
+
+#toggler:checked + .slider {
+    background-color: transparent;
+}
+#toggler:checked + .slider:before, #toggler:checked + .slider:after {
+    transform: translateX(35px);
+    background-color: white;
+}
+#toggler:checked + .slider:after {
+    background-color: black;  
+}
+#toggler:checked ~ .wave {
+    display: block;
+    background-color: #f1d760;
+}

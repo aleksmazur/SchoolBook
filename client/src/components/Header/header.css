@@ -1,0 +1,47 @@
+.header {
+    background: var(--bg-header);
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border-radius: 5px;
+}
+
+.header__logo span {
+    color: rgba(255, 87, 87, 0.747);
+}
+
+.header__button-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header__home-button {
+    display: flex;
+}
+
+.header__home-button a {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.header__logo {
+    position: relative;
+    font-family: "Neucha", cursive;
+    font-size: 40px;
+    font-weight: 700;
+    padding-left: 40px;
+    padding-top: 10px;
+}
+
+.header__user-name-block {
+    display: flex;
+    align-items: center;
+    color: var(--color-text);
+}
