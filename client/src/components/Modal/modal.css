@@ -88,3 +88,7 @@
 .registration-form {
     text-align: right;
 }
+
+.error__text {
+    color: red;
+}
