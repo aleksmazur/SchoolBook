@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserFromToken } from '../components/Header/Header';
-import { authUser, getChildrenByParent } from '../thunks/user';
+import { authUser, getChildrenByParent, getUserById } from '../thunks/user';
 import jwt_decode from 'jwt-decode';
 
 type IClass = {
@@ -29,6 +29,7 @@ type IUserInfo = {
   fullName: string | null;
   role: string | null;
   children: IChildren[] | null;
+  profilePic: string | null;
 };
 
 export type IUserState = {
@@ -49,6 +50,7 @@ const initialState: IUserState = {
     fullName: null,
     role: null,
     children: null,
+    profilePic: null,
   },
   errorUser: null,
 };
@@ -85,6 +87,9 @@ const userReducer = createSlice({
       })
       .addCase(getChildrenByParent.fulfilled, (state, action) => {
         state.userInfo.children = action.payload;
+      })
+      .addCase(getUserById.fulfilled, (state, action) => {
+        state.userInfo.profilePic = action.payload.profilePic;
       });
     // .addCase(authUser.rejected, (state, action) => {
     //error

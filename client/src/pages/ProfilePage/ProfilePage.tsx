@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { BASE_URL } from '../../constants/baseUrl';
 import { useAppSelector } from '../../store/hooks';
 import './profile.css';
 
@@ -27,7 +28,13 @@ const ProfilePage = () => {
   return (
     <div className="profile">
       <div className="profile__content">
-        <div className="profile__image" />
+        <div className="profile__photo">
+          <img
+            src={`${BASE_URL}/${userInfo.profilePic}`}
+            className="profile__photo-image"
+            alt="Фото"
+          />
+        </div>
         <div className="profile__info">
           <h3 className="profile__title">ФИО {userInfo.fullName}</h3>
           <div className="profile__role"> Роль {userInfo.role}</div>
