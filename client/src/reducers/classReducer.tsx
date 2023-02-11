@@ -8,6 +8,7 @@ export type ITeacher = {
   firstName: string;
   lastName: string;
   fullName: string;
+  profilePic: string;
 };
 
 type IPupil = {
@@ -20,6 +21,7 @@ type IPupil = {
   middleName: string | null;
   fullName: string | null;
   parents: [{ fullName: string | null }];
+  profilePic: string | null;
   isLoading: boolean;
 };
 
@@ -52,6 +54,7 @@ const initialState: IClass = {
     middleName: null,
     fullName: null,
     parents: [{ fullName: null }],
+    profilePic: null,
     isLoading: false,
   },
 };

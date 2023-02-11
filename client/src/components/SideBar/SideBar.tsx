@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import { isMobile } from 'react-device-detect';
-import { getChildrenByParent } from '../../thunks/user';
+import { getChildrenByParent, getUserById } from '../../thunks/user';
 import './sideBar.css';
 import { getClassByID, getClassByIDTeacher } from '../../thunks/classes';
 
@@ -25,6 +25,9 @@ const SideBar = () => {
       if (id) {
         dispatch(getChildrenByParent(id));
       }
+    }
+    if (id) {
+      dispatch(getUserById(id));
     }
   }, [dispatch, id, role]);
 

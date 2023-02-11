@@ -43,7 +43,7 @@ export const getChildrenByParent = createAsyncThunk('user/getChildren', async (i
   }
 });
 
-export const getParrentById = createAsyncThunk('user/getParrentById', async (id: string) => {
+export const getUserById = createAsyncThunk('user/getUserById', async (id: string) => {
   try {
     const response = await fetch(`${BASE_URL}/users/${id}`, {
       method: 'GET',

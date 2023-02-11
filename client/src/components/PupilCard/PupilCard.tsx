@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { BASE_URL } from '../../constants/baseUrl';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getChildrenById } from '../../thunks/user';
 import Preloader from '../Preloader/Preloader';
@@ -13,7 +14,7 @@ const PupilCard = () => {
 
   const { classInfo } = useAppSelector((state) => state.classInfo);
   const { children } = useAppSelector((state) => state.userInfo.userInfo);
-  const { fullName, birthday, adress, parents, id, isLoading } = useAppSelector(
+  const { fullName, birthday, adress, parents, id, profilePic, isLoading } = useAppSelector(
     (state) => state.classInfo.currentPupil
   );
 
@@ -40,7 +41,9 @@ const PupilCard = () => {
         <Preloader />
       ) : (
         <div className="pupil__content">
-          <div className="pupil__image" />
+          <div className="pupil__photo">
+            <img src={`${BASE_URL}/${profilePic}`} className="profile__photo-image" alt="Фото" />
+          </div>
           <div className="pupil__info">
             <h3 className="pupil__title">{fullName}</h3>
             <div className="pupil__birthday">
@@ -60,7 +63,7 @@ const PupilCard = () => {
             {children && id === children[0].id && (
               <div className="pupil__progress">
                 <Link to={`/diary`}>Смотреть дневник</Link>
-                <Link to={`/progress`}>Смотреть успеваемость</Link>
+                <Link to={`/grades`}>Смотреть успеваемость</Link>
               </div>
             )}
           </div>

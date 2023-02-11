@@ -15,7 +15,7 @@ const grades = [
 
 const FinalGrades = () => {
   return (
-    <div className="currentGrades__table">
+    <div className="finalGrades__table">
       <table>
         <thead>
           <tr>

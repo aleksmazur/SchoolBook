@@ -1,13 +1,7 @@
 .pupil__content {
     display: flex;
-    gap: 40px;
+    gap: 20px;
     align-items: center;
-}
-
-.pupil__image {
-    width: 120px;
-    height: 120px;
-    background: url('./../../assets/svg/profile.svg') center center / contain no-repeat;
 }
 
 .pupil__info h3, .pupil__info div {
