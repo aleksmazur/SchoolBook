@@ -60,7 +60,9 @@ const SideBar = () => {
     <>
       <ul
         onClick={toggleActiveNav}
-        className={isMobile && !activeSidebar ? 'sidebar__ul-none' : 'sidebar__ul'}
+        className={
+          isMobile ? (activeSidebar ? 'sidebar__ul-full' : 'sidebar__ul-none') : 'sidebar__ul'
+        }
       >
         <Link to="/">
           <li className={`sidebar__li ${'' === active ? 'active' : ''}`} data-link="main">
