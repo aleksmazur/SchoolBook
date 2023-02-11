@@ -24,6 +24,7 @@
     }
     .header__logo {
         font-size: 32px;
+        padding-left: 34px;
     }
     .header__user-name-block {
         flex-direction: column-reverse;
@@ -31,6 +32,7 @@
     }
     .header__username {
         margin-top: -5px;
+        font-size: 14px;
     }
     .header__action-button {
         margin-right: 0px;

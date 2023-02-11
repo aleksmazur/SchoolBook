@@ -5,21 +5,33 @@
     list-style: none;
     padding: 10px;
     position: relative;
+    width: 300px;
 }
 
 .sidebar__ul-none {
     display: none;
 }
 
+.sidebar__ul-full {
+    padding: 10px;
+    width: 100vw;
+}
+
+.sidebar__ul-full a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
 .sidebar__li {
     display: flex;
+    height: 40px;
     gap: 15px;
     padding: 8px 16px;
     margin-bottom: 5px;
     cursor: pointer;
     align-items: center;
     text-decoration: none;
-    width: 200px;
     border-radius: 5px;
     background-color: rgb(255, 255, 255);
     transition: all 0.5s;
@@ -28,6 +40,7 @@
 .sidebar__ul a {
     text-decoration: none;
     color: inherit;
+    width: 100%;
 }
 
 .sidebar__li:hover {
