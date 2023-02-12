@@ -19,10 +19,17 @@ export class ClassesController {
   @ApiOperation({ summary: "Get all classes" })
   @ApiResponse({ status: 200, type: [ClassRoom] })
   @ApiQuery({ name: "teacher", required: false })
+  @ApiQuery({ name: "name", required: false })
   @Get()
-  getAll(@Query("teacher") teacherId?: number) {
+  getAll(
+    @Query("teacher") teacherId?: number,
+    @Query("name") name?: string
+  ) {
     if (teacherId) {
       return this.classService.getClassesByTeacher(teacherId);
+    }
+    if (name) {
+      return this.classService.getClassByName(name);
     }
     return this.classService.getAllClasses();
   }

@@ -101,4 +101,38 @@ export class ClassesService {
     }
     return classItem;
   }
+
+  async getClassByName(name: string) {
+    const classItem = await this.classesRepository.findOne({
+      where: { className: name },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password", "username"],
+          },
+        },
+        {
+          model: Children,
+          separate: true,
+          order: [["fullName", "ASC"]],
+        },
+        {
+          model: Subject,
+          include: [
+            {
+              model: Grade
+            }
+          ]
+        }
+      ],
+    });
+    if (!classItem) {
+      throw new HttpException(
+        `Class with name '${name}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return classItem;
+  }
 }
