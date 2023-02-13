@@ -58,6 +58,9 @@ export class User extends Model<User, UserCreationAttrs> {
     instance.fullName = `${instance.lastName} ${instance.firstName}`;
   }
 
+  @Column({ type: DataType.STRING, allowNull: true })
+  gender: string;
+
   @BelongsToMany(() => Role, () => UserRoles)
   role: Role[];
 
