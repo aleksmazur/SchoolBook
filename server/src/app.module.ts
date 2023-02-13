@@ -22,7 +22,9 @@ import { SheduleModule } from "./shedule/shedule.module";
 import { DiaryModule } from './diary/diary.module';
 import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from "@nestjs/serve-static";
+import { QuartersModule } from './quarters/quarters.module';
 import * as path from "path";
+import { Quarter } from "./quarters/quarters.model";
 
 @Module({
   imports: [
@@ -49,6 +51,7 @@ import * as path from "path";
         News,
         Subject,
         Grade,
+        Quarter
       ],
       autoLoadModels: true,
     }),
@@ -63,6 +66,7 @@ import * as path from "path";
     SheduleModule,
     DiaryModule,
     FilesModule,
+    QuartersModule,
   ],
 })
 export class AppModule {}

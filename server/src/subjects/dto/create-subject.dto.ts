@@ -21,4 +21,10 @@ export class CreateSubjectDto {
     description: "Date of the subject",
   })
   readonly date: string;
+
+  @ApiProperty({
+    example: "2",
+    description: "Number of quarter",
+  })
+  readonly quarter: number;
 }

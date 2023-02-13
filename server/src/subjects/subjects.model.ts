@@ -15,12 +15,14 @@ import {
 import { ClassRoom } from "../classes/classes.model";
 import { Grade } from "../grades/grades.model";
 import * as moment from "moment-timezone";
+import { Quarter } from "../quarters/quarters.model";
 
 interface SubjectCreationAttrs {
   name: string;
   homework?: string;
   classId: number;
   date: string;
+  quarterId: number;
 }
 
 @Table({ tableName: "subjects", createdAt: false, updatedAt: false })
@@ -97,4 +99,11 @@ export class Subject extends Model<Subject, SubjectCreationAttrs> {
 
   @HasMany(() => Grade)
   grades: [Grade];
+
+  @ForeignKey(() => Quarter)
+  @Column
+  quarterId: number;
+
+  @BelongsTo(() => Quarter)
+  quarter: Quarter;
 }

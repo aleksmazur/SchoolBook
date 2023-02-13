@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
+import { QuartersService } from "src/quarters/quarters.service";
 import { GradesService } from "../grades/grades.service";
 import { CreateSubjectDto } from "./dto/create-subject.dto";
 import { Subject } from "./subjects.model";
@@ -7,11 +8,22 @@ import { Subject } from "./subjects.model";
 export class SubjectsService {
   constructor(
     @InjectModel(Subject) private subjectsRepository: typeof Subject,
-    private gradesService: GradesService
+    private gradesService: GradesService,
+    private quartersService: QuartersService
   ) {}
 
   async createSubject(dto: CreateSubjectDto) {
-    const subject = await this.subjectsRepository.create(dto);
+    const quarter = await this.quartersService.getQuarterByValue(dto.quarter);
+    if(!quarter) {
+      throw new HttpException(
+        `Quarter '${dto.quarter}' not found! Create quarter '${dto.quarter}' before create a subject!`,
+        HttpStatus.NOT_FOUND
+      );
+    }
+    const subject = await this.subjectsRepository.create({
+      ...dto,
+      quarterId: quarter.id
+    });
     return subject;
   }
 
