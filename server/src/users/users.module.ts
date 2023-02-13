@@ -19,7 +19,7 @@ import { FilesModule } from "src/files/files.module";
     RolesModule,
     forwardRef(() => ChildrensModule),
     forwardRef(() => AuthModule),
-    FilesModule
+    FilesModule,
   ],
   exports: [UsersService],
 })

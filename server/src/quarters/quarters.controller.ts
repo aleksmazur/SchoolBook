@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateQuarterDto } from './dto/create-quarter.dto';
-import { Quarter } from './quarters.model';
-import { QuartersService } from './quarters.service';
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { CreateQuarterDto } from "./dto/create-quarter.dto";
+import { Quarter } from "./quarters.model";
+import { QuartersService } from "./quarters.service";
 
 @ApiTags("Quarters")
-@Controller('quarters')
+@Controller("quarters")
 export class QuartersController {
   constructor(private quartersService: QuartersService) {}
 

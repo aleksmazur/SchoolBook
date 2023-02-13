@@ -19,10 +19,10 @@ import { Subject } from "./subjects/subjects.model";
 import { GradesModule } from "./grades/grades.module";
 import { Grade } from "./grades/grades.model";
 import { SheduleModule } from "./shedule/shedule.module";
-import { DiaryModule } from './diary/diary.module';
-import { FilesModule } from './files/files.module';
+import { DiaryModule } from "./diary/diary.module";
+import { FilesModule } from "./files/files.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
-import { QuartersModule } from './quarters/quarters.module';
+import { QuartersModule } from "./quarters/quarters.module";
 import * as path from "path";
 import { Quarter } from "./quarters/quarters.model";
 
@@ -32,7 +32,7 @@ import { Quarter } from "./quarters/quarters.model";
       envFilePath: `.${process.env.NODE_ENV}.env`,
     }),
     ServeStaticModule.forRoot({
-      rootPath: path.resolve(__dirname, 'static'),
+      rootPath: path.resolve(__dirname, "static"),
     }),
     SequelizeModule.forRoot({
       dialect: "postgres",
@@ -51,7 +51,7 @@ import { Quarter } from "./quarters/quarters.model";
         News,
         Subject,
         Grade,
-        Quarter
+        Quarter,
       ],
       autoLoadModels: true,
     }),

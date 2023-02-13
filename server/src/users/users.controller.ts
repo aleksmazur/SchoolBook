@@ -128,10 +128,7 @@ export class UsersController {
   @ApiOperation({ summary: "Change profile" })
   @Put("/edit/profile")
   @UseInterceptors(FileInterceptor("profilePic"))
-  changeProfile(
-    @Body() dto: EditProfileDto,
-    @UploadedFile() image
-  ) {
+  changeProfile(@Body() dto: EditProfileDto, @UploadedFile() image) {
     return this.usersService.editProfile(dto, image);
   }
 }

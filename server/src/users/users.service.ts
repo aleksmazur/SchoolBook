@@ -23,7 +23,7 @@ export class UsersService {
     private roleService: RolesService,
     @Inject(forwardRef(() => ChildrensService))
     private childrenService: ChildrensService,
-    private filesService: FilesService
+    private filesService: FilesService,
   ) {}
 
   async createUser(dto: CreateUserDto) {
@@ -172,10 +172,16 @@ export class UsersService {
     const fileName = await this.filesService.createFile(image);
     const user = await this.userRepository.findByPk(dto.id);
     if (!user) {
-      throw new HttpException(`User with ID '${dto.id}' not found`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `User with ID '${dto.id}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
     }
     if (!fileName) {
-      throw new HttpException(`Filename was not generated!`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `Filename was not generated!`,
+        HttpStatus.NOT_FOUND,
+      );
     }
     await user.update({ profilePic: fileName });
     return user;

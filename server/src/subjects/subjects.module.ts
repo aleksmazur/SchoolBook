@@ -15,7 +15,7 @@ import { QuartersModule } from "../quarters/quarters.module";
   imports: [
     SequelizeModule.forFeature([Subject, ClassRoom, Grade, Quarter]),
     GradesModule,
-    QuartersModule
+    QuartersModule,
   ],
   exports: [SubjectsService],
 })

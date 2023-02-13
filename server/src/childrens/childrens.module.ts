@@ -14,7 +14,7 @@ import { FilesModule } from "src/files/files.module";
   imports: [
     SequelizeModule.forFeature([Children, User, UserChildrens]),
     forwardRef(() => UsersModule),
-    FilesModule
+    FilesModule,
   ],
   exports: [ChildrensService],
 })

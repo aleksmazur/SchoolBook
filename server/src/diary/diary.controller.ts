@@ -1,9 +1,9 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
-import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { DiaryService } from './diary.service';
+import { Controller, Get, Param, Query } from "@nestjs/common";
+import { ApiOperation, ApiQuery, ApiTags } from "@nestjs/swagger";
+import { DiaryService } from "./diary.service";
 
 @ApiTags("Diary")
-@Controller('diary')
+@Controller("diary")
 export class DiaryController {
   constructor(private diaryService: DiaryService) {}
 
@@ -15,8 +15,13 @@ export class DiaryController {
     @Param("classid") classid: number,
     @Param("childrenid") childrenid: number,
     @Query("week") week?: number,
-    @Query("year") year?: number
+    @Query("year") year?: number,
   ) {
-    return this.diaryService.getChildrenDiaryByClass(classid, childrenid, week, year);
+    return this.diaryService.getChildrenDiaryByClass(
+      classid,
+      childrenid,
+      week,
+      year,
+    );
   }
 }

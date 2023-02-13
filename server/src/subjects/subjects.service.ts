@@ -9,20 +9,20 @@ export class SubjectsService {
   constructor(
     @InjectModel(Subject) private subjectsRepository: typeof Subject,
     private gradesService: GradesService,
-    private quartersService: QuartersService
+    private quartersService: QuartersService,
   ) {}
 
   async createSubject(dto: CreateSubjectDto) {
     const quarter = await this.quartersService.getQuarterByValue(dto.quarter);
-    if(!quarter) {
+    if (!quarter) {
       throw new HttpException(
         `Quarter '${dto.quarter}' not found! Create quarter '${dto.quarter}' before create a subject!`,
-        HttpStatus.NOT_FOUND
+        HttpStatus.NOT_FOUND,
       );
     }
     const subject = await this.subjectsRepository.create({
       ...dto,
-      quarterId: quarter.id
+      quarterId: quarter.id,
     });
     return subject;
   }
@@ -55,15 +55,23 @@ export class SubjectsService {
     return subjects;
   }
 
-  async findByChildrenClass(classId: number, childrenid: number): Promise<Array<Partial<Subject> & { grade: number | null }>> {
-    const subjects = await this.subjectsRepository.findAll({ where: { classId }});
+  async findByChildrenClass(
+    classId: number,
+    childrenid: number,
+  ): Promise<Array<Partial<Subject> & { grade: number | null }>> {
+    const subjects = await this.subjectsRepository.findAll({
+      where: { classId },
+    });
     if (!subjects.length) {
-      throw new HttpException(`Subject for children '${childrenid}' by class '${classId}' not found!`, HttpStatus.NOT_FOUND);
-    };
+      throw new HttpException(
+        `Subject for children '${childrenid}' by class '${classId}' not found!`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
 
     const grades = await this.gradesService.getGradesByChildren(childrenid);
-    return subjects.map(subject => {
-      const grade = grades.find(grade => grade.subjectId === subject.id);
+    return subjects.map((subject) => {
+      const grade = grades.find((grade) => grade.subjectId === subject.id);
       return { ...subject.toJSON(), grade: grade ? grade.value : null };
     });
   }

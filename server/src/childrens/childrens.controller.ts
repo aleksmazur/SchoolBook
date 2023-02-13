@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Param, Post, Put, Query, UploadedFile, UseInterceptors } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  UploadedFile,
+  UseInterceptors,
+} from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Children } from "./childrens.model";
@@ -39,10 +49,7 @@ export class ChildrensController {
   @ApiOperation({ summary: "Change profile" })
   @Put("/edit/profile")
   @UseInterceptors(FileInterceptor("profilePic"))
-  changeProfile(
-    @Body() dto: EditProfileDto,
-    @UploadedFile() image
-  ) {
+  changeProfile(@Body() dto: EditProfileDto, @UploadedFile() image) {
     return this.childrenService.editProfile(dto, image);
   }
 }

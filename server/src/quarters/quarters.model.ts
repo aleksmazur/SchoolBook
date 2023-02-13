@@ -1,11 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  Column,
-  DataType,
-  HasMany,
-  Model,
-  Table,
-} from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Subject } from "../subjects/subjects.model";
 
 interface QuarterCreationAttrs {

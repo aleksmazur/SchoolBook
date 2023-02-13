@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { SubjectsService } from "../subjects/subjects.service";
 import * as moment from "moment";
 
@@ -22,17 +22,30 @@ export class SheduleService {
         acc[day].push(subject);
         return acc;
       }, {});
-      const sortedSchedule = {};
-      const daysOfWeek = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
-      daysOfWeek.forEach(day => {
-        if (schedule[day]) {
-          sortedSchedule[day] = schedule[day].sort((a: { date: moment.MomentInput; }, b: { date: moment.MomentInput; }) => {
+    const sortedSchedule = {};
+    const daysOfWeek = [
+      "воскресенье",
+      "понедельник",
+      "вторник",
+      "среда",
+      "четверг",
+      "пятница",
+      "суббота",
+    ];
+    daysOfWeek.forEach((day) => {
+      if (schedule[day]) {
+        sortedSchedule[day] = schedule[day].sort(
+          (
+            a: { date: moment.MomentInput },
+            b: { date: moment.MomentInput },
+          ) => {
             const startTimeA = moment(a.date);
             const startTimeB = moment(b.date);
             return startTimeA.diff(startTimeB);
-          });
-        }
-      });
+          },
+        );
+      }
+    });
     return sortedSchedule;
   }
 }

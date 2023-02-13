@@ -35,9 +35,9 @@ export class ClassesService {
           model: Subject,
           include: [
             {
-              model: Grade
-            }
-          ]
+              model: Grade,
+            },
+          ],
         },
       ],
     });
@@ -87,10 +87,10 @@ export class ClassesService {
           model: Subject,
           include: [
             {
-              model: Grade
-            }
-          ]
-        }
+              model: Grade,
+            },
+          ],
+        },
       ],
     });
     if (!classItem) {
@@ -121,10 +121,10 @@ export class ClassesService {
           model: Subject,
           include: [
             {
-              model: Grade
-            }
-          ]
-        }
+              model: Grade,
+            },
+          ],
+        },
       ],
     });
     if (!classItem) {

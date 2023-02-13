@@ -21,7 +21,7 @@ export class ChildrensService {
     @InjectModel(Children) private childrensRepository: typeof Children,
     @Inject(forwardRef(() => UsersService))
     private userService: UsersService,
-    private filesService: FilesService
+    private filesService: FilesService,
   ) {}
 
   async createChildren(dto: CreateChildrenDto) {
@@ -111,10 +111,16 @@ export class ChildrensService {
     const fileName = await this.filesService.createFile(image);
     const children = await this.childrensRepository.findByPk(dto.id);
     if (!children) {
-      throw new HttpException(`Children with ID '${dto.id}' not found`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `Children with ID '${dto.id}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
     }
     if (!fileName) {
-      throw new HttpException(`Filename was not generated!`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `Filename was not generated!`,
+        HttpStatus.NOT_FOUND,
+      );
     }
     await children.update({ profilePic: fileName });
     return children;

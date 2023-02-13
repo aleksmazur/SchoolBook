@@ -21,10 +21,7 @@ export class ClassesController {
   @ApiQuery({ name: "teacher", required: false })
   @ApiQuery({ name: "name", required: false })
   @Get()
-  getAll(
-    @Query("teacher") teacherId?: number,
-    @Query("name") name?: string
-  ) {
+  getAll(@Query("teacher") teacherId?: number, @Query("name") name?: string) {
     if (teacherId) {
       return this.classService.getClassesByTeacher(teacherId);
     }

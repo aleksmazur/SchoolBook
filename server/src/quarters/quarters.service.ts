@@ -1,12 +1,12 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { CreateQuarterDto } from './dto/create-quarter.dto';
-import { Quarter } from './quarters.model';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/sequelize";
+import { CreateQuarterDto } from "./dto/create-quarter.dto";
+import { Quarter } from "./quarters.model";
 
 @Injectable()
 export class QuartersService {
   constructor(
-    @InjectModel(Quarter) private quartersRepository: typeof Quarter
+    @InjectModel(Quarter) private quartersRepository: typeof Quarter,
   ) {}
 
   async createQuarter(dto: CreateQuarterDto) {
@@ -27,11 +27,14 @@ export class QuartersService {
   async getQuarterByValue(value: number) {
     const quarter = await this.quartersRepository.findOne({
       where: {
-        quarter: value
-      }
+        quarter: value,
+      },
     });
     if (!quarter) {
-      throw new HttpException(`Quarter '${value}' not found!`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `Quarter '${value}' not found!`,
+        HttpStatus.NOT_FOUND,
+      );
     }
     return quarter;
   }

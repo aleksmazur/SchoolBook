@@ -8,9 +8,6 @@ import { NewsService } from "./news.service";
 @Module({
   providers: [NewsService],
   controllers: [NewsController],
-  imports: [
-    SequelizeModule.forFeature([News]),
-    FilesModule
-  ]
+  imports: [SequelizeModule.forFeature([News]), FilesModule],
 })
 export class NewsModule {}

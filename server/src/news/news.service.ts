@@ -8,7 +8,7 @@ import { News } from "./news.model";
 export class NewsService {
   constructor(
     @InjectModel(News) private newsRepository: typeof News,
-    private fileService: FilesService
+    private fileService: FilesService,
   ) {}
 
   async createNews(dto: CreateNewsDto, image: any) {
