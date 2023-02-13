@@ -9,6 +9,7 @@ import { InjectModel } from "@nestjs/sequelize";
 import { ClassRoom } from "src/classes/classes.model";
 import { FilesService } from "src/files/files.service";
 import { Grade } from "src/grades/grades.model";
+import { Subject } from "src/subjects/subjects.model";
 import { User } from "src/users/users.model";
 import { UsersService } from "../users/users.service";
 import { Children } from "./childrens.model";
@@ -124,5 +125,48 @@ export class ChildrensService {
     }
     await children.update({ profilePic: fileName });
     return children;
+  }
+
+  async getSubjectsWithGrades(childrenid: number) {
+    const children = await this.childrensRepository.findByPk(childrenid, {
+      include: [
+        {
+          model: Grade,
+          as: "grades",
+          include: [
+            {
+              model: Subject,
+            },
+          ],
+        },
+      ],
+    });
+    if (!children) {
+      throw new HttpException(
+        `Children with ID '${children}' not found!`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    const grades = children.grades.map((grade) => {
+      return { subject: grade.subject.name, grade: grade.value };
+    });
+
+    const groupedGrades = grades.reduce((acc, grade) => {
+      if (!acc[grade.subject]) {
+        acc[grade.subject] = [];
+      }
+      acc[grade.subject].push(grade.grade);
+      return acc;
+    }, {});
+
+    if (JSON.stringify(groupedGrades) === "{}") {
+      throw new HttpException(
+        `Grades for childrend '${childrenid}' not found!`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return groupedGrades;
   }
 }

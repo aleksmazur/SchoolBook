@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateSubjectDto } from "./dto/create-subject.dto";
 import { Subject } from "./subjects.model";
 import { SubjectsService } from "./subjects.service";
@@ -18,8 +18,15 @@ export class SubjectsController {
 
   @ApiOperation({ summary: "Get all subjects" })
   @ApiResponse({ status: 200, type: [Subject] })
+  @ApiQuery({ name: "class", required: false })
   @Get()
-  getAll() {
+  getAll(
+    @Query("class") classid?: number,
+    @Query("childrenid") childrenid?: number,
+  ) {
+    if (classid && childrenid) {
+      return this.subjectsService.findByChildrenClass(classid, childrenid);
+    }
     return this.subjectsService.getAllSubjects();
   }
 }

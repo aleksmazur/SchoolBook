@@ -20,7 +20,6 @@ export class ClassesService {
 
   async getAllClasses() {
     const classes = await this.classesRepository.findAll({
-      // include: { all: true },
       include: [
         {
           model: User,

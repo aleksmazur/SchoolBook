@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { QuartersService } from "src/quarters/quarters.service";
 import { GradesService } from "../grades/grades.service";
@@ -7,7 +13,9 @@ import { Subject } from "./subjects.model";
 @Injectable()
 export class SubjectsService {
   constructor(
-    @InjectModel(Subject) private subjectsRepository: typeof Subject,
+    @InjectModel(Subject)
+    private subjectsRepository: typeof Subject,
+    @Inject(forwardRef(() => GradesService))
     private gradesService: GradesService,
     private quartersService: QuartersService,
   ) {}
@@ -45,6 +53,7 @@ export class SubjectsService {
       attributes: {
         exclude: ["homework"],
       },
+      include: { all: true },
     });
     if (!subjects.length) {
       throw new HttpException(
