@@ -29,7 +29,7 @@ export type IDiaryState = {
 
 const initialState: IDiaryState = {
   diary: null,
-  week: getWeekNumber(),
+  week: getWeekNumber(new Date()),
   year: 2023,
   errorDiary: null,
   startWeek: null,
