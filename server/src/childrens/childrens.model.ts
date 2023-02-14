@@ -67,8 +67,8 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   adress: string;
 
   @ApiProperty({ example: "12.01.2012", description: "Date of birthday" })
-  @Column({ type: "timestamp", allowNull: false })
-  birthday: string;
+  @Column({ type: DataType.DATEONLY, allowNull: false })
+  birthday: string | Date;
 
   @Column({ type: DataType.STRING, allowNull: true })
   gender: string;
