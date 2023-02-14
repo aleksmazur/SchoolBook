@@ -16,21 +16,40 @@ export class GradesController {
     return this.gradesService.createGrade(dto);
   }
 
-  @ApiOperation({ summary: "Get all grades" })
-  @ApiResponse({ status: 200, type: [Grade] })
+  @ApiOperation({ summary: "Get grades" })
   @ApiQuery({ name: "children", required: false })
-  @Get()
-  getAll(
+  @Get("")
+  getAll(@Query("children") childrenid?: number) {
+    if (childrenid) {
+      return this.gradesService.getChildrenGrades(childrenid);
+    } else {
+      return this.gradesService.getAllGrades();
+    }
+  }
+
+  @ApiOperation({ summary: "Get current grades by all subjects and grades" })
+  @ApiQuery({ name: "children", required: true })
+  @ApiQuery({ name: "class", required: true })
+  @Get("/current")
+  getCurrent(
     @Query("class") classid?: number,
     @Query("children") childrenid?: number,
   ) {
     if (classid && childrenid) {
       return this.gradesService.getCurrentGrades(classid, childrenid);
     }
-    if (childrenid) {
-      return this.gradesService.getChildrenGrades(childrenid);
-    } else {
-      return this.gradesService.getAllGrades();
+  }
+
+  @ApiOperation({ summary: "Get final grades by all subjects and grades" })
+  @ApiQuery({ name: "children", required: true })
+  @ApiQuery({ name: "class", required: true })
+  @Get("/final")
+  getFinal(
+    @Query("class") classid?: number,
+    @Query("children") childrenid?: number,
+  ) {
+    if (classid && childrenid) {
+      return this.gradesService.getFinalGrades(classid, childrenid);
     }
   }
 }

@@ -6,7 +6,8 @@ import {
   Injectable,
 } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { QuartersService } from "src/quarters/quarters.service";
+import { Quarter } from "../quarters/quarters.model";
+import { QuartersService } from "../quarters/quarters.service";
 import { GradesService } from "../grades/grades.service";
 import { CreateSubjectDto } from "./dto/create-subject.dto";
 import { Subject } from "./subjects.model";
@@ -70,6 +71,11 @@ export class SubjectsService {
   ): Promise<Array<Partial<Subject> & { grade: number | null }>> {
     const subjects = await this.subjectsRepository.findAll({
       where: { classId },
+      include: [
+        {
+          model: Quarter,
+        },
+      ],
     });
     if (!subjects.length) {
       throw new HttpException(
