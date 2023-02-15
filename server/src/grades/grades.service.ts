@@ -56,12 +56,6 @@ export class GradesService {
     const grades = await this.gradesRepository.findAll({
       where: { childrenId },
     });
-    if (!grades.length) {
-      throw new HttpException(
-        `Grades for children '${childrenId}' not found!`,
-        HttpStatus.NOT_FOUND,
-      );
-    }
     return grades;
   }
 
