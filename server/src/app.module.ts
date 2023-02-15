@@ -25,8 +25,16 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { QuartersModule } from "./quarters/quarters.module";
 import * as path from "path";
 import { Quarter } from "./quarters/quarters.model";
+import { APP_GUARD } from "@nestjs/core";
+import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 
 @Module({
+  // providers: [
+  //   {
+  //      provide: APP_GUARD,
+  //      useClass: JwtAuthGuard,
+  //   },
+  // ],
   imports: [
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`,
