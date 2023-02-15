@@ -8,7 +8,7 @@ import { getMonth, getWeekNumber } from '../../helpers/dataHelper';
 import { setWeek, setYear } from '../../reducers/diaryReducer';
 import { setActiveQuarter, setCurrentQuarter } from '../../reducers/quarterReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getDiary } from '../../thunks/diary';
+import { getDiary, getFinalDiary } from '../../thunks/diary';
 import { getQuarter } from '../../thunks/quarter';
 import { getSchedule } from '../../thunks/schedule';
 
@@ -35,7 +35,6 @@ const DiaryPage = () => {
     { title: `II ${t('diary.quarter')}` },
     { title: `III ${t('diary.quarter')}` },
     { title: `IV ${t('diary.quarter')}` },
-    { title: `${t('diary.lastPage')}` },
   ];
 
   const setVisibleArrow = (week: number) => {
@@ -46,23 +45,22 @@ const DiaryPage = () => {
   const setQuaterTab = (activeTab: number) => {
     let date = new Date();
     let currentWeek: number = getWeekNumber(date);
-    if (activeTab > quarter.length) {
-      console.log('последняя');
-    } else {
-      const current = quarter.filter((item) => item.quarter === activeTab)[0];
-      if (activeTab === currentQuarter) {
-      } else if (activeTab > currentQuarter) {
-        date = new Date(current.startDate);
-        currentWeek = getWeekNumber(date);
-      } else if (activeTab < currentQuarter) {
-        date = new Date(current.endDate);
-        currentWeek = getWeekNumber(date);
-      }
-      dispatch(setWeek(currentWeek));
-      dispatch(setYear(date.getFullYear()));
-      dispatch(setActiveQuarter(activeTab));
+
+    const current = quarter.filter((item) => item.quarter === activeTab)[0];
+    if (activeTab === currentQuarter) {
+    } else if (activeTab > currentQuarter) {
+      date = new Date(current.startDate);
+      currentWeek = getWeekNumber(date);
+    } else if (activeTab < currentQuarter) {
+      date = new Date(current.endDate);
+      currentWeek = getWeekNumber(date);
     }
+    dispatch(setWeek(currentWeek));
+    dispatch(setYear(date.getFullYear()));
+    dispatch(setActiveQuarter(activeTab));
+
     setActiveTab(activeTab);
+    console.log('activeTab: ', activeTab);
     setVisibleArrow(currentWeek);
   };
 
@@ -92,6 +90,7 @@ const DiaryPage = () => {
     if (children && idClass) {
       const idPupil = children[0].id;
       dispatch(getDiary({ idPupil, idClass, week, year }));
+      dispatch(getFinalDiary({ idPupil, idClass }));
     }
   }, [dispatch, week, children, idClass, year]);
 

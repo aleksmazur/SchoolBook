@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from '@reduxjs/toolkit';
 import { getWeekNumber } from '../helpers/dataHelper';
-import { getDiary } from '../thunks/diary';
+import { getDiary, getFinalDiary } from '../thunks/diary';
 
 type IDiary = {
   [key: string]: IDiaryDay[];
@@ -25,6 +26,7 @@ export type IDiaryState = {
   startWeek: string | null;
   endWeek: string | null;
   isLoader: boolean;
+  finalDiary: any;
 };
 
 const initialState: IDiaryState = {
@@ -35,6 +37,7 @@ const initialState: IDiaryState = {
   startWeek: null,
   endWeek: null,
   isLoader: false,
+  finalDiary: null,
 };
 
 const diaryReducer = createSlice({
@@ -57,6 +60,14 @@ const diaryReducer = createSlice({
         state.diary = action.payload;
         state.startWeek = Object.keys(action.payload)[0];
         state.endWeek = Object.keys(action.payload)[Object.keys(action.payload).length - 1];
+        state.errorDiary = null;
+        state.isLoader = false;
+      })
+      .addCase(getFinalDiary.pending, (state) => {
+        state.isLoader = true;
+      })
+      .addCase(getFinalDiary.fulfilled, (state, action) => {
+        state.finalDiary = action.payload;
         state.errorDiary = null;
         state.isLoader = false;
       })

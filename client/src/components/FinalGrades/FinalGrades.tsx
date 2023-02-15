@@ -1,19 +1,8 @@
+import { useAppSelector } from '../../store/hooks';
 import './finalGrades.css';
 
-type IFinalGrades = {
-  subject: string;
-  quarterGrades: (number | null)[];
-  finalGrade: number | null;
-};
-
-const grades = [
-  { subject: 'Математика', quarterGrades: [5, 4, null, null], finalGrade: null },
-  { subject: 'Русский язык', quarterGrades: [4, 5, null, null], finalGrade: null },
-  { subject: 'Иностранный язык', quarterGrades: [5, 5, null, null], finalGrade: null },
-  { subject: 'Физкультура', quarterGrades: [5, 5, null, null], finalGrade: null },
-];
-
 const FinalGrades = () => {
+  const { finalDiary } = useAppSelector((state) => state.diary);
   return (
     <div className="finalGrades__table">
       <table>
@@ -29,24 +18,24 @@ const FinalGrades = () => {
           </tr>
         </thead>
         <tbody>
-          {grades
-            ? grades.map((grade: IFinalGrades, ind: number) => {
-                return (
-                  <tr className={ind % 2 ? 'tr__honest' : 'tr__odd'} key={ind}>
-                    <td className="subject_id">{ind + 1}. </td>
-                    <td className="subject_name">{grade.subject}</td>
-                    {grade.quarterGrades.map((mark: number | null, i: number) => {
-                      return (
-                        <td className={`subject_grade-${i + 1}`} key={i}>
-                          {mark}
-                        </td>
-                      );
-                    })}
-                    <td className="subject_finalGrade">{grade.finalGrade}</td>
-                  </tr>
-                );
-              })
-            : null}
+          {finalDiary &&
+            Object.keys(finalDiary).map((item, ind) => {
+              return (
+                <tr className={ind % 2 ? 'tr__honest' : 'tr__odd'} key={ind}>
+                  <td className="subject_id">{ind + 1}. </td>
+                  <td className="subject_name">{item}</td>
+                  {Object.keys(finalDiary[item]).map((quarter, i) => {
+                    return (
+                      <td key={i} className="subject_quarter">
+                        {finalDiary[item] && finalDiary[item][quarter]
+                          ? finalDiary[item][quarter].average
+                          : ''}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
