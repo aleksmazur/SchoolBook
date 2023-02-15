@@ -1,33 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setCurrentQuarter } from '../../reducers/quarterReducer';
-import { getQuarter } from '../../thunks/quarter';
-import { getFinalDiary } from '../../thunks/diary';
+import { useAppSelector } from '../../store/hooks';
 import './currentGrade.css';
 
 const CurrentGrades = () => {
   const finalGrade = useAppSelector((state) => state.diary.finalDiary);
-  const { quarter, currentQuarter } = useAppSelector((state) => state.quarter);
-  const { children } = useAppSelector((state) => state.userInfo.userInfo);
-  const idClass = useAppSelector((state) => state.classInfo.classInfo.id);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const today = new Date().getTime();
-    quarter.forEach((item) => {
-      const startDate = new Date(item.startDate).getTime();
-      const endDate = new Date(item.endDate).getTime();
-      if (today > startDate && today < endDate) {
-        dispatch(setCurrentQuarter(item.quarter));
-      }
-    });
-    dispatch(getQuarter());
-    if (children && idClass) {
-      const idPupil = children[0].id;
-      dispatch(getFinalDiary({ idPupil, idClass }));
-    }
-  }, [dispatch, children, idClass]);
+  const { currentQuarter } = useAppSelector((state) => state.quarter);
 
   return (
     <div className="currentGrades__table">
