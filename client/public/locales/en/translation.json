@@ -32,7 +32,9 @@
     },
     "diary": {
         "diaryTitle": "School diary",
-        "subscribe": "Subscribe"
+        "subscribe": "Subscribe",
+        "quarter": "quarter",
+        "lastPage": "Last Page"
     },
     "schedule": {
         "scheduleTitle": "Schedule"

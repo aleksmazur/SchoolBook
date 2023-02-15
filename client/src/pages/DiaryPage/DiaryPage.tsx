@@ -14,6 +14,9 @@ import { getSchedule } from '../../thunks/schedule';
 
 import './diary.css';
 
+const lastWeekBeforeHolidays = [44, 52, 12, 21];
+const firstWeekAfterHollidays = [35, 46, 14];
+
 const DiaryPage = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -23,30 +26,44 @@ const DiaryPage = () => {
   const { children, role } = useAppSelector((state) => state.userInfo.userInfo);
   const idClass = useAppSelector((state) => state.classInfo.classInfo.id);
   const { quarter, activeQuarter, currentQuarter } = useAppSelector((state) => state.quarter);
+  const [activeTab, setActiveTab] = useState(activeQuarter);
+  const [hiddenPrev, setHiddenPrev] = useState(false);
+  const [hiddenNext, setHiddenNext] = useState(false);
 
   const tabsList = [
-    { title: 'I четверть' },
-    { title: 'II четверть' },
-    { title: 'III четверть' },
-    { title: 'IV четверть' },
-    { title: 'Последняя страница' },
+    { title: `I ${t('diary.quarter')}` },
+    { title: `II ${t('diary.quarter')}` },
+    { title: `III ${t('diary.quarter')}` },
+    { title: `IV ${t('diary.quarter')}` },
+    { title: `${t('diary.lastPage')}` },
   ];
+
+  const setVisibleArrow = (week: number) => {
+    lastWeekBeforeHolidays.includes(week) ? setHiddenNext(true) : setHiddenNext(false);
+    firstWeekAfterHollidays.includes(week) ? setHiddenPrev(true) : setHiddenPrev(false);
+  };
 
   const setQuaterTab = (activeTab: number) => {
     let date = new Date();
     let currentWeek: number = getWeekNumber(date);
-    const current = quarter.filter((item) => item.quarter === activeTab)[0];
-    if (activeTab === currentQuarter) {
-    } else if (activeTab > currentQuarter) {
-      date = new Date(current.startDate);
-      currentWeek = getWeekNumber(date);
-    } else if (activeTab < currentQuarter) {
-      date = new Date(current.endDate);
-      currentWeek = getWeekNumber(date);
+    if (activeTab > quarter.length) {
+      console.log('последняя');
+    } else {
+      const current = quarter.filter((item) => item.quarter === activeTab)[0];
+      if (activeTab === currentQuarter) {
+      } else if (activeTab > currentQuarter) {
+        date = new Date(current.startDate);
+        currentWeek = getWeekNumber(date);
+      } else if (activeTab < currentQuarter) {
+        date = new Date(current.endDate);
+        currentWeek = getWeekNumber(date);
+      }
+      dispatch(setWeek(currentWeek));
+      dispatch(setYear(date.getFullYear()));
+      dispatch(setActiveQuarter(activeTab));
     }
-    dispatch(setWeek(currentWeek));
-    dispatch(setYear(date.getFullYear()));
-    dispatch(setActiveQuarter(activeTab));
+    setActiveTab(activeTab);
+    setVisibleArrow(currentWeek);
   };
 
   const openTab = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -65,9 +82,6 @@ const DiaryPage = () => {
         dispatch(setCurrentQuarter(item.quarter));
       }
     });
-  }, [quarter]);
-
-  useEffect(() => {
     if (idClass) {
       dispatch(getSchedule(idClass));
     }
@@ -109,7 +123,7 @@ const DiaryPage = () => {
       <div className="tab">
         {tabsList.map((tab, i) => (
           <button
-            className={`tablinks ${i === activeQuarter - 1 ? 'active' : ''}`}
+            className={`tablinks ${i === activeTab - 1 ? 'active' : ''}`}
             onClick={openTab}
             data-index={i + 1}
             key={i}
@@ -123,7 +137,10 @@ const DiaryPage = () => {
       ) : (
         <>
           <div className="week__control">
-            <div onClick={() => onChangeWeekPrev()} className="arrow">
+            <div
+              onClick={() => onChangeWeekPrev()}
+              className={`arrow ${hiddenPrev ? 'hidden' : ''}`}
+            >
               &#8592;
             </div>
             {startWeek && endWeek && !errorDiary && (
@@ -135,7 +152,10 @@ const DiaryPage = () => {
                 {new Date(endWeek).getFullYear()}
               </div>
             )}
-            <div onClick={() => onChangeWeekNext()} className="arrow">
+            <div
+              onClick={() => onChangeWeekNext()}
+              className={`arrow ${hiddenNext ? 'hidden' : ''}`}
+            >
               &#8594;
             </div>
           </div>

@@ -32,7 +32,9 @@
     },
     "diary": {
         "diaryTitle": "Дневник",
-        "subscribe": "Подписать"
+        "subscribe": "Подписать",
+        "quarter": "четверть",
+        "lastPage": "Последняя страница"
     },
     "schedule": {
         "scheduleTitle": "Расписание"
