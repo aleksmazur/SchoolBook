@@ -15,7 +15,7 @@ const GradesPage = () => {
   const tabsList = [
     { title: `${t('grades.currentGrades')}`, content: <CurrentGrades /> },
     { title: `${t('grades.finalGrades')}`, content: <FinalGrades /> },
-    { title: `${t('grades.rating')}`, content: '*Рейтинг класса*' },
+    /*     { title: `${t('grades.rating')}`, content: '*Рейтинг класса*' }, */
   ];
 
   const [active, setActive] = useState(0);

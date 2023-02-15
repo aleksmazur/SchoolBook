@@ -1,15 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setCurrentQuarter } from '../../reducers/quarterReducer';
+import { getQuarter } from '../../thunks/quarter';
+import { getFinalDiary } from '../../thunks/diary';
 import './currentGrade.css';
 
-type IGrade = { subject: string; grades: number[] };
-
-const grades = [
-  { subject: 'Математика', grades: [5, 4, 4] },
-  { subject: 'Русский язык', grades: [3, 4, 5, 3, 5] },
-  { subject: 'Иностранный язык', grades: [5, 5, 5, 4] },
-  { subject: 'Физкультура', grades: [5, 5, 5] },
-];
-
 const CurrentGrades = () => {
+  const finalGrade = useAppSelector((state) => state.diary.finalDiary);
+  const { quarter, currentQuarter } = useAppSelector((state) => state.quarter);
+  const { children } = useAppSelector((state) => state.userInfo.userInfo);
+  const idClass = useAppSelector((state) => state.classInfo.classInfo.id);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const today = new Date().getTime();
+    quarter.forEach((item) => {
+      const startDate = new Date(item.startDate).getTime();
+      const endDate = new Date(item.endDate).getTime();
+      if (today > startDate && today < endDate) {
+        dispatch(setCurrentQuarter(item.quarter));
+      }
+    });
+    dispatch(getQuarter());
+    if (children && idClass) {
+      const idPupil = children[0].id;
+      dispatch(getFinalDiary({ idPupil, idClass }));
+    }
+  }, [dispatch, children, idClass]);
+
   return (
     <div className="currentGrades__table">
       <table>
@@ -22,20 +41,25 @@ const CurrentGrades = () => {
           </tr>
         </thead>
         <tbody>
-          {grades
-            ? grades.map((grade: IGrade, ind: number) => {
-                return (
-                  <tr className={ind % 2 ? 'tr__honest' : 'tr__odd'} key={ind}>
-                    <td className="subject_id">{ind + 1}. </td>
-                    <td className="subject_name">{grade.subject}</td>
-                    <td className="subject_grade">{grade.grades.join(', ')}</td>
-                    <td className="subject_grade-average">
-                      {(grade.grades.reduce((a, b) => a + b) / grade.grades.length).toFixed(1)}
-                    </td>
-                  </tr>
-                );
-              })
-            : null}
+          {finalGrade &&
+            Object.keys(finalGrade).map((item, ind) => {
+              return (
+                <tr className={ind % 2 ? 'tr__honest' : 'tr__odd'} key={ind}>
+                  <td className="subject_id">{ind + 1}. </td>
+                  <td className="subject_name">{item}</td>
+                  <td className="subject_grade">
+                    {finalGrade[item] && finalGrade[item][currentQuarter - 1]
+                      ? finalGrade[item][currentQuarter - 1].grades.join(', ')
+                      : ''}
+                  </td>
+                  <td className="subject_grade-average">
+                    {finalGrade[item] && finalGrade[item][currentQuarter - 1]
+                      ? finalGrade[item][currentQuarter - 1].average
+                      : ''}
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
