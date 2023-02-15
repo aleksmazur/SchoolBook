@@ -19,6 +19,7 @@ export class SubjectsController {
   @ApiOperation({ summary: "Get all subjects" })
   @ApiResponse({ status: 200, type: [Subject] })
   @ApiQuery({ name: "class", required: false })
+  @ApiQuery({ name: "childrenid", required: false })
   @Get()
   getAll(
     @Query("class") classid?: number,
