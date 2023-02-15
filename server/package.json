@@ -23,7 +23,7 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
-    "@nestjs/jwt": "^10.0.1",
+    "@nestjs/jwt": "^10.0.2",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/sequelize": "^9.0.0",
     "@nestjs/serve-static": "^3.0.1",
