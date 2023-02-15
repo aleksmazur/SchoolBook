@@ -15,7 +15,7 @@ import { getSchedule } from '../../thunks/schedule';
 import './diary.css';
 
 const lastWeekBeforeHolidays = [44, 52, 12, 21];
-const firstWeekAfterHollidays = [35, 46, 14];
+const firstWeekAfterHollidays = [35, 46, 14, 2];
 
 const DiaryPage = () => {
   const { t } = useTranslation();
@@ -36,6 +36,11 @@ const DiaryPage = () => {
     { title: `III ${t('diary.quarter')}` },
     { title: `IV ${t('diary.quarter')}` },
   ];
+
+  useEffect(() => {
+    console.log('useEffect: ');
+    setVisibleArrow(week);
+  }, [week]);
 
   const setVisibleArrow = (week: number) => {
     lastWeekBeforeHolidays.includes(week) ? setHiddenNext(true) : setHiddenNext(false);
