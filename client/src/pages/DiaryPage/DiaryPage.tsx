@@ -38,7 +38,6 @@ const DiaryPage = () => {
   ];
 
   useEffect(() => {
-    console.log('useEffect: ');
     setVisibleArrow(week);
   }, [week]);
 
