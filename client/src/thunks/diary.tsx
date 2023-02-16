@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_URL } from '../constants/baseUrl';
+import { TOKEN } from '../constants/token';
 
 export const getDiary = createAsyncThunk(
   'diary/get',
@@ -9,6 +10,9 @@ export const getDiary = createAsyncThunk(
         `${BASE_URL}/diary/${params.idClass}/${params.idPupil}?week=${params.week}&year=${params.year}`,
         {
           method: 'GET',
+          headers: {
+            Authorization: `Bearer ${TOKEN()}`,
+          },
         }
       );
       if (response.status === 404) {
@@ -31,6 +35,9 @@ export const getFinalDiary = createAsyncThunk(
         `${BASE_URL}/grades/final?class=${params.idClass}&children=${params.idPupil}`,
         {
           method: 'GET',
+          headers: {
+            Authorization: `Bearer ${TOKEN()}`,
+          },
         }
       );
       if (response.status === 404) {
