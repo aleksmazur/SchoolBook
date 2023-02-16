@@ -3,9 +3,10 @@ import './inputGrade.css';
 
 type IProps = {
   setIsInput: Dispatch<SetStateAction<boolean>>;
+  idPupil: number;
 };
 
-export const InputGrade = ({ setIsInput }: IProps) => {
+export const InputGrade = ({ setIsInput, idPupil }: IProps) => {
   const [valueGrade, setNewGrade] = useState<string>('');
 
   const updateGrade = async () => {
@@ -29,7 +30,7 @@ export const InputGrade = ({ setIsInput }: IProps) => {
         type="text"
         onChange={(e) => handleChange(e)}
         value={valueGrade}
-        /* data-idlesson={idLesson} */
+        data-idpupil={idPupil}
       />
       <div className="apply__icon" onClick={updateGrade}></div>
       <div className="cancel__icon" onClick={() => setIsInput(false)}></div>
