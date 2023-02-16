@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 import { ISubjects } from '../../reducers/subjectsReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -6,27 +7,16 @@ import HomeWorkItem from '../HomeWorkItem/HomeWorkItem';
 import Preloader from '../Preloader/Preloader';
 
 export type IHomeWork = {
-  nameLesson: string;
-  quarter: number;
-  idClass: number | null;
+  filtersSubject: ISubjects[];
 };
 
-const HomeWorkInJournal = ({ nameLesson, quarter, idClass }: IHomeWork) => {
+const HomeWorkInJournal = ({ filtersSubject }: IHomeWork) => {
   const dispatch = useAppDispatch();
-  const { subjects, isLoader } = useAppSelector((state) => state.subjects);
-  const [filtersSubject, setFiltersSubject] = useState<ISubjects[]>([]);
+  const { isLoader } = useAppSelector((state) => state.subjects);
 
   useEffect(() => {
     dispatch(getSubject());
   }, [dispatch]);
-
-  useEffect(() => {
-    const res = subjects
-      .filter((item) => item.name === nameLesson)
-      .filter((item) => item.quarter.quarter === quarter)
-      .filter((item) => item.classId === idClass);
-    setFiltersSubject(res);
-  }, [subjects, nameLesson, quarter, idClass]);
 
   return (
     <div className="homeWorkList__table">

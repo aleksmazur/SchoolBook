@@ -1,21 +1,21 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import './inputGrade.css';
 
 type IProps = {
   setIsInput: Dispatch<SetStateAction<boolean>>;
+  idLesson: number;
 };
 
-export const InputGrade = ({ setIsInput }: IProps) => {
+export const InputHomeWork = ({ setIsInput, idLesson }: IProps) => {
   const [valueGrade, setNewGrade] = useState<string>('');
 
-  const updateGrade = async () => {
-    /*  const newGrade = {
-      value: valueGrade,
+  const updateHomeWork = async () => {
+    const newHomeWork = {
+      /* value: valueGrade,
       childrenId: 1,
-      /subjectId: idLesson, 
-    };*/
+      subjectId: idLesson, */
+    };
     setIsInput(false);
-    console.log('оценка обновлена');
+    console.log('домашка обновлена');
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,9 +29,9 @@ export const InputGrade = ({ setIsInput }: IProps) => {
         type="text"
         onChange={(e) => handleChange(e)}
         value={valueGrade}
-        /* data-idlesson={idLesson} */
+        data-idlesson={idLesson}
       />
-      <div className="apply__icon" onClick={updateGrade}></div>
+      <div className="apply__icon" onClick={updateHomeWork}></div>
       <div className="cancel__icon" onClick={() => setIsInput(false)}></div>
     </div>
   );

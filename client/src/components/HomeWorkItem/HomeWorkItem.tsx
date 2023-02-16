@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { InputGrade } from '../InputGrade/InputGrade';
+import { InputHomeWork } from '../InputHomeWork/InputHomeWork';
+import { getDate } from '../PupilsInJournal/PupilsInJornal';
 import './homeWorkItem.css';
 
 type IPropsHomeWork = {
@@ -14,11 +15,11 @@ const HomeWorkItem = ({ id, date, homework }: IPropsHomeWork) => {
 
   return (
     <tr key={id} className="homeWork__item">
-      <td>{date.substring(0, 10)}</td>
+      <td>{getDate(date)}</td>
       <td>{homework}</td>
       {isInput ? (
         <td className="cell__grade-active">
-          <InputGrade setIsInput={setIsInput} />
+          <InputHomeWork setIsInput={setIsInput} idLesson={id} />
         </td>
       ) : (
         <td className="cell__grade" onClick={() => setIsInput(true)}>
