@@ -67,8 +67,16 @@ const JournalPage = () => {
         ))}
       </div>
 
-      <PupilsInJornal />
-      <HomeWorkInJournal nameLesson={lessons[activeLesson]} quarter={activeQuarter + 1} />
+      <PupilsInJornal
+        nameLesson={lessons[activeLesson]}
+        quarter={activeQuarter + 1}
+        idClass={idClass}
+      />
+      <HomeWorkInJournal
+        nameLesson={lessons[activeLesson]}
+        quarter={activeQuarter + 1}
+        idClass={idClass}
+      />
     </>
   );
 };
