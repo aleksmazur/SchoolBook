@@ -57,5 +57,11 @@
         "currentGrades": "Текущие оценки",
         "finalGrades": "Итоговые  оценки",
         "rating": "Рейтинг класса"
+    },
+    "profile": {
+        "profileTitle": "Профиль пользователя",
+        "teacher": "Учитель",
+        "father": "Отец",
+        "mother": "Мать"
     }
   }
