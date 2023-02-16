@@ -3,6 +3,7 @@ import './finalGrades.css';
 
 const FinalGrades = () => {
   const { finalDiary } = useAppSelector((state) => state.diary);
+  const { currentQuarter } = useAppSelector((state) => state.quarter);
   return (
     <div className="finalGrades__table">
       <table>
@@ -27,8 +28,11 @@ const FinalGrades = () => {
                   {Object.keys(finalDiary[item]).map((quarter, i) => {
                     return (
                       <td key={i} className="subject_quarter">
-                        {finalDiary[item] && finalDiary[item][quarter]
-                          ? finalDiary[item][quarter].average
+                        {finalDiary[item] &&
+                        finalDiary[item][quarter] &&
+                        finalDiary[item][quarter].average &&
+                        +quarter < currentQuarter
+                          ? finalDiary[item][quarter].average.toFixed()
                           : ''}
                       </td>
                     );

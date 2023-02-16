@@ -5,14 +5,19 @@ import './diaryDay.css';
 type IDiaryProps = {
   lessons: IDiaryDay[];
   date: string;
+  index: number;
 };
 
-const DiaryDay = ({ lessons, date }: IDiaryProps) => {
+const DiaryDay = ({ lessons, date, index }: IDiaryProps) => {
   const dayFromDate = new Date(date).getDay();
   const today = new Date(Date.now()).toLocaleDateString('ru-RU').split('.').reverse().join('.');
 
   return (
-    <div className={date === today ? 'diary__item current' : 'diary__item'} data-day={date}>
+    <div
+      className={date === today ? 'diary__item current' : 'diary__item'}
+      data-day={date}
+      data-greed={index}
+    >
       <table>
         <thead>
           <tr>
@@ -28,7 +33,7 @@ const DiaryDay = ({ lessons, date }: IDiaryProps) => {
         <tbody>
           {lessons.map((lesson, ind) => {
             return (
-              <tr className={ind % 2 ? 'lesson__odd' : 'lesson__honest'} key={`${ind}_${lesson}`}>
+              <tr key={`${ind}_${lesson}`}>
                 <td className="num">
                   {ind + 1}. {lesson.name}
                 </td>
