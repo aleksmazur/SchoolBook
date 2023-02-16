@@ -4,9 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import { isMobile } from 'react-device-detect';
-import { getChildrenByParent, getUserById } from '../../thunks/user';
 import './sideBar.css';
 import { getClassByID, getClassByIDTeacher } from '../../thunks/classes';
+import { getChildrenByParent, getUserById } from '../../thunks/user';
 
 const SideBar = () => {
   const { t } = useTranslation();
