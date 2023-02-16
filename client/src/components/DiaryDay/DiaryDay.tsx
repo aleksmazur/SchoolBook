@@ -4,16 +4,15 @@ import './diaryDay.css';
 
 type IDiaryProps = {
   lessons: IDiaryDay[];
-  index: number;
   date: string;
 };
 
-const DiaryDay = ({ lessons, index, date }: IDiaryProps) => {
+const DiaryDay = ({ lessons, date }: IDiaryProps) => {
   const dayFromDate = new Date(date).getDay();
-  const todayDay = new Date(Date.now()).getDay() - 1;
+  const today = new Date(Date.now()).toLocaleDateString('ru-RU').split('.').reverse().join('.');
 
   return (
-    <div className={index === todayDay ? 'diary__item current' : 'diary__item'} data-day={index}>
+    <div className={date === today ? 'diary__item current' : 'diary__item'} data-day={date}>
       <table>
         <thead>
           <tr>

@@ -30,6 +30,7 @@ type IUserInfo = {
   role: string | null;
   children: IChildren[] | null;
   profilePic: string | null;
+  gender: string | null;
 };
 
 export type IUserState = {
@@ -51,6 +52,7 @@ const initialState: IUserState = {
     role: null,
     children: null,
     profilePic: null,
+    gender: null,
   },
   errorUser: null,
 };
@@ -90,6 +92,7 @@ const userReducer = createSlice({
       })
       .addCase(getUserById.fulfilled, (state, action) => {
         state.userInfo.profilePic = action.payload.profilePic;
+        state.userInfo.gender = action.payload.gender;
       });
     // .addCase(authUser.rejected, (state, action) => {
     //error
