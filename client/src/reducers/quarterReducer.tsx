@@ -16,7 +16,7 @@ export type IQuarterState = {
 };
 
 const initialState: IQuarterState = {
-  currentQuarter: 1,
+  currentQuarter: 3,
   activeQuarter: 3,
   quarter: [],
 };
