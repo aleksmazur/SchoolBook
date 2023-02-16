@@ -12,6 +12,7 @@
     padding: 5px;
     background-color: white;
     cursor: pointer;
+    width: 90px;
 }
 
 .input__grade {

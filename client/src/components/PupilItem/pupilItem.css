@@ -39,4 +39,27 @@ table tbody tr td:first-child {
 }
 table tbody tr td:last-child {
 	border-radius: 0 8px 8px 0;
+	width: 90px;
+}
+.cell__grade {
+	display: flex;
+	justify-content: space-between;
+	cursor: pointer;
+	position: relative;
+	text-align: center;
+}
+.cell__grade-active {
+	padding: 0;
+}
+.cell__grade div{
+	background-image: url('./../../assets/png/pen.png');
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+	position: absolute;
+    right: 0;
+    top: 5px;
+}
+.cell__grade span {
+	margin: 10px;
 }

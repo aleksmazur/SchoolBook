@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import HomeWorkInJournal from '../../components/HomeWorkInJournal/HomeWorkInJournal';
 import PupilsInJornal from '../../components/PupilsInJournal/PupilsInJornal';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getSchedule } from '../../thunks/schedule';
@@ -67,6 +68,7 @@ const JournalPage = () => {
       </div>
 
       <PupilsInJornal />
+      <HomeWorkInJournal nameLesson={lessons[activeLesson]} quarter={activeQuarter + 1} />
     </>
   );
 };
