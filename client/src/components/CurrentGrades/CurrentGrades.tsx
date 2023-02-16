@@ -24,13 +24,13 @@ const CurrentGrades = () => {
                   <td className="subject_id">{ind + 1}. </td>
                   <td className="subject_name">{item}</td>
                   <td className="subject_grade">
-                    {finalGrade[item] && finalGrade[item][currentQuarter - 1]
-                      ? finalGrade[item][currentQuarter - 1].grades.join(', ')
+                    {finalGrade[item] && finalGrade[item][currentQuarter]
+                      ? finalGrade[item][currentQuarter].grades.join(', ')
                       : ''}
                   </td>
                   <td className="subject_grade-average">
-                    {finalGrade[item] && finalGrade[item][currentQuarter - 1]
-                      ? finalGrade[item][currentQuarter - 1].average
+                    {finalGrade[item] && finalGrade[item][currentQuarter]
+                      ? finalGrade[item][currentQuarter].average
                       : ''}
                   </td>
                 </tr>
