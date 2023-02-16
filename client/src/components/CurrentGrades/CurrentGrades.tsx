@@ -29,8 +29,10 @@ const CurrentGrades = () => {
                       : ''}
                   </td>
                   <td className="subject_grade-average">
-                    {finalGrade[item] && finalGrade[item][currentQuarter]
-                      ? finalGrade[item][currentQuarter].average
+                    {finalGrade[item] &&
+                    finalGrade[item][currentQuarter] &&
+                    finalGrade[item][currentQuarter].average
+                      ? finalGrade[item][currentQuarter].average.toFixed(2)
                       : ''}
                   </td>
                 </tr>

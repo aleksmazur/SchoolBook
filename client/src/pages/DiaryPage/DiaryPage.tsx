@@ -163,7 +163,7 @@ const DiaryPage = () => {
             <div className="diary__list">
               {diary &&
                 Object.keys(diary).map((date, index) => (
-                  <DiaryDay lessons={diary[date]} key={index} date={date}></DiaryDay>
+                  <DiaryDay lessons={diary[date]} key={index} date={date} index={index}></DiaryDay>
                 ))}
             </div>
           ) : (
