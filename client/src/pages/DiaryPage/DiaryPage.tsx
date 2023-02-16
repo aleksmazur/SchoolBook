@@ -15,7 +15,7 @@ import { getSchedule } from '../../thunks/schedule';
 import './diary.css';
 
 const lastWeekBeforeHolidays = [44, 52, 12, 21];
-const firstWeekAfterHollidays = [35, 46, 14, 2];
+const firstWeekAfterHolidays = [35, 46, 14, 2];
 
 const DiaryPage = () => {
   const { t } = useTranslation();
@@ -43,7 +43,7 @@ const DiaryPage = () => {
 
   const setVisibleArrow = (week: number) => {
     lastWeekBeforeHolidays.includes(week) ? setHiddenNext(true) : setHiddenNext(false);
-    firstWeekAfterHollidays.includes(week) ? setHiddenPrev(true) : setHiddenPrev(false);
+    firstWeekAfterHolidays.includes(week) ? setHiddenPrev(true) : setHiddenPrev(false);
   };
 
   const setQuaterTab = (activeTab: number) => {
@@ -52,13 +52,13 @@ const DiaryPage = () => {
 
     const current = quarter.filter((item) => item.quarter === activeTab)[0];
     if (activeTab === currentQuarter) {
+      date = new Date();
     } else if (activeTab > currentQuarter) {
       date = new Date(current.startDate);
-      currentWeek = getWeekNumber(date);
     } else if (activeTab < currentQuarter) {
       date = new Date(current.endDate);
-      currentWeek = getWeekNumber(date);
     }
+    currentWeek = getWeekNumber(date);
     dispatch(setWeek(currentWeek));
     dispatch(setYear(date.getFullYear()));
     dispatch(setActiveQuarter(activeTab));
@@ -78,7 +78,6 @@ const DiaryPage = () => {
       const startDate = new Date(item.startDate).getTime();
       const endDate = new Date(item.endDate).getTime();
       if (today > startDate && today < endDate) {
-        dispatch(setActiveQuarter(item.quarter));
         dispatch(setCurrentQuarter(item.quarter));
       }
     });

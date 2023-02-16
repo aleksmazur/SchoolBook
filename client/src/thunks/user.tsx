@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_URL } from '../constants/baseUrl';
+import { TOKEN } from '../constants/token';
 
 export interface ILogin {
   username: string;
@@ -32,6 +33,9 @@ export const getChildrenByParent = createAsyncThunk('user/getChildren', async (i
   try {
     const response = await fetch(`${BASE_URL}/users/childrens/${id}`, {
       method: 'GET',
+      headers: {
+        Authorization: `Bearer ${TOKEN()}`,
+      },
     });
     if (response.status === 404) {
       throw new Error('Childrens not found');
@@ -47,6 +51,9 @@ export const getUserById = createAsyncThunk('user/getUserById', async (id: strin
   try {
     const response = await fetch(`${BASE_URL}/users/${id}`, {
       method: 'GET',
+      headers: {
+        Authorization: `Bearer ${TOKEN()}`,
+      },
     });
     if (response.status === 404) {
       throw new Error('User not found');
@@ -62,6 +69,9 @@ export const getChildrenById = createAsyncThunk('user/getChildrenById', async (i
   try {
     const response = await fetch(`${BASE_URL}/childrens/${id}`, {
       method: 'GET',
+      headers: {
+        Authorization: `Bearer ${TOKEN()}`,
+      },
     });
     if (response.status === 404) {
       throw new Error('User not found');
