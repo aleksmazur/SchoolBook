@@ -57,5 +57,11 @@
         "currentGrades": "Current grades",
         "finalGrades": "Final grades",
         "rating": "Class rating"
+    },
+    "profile": {
+        "profileTitle": "Users profile",
+        "teacher": "Teacher",
+        "father": "Father",
+        "mother": "Mother"
     }
   }
