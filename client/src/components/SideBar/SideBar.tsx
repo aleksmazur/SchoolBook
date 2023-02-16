@@ -59,8 +59,6 @@ const SideBar = () => {
       const currentTargetTab = e.currentTarget as HTMLLIElement;
       const contentArea = currentTargetTab.parentElement?.lastChild as HTMLLIElement;
       contentArea.classList.remove('content-area-none');
-      console.log(currentTargetTab);
-      console.log(contentArea);
     }
   };
 

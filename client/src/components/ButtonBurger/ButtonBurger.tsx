@@ -10,7 +10,6 @@ const ButtonBurger = ({ isOpen, setActiveSideBar }: IBurger) => {
   const openMenu = (e: React.MouseEvent<HTMLElement>) => {
     const currentEl = e.currentTarget as HTMLLIElement;
     const contentArea = currentEl.parentElement?.lastChild as HTMLLIElement;
-    console.log(contentArea);
     if (isOpen) {
       contentArea.classList.remove('content-area-none');
     } else {

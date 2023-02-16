@@ -75,7 +75,6 @@ const classReducer = createSlice({
         // preloader
       })
       .addCase(getClassByIDTeacher.fulfilled, (state, action) => {
-        // удалить [0]
         state.classInfo = action.payload[0];
       })
       .addCase(getChildrenById.pending, (state) => {

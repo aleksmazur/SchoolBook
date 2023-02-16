@@ -22,3 +22,25 @@ export const getDiary = createAsyncThunk(
     }
   }
 );
+
+export const getFinalDiary = createAsyncThunk(
+  'finaldiary/get',
+  async (params: { idPupil: number; idClass: number }) => {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/grades/final?class=${params.idClass}&children=${params.idPupil}`,
+        {
+          method: 'GET',
+        }
+      );
+      if (response.status === 404) {
+        throw new Error('Diary not Found');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  }
+);

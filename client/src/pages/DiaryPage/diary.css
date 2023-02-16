@@ -43,6 +43,10 @@
     cursor: pointer;
 }
 
+.arrow.hidden {
+    display: none;
+}
+
 .diary__item thead tr th:last-child {
     width: 70px;
 }

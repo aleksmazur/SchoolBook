@@ -28,9 +28,9 @@ export const getWeekDay = (dayId: number) => {
 
 export const getMonth = (monthId: number) => monthArray[monthId];
 
-export const getWeekNumber = () => {
-  const currentDate = new Date();
-  const startDate = new Date(currentDate.getFullYear(), 0, 1);
-  const days = Math.floor((currentDate.getTime() - startDate.getTime()) / 86400000 + 1);
+export const getWeekNumber = (today: Date) => {
+  // const currentDate = new Date();
+  const startDate = new Date(today.getFullYear(), 0, 1);
+  const days = Math.floor((today.getTime() - startDate.getTime()) / 86400000 + 1);
   return Math.ceil(days / 7);
 };
