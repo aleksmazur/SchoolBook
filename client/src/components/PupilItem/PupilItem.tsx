@@ -29,7 +29,7 @@ const PupilItem = ({ num, id, fullName, birthday, adress, diary }: IPropsPupil) 
       {adress && <td className="pupil__item_adress">{adress}</td>}
       {isInput ? (
         <td className="cell__grade-active">
-          <InputGrade setIsInput={setIsInput} /* idLesson={idLesson} */ />
+          <InputGrade setIsInput={setIsInput} idPupil={id} />
         </td>
       ) : (
         diary && (
