@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { InputGrade } from '../InputGrade/InputGrade';
 import moment from 'moment';
+import { InputGrade } from '../InputGrade/InputGrade';
 import './pupilItem.css';
 
 type IPropsPupil = {
@@ -29,11 +29,11 @@ const PupilItem = ({ num, id, fullName, birthday, adress, diary }: IPropsPupil) 
       {adress && <td className="pupil__item_adress">{adress}</td>}
       {isInput ? (
         <td className="cell__grade-active">
-          <InputGrade setIsInput={setIsInput} />
+          <InputGrade setIsInput={setIsInput} /* idLesson={idLesson} */ />
         </td>
       ) : (
         diary && (
-          <td className="cell__grade" onClick={() => setIsInput(true)}>
+          <td className="cell__grade" onClick={() => setIsInput(true)} data-idpupil={id}>
             <span>4</span>
             <div></div>
           </td>
