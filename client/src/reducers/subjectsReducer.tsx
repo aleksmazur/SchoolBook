@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from '@reduxjs/toolkit';
 import { getSubject } from '../thunks/subject';
 import { IClass } from './classReducer';
@@ -45,7 +44,7 @@ const subjectsReducer = createSlice({
         state.isLoader = true;
       })
       .addCase(getSubject.fulfilled, (state, action) => {
-        console.log('action: ', action);
+        console.log('getSubject: ', action.payload);
         state.subjects = action.payload;
       });
   },

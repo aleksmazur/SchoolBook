@@ -1,6 +1,5 @@
 import { IChildren } from '../../reducers/userReducer';
 import { useAppSelector } from '../../store/hooks';
-import { IHomeWork } from '../HomeWorkInJournal/HomeWorkInJournal';
 import PupilItemInJournal from '../PupilItemInJournal/PupilteminJournal';
 
 export const getDate = (date: string): string => {
@@ -15,9 +14,9 @@ export const getDate = (date: string): string => {
   return `${day}.${month}`;
 };
 
-const PupilsInJornal = ({ filtersSubject }: IHomeWork) => {
+const PupilsInJornal = () => {
   const childrens = useAppSelector((state) => state.classInfo.classInfo.childrens);
-  //название предмета, четверть, id класса + сортировка по дате
+  const subjects = useAppSelector((state) => state.subjects.subjects);
 
   return (
     <div className="pupilsList__table">
@@ -26,24 +25,19 @@ const PupilsInJornal = ({ filtersSubject }: IHomeWork) => {
           <tr>
             <th></th>
             <th>ФИО</th>
-            {filtersSubject.map((sub, ind) => (
-              <th key={ind} data-idlesson={sub.id}>
-                {getDate(sub.date)}
-              </th>
-            ))}
+            {subjects &&
+              subjects.map((sub, ind) => (
+                <th key={ind} data-idlesson={sub.id}>
+                  {getDate(sub.date)}
+                </th>
+              ))}
           </tr>
         </thead>
         <tbody>
           {childrens
             ? childrens.map((pupil: IChildren, ind: number) => {
                 return (
-                  <PupilItemInJournal
-                    key={ind}
-                    num={ind}
-                    id={pupil.id}
-                    fullName={pupil.fullName}
-                    filtersSubject={filtersSubject}
-                  />
+                  <PupilItemInJournal key={ind} num={ind} id={pupil.id} fullName={pupil.fullName} />
                 );
               })
             : null}
