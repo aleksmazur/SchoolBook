@@ -90,4 +90,32 @@ export class SubjectsService {
       return { ...subject.toJSON(), grade: grade ? grade.value : null };
     });
   }
+
+  async sortSubjects(classId: number, name: string, quarterValue: number) {
+    const quarterId = await this.quartersService.getQuarterByValue(
+      quarterValue,
+    );
+    const subjects = await this.subjectsRepository.findAll({
+      where: {
+        classId,
+        name,
+        quarterId: quarterId.id,
+      },
+      include: [
+        {
+          model: Quarter,
+        },
+      ],
+      order: [["date", "ASC"]],
+    });
+
+    if (!subjects.length) {
+      throw new HttpException(
+        `Subjects by class ID '${classId}', name '${name}' and quarter '${quarterValue}' not found!`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return subjects;
+  }
 }

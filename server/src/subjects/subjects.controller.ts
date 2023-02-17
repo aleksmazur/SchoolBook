@@ -20,11 +20,18 @@ export class SubjectsController {
   @ApiResponse({ status: 200, type: [Subject] })
   @ApiQuery({ name: "class", required: false })
   @ApiQuery({ name: "childrenid", required: false })
+  @ApiQuery({ name: "name", required: false })
+  @ApiQuery({ name: "quarter", required: false })
   @Get()
   getAll(
     @Query("class") classid?: number,
     @Query("childrenid") childrenid?: number,
+    @Query("name") name?: string,
+    @Query("quarter") quarter?: number,
   ) {
+    if (classid && name && quarter) {
+      return this.subjectsService.sortSubjects(classid, name, quarter);
+    }
     if (classid && childrenid) {
       return this.subjectsService.findByChildrenClass(classid, childrenid);
     }
