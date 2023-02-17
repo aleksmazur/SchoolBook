@@ -4,3 +4,30 @@
 .homeWork__item .grade__wrapper {
     width: 100%;
 }
+
+.cell__homework {
+    position: relative;
+}
+
+.cell__homework div {
+    width: 300px;
+}
+
+.homeWork__item td {
+    width: 5%;
+}
+
+.cell__homework {
+    width: 80% !important;
+}
+
+.cell__homework div:last-child {
+    background-image: url('./../../assets/png/pen.png');
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+	position: absolute;
+    right: 0;
+    top: 5px;
+    opacity: 0.7;
+}

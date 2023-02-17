@@ -44,7 +44,6 @@ const subjectsReducer = createSlice({
         state.isLoader = true;
       })
       .addCase(getSubject.fulfilled, (state, action) => {
-        console.log('getSubject: ', action.payload);
         state.subjects = action.payload;
       });
   },

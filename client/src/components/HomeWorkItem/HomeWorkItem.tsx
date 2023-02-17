@@ -16,13 +16,13 @@ const HomeWorkItem = ({ id, date, homework }: IPropsHomeWork) => {
   return (
     <tr key={id} className="homeWork__item">
       <td>{getDate(date)}</td>
-      <td>{homework}</td>
       {isInput ? (
         <td className="cell__grade-active">
-          <InputHomeWork setIsInput={setIsInput} idLesson={id} />
+          <InputHomeWork setIsInput={setIsInput} idLesson={id} homeWork={homework} />
         </td>
       ) : (
-        <td className="cell__grade" onClick={() => setIsInput(true)}>
+        <td className="cell__homework" onClick={() => setIsInput(true)}>
+          <div>{homework}</div>
           <div></div>
         </td>
       )}
