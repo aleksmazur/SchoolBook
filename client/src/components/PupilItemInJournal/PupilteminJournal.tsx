@@ -10,7 +10,7 @@ type IPropsPupil = {
   filtersSubject: ISubjects[];
 };
 
-const PupilItemInJournal = ({ num, id, fullName, filtersSubject }: IPropsPupil) => {
+const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
   const navigate = useNavigate();
   const [isInput, setIsInput] = useState(false);
 

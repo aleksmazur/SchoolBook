@@ -24,7 +24,7 @@ const PupilsInJornal = ({ filtersSubject }: IHomeWork) => {
       <table>
         <thead>
           <tr>
-            <th>Даты</th>
+            <th></th>
             <th>ФИО</th>
             {filtersSubject.map((sub, ind) => (
               <th key={ind} data-idlesson={sub.id}>
