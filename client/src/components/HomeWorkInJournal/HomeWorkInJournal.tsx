@@ -1,22 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from 'react';
-import { ISubjects } from '../../reducers/subjectsReducer';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getSubject } from '../../thunks/subject';
+import { useAppSelector } from '../../store/hooks';
 import HomeWorkItem from '../HomeWorkItem/HomeWorkItem';
 import Preloader from '../Preloader/Preloader';
 
-export type IHomeWork = {
-  filtersSubject: ISubjects[];
-};
-
-const HomeWorkInJournal = ({ filtersSubject }: IHomeWork) => {
-  const dispatch = useAppDispatch();
-  const { isLoader } = useAppSelector((state) => state.subjects);
-
-  useEffect(() => {
-    dispatch(getSubject());
-  }, [dispatch]);
+const HomeWorkInJournal = () => {
+  const { isLoader, subjects } = useAppSelector((state) => state.subjects);
 
   return (
     <div className="homeWorkList__table">
@@ -36,8 +23,8 @@ const HomeWorkInJournal = ({ filtersSubject }: IHomeWork) => {
               </td>
             </tr>
           ) : (
-            filtersSubject &&
-            filtersSubject.map((subject, ind) => {
+            subjects &&
+            subjects.map((subject, ind) => {
               return (
                 <HomeWorkItem
                   key={subject.id}

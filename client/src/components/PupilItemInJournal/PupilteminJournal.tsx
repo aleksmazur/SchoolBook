@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { InputGrade } from '../InputGrade/InputGrade';
-import { ISubjects } from '../../reducers/subjectsReducer';
+import { useAppSelector } from '../../store/hooks';
 
 type IPropsPupil = {
   num: number;
   id: number;
   fullName: string;
-  filtersSubject: ISubjects[];
 };
 
 const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
   const navigate = useNavigate();
   const [isInput, setIsInput] = useState(false);
+  const subjects = useAppSelector((state) => state.subjects.subjects);
 
   return (
     <tr>
@@ -22,11 +22,17 @@ const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
       </td>
       {isInput ? (
         <td className="cell__grade-active">
-          <InputGrade setIsInput={setIsInput} idPupil={id} />
+          {subjects && (
+            <InputGrade setIsInput={setIsInput} idPupil={id} idLesson={subjects[num].id} />
+          )}
         </td>
       ) : (
         <td className="cell__grade" onClick={() => setIsInput(true)} data-idpupil={id}>
-          <span>4</span>
+          <span>
+            {subjects && subjects[num] && subjects[num].grades && subjects[num].grades[0]
+              ? subjects[num].grades[0].value
+              : ''}
+          </span>
           <div></div>
         </td>
       )}

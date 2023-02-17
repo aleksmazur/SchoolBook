@@ -4,17 +4,18 @@ import './inputGrade.css';
 type IProps = {
   setIsInput: Dispatch<SetStateAction<boolean>>;
   idPupil: number;
+  idLesson: number;
 };
 
-export const InputGrade = ({ setIsInput, idPupil }: IProps) => {
+export const InputGrade = ({ setIsInput, idPupil, idLesson }: IProps) => {
   const [valueGrade, setNewGrade] = useState<string>('');
 
   const updateGrade = async () => {
-    /*  const newGrade = {
+    /* const newGrade = {
       value: valueGrade,
       childrenId: 1,
-      /subjectId: idLesson, 
-    };*/
+      subjectId: idLesson,
+    }; */
     setIsInput(false);
     console.log('оценка обновлена');
   };
@@ -30,7 +31,9 @@ export const InputGrade = ({ setIsInput, idPupil }: IProps) => {
         type="text"
         onChange={(e) => handleChange(e)}
         value={valueGrade}
+        placeholder={valueGrade}
         data-idpupil={idPupil}
+        data-idlesson={idLesson}
       />
       <div className="apply__icon" onClick={updateGrade}></div>
       <div className="cancel__icon" onClick={() => setIsInput(false)}></div>
