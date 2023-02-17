@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import HomeWorkInJournal from '../../components/HomeWorkInJournal/HomeWorkInJournal';
 import PupilsInJornal from '../../components/PupilsInJournal/PupilsInJornal';
+import { setActiveQuarter } from '../../reducers/quarterReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getSchedule } from '../../thunks/schedule';
 import { getSubject } from '../../thunks/subject';
@@ -10,7 +11,7 @@ const JournalPage = () => {
   const dispatch = useAppDispatch();
   const lessons = useAppSelector((state) => state.schedule.lessonInClass);
   const [activeLesson, setActiveLesson] = useState(0);
-  const [activeQuarter, setActiveQuarter] = useState(2);
+  const [activeQuarter, setActiveQuarterTab] = useState(2);
 
   const tabsListLesson = lessons.map((les) => {
     return { title: `${les}` };
@@ -32,7 +33,8 @@ const JournalPage = () => {
   const openTabQuarter = (e: React.MouseEvent<HTMLButtonElement>) => {
     const currentTab = e.target as HTMLButtonElement;
     const activeTab = Number(currentTab.dataset.index);
-    setActiveQuarter(activeTab);
+    setActiveQuarterTab(activeTab);
+    dispatch(setActiveQuarter(activeTab));
   };
 
   useEffect(() => {
