@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ISubjects } from '../../reducers/subjectsReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getSubject } from '../../thunks/subject';
@@ -22,6 +22,13 @@ const HomeWorkInJournal = ({ filtersSubject }: IHomeWork) => {
     <div className="homeWorkList__table">
       <table>
         <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Домашнее задание</th>
+            <th>Задать домашнее задание</th>
+          </tr>
+        </thead>
+        <tbody>
           {!isLoader ? (
             <tr>
               <td>
@@ -42,8 +49,7 @@ const HomeWorkInJournal = ({ filtersSubject }: IHomeWork) => {
               );
             })
           )}
-        </thead>
-        <tbody></tbody>
+        </tbody>
       </table>
     </div>
   );

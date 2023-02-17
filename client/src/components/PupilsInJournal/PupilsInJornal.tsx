@@ -1,7 +1,7 @@
 import { IChildren } from '../../reducers/userReducer';
 import { useAppSelector } from '../../store/hooks';
 import { IHomeWork } from '../HomeWorkInJournal/HomeWorkInJournal';
-import PupilItem from '../PupilItem/PupilItem';
+import PupilItemInJournal from '../PupilItemInJournal/PupilteminJournal';
 
 export const getDate = (date: string): string => {
   const day =
@@ -27,7 +27,9 @@ const PupilsInJornal = ({ filtersSubject }: IHomeWork) => {
             <th>Даты</th>
             <th>ФИО</th>
             {filtersSubject.map((sub, ind) => (
-              <th key={ind}>{getDate(sub.date)}</th>
+              <th key={ind} data-idlesson={sub.id}>
+                {getDate(sub.date)}
+              </th>
             ))}
           </tr>
         </thead>
@@ -35,12 +37,12 @@ const PupilsInJornal = ({ filtersSubject }: IHomeWork) => {
           {childrens
             ? childrens.map((pupil: IChildren, ind: number) => {
                 return (
-                  <PupilItem
+                  <PupilItemInJournal
                     key={ind}
                     num={ind}
                     id={pupil.id}
                     fullName={pupil.fullName}
-                    diary={true}
+                    filtersSubject={filtersSubject}
                   />
                 );
               })

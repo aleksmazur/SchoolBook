@@ -4,12 +4,19 @@ import { getSubject } from '../thunks/subject';
 import { IClass } from './classReducer';
 import { IQuarter } from './quarterReducer';
 
+export type IGrade = {
+  id: number;
+  value: number;
+  childrenId: number;
+  subjectId: number;
+};
+
 export type ISubjects = {
   class: IClass;
   classId: number;
   date: string;
   endTime: string;
-  grades: any[];
+  grades: IGrade[];
   homework: null | string;
   id: number;
   name: string;
