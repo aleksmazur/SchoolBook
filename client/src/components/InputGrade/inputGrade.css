@@ -23,19 +23,19 @@
 
 .apply__icon, .cancel__icon {
     position: absolute;
-    width: 15px;
-    height: 15px;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
     background-repeat: no-repeat;
     background-size: contain;
 } 
 
 .apply__icon {
-    right: 30px;
+    right: 40px;
     background-image: url('./../../assets/svg/apply.svg');
 }
 
 .cancel__icon {
-    right: 4px;
+    right: 5px;
     background-image: url('./../../assets/svg/delete.svg');
 }
