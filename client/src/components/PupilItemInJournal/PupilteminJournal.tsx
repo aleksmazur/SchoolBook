@@ -23,7 +23,16 @@ const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
       {isInput ? (
         <td className="cell__grade-active">
           {subjects && (
-            <InputGrade setIsInput={setIsInput} idPupil={id} idLesson={subjects[num].id} />
+            <InputGrade
+              setIsInput={setIsInput}
+              idPupil={id}
+              idLesson={subjects[num].id}
+              grade={
+                subjects && subjects[num] && subjects[num].grades && subjects[num].grades[0]
+                  ? subjects[num].grades[0].value
+                  : null
+              }
+            />
           )}
         </td>
       ) : (

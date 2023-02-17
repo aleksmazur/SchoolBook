@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../store/hooks';
 import HomeWorkItem from '../HomeWorkItem/HomeWorkItem';
 import Preloader from '../Preloader/Preloader';
+import './homeWorkInJournal.css';
 
 const HomeWorkInJournal = () => {
   const { isLoader, subjects } = useAppSelector((state) => state.subjects);
@@ -12,7 +13,6 @@ const HomeWorkInJournal = () => {
           <tr>
             <th>Дата</th>
             <th>Домашнее задание</th>
-            <th>Задать домашнее задание</th>
           </tr>
         </thead>
         <tbody>
