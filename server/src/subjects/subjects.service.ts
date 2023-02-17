@@ -51,7 +51,10 @@ export class SubjectsService {
   async getSubjectByID(id: number) {
     const subject = await this.subjectsRepository.findByPk(id);
     if (!subject) {
-      throw new HttpException(`Subject with ID '${id}' not found!`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `Subject with ID '${id}' not found!`,
+        HttpStatus.NOT_FOUND,
+      );
     }
     return subject;
   }
@@ -116,8 +119,8 @@ export class SubjectsService {
           model: Quarter,
         },
         {
-          model: Grade
-        }
+          model: Grade,
+        },
       ],
       order: [["date", "ASC"]],
     });
@@ -135,7 +138,10 @@ export class SubjectsService {
   async addSubjectHomework(id: number, dto: AddHomeworkDto) {
     const subject = await this.subjectsRepository.findByPk(id);
     if (!subject) {
-      throw new HttpException(`Subject with ID '${id}' not found!`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `Subject with ID '${id}' not found!`,
+        HttpStatus.NOT_FOUND,
+      );
     }
     return await subject.update({ homework: dto.homework });
   }

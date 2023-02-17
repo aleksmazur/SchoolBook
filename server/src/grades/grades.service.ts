@@ -180,12 +180,12 @@ export class GradesService {
 
   async addGrade(dto: AddGradeDto) {
     const { value, childrenId, subjectId } = dto;
-    const grade = await this.gradesRepository.findOne(({
+    const grade = await this.gradesRepository.findOne({
       where: {
         childrenId,
-        subjectId
-      }
-    }));
+        subjectId,
+      },
+    });
     const children = await this.childrensService.getChildren(childrenId);
     const subject = await this.subjectsService.getSubjectByID(subjectId);
     if (children && subject) {

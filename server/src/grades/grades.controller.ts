@@ -57,9 +57,7 @@ export class GradesController {
   @ApiOperation({ summary: "Add grade for children by subject" })
   @ApiResponse({ status: 200, type: Grade })
   @Put("/add")
-  addGrade(
-    @Body() dto: AddGradeDto
-  ) {
+  addGrade(@Body() dto: AddGradeDto) {
     return this.gradesService.addGrade(dto);
   }
 }
