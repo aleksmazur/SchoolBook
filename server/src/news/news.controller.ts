@@ -21,7 +21,10 @@ export class NewsController {
   @ApiResponse({ status: 200, type: News })
   @Post()
   @UseInterceptors(FileInterceptor("image"))
-  create(@Body() dto: CreateNewsDto, @UploadedFile() image) {
+  create(
+    @Body() dto: CreateNewsDto,
+    @UploadedFile() image
+  ) {
     return this.newsService.createNews(dto, image);
   }
 
