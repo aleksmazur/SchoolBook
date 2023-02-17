@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Post, Put, Query } from "@nestjs/common";
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { AddGradeDto } from "./dto/add-grade.dto";
 import { CreateGradeDto } from "./dto/create-grade.dto";
 import { Grade } from "./grades.model";
 import { GradesService } from "./grades.service";
@@ -51,5 +52,14 @@ export class GradesController {
     if (classid && childrenid) {
       return this.gradesService.getFinalGrades(classid, childrenid);
     }
+  }
+
+  @ApiOperation({ summary: "Add grade for children by subject" })
+  @ApiResponse({ status: 200, type: Grade })
+  @Put("/add")
+  addGrade(
+    @Body() dto: AddGradeDto
+  ) {
+    return this.gradesService.addGrade(dto);
   }
 }

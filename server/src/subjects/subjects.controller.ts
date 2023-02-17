@@ -40,7 +40,8 @@ export class SubjectsController {
   }
 
   @ApiOperation({ summary: "Add homework for subject" })
-  @Put("/add/:id")
+  @ApiResponse({ status: 200, type: Subject })
+  @Put("/homework/add/:id")
   addSubject(
     @Param("id") id: number,
     @Body() dto: AddHomeworkDto
