@@ -1,0 +1,6 @@
+.homeWorkList__table th:last-child {
+    width: 30%
+}
+.homeWork__item .grade__wrapper {
+    width: 100%;
+}
