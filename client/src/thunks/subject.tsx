@@ -7,9 +7,7 @@ export const getSubject = createAsyncThunk(
   async (params: { nameLesson: string; activeQuarter: number; idClass: number }) => {
     try {
       const response = await fetch(
-        `${BASE_URL}/subjects?class=${params.idClass}&name=${params.nameLesson}&quarter=${
-          params.activeQuarter + 1
-        }`,
+        `${BASE_URL}/subjects?class=${params.idClass}&name=${params.nameLesson}&quarter=${params.activeQuarter}`,
         {
           method: 'GET',
           headers: {

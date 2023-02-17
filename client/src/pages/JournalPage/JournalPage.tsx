@@ -11,7 +11,7 @@ const JournalPage = () => {
   const dispatch = useAppDispatch();
   const lessons = useAppSelector((state) => state.schedule.lessonInClass);
   const [activeLesson, setActiveLesson] = useState(0);
-  const [activeQuarter, setActiveQuarterTab] = useState(2);
+  const [activeQuarterTab, setActiveQuarterTab] = useState(2);
 
   const tabsListLesson = lessons.map((les) => {
     return { title: `${les}` };
@@ -34,15 +34,16 @@ const JournalPage = () => {
     const currentTab = e.target as HTMLButtonElement;
     const activeTab = Number(currentTab.dataset.index);
     setActiveQuarterTab(activeTab);
-    dispatch(setActiveQuarter(activeTab));
+    dispatch(setActiveQuarter(activeTab + 1));
   };
 
   useEffect(() => {
     if (idClass && lessons[activeLesson]) {
       const nameLesson = lessons[activeLesson];
+      const activeQuarter = activeQuarterTab + 1;
       dispatch(getSubject({ nameLesson, activeQuarter, idClass }));
     }
-  }, [activeLesson, activeQuarter, dispatch, idClass, lessons]);
+  }, [activeLesson, activeQuarterTab, dispatch, idClass, lessons]);
 
   useEffect(() => {
     if (idClass) {
@@ -55,7 +56,7 @@ const JournalPage = () => {
       <div className="tab">
         {tabListQuarter.map((tab, i) => (
           <button
-            className={`tablinks ${i === activeQuarter ? 'active' : ''}`}
+            className={`tablinks ${i === activeQuarterTab ? 'active' : ''}`}
             onClick={openTabQuarter}
             data-index={i}
             key={i}
