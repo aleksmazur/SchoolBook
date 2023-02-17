@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, Query } from "@nestjs/common";
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { AddHomeworkDto } from "./dto/add-homework.dto";
 import { CreateSubjectDto } from "./dto/create-subject.dto";
 import { Subject } from "./subjects.model";
 import { SubjectsService } from "./subjects.service";
@@ -36,5 +37,14 @@ export class SubjectsController {
       return this.subjectsService.findByChildrenClass(classid, childrenid);
     }
     return this.subjectsService.getAllSubjects();
+  }
+
+  @ApiOperation({ summary: "Add homework for subject" })
+  @Put("/add/:id")
+  addSubject(
+    @Param("id") id: number,
+    @Body() dto: AddHomeworkDto
+  ) {
+    return this.subjectsService.addSubjectHomework(id, dto);
   }
 }

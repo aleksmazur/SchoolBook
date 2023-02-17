@@ -11,6 +11,8 @@ import { QuartersService } from "../quarters/quarters.service";
 import { GradesService } from "../grades/grades.service";
 import { CreateSubjectDto } from "./dto/create-subject.dto";
 import { Subject } from "./subjects.model";
+import { Grade } from "src/grades/grades.model";
+import { AddHomeworkDto } from "./dto/add-homework.dto";
 @Injectable()
 export class SubjectsService {
   constructor(
@@ -105,6 +107,9 @@ export class SubjectsService {
         {
           model: Quarter,
         },
+        {
+          model: Grade
+        }
       ],
       order: [["date", "ASC"]],
     });
@@ -117,5 +122,17 @@ export class SubjectsService {
     }
 
     return subjects;
+  }
+
+  async addSubjectHomework(id: number, dto: AddHomeworkDto) {
+    const subject = await this.subjectsRepository.findByPk(id);
+    if (!subject) {
+      throw new HttpException(`Subject with ID '${id}' not found!`, HttpStatus.NOT_FOUND);
+    }
+    await subject.update({ homework: dto.homework });
+    throw new HttpException(
+      `Homework add for subject ID '${id}'`,
+      HttpStatus.CREATED,
+    );
   }
 }
