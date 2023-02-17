@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Roboto, sans-serif;
 }
 
 :root[data-theme="light"] {
@@ -32,6 +33,7 @@
     background-color: rgb(255, 255, 255);
     transition: all 0.5s;
     border: 1px solid #28384d;
+    font-size: 16px;
 }
 
 .btn:hover {

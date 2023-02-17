@@ -9,3 +9,74 @@
     box-shadow: 2px 2px 6px #2b1a1a80;
     max-width: 340px;
 }
+
+.news__form {
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.26);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.addNews-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+}
+
+.news__inputs {
+    width: 100%;
+}
+
+.news_header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.news__inputs textarea {
+    height: 90px;
+}
+
+.add__news-input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+    resize: vertical;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.add__news-file-input {
+    display: none;
+}
+
+.input__file-button-text {
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    transition: all 0.5s;
+    border: 1px solid #28384d;
+}
+
+.input__file-button-text:hover {
+    background-color: rgb(241, 214, 95);
+}
+
+.input__file-button-img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+    background: url(./../../assets/svg/upload.svg) center center no-repeat;
+}
