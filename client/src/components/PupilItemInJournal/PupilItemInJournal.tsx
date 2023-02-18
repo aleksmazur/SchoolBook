@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { InputGrade } from '../InputGrade/InputGrade';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -25,11 +25,17 @@ export type INewGrade = {
 
 const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
-  const [options, setOptionsModal] = useState({ pupilId: 0, subjectId: 0 });
   const dispatch = useAppDispatch();
 
   const subjects = useAppSelector((state) => state.subjects.subjects);
+
+  //   useEffect(() => {
+  //     if (idClass && lessons[activeLesson]) {
+  //       const nameLesson = lessons[activeLesson];
+  //       const activeQuarter = activeQuarterTab + 1;
+  //       dispatch(getSubject({ nameLesson, activeQuarter, idClass }));
+  //     }
+  //   }, [activeLesson, activeQuarterTab, dispatch, idClass, lessons]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const currentCell = e.target as HTMLElement;
