@@ -17,7 +17,7 @@ const HomeWorkItem = ({ id, date, homework }: IPropsHomeWork) => {
     <tr key={id} className="homeWork__item">
       <td>{getDate(date)}</td>
       {isInput ? (
-        <td className="cell__grade-active">
+        <td className="cell__homework-active">
           <InputHomeWork setIsInput={setIsInput} idLesson={id} homeWork={homework} />
         </td>
       ) : (

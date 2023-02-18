@@ -15,12 +15,6 @@
     width: 90px;
 }
 
-.input__grade {
-    border: none;
-    max-width: 50%;
-    outline: none;
-}
-
 .apply__icon, .cancel__icon {
     position: absolute;
     width: 25px;

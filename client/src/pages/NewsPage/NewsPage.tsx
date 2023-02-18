@@ -10,7 +10,7 @@ import './newsPage.css';
 
 const NewsPage = () => {
   const { t } = useTranslation();
-  const { news, isLoader, status } = useAppSelector((store) => store.news);
+  const { news, isLoader } = useAppSelector((store) => store.news);
   const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm<INewsItem>({
     mode: 'onSubmit',
@@ -26,7 +26,6 @@ const NewsPage = () => {
     if (data.title) formData.append('title', data.title);
     if (data.content) formData.append('content', data.content);
     await dispatch(postNews(formData));
-    console.log(status);
     dispatch(getNews());
   };
 

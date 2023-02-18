@@ -1,16 +1,12 @@
 .homeWorkList__table th:last-child {
     width: 30%
 }
-.homeWork__item .grade__wrapper {
+.homeWork__item .homework__wrapper {
     width: 100%;
 }
 
 .cell__homework {
     position: relative;
-}
-
-.cell__homework div {
-    width: 300px;
 }
 
 .homeWork__item td {
