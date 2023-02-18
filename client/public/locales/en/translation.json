@@ -28,7 +28,12 @@
         "subtitle": "Now the diary can not be forgotten at home!"
     },
     "news": {
-        "newsTitle": "School news"
+        "newsTitle": "School news",
+        "addNewsTitle": "Add news",
+        "addTitle": "News Title",
+        "content": "News content",
+        "addPicture": "Add picture",
+        "addNewsBtn": "Add news"
     },
     "diary": {
         "diaryTitle": "School diary",
