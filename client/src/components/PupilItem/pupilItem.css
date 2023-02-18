@@ -42,11 +42,11 @@ table tbody tr td:last-child {
 	width: 90px;
 }
 .cell__grade {
-	display: flex;
 	justify-content: space-between;
 	cursor: pointer;
 	position: relative;
 	text-align: center;
+    padding: 0;
 }
 .cell__grade-active {
 	padding: 0;

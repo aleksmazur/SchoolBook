@@ -10,7 +10,7 @@ type IProps = {
 };
 
 export const InputGrade = ({ setIsInput, idPupil, idLesson, grade }: IProps) => {
-  const [valueGrade, setNewGrade] = useState<string>(grade?.toString() || '');
+  const [valueGrade, setNewGrade] = useState<string>(grade?.toString() || ' ');
   /*   const classId = useAppSelector((state) => state.classInfo.classInfo.id);
   const { activeQuarter } = useAppSelector((state) => state.quarter); */
 

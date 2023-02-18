@@ -1,6 +1,6 @@
 import { IChildren } from '../../reducers/userReducer';
 import { useAppSelector } from '../../store/hooks';
-import PupilItemInJournal from '../PupilItemInJournal/PupilteminJournal';
+import PupilItemInJournal from '../PupilItemInJournal/PupilItemInJournal';
 
 export const getDate = (date: string): string => {
   const day =
