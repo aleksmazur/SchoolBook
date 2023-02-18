@@ -37,7 +37,8 @@
     },
     "diary": {
         "diaryTitle": "School diary",
-        "subscribe": "Subscribe",
+        "signed": "Signed",
+        "sign": "Sign",
         "quarter": "quarter",
         "lastPage": "Last Page"
     },

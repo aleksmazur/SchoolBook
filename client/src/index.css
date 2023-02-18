@@ -40,6 +40,13 @@
     background-color: rgb(241, 214, 95);
 }
 
+.btn:disabled,
+button[disabled] {
+    border: none;
+    background-color: rgb(241, 214, 95);
+    cursor: default;
+}
+
 a {
     color: inherit;
     text-decoration-color: #f1d760;
