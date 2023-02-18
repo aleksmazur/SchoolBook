@@ -1,17 +1,24 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-//import { useAppDispatch } from '../../store/hooks';
+/* import { useAppSelector } from '../../store/hooks'; */
 import './inputGrade.css';
 
 type IProps = {
   setIsInput: Dispatch<SetStateAction<boolean>>;
+  idPupil: number;
+  idLesson: number;
+  grade: number | null;
 };
 
-export const InputGrade = ({ setIsInput }: IProps) => {
-  const [valueGrade, setNewGrade] = useState<string>('');
+export const InputGrade = ({ setIsInput, idPupil, idLesson, grade }: IProps) => {
+  const [valueGrade, setNewGrade] = useState<string>(grade?.toString() || '');
+  /*   const classId = useAppSelector((state) => state.classInfo.classInfo.id);
+  const { activeQuarter } = useAppSelector((state) => state.quarter); */
 
   const updateGrade = async () => {
     /* const newGrade = {
       value: valueGrade,
+      childrenId: 1,
+      subjectId: idLesson,
     }; */
     setIsInput(false);
     console.log('оценка обновлена');
@@ -26,9 +33,11 @@ export const InputGrade = ({ setIsInput }: IProps) => {
       <input
         className="input__grade"
         type="text"
-        /*         placeholder={grade} */
         onChange={(e) => handleChange(e)}
         value={valueGrade}
+        /* placeholder={valueGrade} */
+        data-idpupil={idPupil}
+        data-idlesson={idLesson}
       />
       <div className="apply__icon" onClick={updateGrade}></div>
       <div className="cancel__icon" onClick={() => setIsInput(false)}></div>

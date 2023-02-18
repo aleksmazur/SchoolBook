@@ -15,7 +15,7 @@ import { getSchedule } from '../../thunks/schedule';
 import './diary.css';
 
 const lastWeekBeforeHolidays = [44, 52, 12, 21];
-const firstWeekAfterHolidays = [35, 46, 14, 2];
+const firstWeekAfterHolidays = [36, 46, 14, 2];
 
 const DiaryPage = () => {
   const { t } = useTranslation();
@@ -163,7 +163,7 @@ const DiaryPage = () => {
             <div className="diary__list">
               {diary &&
                 Object.keys(diary).map((date, index) => (
-                  <DiaryDay lessons={diary[date]} key={index} date={date}></DiaryDay>
+                  <DiaryDay lessons={diary[date]} key={index} date={date} index={index}></DiaryDay>
                 ))}
             </div>
           ) : (
