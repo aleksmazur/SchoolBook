@@ -52,6 +52,9 @@ export class User extends Model<User, UserCreationAttrs> {
   @Column({ type: DataType.STRING })
   fullName: string;
 
+  @Column({ type: DataType.STRING })
+  phone: string;
+
   @BeforeCreate
   @BeforeUpdate
   static setFullName(instance: User) {

@@ -197,7 +197,7 @@ export class UsersService {
         HttpStatus.NOT_FOUND,
       );
     }
-    await user.update({ profilePic: fileName });
+    await user.update({ profilePic: fileName, phone: dto.phone });
     return user;
   }
 }
