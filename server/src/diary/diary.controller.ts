@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { ApiOperation, ApiQuery, ApiTags } from "@nestjs/swagger";
-import { CreateDiarySignDto } from "src/diary_sign/dto/create-diary_sign.dto";
+import { CreateDiarySignDto } from "../diary/dto/create-diary_sign.dto";
 import { DiaryService } from "./diary.service";
 
 @ApiTags("Diary")

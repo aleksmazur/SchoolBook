@@ -1,15 +1,16 @@
 import { Module } from "@nestjs/common";
-import { DiarySignModule } from "src/diary_sign/diary_sign.module";
+import { SequelizeModule } from "@nestjs/sequelize";
 import { SubjectsModule } from "../subjects/subjects.module";
 import { DiaryController } from "./diary.controller";
 import { DiaryService } from "./diary.service";
+import { DiarySign } from "./diary_sign.model";
 
 @Module({
   providers: [DiaryService],
   controllers: [DiaryController],
   imports: [
+    SequelizeModule.forFeature([DiarySign]),
     SubjectsModule,
-    DiarySignModule
   ],
 })
 export class DiaryModule {}
