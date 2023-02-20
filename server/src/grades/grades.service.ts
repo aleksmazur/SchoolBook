@@ -10,6 +10,7 @@ import { SubjectsService } from "../subjects/subjects.service";
 import { ChildrensService } from "../childrens/childrens.service";
 import { CreateGradeDto } from "./dto/create-grade.dto";
 import { Grade } from "./grades.model";
+import { AddGradeDto } from "./dto/add-grade.dto";
 
 interface SubjectGrades {
   name: string;
@@ -175,5 +176,38 @@ export class GradesService {
     }
 
     return gradesBySubject;
+  }
+
+  async addGrade(dto: AddGradeDto) {
+    const { value, childrenId, subjectId } = dto;
+    const grade = await this.gradesRepository.findOne({
+      where: {
+        childrenId,
+        subjectId,
+      },
+    });
+    const children = await this.childrensService.getChildren(childrenId);
+    const subject = await this.subjectsService.getSubjectByID(subjectId);
+    if (children && subject) {
+      if (grade) {
+        return await grade.update({ value });
+      } else {
+        return await this.gradesRepository.create(dto);
+      }
+    }
+  }
+
+  async deleteGrade(id: number) {
+    const grade = await this.gradesRepository.findOne({
+      where: { id },
+    });
+    if (!grade) {
+      throw new HttpException(
+        `Grade with ID '${id}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    await grade.destroy();
+    throw new HttpException(`Grade successfully remove`, HttpStatus.OK);
   }
 }

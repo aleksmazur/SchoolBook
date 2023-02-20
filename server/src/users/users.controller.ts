@@ -20,7 +20,7 @@ import {
   ApiResponse,
   ApiTags,
 } from "@nestjs/swagger";
-import { Children } from "src/childrens/childrens.model";
+import { Children } from "../childrens/childrens.model";
 import { Role } from "../auth/role-auth.decorator";
 import { RoleGuard } from "../auth/role.guard";
 import { AddRoleDto } from "./dto/add-role.dto";

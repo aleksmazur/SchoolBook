@@ -1,3 +1,8 @@
+.homeWorkList__table {
+    overflow: scroll;
+}
+
 .homeWorkList__table table {
-    width: 70%;
+    width: 100%;
+    max-width: 500px;
 }

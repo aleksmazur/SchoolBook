@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { FilesService } from "src/files/files.service";
+import { FilesService } from "../files/files.service";
 import { CreateNewsDto } from "./dto/create-news.dto";
 import { News } from "./news.model";
 
@@ -12,9 +12,12 @@ export class NewsService {
   ) {}
 
   async createNews(dto: CreateNewsDto, image: any) {
-    const fileName = await this.fileService.createFile(image);
-    const news = await this.newsRepository.create({ ...dto, image: fileName });
-    return news;
+    if (image) {
+      const fileName = await this.fileService.createFile(image);
+      return await this.newsRepository.create({ ...dto, image: fileName });
+    } else {
+      return await this.newsRepository.create(dto);
+    }
   }
 
   async getAllNews() {

@@ -5,7 +5,7 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { Children } from "src/childrens/childrens.model";
+import { Children } from "../../childrens/childrens.model";
 import { User } from "../users.model";
 
 @Table({ tableName: "user_childrens", createdAt: false, updatedAt: false })

@@ -50,6 +50,7 @@
     box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
     height: auto;
     margin-bottom: 20px;
+    font-family: Roboto, sans-serif;
 }
 
 .add__news-file-input {

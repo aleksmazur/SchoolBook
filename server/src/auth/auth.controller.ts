@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateUserDto } from "../users/dto/create-user.dto";
-import { LogiUserDto } from "../users/dto/login-user.dto";
+import { LoginUserDto } from "../users/dto/login-user.dto";
 import { AuthService } from "./auth.service";
 import { Public } from "./public.decorator";
 
@@ -14,7 +14,7 @@ export class AuthController {
   @ApiResponse({ status: 200, description: "Succsess login" })
   @Public()
   @Post("/login")
-  login(@Body() userDto: LogiUserDto) {
+  login(@Body() userDto: LoginUserDto) {
     return this.authService.login(userDto);
   }
   @ApiOperation({ summary: "User register" })

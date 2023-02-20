@@ -34,7 +34,7 @@ export const InputHomeWork = ({ setIsInput, idLesson, homeWork }: IProps) => {
   };
 
   return (
-    <div className="grade__wrapper">
+    <div className="homework__wrapper">
       <input
         className="input__homework"
         type="text"

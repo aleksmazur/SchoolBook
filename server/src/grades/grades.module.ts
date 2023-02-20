@@ -6,7 +6,7 @@ import { Subject } from "../subjects/subjects.model";
 import { GradesController } from "./grades.controller";
 import { Grade } from "./grades.model";
 import { GradesService } from "./grades.service";
-import { SubjectsModule } from "src/subjects/subjects.module";
+import { SubjectsModule } from "../subjects/subjects.module";
 
 @Module({
   providers: [GradesService],

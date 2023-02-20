@@ -8,7 +8,7 @@ import { JwtService } from "@nestjs/jwt";
 import { UsersService } from "../users/users.service";
 import * as bcrypt from "bcryptjs";
 import { User } from "../users/users.model";
-import { LogiUserDto } from "../users/dto/login-user.dto";
+import { LoginUserDto } from "../users/dto/login-user.dto";
 import { CreateUserDto } from "../users/dto/create-user.dto";
 
 @Injectable()
@@ -18,7 +18,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(userDto: LogiUserDto) {
+  async login(userDto: LoginUserDto) {
     const user = await this.validateUser(userDto);
     return this.generateToken(user);
   }
@@ -53,7 +53,7 @@ export class AuthService {
     };
   }
 
-  private async validateUser(userDto: LogiUserDto) {
+  private async validateUser(userDto: LoginUserDto) {
     const user = await this.userService.getUserByUsername(userDto.username);
     if (!user) {
       throw new HttpException(
