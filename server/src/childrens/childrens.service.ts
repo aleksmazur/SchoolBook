@@ -6,6 +6,7 @@ import {
   Injectable,
 } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
+import { ClassesService } from "src/classes/classes.service";
 import { ClassRoom } from "../classes/classes.model";
 import { FilesService } from "../files/files.service";
 import { Grade } from "../grades/grades.model";
@@ -14,7 +15,7 @@ import { User } from "../users/users.model";
 import { UsersService } from "../users/users.service";
 import { Children } from "./childrens.model";
 import { CreateChildrenDto } from "./dto/create-children.dto";
-import { EditProfileDto } from "./dto/edit-profile.dto";
+import { EditChildProfileDto } from "./dto/edit-child-profile.dto";
 
 @Injectable()
 export class ChildrensService {
@@ -23,11 +24,13 @@ export class ChildrensService {
     @Inject(forwardRef(() => UsersService))
     private userService: UsersService,
     private filesService: FilesService,
+    private classesService: ClassesService
   ) {}
 
   async createChildren(dto: CreateChildrenDto) {
-    const children = await this.childrensRepository.create(dto);
     const childrenParent = await this.userService.getUserByID(dto.parentId);
+    await this.classesService.getClass(dto.classId);
+    const children = await this.childrensRepository.create(dto);
     await children.$set("parents", [childrenParent.id]);
     children.parents = [childrenParent];
     return children;
@@ -108,7 +111,7 @@ export class ChildrensService {
     return children;
   }
 
-  async editProfile(dto: EditProfileDto, image) {
+  async editProfile(dto: EditChildProfileDto, image) {
     const fileName = await this.filesService.createFile(image);
     const children = await this.childrensRepository.findByPk(dto.id);
     if (!children) {
@@ -120,7 +123,7 @@ export class ChildrensService {
     if (!fileName) {
       throw new HttpException(
         `Filename was not generated!`,
-        HttpStatus.NOT_FOUND,
+        HttpStatus.FORBIDDEN,
       );
     }
     await children.update({ profilePic: fileName });

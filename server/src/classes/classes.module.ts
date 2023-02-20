@@ -10,5 +10,8 @@ import { ClassesService } from "./classes.service";
   controllers: [ClassesController],
   providers: [ClassesService],
   imports: [SequelizeModule.forFeature([ClassRoom, User, Subject])],
+  exports: [
+    ClassesService
+  ]
 })
 export class ClassesModule {}

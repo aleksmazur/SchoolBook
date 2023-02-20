@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -10,27 +11,29 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Children } from "./childrens.model";
 import { ChildrensService } from "./childrens.service";
 import { CreateChildrenDto } from "./dto/create-children.dto";
-import { EditProfileDto } from "./dto/edit-profile.dto";
+import { EditChildProfileDto } from "./dto/edit-child-profile.dto";
 
 @ApiTags("Childrens")
 @Controller("childrens")
 export class ChildrensController {
   constructor(private childrenService: ChildrensService) {}
 
-  @ApiOperation({ summary: "Create a children" })
-  @ApiResponse({ status: 200, type: Children })
+  @ApiOperation({ summary: "Create a child" })
+  @ApiCreatedResponse({type: Children})
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Parent or class for children not found!" })
   @Post()
   create(@Body() dto: CreateChildrenDto) {
     return this.childrenService.createChildren(dto);
   }
 
-  @ApiOperation({ summary: "Get all childrens" })
-  @ApiResponse({ status: 200, type: [Children] })
+  @ApiOperation({ summary: "Get a list of children" })
+  @ApiOkResponse({ type: [Children] })
   @ApiQuery({ name: "parent", required: false })
+  @ApiNotFoundResponse({ description: "Children or parent not found!" })
   @Get()
   getAll(@Query("parent") parentId?: number) {
     if (parentId) {
@@ -39,17 +42,20 @@ export class ChildrensController {
     return this.childrenService.getAllChildrens();
   }
 
-  @ApiOperation({ summary: "Get children by ID" })
-  @ApiResponse({ status: 200, type: Children })
+  @ApiOperation({ summary: "Get a child by ID" })
+  @ApiOkResponse({ type: Children })
+  @ApiNotFoundResponse({ description: "Child not found!" })
   @Get(":id")
   getChildrenByID(@Param("id") id: number) {
     return this.childrenService.getChildren(id);
   }
 
-  @ApiOperation({ summary: "Change profile" })
+  @ApiOperation({ summary: "Edit a child's profile picture" })
+  @ApiOkResponse({ type: Children })
+  @ApiNotFoundResponse({ description: "Child not found!" })
   @Put("/edit/profile")
   @UseInterceptors(FileInterceptor("profilePic"))
-  changeProfile(@Body() dto: EditProfileDto, @UploadedFile() image) {
+  changeProfile(@Body() dto: EditChildProfileDto, @UploadedFile() image) {
     return this.childrenService.editProfile(dto, image);
   }
 }

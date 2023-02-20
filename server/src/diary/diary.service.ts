@@ -100,13 +100,13 @@ export class DiaryService {
       // return signature?.sign;
       const startDate = moment()
         .year(year)
-        .isoWeek(week)
-        .startOf("isoWeek")
+        .week(week)
+        .startOf("week")
         .format("YYYY-MM-DD");
       const endDate = moment()
         .year(year)
-        .isoWeek(week)
-        .endOf("isoWeek")
+        .week(week)
+        .endOf("week")
         .format("YYYY-MM-DD");
       console.log(startDate, endDate);
       const diarySigns = await this.diarySignRepository.findAll({
