@@ -53,6 +53,20 @@ export class UsersService {
     return users;
   }
 
+  async getUserRoles(id: number) {
+    const user = await this.userRepository.findByPk(id, {
+      include: { all: true },
+    });
+    if (!user) {
+      throw new HttpException(
+        `User with ID '${id}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    const roles = user.role.map((role) => role.value);
+    return roles;
+  }
+
   async getUsersByRole(value: string) {
     const users = await this.userRepository.findAll({
       attributes: {

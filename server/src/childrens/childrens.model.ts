@@ -83,7 +83,7 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
 
   @ApiProperty({
     description: "Child class object",
-    type: ClassRoom
+    type: () => ClassRoom
   })
   @BelongsTo(() => ClassRoom)
   class: ClassRoom;
@@ -98,14 +98,14 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
 
   @ApiProperty({
     description: "Child's parents",
-    type: [User]
+    type: () => [User]
   })
   @BelongsToMany(() => User, () => UserChildrens)
   parents: User[];
 
   @ApiProperty({
     description: "Child grades",
-    type: [Grade]
+    type: () => [Grade]
   })
   @HasMany(() => Grade)
   grades: [Grade];
@@ -119,7 +119,7 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
 
   @ApiProperty({
     description: "Signed diary of a child",
-    type: [DiarySign]
+    type: () => [DiarySign]
   })
   @HasMany(() => DiarySign)
   approves: [DiarySign];
