@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { ApiOperation, ApiQuery, ApiTags } from "@nestjs/swagger";
-import { CreateDiarySignDto } from "src/diary_sign/dto/create-diary_sign.dto";
+import { CreateDiarySignDto } from "../diary/dto/create-diary_sign.dto";
 import { DiaryService } from "./diary.service";
 
 @ApiTags("Diary")
@@ -28,9 +28,7 @@ export class DiaryController {
 
   @ApiOperation({ summary: "Add sign for diary" })
   @Post("/sign/add")
-  addSign(
-    @Body() dto: CreateDiarySignDto
-  ) {
+  addSign(@Body() dto: CreateDiarySignDto) {
     return this.diaryService.addDiarySign(dto);
   }
 
@@ -43,10 +41,6 @@ export class DiaryController {
     @Query("week") week?: number,
     @Query("year") year?: number,
   ) {
-    return this.diaryService.getStatusDiarySign(
-      childrenid,
-      week,
-      year,
-    );
+    return this.diaryService.getStatusDiarySign(childrenid, week, year);
   }
 }

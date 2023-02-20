@@ -196,4 +196,18 @@ export class GradesService {
       }
     }
   }
+
+  async deleteGrade(id: number) {
+    const grade = await this.gradesRepository.findOne({
+      where: { id },
+    });
+    if (!grade) {
+      throw new HttpException(
+        `Grade with ID '${id}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    await grade.destroy();
+    throw new HttpException(`Grade successfully remove`, HttpStatus.OK);
+  }
 }

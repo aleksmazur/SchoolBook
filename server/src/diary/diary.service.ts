@@ -1,14 +1,16 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { SubjectsService } from "../subjects/subjects.service";
 import * as moment from "moment";
-import { CreateDiarySignDto } from "../diary_sign/dto/create-diary_sign.dto";
-import { DiarySignService } from "../diary_sign/diary_sign.service";
+import { CreateDiarySignDto } from "./dto/create-diary_sign.dto";
+import { InjectModel } from "@nestjs/sequelize";
+import { DiarySign } from "./diary_sign.model";
 
 @Injectable()
 export class DiaryService {
   constructor(
+    @InjectModel(DiarySign)
+    private diarySignRepository: typeof DiarySign,
     private subjectsService: SubjectsService,
-    private diarySignService: DiarySignService
   ) {}
 
   async getChildrenDiaryByClass(
@@ -77,12 +79,58 @@ export class DiaryService {
   }
 
   async addDiarySign(dto: CreateDiarySignDto) {
-    const sign = await this.diarySignService.createSign(dto);
+    const sign = await this.diarySignRepository.create(dto);
     return sign;
   }
 
-  async getStatusDiarySign(childrenid: number, week?: number, year?: number) {
-    const status = await this.diarySignService.getSign(childrenid, week, year);
-    return status;
+  async getStatusDiarySign(childrenId: number, week?: number, year?: number) {
+    if (week && year) {
+      // const startDate = moment().year(year).week(week).startOf("week").toDate();
+      // const endDate = moment().year(year).week(week).endOf("week").toDate();
+      // console.log(startDate, endDate);
+      // const signature = await this.diarySignRepository.findOne({
+      //   where: {
+      //     childrenId,
+      //     date: {
+      //       $between: [startDate, endDate]
+      //     }
+      //   },
+      //   attributes: ['sign'],
+      // });
+      // return signature?.sign;
+      const startDate = moment()
+        .year(year)
+        .isoWeek(week)
+        .startOf("isoWeek")
+        .format("YYYY-MM-DD");
+      const endDate = moment()
+        .year(year)
+        .isoWeek(week)
+        .endOf("isoWeek")
+        .format("YYYY-MM-DD");
+      console.log(startDate, endDate);
+      const diarySigns = await this.diarySignRepository.findAll({
+        where: {
+          childrenId,
+        },
+      });
+      let sign = false;
+      diarySigns.some((diarySign) => {
+        const date = moment(diarySign.date).format("YYYY-MM-DD");
+        if (date >= startDate && date <= endDate) {
+          sign = diarySign.sign;
+          return sign;
+        }
+      });
+      return sign;
+      // const filteredDiarySigns = diarySigns.filter((diarySign) => {
+      //   const date = moment(diarySign.date).format("YYYY-MM-DD");
+      //   return date >= startDate && date <= endDate;
+      // });
+      // if (filteredDiarySigns.length > 0) {
+      //   return filteredDiarySigns[0].sign;
+      // }
+      // return false;
+    }
   }
 }

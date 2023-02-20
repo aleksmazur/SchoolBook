@@ -6,12 +6,11 @@ import {
   Injectable,
 } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { ClassRoom } from "src/classes/classes.model";
-import { DiarySign } from "src/diary_sign/diary_sign.model";
-import { FilesService } from "src/files/files.service";
-import { Grade } from "src/grades/grades.model";
-import { Subject } from "src/subjects/subjects.model";
-import { User } from "src/users/users.model";
+import { ClassRoom } from "../classes/classes.model";
+import { FilesService } from "../files/files.service";
+import { Grade } from "../grades/grades.model";
+import { Subject } from "../subjects/subjects.model";
+import { User } from "../users/users.model";
 import { UsersService } from "../users/users.service";
 import { Children } from "./childrens.model";
 import { CreateChildrenDto } from "./dto/create-children.dto";
@@ -97,7 +96,7 @@ export class ChildrensService {
         },
         {
           model: User,
-        }
+        },
       ],
     });
     if (!children) {
