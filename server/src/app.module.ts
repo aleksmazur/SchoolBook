@@ -61,7 +61,7 @@ import { DiarySign } from "./diary/diary_sign.model";
         Subject,
         Grade,
         Quarter,
-        DiarySign
+        DiarySign,
       ],
       autoLoadModels: true,
     }),

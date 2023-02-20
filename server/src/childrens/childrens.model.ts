@@ -95,5 +95,5 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   profilePic: string;
 
   @HasMany(() => DiarySign)
-  approves: [DiarySign]
+  approves: [DiarySign];
 }

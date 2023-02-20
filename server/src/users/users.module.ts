@@ -8,8 +8,8 @@ import { UserChildrens } from "./dto/user-childrens.model";
 import { UsersController } from "./users.controller";
 import { User } from "./users.model";
 import { UsersService } from "./users.service";
-import { ChildrensModule } from "src/childrens/childrens.module";
-import { FilesModule } from "src/files/files.module";
+import { ChildrensModule } from "../childrens/childrens.module";
+import { FilesModule } from "../files/files.module";
 
 @Module({
   controllers: [UsersController],

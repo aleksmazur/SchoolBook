@@ -14,7 +14,7 @@ import { AddRoleDto } from "./dto/add-role.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from "./users.model";
 import { EditProfileDto } from "./dto/edit-profile.dto";
-import { FilesService } from "src/files/files.service";
+import { FilesService } from "../files/files.service";
 
 @Injectable()
 export class UsersService {

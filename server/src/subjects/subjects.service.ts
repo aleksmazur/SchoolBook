@@ -11,7 +11,7 @@ import { QuartersService } from "../quarters/quarters.service";
 import { GradesService } from "../grades/grades.service";
 import { CreateSubjectDto } from "./dto/create-subject.dto";
 import { Subject } from "./subjects.model";
-import { Grade } from "src/grades/grades.model";
+import { Grade } from "../grades/grades.model";
 import { AddHomeworkDto } from "./dto/add-homework.dto";
 @Injectable()
 export class SubjectsService {

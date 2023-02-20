@@ -28,9 +28,7 @@ export class DiaryController {
 
   @ApiOperation({ summary: "Add sign for diary" })
   @Post("/sign/add")
-  addSign(
-    @Body() dto: CreateDiarySignDto
-  ) {
+  addSign(@Body() dto: CreateDiarySignDto) {
     return this.diaryService.addDiarySign(dto);
   }
 
@@ -43,10 +41,6 @@ export class DiaryController {
     @Query("week") week?: number,
     @Query("year") year?: number,
   ) {
-    return this.diaryService.getStatusDiarySign(
-      childrenid,
-      week,
-      year,
-    );
+    return this.diaryService.getStatusDiarySign(childrenid, week, year);
   }
 }

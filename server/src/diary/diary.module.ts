@@ -8,9 +8,6 @@ import { DiarySign } from "./diary_sign.model";
 @Module({
   providers: [DiaryService],
   controllers: [DiaryController],
-  imports: [
-    SequelizeModule.forFeature([DiarySign]),
-    SubjectsModule,
-  ],
+  imports: [SequelizeModule.forFeature([DiarySign]), SubjectsModule],
 })
 export class DiaryModule {}
