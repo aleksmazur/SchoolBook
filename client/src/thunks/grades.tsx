@@ -22,3 +22,22 @@ export const updateGrade = createAsyncThunk('grade/put', async (newGrade: INewGr
     throw new Error((err as Error).message);
   }
 });
+
+export const deleteGrade = createAsyncThunk('grade/delete', async (id: number) => {
+  try {
+    const response = await fetch(`${BASE_URL}/grades/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${TOKEN()}`,
+      },
+    });
+    if (response.status === 404) {
+      throw new Error('not Found');
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw new Error((err as Error).message);
+  }
+});

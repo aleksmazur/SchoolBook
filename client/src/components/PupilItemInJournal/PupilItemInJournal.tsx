@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { ISubjects } from '../../reducers/subjectsReducer';
 import './pupilItemInJournal.css';
-import { updateGrade } from '../../thunks/grades';
+import { updateGrade, deleteGrade } from '../../thunks/grades';
 import { getSubject } from '../../thunks/subject';
 
 type IPropsPupil = {
@@ -21,6 +21,7 @@ export type INewGrade = {
   value: string | null;
   childrenId: number;
   subjectId: number;
+  id?: number;
 };
 
 const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
@@ -34,17 +35,14 @@ const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
 
   const handleReset = async (e: MouseEvent<HTMLInputElement>) => {
     const currentCell = e.target as HTMLInputElement;
-    const currentCellOptions = currentCell.getAttribute('data-cell')?.split('_') as string[];
-    await dispatch(
-      updateGrade({
-        value: '0', // изменить на null
-        childrenId: +currentCellOptions[0],
-        subjectId: +currentCellOptions[1],
-      })
-    );
-    const nameLesson = subject.filter((item) => item.id === +currentCellOptions[1])[0].name;
-    if (idClass) {
-      dispatch(getSubject({ nameLesson, activeQuarter, idClass }));
+    if (currentCell.value) {
+      const currentCellOptions = currentCell.getAttribute('data-cell')?.split('_') as string[];
+      const currentCellId = currentCell.getAttribute('data-id') as string;
+      await dispatch(deleteGrade(+currentCellId));
+      const nameLesson = subject.filter((item) => item.id === +currentCellOptions[1])[0].name;
+      if (idClass) {
+        dispatch(getSubject({ nameLesson, activeQuarter, idClass }));
+      }
     }
   };
 
@@ -85,9 +83,12 @@ const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
         </td>
         {subjects &&
           subjects.map((subject: ISubjects, index: number) => {
-            const currentMark: number | null | undefined = subject.grades.find(
+            const currentMarkValue: number | null | undefined = subject.grades.find(
               (el) => el.childrenId === id
             )?.value;
+            const currentMarkId: number | null | undefined = subject.grades.find(
+              (el) => el.childrenId === id
+            )?.id;
             return (
               <td className="cell__grade" key={index}>
                 <input
@@ -97,8 +98,9 @@ const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
                   onMouseOut={(e) => hideClue(e)}
                   onClick={(e) => handleReset(e)}
                   onChange={(e) => handleChange(e)}
-                  value={currentMark ? String(currentMark) : ''}
+                  value={currentMarkValue ? String(currentMarkValue) : ''}
                   data-cell={`${id}_${subject.id}`}
+                  data-id={currentMarkId}
                 />
                 <span className="grade__clue">Кликните по ячейке для удаления оценки</span>
               </td>
