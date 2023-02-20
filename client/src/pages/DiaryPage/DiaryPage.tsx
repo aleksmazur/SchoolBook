@@ -98,7 +98,7 @@ const DiaryPage = () => {
   useEffect(() => {
     if (children) {
       const idPupil = children[0].id;
-      dispatch(getSignDiary({ idPupil, week, year }));
+      dispatch(getSignDiary({ idPupil, week: year < 2023 ? week - 1 : week, year }));
     }
   }, [dispatch, sign, week, year, children]);
 
@@ -128,10 +128,8 @@ const DiaryPage = () => {
         sign: true,
       };
       await dispatch(setSignDiary(sign));
-      if (sign) {
-        const idPupil = children[0].id;
-        dispatch(getSignDiary({ idPupil, week, year }));
-      }
+      const idPupil = children[0].id;
+      dispatch(getSignDiary({ idPupil, week: year < 2023 ? week - 1 : week, year }));
     }
   };
 

@@ -30,7 +30,7 @@ export const getMonth = (monthId: number) => monthArray[monthId];
 
 export const getWeekNumber = (today: Date) => {
   // const currentDate = new Date();
-  const startDate = new Date(today.getFullYear(), 0, 1);
+  const startDate = new Date(today.getFullYear(), 0, 0);
   const days = Math.floor((today.getTime() - startDate.getTime()) / 86400000 + 1);
   return Math.ceil(days / 7);
 };
