@@ -12,9 +12,12 @@ export class NewsService {
   ) {}
 
   async createNews(dto: CreateNewsDto, image: any) {
-    const fileName = await this.fileService.createFile(image);
-    const news = await this.newsRepository.create({ ...dto, image: fileName });
-    return news;
+    if (image) {
+      const fileName = await this.fileService.createFile(image);
+      return await this.newsRepository.create({ ...dto, image: fileName });
+    } else {
+      return await this.newsRepository.create(dto);
+    }
   }
 
   async getAllNews() {

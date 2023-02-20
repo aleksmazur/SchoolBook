@@ -11,7 +11,8 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { Grade } from "src/grades/grades.model";
+import { DiarySign } from "src/diary_sign/diary_sign.model";
+import { Grade } from "../grades/grades.model";
 import { ClassRoom } from "../classes/classes.model";
 import { UserChildrens } from "../users/dto/user-childrens.model";
 import { User } from "../users/users.model";
@@ -92,4 +93,7 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
 
   @Column({ type: DataType.STRING, allowNull: true })
   profilePic: string;
+
+  @HasMany(() => DiarySign)
+  approves: [DiarySign]
 }

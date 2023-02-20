@@ -25,8 +25,10 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { QuartersModule } from "./quarters/quarters.module";
 import * as path from "path";
 import { Quarter } from "./quarters/quarters.model";
-import { APP_GUARD } from "@nestjs/core";
-import { JwtAuthGuard } from "./auth/jwt-auth.guard";
+// import { APP_GUARD } from "@nestjs/core";
+// import { JwtAuthGuard } from "./auth/jwt-auth.guard";
+import { DiarySignModule } from './diary_sign/diary_sign.module';
+import { DiarySign } from "./diary_sign/diary_sign.model";
 
 @Module({
   // providers: [
@@ -60,6 +62,7 @@ import { JwtAuthGuard } from "./auth/jwt-auth.guard";
         Subject,
         Grade,
         Quarter,
+        DiarySign
       ],
       autoLoadModels: true,
     }),
@@ -75,6 +78,7 @@ import { JwtAuthGuard } from "./auth/jwt-auth.guard";
     DiaryModule,
     FilesModule,
     QuartersModule,
+    DiarySignModule,
   ],
 })
 export class AppModule {}

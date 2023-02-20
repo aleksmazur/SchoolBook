@@ -56,17 +56,25 @@ export class Subject extends Model<Subject, SubjectCreationAttrs> {
 
   @BeforeCreate
   @AfterCreate
-  @BeforeUpdate
   static async saveDateInUTC(instance: Subject) {
     const assignedTime = moment(instance.date).format("YYYY-MM-DD HH:mm");
     instance.date = assignedTime;
   }
 
   @AfterFind
-  static async convertToLocal(instance: Subject[]) {
-    for (const subject of instance) {
-      const assignedTime = moment(subject.date).format("YYYY-MM-DD HH:mm");
-      subject.date = assignedTime;
+  static async convertToLocal(instance: Subject[] | Subject) {
+    if (Array.isArray(instance)) {
+      for (const subject of instance) {
+        if (subject && subject.date) {
+          const assignedTime = moment(subject.date).format("YYYY-MM-DD HH:mm");
+          subject.date = assignedTime;
+        }
+      }
+    } else {
+      if (instance && instance.date) {
+        const assignedTime = moment(instance.date).format("YYYY-MM-DD HH:mm");
+        instance.date = assignedTime;
+      }
     }
   }
 
@@ -74,7 +82,6 @@ export class Subject extends Model<Subject, SubjectCreationAttrs> {
   startTime: string;
 
   @BeforeCreate
-  @BeforeUpdate
   static setStartTime(instance: Subject) {
     const startTime = moment(instance.date).format("HH:mm");
     instance.startTime = startTime;

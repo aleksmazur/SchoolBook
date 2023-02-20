@@ -1,10 +1,15 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { SubjectsService } from "../subjects/subjects.service";
 import * as moment from "moment";
+import { CreateDiarySignDto } from "../diary_sign/dto/create-diary_sign.dto";
+import { DiarySignService } from "../diary_sign/diary_sign.service";
 
 @Injectable()
 export class DiaryService {
-  constructor(private subjectsService: SubjectsService) {}
+  constructor(
+    private subjectsService: SubjectsService,
+    private diarySignService: DiarySignService
+  ) {}
 
   async getChildrenDiaryByClass(
     classid: number,
@@ -69,5 +74,15 @@ export class DiaryService {
         return acc;
       }, {});
     return sortedSubjectsByDay;
+  }
+
+  async addDiarySign(dto: CreateDiarySignDto) {
+    const sign = await this.diarySignService.createSign(dto);
+    return sign;
+  }
+
+  async getStatusDiarySign(childrenid: number, week?: number, year?: number) {
+    const status = await this.diarySignService.getSign(childrenid, week, year);
+    return status;
   }
 }
