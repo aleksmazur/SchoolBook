@@ -8,7 +8,7 @@ import { getMonth, getWeekNumber } from '../../helpers/dataHelper';
 import { setWeek, setYear } from '../../reducers/diaryReducer';
 import { setActiveQuarter, setCurrentQuarter } from '../../reducers/quarterReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getDiary } from '../../thunks/diary';
+import { getDiary, getSignDiary, setSignDiary } from '../../thunks/diary';
 import { getQuarter } from '../../thunks/quarter';
 import { getSchedule } from '../../thunks/schedule';
 
@@ -26,6 +26,7 @@ const DiaryPage = () => {
   const { children, role } = useAppSelector((state) => state.userInfo.userInfo);
   const idClass = useAppSelector((state) => state.classInfo.classInfo.id);
   const { quarter, activeQuarter, currentQuarter } = useAppSelector((state) => state.quarter);
+  const { sign } = useAppSelector((state) => state.diary);
   const [activeTab, setActiveTab] = useState(activeQuarter);
   const [hiddenPrev, setHiddenPrev] = useState(false);
   const [hiddenNext, setHiddenNext] = useState(false);
@@ -94,6 +95,13 @@ const DiaryPage = () => {
     }
   }, [dispatch, week, children, idClass, year]);
 
+  useEffect(() => {
+    if (children) {
+      const idPupil = children[0].id;
+      dispatch(getSignDiary({ idPupil, week, year }));
+    }
+  }, [dispatch, sign, week, year, children]);
+
   const onChangeWeekNext = () => {
     if (week + 1 > MAX_WEEK_IN_YEAR) {
       dispatch(setWeek(0));
@@ -112,8 +120,17 @@ const DiaryPage = () => {
     }
   };
 
-  const subscribeDiary = () => {
-    console.log('Дневник подписан!');
+  const subscribeDiary = async () => {
+    if (children && endWeek) {
+      const sign = {
+        childrenId: children[0].id,
+        date: `${new Date(endWeek).toLocaleDateString('af')}`,
+        sign: true,
+      };
+      await dispatch(setSignDiary(sign));
+      const idPupil = children[0].id;
+      dispatch(getSignDiary({ idPupil, week, year }));
+    }
   };
 
   return (
@@ -170,8 +187,8 @@ const DiaryPage = () => {
             <div className="error__text">{errorDiary}</div>
           )}
           {role === 'parent' && (
-            <button className="diary__action-button btn" onClick={subscribeDiary}>
-              {t('diary.subscribe')}
+            <button className="diary__action-button btn" disabled={sign} onClick={subscribeDiary}>
+              {sign ? t('diary.signed') : t('diary.sign')}
             </button>
           )}
         </>

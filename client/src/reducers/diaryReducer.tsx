@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from '@reduxjs/toolkit';
 import { getWeekNumber } from '../helpers/dataHelper';
-import { getDiary, getFinalDiary } from '../thunks/diary';
+import { getDiary, getFinalDiary, getSignDiary } from '../thunks/diary';
 
 type IDiary = {
   [key: string]: IDiaryDay[];
@@ -27,6 +27,7 @@ export type IDiaryState = {
   endWeek: string | null;
   isLoader: boolean;
   finalDiary: any;
+  sign: boolean;
 };
 
 const initialState: IDiaryState = {
@@ -38,6 +39,7 @@ const initialState: IDiaryState = {
   endWeek: null,
   isLoader: false,
   finalDiary: null,
+  sign: false,
 };
 
 const diaryReducer = createSlice({
@@ -74,6 +76,9 @@ const diaryReducer = createSlice({
       .addCase(getDiary.rejected, (state, action) => {
         state.errorDiary = action.error.message;
         state.isLoader = false;
+      })
+      .addCase(getSignDiary.fulfilled, (state, action) => {
+        state.sign = action.payload;
       });
   },
 });
