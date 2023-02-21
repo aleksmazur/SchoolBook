@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { IChildren } from '../../reducers/userReducer';
 import { useAppSelector } from '../../store/hooks';
 import PupilItemInJournal from '../PupilItemInJournal/PupilItemInJournal';
@@ -15,6 +16,8 @@ export const getDate = (date: string): string => {
 };
 
 const PupilsInJornal = () => {
+  const { t } = useTranslation();
+
   const childrens = useAppSelector((state) => state.classInfo.classInfo.childrens);
   const subjects = useAppSelector((state) => state.subjects.subjects);
 
@@ -24,7 +27,7 @@ const PupilsInJornal = () => {
         <thead>
           <tr>
             <th></th>
-            <th>ФИО</th>
+            <th>{t('journal.name')}</th>
             {subjects &&
               subjects.map((sub, ind) => (
                 <th key={ind} data-idlesson={sub.id}>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ISсheduleDay } from '../../interfaces/ISchedule';
 import Lesson from '../Lesson/Lesson';
 import './lesson.css';
@@ -9,6 +10,8 @@ type IScheduleDayProps = {
 };
 
 const ScheduleDay = ({ lessons, index, day }: IScheduleDayProps) => {
+  const { t } = useTranslation();
+
   const today = new Date(Date.now()).getDay() - 1;
 
   return (
@@ -21,8 +24,8 @@ const ScheduleDay = ({ lessons, index, day }: IScheduleDayProps) => {
         <thead>
           <tr>
             <th></th>
-            <th>Время</th>
-            <th>Урок</th>
+            <th>{t('schedule.time')}</th>
+            <th>{t('schedule.lesson')}</th>
           </tr>
         </thead>
         <tbody>
