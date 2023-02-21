@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
-import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { ClassRoom } from "./classes.model";
 import { ClassesService, CustomError } from "./classes.service";
 import { CreateClassRoomDto } from "./dto/create-classroom.dto";
@@ -22,8 +22,8 @@ export class ClassesController {
   @ApiOperation({ summary: "Get all classes" })
   @ApiOkResponse({ type: [ClassRoom] })
   @ApiNotFoundResponse({ description: "Classes not found!" })
-  @ApiQuery({ name: "teacher", required: false })
-  @ApiQuery({ name: "name", required: false })
+  @ApiQuery({ name: "teacher", description: "Teacher ID to find his class", required: false, example: "2" })
+  @ApiQuery({ name: "name", description: "Class name to search for a class by its name", required: false, example: "1А" })
   @Get()
   getAll(@Query("teacher") teacherId?: number, @Query("name") name?: string) {
     if (teacherId) {
@@ -38,6 +38,7 @@ export class ClassesController {
   @ApiOperation({ summary: "Get class by ID" })
   @ApiOkResponse({ type: ClassRoom })
   @ApiNotFoundResponse({ description: "Class not found!" })
+  @ApiParam({ name: "id", description: "Class ID to get information about it", example: "2", required: true })
   @Get(":id")
   getClassByID(@Param("id") id: number) {
     return this.classService.getClass(id);
