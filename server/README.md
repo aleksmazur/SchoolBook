@@ -31,7 +31,7 @@ npm run start
 
 👤 **Anastasia Arzhanik**
 
-👤 **Aleksandar Mazur**
+👤 **Aleksandra Mazur**
 
 * Github: [@wowblvck](https://github.com/wowblvck)
 * Github: [@Arzhanik-Anastasia](https://github.com/Arzhanik-Anastasia)
