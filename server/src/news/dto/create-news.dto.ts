@@ -3,7 +3,7 @@ import { ApiProperty } from "@nestjs/swagger";
 export class CreateNewsDto {
   @ApiProperty({
     example: "Excursion to the 'Stalin Line'",
-    description: "News title",
+    description: "News headline",
   })
   readonly title: string;
 
