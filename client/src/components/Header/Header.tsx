@@ -38,7 +38,7 @@ export function Header() {
     if (token) {
       const decodedToken: IUserFromToken = jwt_decode(token);
       dispatch(setUserInfo({ username: decodedToken.username, fullName: decodedToken.fullName }));
-      dispatch(setToken(token));
+      dispatch(setToken({ token: token }));
       dispatch(setServiceInfo(token));
     }
   }, [dispatch, token]);
