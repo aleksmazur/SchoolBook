@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { toggleActiveModal } from '../../reducers/modalReducer';
+import { setStatusModal } from '../../reducers/modalReducer';
 import { setServiceInfo, setToken, setUserInfo } from '../../reducers/userReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import jwt_decode from 'jwt-decode';
 import './header.css';
 import { useEffect } from 'react';
+import { resetClassInfo } from '../../reducers/classReducer';
 
 export type IUserFromToken = {
   exp: number;
@@ -51,12 +51,14 @@ export function Header() {
 
   const logoutUser = () => {
     dispatch(setToken({ token: null }));
+    dispatch(setUserInfo({ username: null, fullName: null }));
     localStorage.clear();
     navigate('/', { replace: true });
+    dispatch(resetClassInfo());
   };
 
   const openModal = () => {
-    dispatch(toggleActiveModal());
+    dispatch(setStatusModal(true));
   };
 
   return (

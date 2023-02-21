@@ -62,7 +62,17 @@ const initialState: IClass = {
 const classReducer = createSlice({
   name: 'class',
   initialState,
-  reducers: {},
+  reducers: {
+    resetClassInfo(state) {
+      state.classInfo = {
+        id: null,
+        className: null,
+        classTeacherId: null,
+        classTeacher: null,
+        childrens: [],
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getClassByID.pending, () => {
@@ -89,4 +99,4 @@ const classReducer = createSlice({
 });
 
 export default classReducer.reducer;
-export const {} = classReducer.actions;
+export const { resetClassInfo } = classReducer.actions;
