@@ -16,7 +16,7 @@
     display: inline-block;
     width: 32px;
     height: 2px;
-    background-color: black;
+    background-color: var(--color-text);
     content: "";
     transition: 0.3s;
 }

@@ -1,4 +1,6 @@
-import { useTheme } from '../../hooks/useTheme';
+import { useEffect } from 'react';
+import { setTheme } from '../../reducers/settingReducer';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import './togglerTheme.css';
 
 const themes = {
@@ -7,11 +9,16 @@ const themes = {
 };
 
 const TogglerTheme = () => {
-  const { theme, setTheme } = useTheme();
+  const theme = useAppSelector((state) => state.setting.theme);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const changeTheme = () => {
-    if (theme === themes.light) setTheme(themes.dark);
-    if (theme === themes.dark) setTheme(themes.light);
+    if (theme === themes.light) dispatch(setTheme(themes.dark));
+    if (theme === themes.dark) dispatch(setTheme(themes.light));
   };
 
   return (
