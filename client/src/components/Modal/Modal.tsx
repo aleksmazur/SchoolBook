@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { toggleActiveModal } from '../../reducers/modalReducer';
+import { setStatusModal } from '../../reducers/modalReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { authUser, ILogin } from '../../thunks/user';
@@ -20,7 +20,7 @@ export const Modal = () => {
   const { errorUser } = useAppSelector((state) => state.userInfo);
 
   const closingModal = () => {
-    dispatch(toggleActiveModal());
+    dispatch(setStatusModal(false));
   };
 
   const onSubmitForm: SubmitHandler<ILogin> = (data) => {
