@@ -6,6 +6,7 @@ import { setActiveQuarter } from '../../reducers/quarterReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getSchedule } from '../../thunks/schedule';
 import { getSubject } from '../../thunks/subject';
+import './journalPage.css';
 
 const JournalPage = () => {
   const { t } = useTranslation();
@@ -68,7 +69,7 @@ const JournalPage = () => {
           </button>
         ))}
       </div>
-      <div className="tab">
+      <div className="tab subjects-tab">
         {tabsListLesson.map((tab, i) => (
           <button
             className={`tablinks ${i === activeLesson ? 'active' : ''}`}

@@ -15,8 +15,8 @@
     display: flex;
     gap: 2px;
     justify-content: center;
-    margin: 20px auto;
-    overflow: scroll;
+    margin: 10px auto;
+    padding: 10px 0;
 }
 .tablinks:first-child {
 	border-radius: 8px 0 0 8px;
