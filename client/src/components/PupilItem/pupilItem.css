@@ -5,17 +5,24 @@
     overflow: scroll;
 }
 
+.pupilsList__table table {
+	width: 80%;
+}
 .pupil__item_name,
 .teacher__item_name {
     cursor: pointer;
+	width: 25%; 
 }
 
+.pupil__item_birht {
+	width: 15%;
+}
 table thead th {
 	font-weight: bold;
 	text-align: left;
 	border: none;
 	padding: 10px;
-	background: #d8d8d8;
+	background: var(--table-head-bg);
 	font-size: 14px;
 }
 table thead tr th:first-child {
@@ -32,14 +39,17 @@ table tbody td {
 	vertical-align: top;
 }
 table tbody tr:nth-child(even){
-	background: #f3f3f3;
+	background: var(--table-body-bg);
+}
+.pupilsList__table table tbody tr td:first-child  {
+	width: 0%;
 }
 table tbody tr td:first-child {
 	border-radius: 8px 0 0 8px;
 }
 table tbody tr td:last-child {
 	border-radius: 0 8px 8px 0;
-	/* width: 90px; */
+	width: 90px;
 }
 .cell__homework {
 	justify-content: space-between;
