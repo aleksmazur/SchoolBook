@@ -89,5 +89,10 @@
         "name": "Pupil",
         "date": "Date",
         "task": "Hometask"
+    },
+    "info": {
+        "about": "About school",
+        "adress": "Adress",
+        "phone": "Phone"
     }
   }
