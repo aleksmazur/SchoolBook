@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { IChildren } from '../../reducers/userReducer';
 import { useAppSelector } from '../../store/hooks';
 import PupilItemInJournal from '../PupilItemInJournal/PupilItemInJournal';
+import './pupilsInJournal.css';
 
 export const getDate = (date: string): string => {
   const day =
@@ -22,7 +23,7 @@ const PupilsInJornal = () => {
   const subjects = useAppSelector((state) => state.subjects.subjects);
 
   return (
-    <div className="pupilsList__table">
+    <div className="pupilsInJournal__table">
       <table>
         <thead>
           <tr>

@@ -1,3 +1,19 @@
 .subjects-tab {
-    overflow: scroll;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    justify-content: start;
+}
+
+.subjects-tab::-webkit-scrollbar{
+    height: 5px;  
+}
+
+.subjects-tab::-webkit-scrollbar-track {
+    background: var(--table-body-bg);
+    border-radius: 10px;       
+}
+
+.subjects-tab::-webkit-scrollbar-thumb {
+    background-color: var(--table-head-bg);
+    border-radius: 10px;       
 }

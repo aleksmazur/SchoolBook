@@ -1,29 +1,9 @@
-.homeWorkList__table th:last-child {
-    width: 30%
-}
-
-.homeWork__item .homework__wrapper {
-    width: 100%;
-    height: 40px;
-}
-
 .cell__homework {
     position: relative;
 }
 
-.cell__homework div {
-    width: 300px;
-}
-.homeWork__item {
-    height: 40px;
-}
-
-.homeWork__item td {
-    width: 5%;
-}
-
-.cell__homework {
-    width: 80% !important;
+.homeWork__item td:last-child {
+    padding-right: 40px;
 }
 
 .cell__homework div:last-child {

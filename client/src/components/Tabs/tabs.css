@@ -10,6 +10,7 @@
 .active {
     background: #f1d760;
     box-shadow: 2px 2px 6px #2b1a1a80;
+    color: black;
 }
 .tab {
     display: flex;

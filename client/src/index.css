@@ -22,10 +22,10 @@
   --color-setting-btn: white;
   --option-bg: #f1d760;
   --option-text: black;
-  --content-bg:  #28384d;
+  --content-bg:  #4f5f75;
   --content-text: rgb(230, 230, 230);
-  --table-head-bg: #575757; 
-  --table-body-bg: #9a9898;
+  --table-head-bg: #28384d; 
+  --table-body-bg: #425166;
 }
 
 .btn {
