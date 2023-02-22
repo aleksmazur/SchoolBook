@@ -7,5 +7,20 @@
 }
 
 .currentGrades__table {
-    overflow: scroll;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+}
+
+.currentGrades__table::-webkit-scrollbar{
+    height: 5px;  
+}
+
+.currentGrades__table::-webkit-scrollbar-track {
+    background: var(--table-body-bg);
+    border-radius: 10px;       
+}
+
+.currentGrades__table::-webkit-scrollbar-thumb {
+    background-color: var(--table-head-bg);
+    border-radius: 10px;       
 }
