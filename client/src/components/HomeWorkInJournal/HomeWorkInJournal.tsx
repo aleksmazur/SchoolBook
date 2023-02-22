@@ -1,9 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '../../store/hooks';
 import HomeWorkItem from '../HomeWorkItem/HomeWorkItem';
 import Preloader from '../Preloader/Preloader';
 import './homeWorkInJournal.css';
 
 const HomeWorkInJournal = () => {
+  const { t } = useTranslation();
   const { isLoader, subjects } = useAppSelector((state) => state.subjects);
 
   return (
@@ -11,8 +13,8 @@ const HomeWorkInJournal = () => {
       <table>
         <thead>
           <tr>
-            <th>Дата</th>
-            <th>Домашнее задание</th>
+            <th>{t('journal.date')}</th>
+            <th>{t('journal.task')}</th>
           </tr>
         </thead>
         <tbody>

@@ -43,12 +43,17 @@
         "lastPage": "Последняя страница"
     },
     "schedule": {
-        "scheduleTitle": "Расписание"
+        "scheduleTitle": "Расписание",
+        "time": "Время",
+        "lesson": "Урок"
     },
     "class": {
         "classList": "Список класса",
         "classPhotos": "Фото класса",
-        "teacher": "Классный руководитель"
+        "teacher": "Классный руководитель",
+        "name": "ФИО",
+        "birth": "Дата рождения",
+        "address": "Адрес"
     },
     "auth": {
         "authTitle": "Авторизация",
@@ -69,6 +74,18 @@
         "teacher": "Учитель",
         "father": "Отец",
         "mother": "Мать",
-        "phone": "Телефон"
+        "phone": "Телефон",
+        "pupil": "Ученик: ",
+        "class": "Класс: ",
+        "role": "Роль: ",
+        "login": "Логин: ",
+        "teacherIn": "Учитель в "
+    },
+    "journal": {
+        "journalTitle": "Школьный журнал",
+        "quarter": "четверть",
+        "name": "ФИО",
+        "date": "Дата",
+        "task": "Домашнее задание"
     }
   }

@@ -1,8 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import { IChildren } from '../../reducers/userReducer';
 import { useAppSelector } from '../../store/hooks';
 import PupilItem from '../PupilItem/PupilItem';
 
 const PupilsList = () => {
+  const { t } = useTranslation();
+
   const childrens = useAppSelector((state) => state.classInfo.classInfo.childrens);
 
   return (
@@ -11,9 +14,9 @@ const PupilsList = () => {
         <thead>
           <tr>
             <th></th>
-            <th>ФИО</th>
-            <th>Дата рождения</th>
-            <th>Адрес</th>
+            <th>{t('class.name')}</th>
+            <th>{t('class.birth')}</th>
+            <th>{t('class.address')}</th>
           </tr>
         </thead>
         <tbody>

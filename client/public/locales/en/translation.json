@@ -43,12 +43,18 @@
         "lastPage": "Last Page"
     },
     "schedule": {
-        "scheduleTitle": "Schedule"
+        "scheduleTitle": "Schedule",
+        "time": "Time",
+        "lesson": "Lesson"
     },
     "class": {
         "classList": "Class list",
         "classPhotos": "Class photo",
-        "teacher": "Teacher"
+        "teacher": "Teacher",
+        "name": "Pupil",
+        "birth": "Birthday",
+        "address": "Address"
+
     },
     "auth": {
         "authTitle": "Authorization",
@@ -69,6 +75,18 @@
         "teacher": "Teacher",
         "father": "Father",
         "mother": "Mother",
-        "phone": "Сontact number"
+        "phone": "Сontact number",
+        "pupil": "Pupil: ",
+        "class": "Class: ",
+        "role": "Role: ",
+        "login": "Login: ",
+        "teacherIn": "Teacher in "
+    },
+    "journal": {
+        "journalTitle": "School Journal",
+        "quarter": "quarter",
+        "name": "Pupil",
+        "date": "Date",
+        "task": "Hometask"
     }
   }
