@@ -5,27 +5,19 @@
 }
 
 :root[data-theme="light"] {
-  --bg-header: #f1d760;;
+  --bg-header: #5da4a4;
   --color-text: black;
   --color-setting-btn: #28384d;;
   --option-bg: #28384d;;
   --option-text: white;
-  --content-bg: rgb(255, 255, 255);
-  --content-text: rgba(0, 0, 0, 0.87);
-  --table-head-bg: #d8d8d8;
-  --table-body-bg: #f3f3f3;
 }
 
 :root[data-theme="dark"] {
   --bg-header: #28384d;
   --color-text: white;
-  --color-setting-btn: white;
+  --color-setting-btn: #5da4a4;
   --option-bg: #f1d760;
   --option-text: black;
-  --content-bg:  #28384d;
-  --content-text: rgb(230, 230, 230);
-  --table-head-bg: #575757; 
-  --table-body-bg: #9a9898;
 }
 
 .btn {
