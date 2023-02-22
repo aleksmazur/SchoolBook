@@ -13,7 +13,9 @@
     cursor: pointer;
 	width: 25%; 
 }
-
+.teacher__item_name {
+	margin: auto;
+}
 .pupil__item_birht {
 	width: 15%;
 }
