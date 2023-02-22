@@ -126,9 +126,15 @@ const SideBar = () => {
             <div className="sidebar__li-text">{t('sidebar.class')}</div>
           </li>
         </Link>
+        <Link to="/info">
+          <li className={`sidebar__li ${'info' === active ? 'active' : ''}`} data-link="info">
+            <div className="sidebar__li-icon icon-news"></div>
+            <div className="sidebar__li-text">{t('sidebar.info')}</div>
+          </li>
+        </Link>
         <Link to="/news">
           <li className={`sidebar__li ${'news' === active ? 'active' : ''}`} data-link="news">
-            <div className="sidebar__li-icon icon-news"></div>
+            <div className="sidebar__li-icon icon-school"></div>
             <div className="sidebar__li-text">{t('sidebar.news')}</div>
           </li>
         </Link>
