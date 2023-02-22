@@ -75,6 +75,7 @@
         "teacher": "Teacher",
         "father": "Father",
         "mother": "Mother",
+        "phone": "Сontact number",
         "pupil": "Pupil: ",
         "class": "Class: ",
         "role": "Role: ",

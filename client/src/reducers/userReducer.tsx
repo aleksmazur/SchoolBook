@@ -65,6 +65,15 @@ const userReducer = createSlice({
       state.userInfo.username = action.payload.username;
       state.userInfo.fullName = action.payload.fullName;
     },
+    resetUserInfo(state) {
+      state.userInfo.id = null;
+      state.userInfo.username = null;
+      state.userInfo.fullName = null;
+      state.userInfo.role = null;
+      state.userInfo.children = null;
+      state.userInfo.profilePic = null;
+      state.userInfo.gender = null;
+    },
     setServiceInfo(state, action) {
       const decodedToken: IUserFromToken = jwt_decode(action.payload);
       state.userInfo.id = decodedToken.id;
@@ -101,4 +110,4 @@ const userReducer = createSlice({
 });
 
 export default userReducer.reducer;
-export const { setUserInfo, setServiceInfo, setToken } = userReducer.actions;
+export const { setUserInfo, setServiceInfo, setToken, resetUserInfo } = userReducer.actions;

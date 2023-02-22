@@ -9,6 +9,7 @@ export type ITeacher = {
   lastName: string;
   fullName: string;
   profilePic: string;
+  phone: string;
 };
 
 type IPupil = {
