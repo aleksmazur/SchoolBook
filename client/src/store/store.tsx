@@ -8,6 +8,7 @@ import newsReducer from '../reducers/newsReducer';
 import diaryReducer from '../reducers/diaryReducer';
 import quarterReducer from '../reducers/quarterReducer';
 import subjectsReducer from '../reducers/subjectsReducer';
+import schoolReducer from '../reducers/schoolReducer';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     news: newsReducer,
     quarter: quarterReducer,
     subjects: subjectsReducer,
+    schoolInfo: schoolReducer,
   },
 });
 
