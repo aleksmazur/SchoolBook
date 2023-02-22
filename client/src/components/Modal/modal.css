@@ -22,13 +22,14 @@
     justify-content: center;
     align-items: center;
     font-family: Roboto, sans-serif;
+    color: var(--content-text);
 }
 
 .modal__body {
     min-height: 250px;
     max-width: 530px;
     width: 100%;
-    background-color: white;
+    background-color: var(--content-bg);
     display: flex;
     position: relative;
     padding: 30px;
@@ -56,7 +57,7 @@
     content: " ";
     height: 26px;
     width: 2px;
-    background-color: black;
+    background-color: var(--content-text);
 }
 
 .close__modal::before {
@@ -76,11 +77,11 @@
 
 .input-block__wrapper input {
     font-size: 20px;
-    color: black;
+    color: var(--content-text);
     border: none;
     padding: 8px;
     background-color: transparent;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--content-text);
     outline: none;
     margin-bottom: 0.6em;
 }
