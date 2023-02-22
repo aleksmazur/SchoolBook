@@ -30,12 +30,12 @@ const ProfilePage = () => {
       const info = children.map((child, ind) => {
         return (
           <p key={ind}>
-            <span>Ученик: </span>
+            <span>{t('profile.pupil')} </span>
             <Link to={`/class/children/${child.id}`}>
               {child.lastName} {child.firstName} {child.middleName}
             </Link>
             <br />
-            <span>Класс: </span>
+            <span>{t('profile.class')}</span>
             <Link to={`/class/${child.class.id}`}> {child.class.className}</Link>
           </p>
         );
@@ -55,19 +55,23 @@ const ProfilePage = () => {
           <h3 className="profile__title">{fullName}</h3>
           <div className="profile__role">
             {' '}
-            Роль:{' '}
+            {t('profile.role')}
             {role === 'teacher'
               ? t('profile.teacher')
               : gender === 'male'
               ? t('profile.father')
               : t('profile.mother')}
           </div>
-          <div className="profile__email">Логин: {username}</div>
+          <div className="profile__email">
+            {t('profile.login')}
+            {username}
+          </div>
           <div className="profile__info-relative">
             {children ? renderInfoChildren() : null}
             {role === 'teacher' ? (
               <span>
-                Учитель в <Link to={`/class/${classInfo.id}`}>{classInfo.className}</Link>
+                {t('profile.teacherIn')}
+                <Link to={`/class/${classInfo.id}`}>{classInfo.className}</Link>
               </span>
             ) : null}
           </div>

@@ -78,9 +78,7 @@ const SideBar = () => {
         </Link>
         <Link to={`${role}/${id}`}>
           <li
-            className={`sidebar__li ${
-              'parent' === active || 'children' === active ? 'active' : ''
-            }`}
+            className={`sidebar__li ${'parent' === active || 'teacher' === active ? 'active' : ''}`}
             data-link={role}
           >
             <div className="sidebar__li-icon icon-profile"></div>
