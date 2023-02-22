@@ -4,6 +4,7 @@ import * as moment from "moment";
 import { CreateDiarySignDto } from "./dto/create-diary_sign.dto";
 import { InjectModel } from "@nestjs/sequelize";
 import { DiarySign } from "./diary_sign.model";
+import { ChildrensService } from "../childrens/childrens.service";
 
 @Injectable()
 export class DiaryService {
@@ -11,6 +12,7 @@ export class DiaryService {
     @InjectModel(DiarySign)
     private diarySignRepository: typeof DiarySign,
     private subjectsService: SubjectsService,
+    private childrensService: ChildrensService
   ) {}
 
   async getChildrenDiaryByClass(
@@ -79,25 +81,14 @@ export class DiaryService {
   }
 
   async addDiarySign(dto: CreateDiarySignDto) {
+    await this.childrensService.getChildren(dto.childrenId);
     const sign = await this.diarySignRepository.create(dto);
     return sign;
   }
 
   async getStatusDiarySign(childrenId: number, week?: number, year?: number) {
+    await this.childrensService.getChildren(childrenId);
     if (week && year) {
-      // const startDate = moment().year(year).week(week).startOf("week").toDate();
-      // const endDate = moment().year(year).week(week).endOf("week").toDate();
-      // console.log(startDate, endDate);
-      // const signature = await this.diarySignRepository.findOne({
-      //   where: {
-      //     childrenId,
-      //     date: {
-      //       $between: [startDate, endDate]
-      //     }
-      //   },
-      //   attributes: ['sign'],
-      // });
-      // return signature?.sign;
       const startDate = moment()
         .year(year)
         .week(week)
@@ -108,7 +99,6 @@ export class DiaryService {
         .week(week)
         .endOf("week")
         .format("YYYY-MM-DD");
-      console.log(startDate, endDate);
       const diarySigns = await this.diarySignRepository.findAll({
         where: {
           childrenId,
@@ -123,14 +113,7 @@ export class DiaryService {
         }
       });
       return sign;
-      // const filteredDiarySigns = diarySigns.filter((diarySign) => {
-      //   const date = moment(diarySign.date).format("YYYY-MM-DD");
-      //   return date >= startDate && date <= endDate;
-      // });
-      // if (filteredDiarySigns.length > 0) {
-      //   return filteredDiarySigns[0].sign;
-      // }
-      // return false;
     }
+    throw new HttpException("Need week and year query params", HttpStatus.BAD_REQUEST);
   }
 }
