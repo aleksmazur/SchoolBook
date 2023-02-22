@@ -12,11 +12,11 @@ const modalReduser = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    toggleActiveModal: (state) => {
-      state.activeModal = !state.activeModal;
+    setStatusModal: (state, action) => {
+      state.activeModal = action.payload;
     },
   },
 });
 
-export const { toggleActiveModal } = modalReduser.actions;
+export const { setStatusModal } = modalReduser.actions;
 export default modalReduser.reducer;
