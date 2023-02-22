@@ -4,7 +4,7 @@
 }
 
 .finalGrades__table::-webkit-scrollbar{
-    width: 4px;  
+    height: 5px;  
 }
 
 .finalGrades__table::-webkit-scrollbar-track {

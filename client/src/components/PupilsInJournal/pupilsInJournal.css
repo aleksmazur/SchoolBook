@@ -6,7 +6,7 @@
 }
 
 .pupilsInJournal__table::-webkit-scrollbar{
-    width: 4px;  
+    height: 5px;  
 }
 
 .pupilsInJournal__table::-webkit-scrollbar-track {

@@ -12,7 +12,7 @@
 }
 
 .currentGrades__table::-webkit-scrollbar{
-    width: 4px;  
+    height: 5px;  
 }
 
 .currentGrades__table::-webkit-scrollbar-track {

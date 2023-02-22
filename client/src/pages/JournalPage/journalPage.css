@@ -5,7 +5,7 @@
 }
 
 .subjects-tab::-webkit-scrollbar{
-    width: 4px;  
+    height: 5px;  
 }
 
 .subjects-tab::-webkit-scrollbar-track {
