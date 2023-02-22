@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { setStatusModal } from '../../reducers/modalReducer';
-import { setServiceInfo, setToken, setUserInfo } from '../../reducers/userReducer';
+import { resetUserInfo, setServiceInfo, setToken, setUserInfo } from '../../reducers/userReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import jwt_decode from 'jwt-decode';
 import './header.css';
@@ -53,8 +53,9 @@ export function Header() {
     dispatch(setToken({ token: null }));
     dispatch(setUserInfo({ username: null, fullName: null }));
     localStorage.clear();
-    navigate('/', { replace: true });
     dispatch(resetClassInfo());
+    dispatch(resetUserInfo());
+    navigate('/', { replace: true });
   };
 
   const openModal = () => {
