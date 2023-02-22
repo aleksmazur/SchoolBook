@@ -1,18 +1,20 @@
-.finalGrades__table {
+.pupilsInJournal__table {
     overflow-x: auto;
     scroll-snap-type: x proximity;
+    height: auto;
+    padding: 10px 0;
 }
 
-.finalGrades__table::-webkit-scrollbar{
+.pupilsInJournal__table::-webkit-scrollbar{
     width: 4px;  
 }
 
-.finalGrades__table::-webkit-scrollbar-track {
+.pupilsInJournal__table::-webkit-scrollbar-track {
     background: var(--table-body-bg);
     border-radius: 10px;       
 }
 
-.finalGrades__table::-webkit-scrollbar-thumb {
+.pupilsInJournal__table::-webkit-scrollbar-thumb {
     background-color: var(--table-head-bg);
     border-radius: 10px;       
 }

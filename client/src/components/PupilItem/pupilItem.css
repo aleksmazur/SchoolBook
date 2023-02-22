@@ -2,12 +2,8 @@
 	width: 100%;
 	border: none;
 	margin-bottom: 20px;
-    overflow: scroll;
 }
 
-.pupilsList__table table {
-	width: 80%;
-}
 .pupil__item_name,
 .teacher__item_name {
     cursor: pointer;
@@ -51,7 +47,7 @@ table tbody tr td:first-child {
 }
 table tbody tr td:last-child {
 	border-radius: 0 8px 8px 0;
-	width: 90px;
+	/* width: 90px; */
 }
 .cell__homework {
 	justify-content: space-between;
