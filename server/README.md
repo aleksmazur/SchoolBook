@@ -4,9 +4,6 @@
   <a href="https://school-book-production.up.railway.app/api/docs" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
-  <a href="#" target="_blank">
-    <img alt="License: UNLICENSED" src="https://img.shields.io/badge/License-UNLICENSED-yellow.svg" />
-  </a>
 </p>
 
 > API for the School Book project by Rolling Scopes School's RS Clone
@@ -43,4 +40,4 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 ## 🚀 Features
 
-### [Features](FEATURES.md)
+### [Features](docs/FEATURES.md)
