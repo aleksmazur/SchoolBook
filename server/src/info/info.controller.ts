@@ -11,14 +11,14 @@ export class InfoController {
     private infoService: InfoService
   ) {}
 
-  @ApiOperation({ summary: "Create news" })
+  @ApiOperation({ summary: "Create info" })
   @ApiOkResponse({ type: Info })
   @Post()
   create(@Body() dto: CreateInfoDto) {
     return this.infoService.createInfo(dto);
   }
 
-  @ApiOperation({ summary: "Get all news" })
+  @ApiOperation({ summary: "Get info" })
   @ApiOkResponse({ type: Info })
   @ApiNotFoundResponse({ description: "Info not found!" })
   @Get()
