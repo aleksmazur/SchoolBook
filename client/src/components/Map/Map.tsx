@@ -18,7 +18,7 @@ const Map = () => {
         container: mapContainer.current,
         style: `https://api.maptiler.com/maps/4e7ef975-e6fc-4243-b48c-4e34e2e846df/style.json?key=${API_KEY}`,
         center: [lng, lat],
-        zoom: 14,
+        zoom: 16,
       });
       map.current.addControl(new maplibregl.NavigationControl({}), 'top-right');
       new maplibregl.Marker({ color: '#FF0000' }).setLngLat([lng, lat]).addTo(map.current);
