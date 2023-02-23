@@ -7,8 +7,8 @@ const Map = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
 
   const map = useRef<maplibregl.Map | null>(null);
-  const [lng] = useState(27.49051816377847);
-  const [lat] = useState(53.896431852742886);
+  const [lng] = useState(27.605179862565443);
+  const [lat] = useState(53.85285127869591);
   const [API_KEY] = useState('cxyywrCy8jX33A6P7CGo');
 
   useEffect(() => {
