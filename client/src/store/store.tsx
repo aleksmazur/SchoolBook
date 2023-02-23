@@ -9,6 +9,7 @@ import diaryReducer from '../reducers/diaryReducer';
 import quarterReducer from '../reducers/quarterReducer';
 import subjectsReducer from '../reducers/subjectsReducer';
 import schoolReducer from '../reducers/schoolReducer';
+import gradesReducer from '../reducers/gradesReducer';
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     quarter: quarterReducer,
     subjects: subjectsReducer,
     schoolInfo: schoolReducer,
+    grades: gradesReducer,
   },
 });
 

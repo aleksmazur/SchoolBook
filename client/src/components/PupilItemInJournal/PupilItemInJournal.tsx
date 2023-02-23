@@ -32,6 +32,7 @@ const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
   const activeQuarter = useAppSelector((state) => state.quarter.activeQuarter);
   const idClass = useAppSelector((state) => state.classInfo.classInfo.id);
   const subject = useAppSelector((state) => state.subjects.subjects);
+  const { isLoader } = useAppSelector((state) => state.grades);
 
   const handleReset = async (e: MouseEvent<HTMLInputElement>) => {
     const currentCell = e.target as HTMLInputElement;
@@ -91,17 +92,21 @@ const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
             )?.id;
             return (
               <td className="cell__grade" key={index}>
-                <input
-                  className="input__grade"
-                  type="text"
-                  onMouseOver={(e) => showClue(e)}
-                  onMouseOut={(e) => hideClue(e)}
-                  onClick={(e) => handleReset(e)}
-                  onChange={(e) => handleChange(e)}
-                  value={currentMarkValue ? String(currentMarkValue) : ''}
-                  data-cell={`${id}_${subject.id}`}
-                  data-id={currentMarkId}
-                />
+                {isLoader ? (
+                  <div className="input__grade-loading"></div>
+                ) : (
+                  <input
+                    className="input__grade"
+                    type="text"
+                    onMouseOver={(e) => showClue(e)}
+                    onMouseOut={(e) => hideClue(e)}
+                    onClick={(e) => handleReset(e)}
+                    onChange={(e) => handleChange(e)}
+                    value={currentMarkValue && !isLoader ? String(currentMarkValue) : ''}
+                    data-cell={`${id}_${subject.id}`}
+                    data-id={currentMarkId}
+                  />
+                )}
                 <span className="grade__clue">Кликните по ячейке для удаления оценки</span>
               </td>
             );
