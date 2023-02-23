@@ -2,9 +2,9 @@
     position: relative;
 }
 
-.homeWork__item td:last-child {
+/* .homeWork__item td:last-child {
     padding-right: 40px;
-}
+} */
 
 .cell__homework div:last-child {
     background-image: url('./../../assets/png/pen.png');
