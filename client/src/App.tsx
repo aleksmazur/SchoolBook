@@ -12,6 +12,7 @@ import { RequireAuth } from './hoc/RequireAuth';
 import PupilCard from './components/PupilCard/PupilCard';
 import GradesPage from './pages/GradesPage/GradesPage';
 import JournalPage from './pages/JournalPage/JournalPage';
+import SchoolInfoPage from './pages/SchoolInfoPage/SchoolInfoPage';
 
 const App = () => {
   return (
@@ -80,6 +81,14 @@ const App = () => {
             element={
               <RequireAuth>
                 <NewsPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="info"
+            element={
+              <RequireAuth>
+                <SchoolInfoPage />
               </RequireAuth>
             }
           />

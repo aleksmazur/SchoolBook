@@ -16,7 +16,8 @@
         "profile": "Profile",
         "class": "Class",
         "news": "News",
-        "journal": "Journal"
+        "journal": "Journal",
+        "info": "About school"
     },
     "main": {
         "schoolBook": "School Book",
@@ -88,5 +89,10 @@
         "name": "Pupil",
         "date": "Date",
         "task": "Hometask"
+    },
+    "info": {
+        "about": "About school",
+        "adress": "Adress",
+        "phone": "Phone"
     }
   }
