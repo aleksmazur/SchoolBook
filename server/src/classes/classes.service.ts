@@ -76,6 +76,24 @@ export class ClassesService {
     return classes;
   }
 
+  async getClassByChild(childid: number, classid: number) {
+    const classItem = await this.classesRepository.findOne({
+      where: {
+        id: classid
+      },
+      include: [
+        {
+          model: Children,
+          where: { id: childid }
+        }
+      ]
+    });
+    if (!classItem) {
+      throw new HttpException(`Class ID '${classid}' by child ID '${childid}' not found!`, HttpStatus.NOT_FOUND);
+    }
+    return classItem;
+  }
+
   async getClassesByTeacher(id: number) {
     const classes = await this.classesRepository.findAll({
       include: [
