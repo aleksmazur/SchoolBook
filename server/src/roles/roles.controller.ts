@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { ApiBadRequestResponse, ApiNotAcceptableResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiNotAcceptableResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateRoleDto } from "./dto/create-role.dto";
 import { Role } from "./roles.model";
 import { RolesService } from "./roles.service";
@@ -10,7 +10,7 @@ export class RolesController {
   constructor(private roleService: RolesService) {}
 
   @ApiOperation({ summary: "Create a user role" })
-  @ApiOkResponse({ type: Role })
+  @ApiCreatedResponse({ type: Role })
   @ApiNotAcceptableResponse({ description: "Role not assigned!" })
   @ApiBadRequestResponse({ description: "Role already exists!" })
   @Post()

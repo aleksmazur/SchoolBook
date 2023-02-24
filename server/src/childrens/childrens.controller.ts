@@ -52,7 +52,7 @@ export class ChildrensController {
   }
 
   @ApiOperation({ summary: "Edit a child's profile picture" })
-  @ApiOkResponse({ type: Children })
+  @ApiCreatedResponse({ type: Children })
   @ApiNotFoundResponse({ description: "Child not found!" })
   @Put("/edit/profile")
   @UseInterceptors(FileInterceptor("profilePic"))

@@ -7,7 +7,7 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiCreatedResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateNewsDto } from "./dto/create-news.dto";
 import { News } from "./news.model";
 import { NewsService } from "./news.service";
@@ -18,7 +18,7 @@ export class NewsController {
   constructor(private newsService: NewsService) {}
 
   @ApiOperation({ summary: "Create news" })
-  @ApiOkResponse({ type: News })
+  @ApiCreatedResponse({ type: News })
   @ApiInternalServerErrorResponse({ description: "An error occurred while writing the file" })
   @Post()
   @UseInterceptors(FileInterceptor("image"))

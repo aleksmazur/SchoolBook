@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
-import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
+import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { CreateDiarySignDto } from "../diary/dto/create-diary_sign.dto";
 import { DiaryService } from "./diary.service";
 import { DiarySign } from "./diary_sign.model";
@@ -31,7 +31,7 @@ export class DiaryController {
   }
 
   @ApiOperation({ summary: "Add diary signature" })
-  @ApiOkResponse({ type: DiarySign })
+  @ApiCreatedResponse({ type: DiarySign })
   @ApiNotFoundResponse({ description: "Child not found!" })
   @Post("/sign/add")
   addSign(@Body() dto: CreateDiarySignDto) {

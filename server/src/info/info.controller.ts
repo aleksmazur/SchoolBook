@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateInfoDto } from './dto/create-info.dto';
 import { Info } from './info.model';
 import { InfoService } from './info.service';
@@ -12,7 +12,7 @@ export class InfoController {
   ) {}
 
   @ApiOperation({ summary: "Create info" })
-  @ApiOkResponse({ type: Info })
+  @ApiCreatedResponse({ type: Info })
   @Post()
   create(@Body() dto: CreateInfoDto) {
     return this.infoService.createInfo(dto);

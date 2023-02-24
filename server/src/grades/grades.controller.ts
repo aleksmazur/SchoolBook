@@ -8,7 +8,7 @@ import {
   Put,
   Query,
 } from "@nestjs/common";
-import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { AddGradeDto } from "./dto/add-grade.dto";
 import { CreateGradeDto } from "./dto/create-grade.dto";
 import { Grade } from "./grades.model";
@@ -20,7 +20,7 @@ export class GradesController {
   constructor(private gradesService: GradesService) {}
 
   @ApiOperation({ summary: "Assign a grade for a child" })
-  @ApiOkResponse({ type: Grade })
+  @ApiCreatedResponse({ type: Grade })
   @ApiNotFoundResponse({ description: "Subject or child not found!" })
   @Post()
   create(@Body() dto: CreateGradeDto) {
@@ -69,7 +69,7 @@ export class GradesController {
   }
 
   @ApiOperation({ summary: "Assign a grade for a child" })
-  @ApiOkResponse({ type: Grade })
+  @ApiCreatedResponse({ type: Grade })
   @ApiNotFoundResponse({ description: "Subject or child not found!" })
   @Put("/add")
   addGrade(@Body() dto: AddGradeDto) {

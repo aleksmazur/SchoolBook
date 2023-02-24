@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put, Query } from "@nestjs/common";
-import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
+import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { AddHomeworkDto } from "./dto/add-homework.dto";
 import { CreateSubjectDto } from "./dto/create-subject.dto";
 import { Subject } from "./subjects.model";
@@ -11,7 +11,7 @@ export class SubjectsController {
   constructor(private subjectsService: SubjectsService) {}
 
   @ApiOperation({ summary: "Create a subject" })
-  @ApiOkResponse({ type: Subject })
+  @ApiCreatedResponse({ type: Subject })
   @ApiNotFoundResponse({ description: "Quarter not found!" })
   @Post()
   create(@Body() dto: CreateSubjectDto) {
@@ -42,7 +42,7 @@ export class SubjectsController {
   }
 
   @ApiOperation({ summary: "Add homework for subject" })
-  @ApiOkResponse({ type: Subject })
+  @ApiCreatedResponse({ type: Subject })
   @ApiParam({ name: "id", example: "2", description: "ID subject", required: true })
   @ApiNotFoundResponse({ description: "Subject not found!" })
   @Put("/homework/add/:id")
