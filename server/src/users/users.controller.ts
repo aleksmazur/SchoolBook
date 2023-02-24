@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Post,
   Put,
@@ -14,10 +13,16 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import {
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiInternalServerErrorResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
   // ApiHeader,
   ApiOperation,
+  ApiParam,
   ApiQuery,
-  ApiResponse,
   ApiTags,
 } from "@nestjs/swagger";
 import { Children } from "../childrens/childrens.model";
@@ -35,7 +40,10 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @ApiOperation({ summary: "Create a user" })
-  @ApiResponse({ status: 200, type: User })
+  @ApiCreatedResponse({ type: User })
+  @ApiBadRequestResponse({ description: "User with username already exists!" })
+  @ApiForbiddenResponse({ description: "No access!" })
+  @ApiNotFoundResponse({ description: "Role not found!" })
   @Role("teacher")
   @UseGuards(RoleGuard)
   @Post()
@@ -44,8 +52,14 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: "Get all users" })
-  @ApiResponse({ status: 200, type: [User] })
-  @ApiQuery({ name: "role", required: false })
+  @ApiOkResponse({ type: [User] })
+  @ApiQuery({
+    name: "role",
+    example: "parent",
+    description: "Value of role",
+    required: false,
+  })
+  @ApiNotFoundResponse({ description: "Users not found!" })
   // @ApiHeader({
   //   name: "Authorization",
   //   description: "Auth token",
@@ -60,25 +74,49 @@ export class UsersController {
     return this.usersService.getAllUsers();
   }
 
-  @ApiOperation({ summary: "Get user by ID" })
-  @ApiResponse({ status: 200, type: User })
-  @ApiResponse({ status: 404, description: "User not found" })
+  @ApiOperation({ summary: "Get user" })
+  @ApiOkResponse({ type: User })
+  @ApiNotFoundResponse({ description: "User not found" })
+  @ApiParam({
+    name: "id",
+    example: "5",
+    description: "User ID",
+    required: true,
+  })
   @Get(":id")
   getUserByID(@Param("id") id: number) {
     return this.usersService.getUserByID(id);
   }
 
-  @ApiOperation({ summary: "Get user childrens" })
-  @ApiResponse({ status: 200, type: [Children] })
-  @ApiResponse({ status: 404, description: "Childrens not found" })
+  @ApiOperation({ summary: "Get user child's" })
+  @ApiOkResponse({ type: [Children] })
+  @ApiNotFoundResponse({ description: "Child's not found" })
+  @ApiParam({
+    name: "id",
+    example: "4",
+    description: "User ID",
+    required: true,
+  })
   @Get("childrens/:id")
   getUserChildrens(@Param("id") id: number) {
     return this.usersService.getUserChildrens(id);
   }
 
-  @ApiOperation({ summary: "Get user children" })
-  @ApiResponse({ status: 200, type: Children })
-  @ApiResponse({ status: 404, description: "Children not found" })
+  @ApiOperation({ summary: "Get user child" })
+  @ApiOkResponse({ type: Children })
+  @ApiNotFoundResponse({ description: "Child not found" })
+  @ApiParam({
+    name: "userId",
+    example: "3",
+    description: "User ID",
+    required: true,
+  })
+  @ApiParam({
+    name: "childId",
+    example: "2",
+    description: "Child ID",
+    required: true,
+  })
   @Get("childrens/:userId/:childId")
   getUserChildren(
     @Param("userId") userId: number,
@@ -88,44 +126,37 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: "Remove user by ID" })
-  @ApiResponse({ status: 200, type: User })
-  @ApiResponse({ status: 404, description: "User not found" })
+  @ApiOkResponse({ description: "User successfully removed!" })
+  @ApiNotFoundResponse({ description: "User not found" })
   @Delete(":id")
   deleteUserByID(@Param("id") id: number) {
     return this.usersService.deleteUserByID(id);
   }
 
   @ApiOperation({ summary: "Add user role" })
-  @ApiResponse({ status: HttpStatus.CREATED, type: AddRoleDto })
-  @ApiResponse({
-    status: HttpStatus.NOT_FOUND,
-    description: "User or role not found",
-  })
-  @ApiResponse({
-    status: HttpStatus.BAD_REQUEST,
-    description: "User already has this role",
-  })
+  @ApiCreatedResponse({ type: AddRoleDto })
+  @ApiNotFoundResponse({ description: "User or role not found" })
+  @ApiBadRequestResponse({ description: "User already has this role" })
   @Post("/role")
   addRole(@Body() dto: AddRoleDto) {
     return this.usersService.addUserRole(dto);
   }
 
   @ApiOperation({ summary: "Change user role" })
-  @ApiResponse({ status: HttpStatus.CREATED, type: AddRoleDto })
-  @ApiResponse({
-    status: HttpStatus.NOT_FOUND,
-    description: "User or role not found",
-  })
-  @ApiResponse({
-    status: HttpStatus.BAD_REQUEST,
-    description: "User already has this role",
-  })
+  @ApiCreatedResponse({ type: AddRoleDto })
+  @ApiNotFoundResponse({ description: "User or role not found" })
+  @ApiBadRequestResponse({ description: "User already has this role" })
   @Put("/role/update")
   changeRole(@Body() dto: AddRoleDto) {
     return this.usersService.changeUserRole(dto);
   }
 
   @ApiOperation({ summary: "Change profile" })
+  @ApiCreatedResponse({ type: User })
+  @ApiNotFoundResponse({ description: "User not found!" })
+  @ApiInternalServerErrorResponse({
+    description: "An error occurred while writing the file",
+  })
   @Put("/edit/profile")
   @UseInterceptors(FileInterceptor("profilePic"))
   changeProfile(@Body() dto: EditProfileDto, @UploadedFile() image) {

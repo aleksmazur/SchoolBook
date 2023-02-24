@@ -32,16 +32,23 @@ export class ClassRoom extends Model<ClassRoom, ClassRoomCreationAttrs> {
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   className: string;
 
+  @ApiProperty({ example: "1", description: "Teacher ID" })
   @ForeignKey(() => User)
   @Column({ allowNull: false })
   classTeacherId: number;
 
+  @ApiProperty({ description: "Class Teacher", type: () => User })
   @BelongsTo(() => User)
   classTeacher: User;
 
+  @ApiProperty({
+    description: "Children in the classroom",
+    type: () => [Children],
+  })
   @HasMany(() => Children)
   childrens: [Children];
 
+  @ApiProperty({ description: "Class items", type: () => [Subject] })
   @HasMany(() => Subject)
   subjects: [Subject];
 }

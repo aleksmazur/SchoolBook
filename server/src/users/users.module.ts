@@ -4,7 +4,7 @@ import { AuthModule } from "../auth/auth.module";
 import { RolesModule } from "../roles/roles.module";
 import { Role } from "../roles/roles.model";
 import { UserRoles } from "../roles/user-roles.model";
-import { UserChildrens } from "./dto/user-childrens.model";
+import { UserChildrens } from "./user-childrens.model";
 import { UsersController } from "./users.controller";
 import { User } from "./users.model";
 import { UsersService } from "./users.service";

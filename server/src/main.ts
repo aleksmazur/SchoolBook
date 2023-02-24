@@ -8,7 +8,9 @@ async function run() {
 
   const config = new DocumentBuilder()
     .setTitle("School Book")
-    .setDescription("Documentation REST API")
+    .setDescription(
+      "REST API documentation for project School Book by task RS Clone from Rolling Scopes School",
+    )
     .setVersion("1.0.0")
     .build();
 

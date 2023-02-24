@@ -7,6 +7,7 @@ import { GradesController } from "./grades.controller";
 import { Grade } from "./grades.model";
 import { GradesService } from "./grades.service";
 import { SubjectsModule } from "../subjects/subjects.module";
+import { ClassesModule } from "src/classes/classes.module";
 
 @Module({
   providers: [GradesService],
@@ -15,6 +16,7 @@ import { SubjectsModule } from "../subjects/subjects.module";
     SequelizeModule.forFeature([Grade, Children, Subject]),
     ChildrensModule,
     forwardRef(() => SubjectsModule),
+    ClassesModule,
   ],
   exports: [GradesService],
 })

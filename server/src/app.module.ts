@@ -11,7 +11,7 @@ import { Children } from "./childrens/childrens.model";
 import { ClassesModule } from "./classes/classes.module";
 import { ClassRoom } from "./classes/classes.model";
 import { AuthModule } from "./auth/auth.module";
-import { UserChildrens } from "./users/dto/user-childrens.model";
+import { UserChildrens } from "./users/user-childrens.model";
 import { NewsModule } from "./news/news.module";
 import { News } from "./news/news.model";
 import { SubjectsModule } from "./subjects/subjects.module";
@@ -28,6 +28,7 @@ import { Quarter } from "./quarters/quarters.model";
 import { DiarySign } from "./diary/diary_sign.model";
 // import { APP_GUARD } from "@nestjs/core";
 // import { JwtAuthGuard } from "./auth/jwt-auth.guard";
+import { InfoModule } from "./info/info.module";
 
 @Module({
   // providers: [
@@ -77,6 +78,7 @@ import { DiarySign } from "./diary/diary_sign.model";
     DiaryModule,
     FilesModule,
     QuartersModule,
+    InfoModule,
   ],
 })
 export class AppModule {}

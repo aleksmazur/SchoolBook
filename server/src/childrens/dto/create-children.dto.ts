@@ -3,43 +3,43 @@ import { ApiProperty } from "@nestjs/swagger";
 export class CreateChildrenDto {
   @ApiProperty({
     example: "Ivan",
-    description: "First child name",
+    description: "Child's name",
   })
   readonly firstName: string;
 
   @ApiProperty({
     example: "Petrov",
-    description: "Last child name",
+    description: "Surname of the child",
   })
   readonly lastName: string;
 
   @ApiProperty({
     example: "Denisovich",
-    description: "Middle child name",
+    description: "Middle name of the child",
   })
   readonly middleName: string;
 
   @ApiProperty({
     example: "street Stroitelei, 12, flat 52",
-    description: "Adress of child",
+    description: "Child's address",
   })
   readonly adress: string;
 
   @ApiProperty({
     example: "12.01.2012",
-    description: "Date of birthday",
+    description: "Date of birth of the child",
   })
   readonly birthday: string;
 
   @ApiProperty({
     example: "2",
-    description: "Class ID",
+    description: "The ID of the class the child belongs to",
   })
   readonly classId: number;
 
   @ApiProperty({
     example: "2",
-    description: "ID of parent",
+    description: "ID of the parent the child belongs to",
   })
   readonly parentId: number;
 }

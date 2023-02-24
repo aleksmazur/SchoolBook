@@ -34,6 +34,13 @@ export class UsersService {
         HttpStatus.NOT_FOUND,
       );
     }
+    const userExists = await this.getUserByUsername(dto.username);
+    if (userExists) {
+      throw new HttpException(
+        `User with username '${dto.username}' already exists!`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     const user = await this.userRepository.create(dto);
     await user.$set("role", [userRole.id]);
     user.role = [userRole];
@@ -51,6 +58,20 @@ export class UsersService {
       throw new HttpException(`Users not found!`, HttpStatus.NOT_FOUND);
     }
     return users;
+  }
+
+  async getUserRoles(id: number) {
+    const user = await this.userRepository.findByPk(id, {
+      include: { all: true },
+    });
+    if (!user) {
+      throw new HttpException(
+        `User with ID '${id}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    const roles = user.role.map((role) => role.value);
+    return roles;
   }
 
   async getUsersByRole(value: string) {
@@ -105,6 +126,10 @@ export class UsersService {
       );
     }
     await user.destroy();
+    throw new HttpException(
+      `User with ID '${id}' successfully removed`,
+      HttpStatus.OK,
+    );
   }
 
   async getUserByUsername(username: string) {
@@ -127,7 +152,7 @@ export class UsersService {
         );
       }
       await user.$add("role", role.id);
-      return new HttpException(
+      throw new HttpException(
         `Role added for ID '${role.id}'`,
         HttpStatus.CREATED,
       );
@@ -183,7 +208,7 @@ export class UsersService {
         HttpStatus.NOT_FOUND,
       );
     }
-    await user.update({ profilePic: fileName });
+    await user.update({ profilePic: fileName, phone: dto.phone });
     return user;
   }
 }

@@ -33,6 +33,10 @@ export class News extends Model<News, NewsCreationAttrs> {
   @Column({ type: DataType.TEXT, unique: false, allowNull: false })
   content: string;
 
+  @ApiProperty({
+    example: "ac71b42f-96f8-4b9f-9e46-8743e3f6a98b.jpg",
+    description: "Image news",
+  })
   @Column({ type: DataType.STRING, unique: false, allowNull: true })
   image: string;
 }

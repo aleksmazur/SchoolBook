@@ -1,5 +1,12 @@
 import { Body, Controller, Get, Post, Query } from "@nestjs/common";
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiQuery,
+  ApiTags,
+} from "@nestjs/swagger";
 import { CreateQuarterDto } from "./dto/create-quarter.dto";
 import { Quarter } from "./quarters.model";
 import { QuartersService } from "./quarters.service";
@@ -10,15 +17,21 @@ export class QuartersController {
   constructor(private quartersService: QuartersService) {}
 
   @ApiOperation({ summary: "Create a quarter" })
-  @ApiResponse({ status: 200, type: Quarter })
+  @ApiCreatedResponse({ type: Quarter })
   @Post()
   create(@Body() dto: CreateQuarterDto) {
     return this.quartersService.createQuarter(dto);
   }
 
   @ApiOperation({ summary: "Get all quarters" })
-  @ApiResponse({ status: 200, type: [Quarter] })
-  @ApiQuery({ name: "quarter", required: false })
+  @ApiOkResponse({ type: [Quarter] })
+  @ApiNotFoundResponse({ description: "Quarter or quarters not found!" })
+  @ApiQuery({
+    name: "quarter",
+    example: "2",
+    description: "Quarter number",
+    required: false,
+  })
   @Get()
   getAll(@Query("quarter") quarter?: number) {
     if (quarter) {

@@ -31,19 +31,21 @@ export class Grade extends Model<Grade, GradeCreationAttrs> {
   @Column({ type: DataType.INTEGER, allowNull: false })
   value: number;
 
-  @ApiProperty({ example: "1", description: "ID of children" })
+  @ApiProperty({ example: "1", description: "Child ID" })
   @ForeignKey(() => Children)
   @Column
   childrenId: number;
 
+  @ApiProperty({ type: () => Children })
   @BelongsTo(() => Children)
   children: Children;
 
-  @ApiProperty({ example: "4", description: "ID of subject" })
+  @ApiProperty({ example: "4", description: "Subject ID" })
   @ForeignKey(() => Subject)
   @Column
   subjectId: number;
 
+  @ApiProperty({ type: () => Subject })
   @BelongsTo(() => Subject)
   subject: Subject;
 }

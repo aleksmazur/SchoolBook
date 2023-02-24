@@ -6,7 +6,7 @@ export class CreateClassRoomDto {
 
   @ApiProperty({
     example: "2",
-    description: "ID of teacher",
+    description: "Teacher ID",
   })
   readonly classTeacherId: number;
 }

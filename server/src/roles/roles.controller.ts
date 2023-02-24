@@ -1,5 +1,13 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiNotAcceptableResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from "@nestjs/swagger";
 import { CreateRoleDto } from "./dto/create-role.dto";
 import { Role } from "./roles.model";
 import { RolesService } from "./roles.service";
@@ -10,22 +18,25 @@ export class RolesController {
   constructor(private roleService: RolesService) {}
 
   @ApiOperation({ summary: "Create a user role" })
-  @ApiResponse({ status: 200, type: Role })
+  @ApiCreatedResponse({ type: Role })
+  @ApiNotAcceptableResponse({ description: "Role not assigned!" })
+  @ApiBadRequestResponse({ description: "Role already exists!" })
   @Post()
   create(@Body() dto: CreateRoleDto) {
     return this.roleService.createRole(dto);
   }
 
   @ApiOperation({ summary: "Get all roles" })
-  @ApiResponse({ status: 200, type: [Role] })
-  @ApiResponse({ status: 404, description: "Roles not found" })
+  @ApiOkResponse({ type: [Role] })
+  @ApiNotFoundResponse({ description: "Roles not found!" })
   @Get()
   getAll() {
     return this.roleService.getRoles();
   }
 
   @ApiOperation({ summary: "Get a role by value" })
-  @ApiResponse({ status: 200, type: Role })
+  @ApiOkResponse({ type: Role })
+  @ApiNotFoundResponse({ description: "Role not found!" })
   @Get("/:value")
   getByValue(@Param("value") value: string) {
     return this.roleService.getRoleByValue(value);
