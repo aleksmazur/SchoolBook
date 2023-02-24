@@ -37,14 +37,18 @@
     align-items: center;
     text-decoration: none;
     border-radius: 5px;
-    background-color: rgb(255, 255, 255);
+    background-color: #f3f3f3;
     transition: all 0.5s;
-    border: 1px solid #28384d;
+    border: 1px solid var(--option-bg);
     font-size: 16px;
 }
 
 .btn:hover {
     background-color: rgb(241, 214, 95);
+}
+
+.btn-active {
+    background-color: rgb(241, 214, 95);   
 }
 
 .btn:disabled,

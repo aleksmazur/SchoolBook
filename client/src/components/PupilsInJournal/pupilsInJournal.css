@@ -3,6 +3,7 @@
     scroll-snap-type: x proximity;
     height: auto;
     padding: 10px 0;
+    margin-bottom: 20px;
 }
 
 .pupilsInJournal__table::-webkit-scrollbar{
