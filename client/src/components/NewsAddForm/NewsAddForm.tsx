@@ -45,11 +45,11 @@ const NewsAddForm = () => {
               />
             </div>
             <div>
-              <label htmlFor="news_picture">
+              <label htmlFor="news_picture" className="addnews__btn">
+                {t('news.addPicture')}
                 <div
                   className={isPicture ? `input__file-button-text load` : `input__file-button-text`}
                 >
-                  {t('news.addPicture')}
                   <div className="input__file-button-img"></div>
                 </div>
               </label>

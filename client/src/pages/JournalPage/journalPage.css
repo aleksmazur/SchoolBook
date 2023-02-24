@@ -17,3 +17,17 @@
     background-color: var(--table-head-bg);
     border-radius: 10px;       
 }
+
+.homework__less-button-img {
+    width: 30px;
+    height: 30px;
+    opacity: 0.7;
+    background: url(./../../assets/svg/less.svg) center center no-repeat;
+}
+
+.homework__more-button-img {
+    width: 30px;
+    height: 30px;
+    opacity: 0.7;
+    background: url(./../../assets/svg/more.svg) center center no-repeat;
+}

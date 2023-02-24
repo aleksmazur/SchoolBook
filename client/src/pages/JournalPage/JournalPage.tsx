@@ -15,6 +15,7 @@ const JournalPage = () => {
   const lessons = useAppSelector((state) => state.schedule.lessonInClass);
   const [activeLesson, setActiveLesson] = useState(0);
   const [activeQuarterTab, setActiveQuarterTab] = useState(2);
+  const [openHomework, setOpenHomework] = useState(false);
 
   const tabsListLesson = lessons.map((les) => {
     return { title: `${les}` };
@@ -54,6 +55,10 @@ const JournalPage = () => {
     }
   }, [idClass, dispatch]);
 
+  const toggleHomework = () => {
+    setOpenHomework(!openHomework);
+  };
+
   return (
     <>
       <h2>{t('journal.journalTitle')}</h2>
@@ -83,7 +88,13 @@ const JournalPage = () => {
       </div>
 
       <PupilsInJornal />
-      <HomeWorkInJournal />
+      <button className={openHomework ? 'btn btn-active' : 'btn'} onClick={toggleHomework}>
+        {openHomework ? 'Скрыть домашние задания' : 'Показать домашние задания'}
+        <div
+          className={openHomework ? 'homework__less-button-img' : 'homework__more-button-img'}
+        ></div>
+      </button>
+      {openHomework && <HomeWorkInJournal />}
     </>
   );
 };
