@@ -37,7 +37,7 @@ export class Quarter extends Model<Quarter, QuarterCreationAttrs> {
   @Column({ type: DataType.DATEONLY, allowNull: false })
   endDate: string | Date;
 
-  @ApiProperty({ type: () => Subject })
+  @ApiProperty({ type: () => [Subject] })
   @HasMany(() => Subject)
   subjects: [Subject];
 }
