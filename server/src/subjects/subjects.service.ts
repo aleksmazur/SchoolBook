@@ -92,7 +92,7 @@ export class SubjectsService {
     });
     if (!subjects.length) {
       throw new HttpException(
-        `Subject for children '${childrenid}' by class '${classId}' not found!`,
+        `Subjects for children '${childrenid}' by class '${classId}' not found!`,
         HttpStatus.NOT_FOUND,
       );
     }
