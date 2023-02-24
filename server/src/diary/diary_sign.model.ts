@@ -35,7 +35,10 @@ export class DiarySign extends Model<DiarySign, DiarySignCreationAttrs> {
   @BelongsTo(() => Children)
   children: Children;
 
-  @ApiProperty({ example: "2023-03-17", description: "Date the diary was signed" })
+  @ApiProperty({
+    example: "2023-03-17",
+    description: "Date the diary was signed",
+  })
   @Column({ type: DataType.DATEONLY, allowNull: false })
   date: 1;
 

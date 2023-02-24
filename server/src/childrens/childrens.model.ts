@@ -43,11 +43,17 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   lastName: string;
 
-  @ApiProperty({ example: "Denisovich", description: "Middle name of the child" })
+  @ApiProperty({
+    example: "Denisovich",
+    description: "Middle name of the child",
+  })
   @Column({ type: DataType.STRING, allowNull: true })
   middleName: string;
 
-  @ApiProperty({ example: "Petrov Ivan Denisovich", description: "Full name of the child" })
+  @ApiProperty({
+    example: "Petrov Ivan Denisovich",
+    description: "Full name of the child",
+  })
   @Column({ type: DataType.STRING })
   fullName: string;
 
@@ -68,7 +74,10 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   adress: string;
 
-  @ApiProperty({ example: "12.01.2012", description: "Date of birth of the child" })
+  @ApiProperty({
+    example: "12.01.2012",
+    description: "Date of birth of the child",
+  })
   @Column({ type: DataType.DATEONLY, allowNull: false })
   birthday: string | Date;
 
@@ -76,14 +85,17 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: true })
   gender: string;
 
-  @ApiProperty({ example: "1", description: "The ID of the class the child belongs to" })
+  @ApiProperty({
+    example: "1",
+    description: "The ID of the class the child belongs to",
+  })
   @ForeignKey(() => ClassRoom)
   @Column
   classId: number;
 
   @ApiProperty({
     description: "Child class object",
-    type: () => ClassRoom
+    type: () => ClassRoom,
   })
   @BelongsTo(() => ClassRoom)
   class: ClassRoom;
@@ -98,14 +110,14 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
 
   @ApiProperty({
     description: "Child's parents",
-    type: () => [User]
+    type: () => [User],
   })
   @BelongsToMany(() => User, () => UserChildrens)
   parents: User[];
 
   @ApiProperty({
     description: "Child grades",
-    type: () => [Grade]
+    type: () => [Grade],
   })
   @HasMany(() => Grade)
   grades: [Grade];
@@ -119,7 +131,7 @@ export class Children extends Model<Children, ChildrenCreationAttrs> {
 
   @ApiProperty({
     description: "Signed diary of a child",
-    type: () => [DiarySign]
+    type: () => [DiarySign],
   })
   @HasMany(() => DiarySign)
   approves: [DiarySign];

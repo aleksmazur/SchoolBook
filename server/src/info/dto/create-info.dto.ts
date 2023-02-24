@@ -11,29 +11,25 @@ export class CreateInfoDto {
   readonly name: string;
 
   @ApiProperty({
-    example:
-      "city Minsk",
+    example: "city Minsk",
     description: "School location",
   })
   readonly location: string;
 
   @ApiProperty({
-    example:
-      "220000, Minsk, Mira street, 1",
+    example: "220000, Minsk, Mira street, 1",
     description: "School address",
   })
   readonly adress: string;
 
   @ApiProperty({
-    example:
-      "+375 214 52-32-61",
+    example: "+375 214 52-32-61",
     description: "School phone number",
   })
   readonly phone: string;
 
   @ApiProperty({
-    example:
-      "gimn1@edum.by",
+    example: "gimn1@edum.by",
     description: "School email address",
   })
   readonly mail: string;

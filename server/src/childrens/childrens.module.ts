@@ -16,7 +16,7 @@ import { ClassesModule } from "src/classes/classes.module";
     SequelizeModule.forFeature([Children, User, UserChildrens]),
     forwardRef(() => UsersModule),
     FilesModule,
-    ClassesModule
+    ClassesModule,
   ],
   exports: [ChildrensService],
 })

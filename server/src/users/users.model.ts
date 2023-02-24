@@ -58,7 +58,7 @@ export class User extends Model<User, UserCreationAttrs> {
   static setFullName(instance: User) {
     instance.fullName = `${instance.lastName} ${instance.firstName}`;
   }
-  
+
   @ApiProperty({ example: "(012)345-67-89", description: "User phone number" })
   @Column({ type: DataType.STRING })
   phone: string;

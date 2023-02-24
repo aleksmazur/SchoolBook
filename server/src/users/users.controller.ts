@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Post,
   Put,
@@ -24,7 +23,6 @@ import {
   ApiOperation,
   ApiParam,
   ApiQuery,
-  ApiResponse,
   ApiTags,
 } from "@nestjs/swagger";
 import { Children } from "../childrens/childrens.model";
@@ -55,7 +53,12 @@ export class UsersController {
 
   @ApiOperation({ summary: "Get all users" })
   @ApiOkResponse({ type: [User] })
-  @ApiQuery({ name: "role", example: "parent", description: "Value of role", required: false })
+  @ApiQuery({
+    name: "role",
+    example: "parent",
+    description: "Value of role",
+    required: false,
+  })
   @ApiNotFoundResponse({ description: "Users not found!" })
   // @ApiHeader({
   //   name: "Authorization",
@@ -74,7 +77,12 @@ export class UsersController {
   @ApiOperation({ summary: "Get user" })
   @ApiOkResponse({ type: User })
   @ApiNotFoundResponse({ description: "User not found" })
-  @ApiParam({ name: "id", example: "5", description: "User ID", required: true })
+  @ApiParam({
+    name: "id",
+    example: "5",
+    description: "User ID",
+    required: true,
+  })
   @Get(":id")
   getUserByID(@Param("id") id: number) {
     return this.usersService.getUserByID(id);
@@ -83,7 +91,12 @@ export class UsersController {
   @ApiOperation({ summary: "Get user child's" })
   @ApiOkResponse({ type: [Children] })
   @ApiNotFoundResponse({ description: "Child's not found" })
-  @ApiParam({ name: "id", example: "4", description: "User ID", required: true })
+  @ApiParam({
+    name: "id",
+    example: "4",
+    description: "User ID",
+    required: true,
+  })
   @Get("childrens/:id")
   getUserChildrens(@Param("id") id: number) {
     return this.usersService.getUserChildrens(id);
@@ -92,8 +105,18 @@ export class UsersController {
   @ApiOperation({ summary: "Get user child" })
   @ApiOkResponse({ type: Children })
   @ApiNotFoundResponse({ description: "Child not found" })
-  @ApiParam({ name: "userId", example: "3", description: "User ID", required: true })
-  @ApiParam({ name: "childId", example: "2", description: "Child ID", required: true })
+  @ApiParam({
+    name: "userId",
+    example: "3",
+    description: "User ID",
+    required: true,
+  })
+  @ApiParam({
+    name: "childId",
+    example: "2",
+    description: "Child ID",
+    required: true,
+  })
   @Get("childrens/:userId/:childId")
   getUserChildren(
     @Param("userId") userId: number,
@@ -131,7 +154,9 @@ export class UsersController {
   @ApiOperation({ summary: "Change profile" })
   @ApiCreatedResponse({ type: User })
   @ApiNotFoundResponse({ description: "User not found!" })
-  @ApiInternalServerErrorResponse({ description: "An error occurred while writing the file" })
+  @ApiInternalServerErrorResponse({
+    description: "An error occurred while writing the file",
+  })
   @Put("/edit/profile")
   @UseInterceptors(FileInterceptor("profilePic"))
   changeProfile(@Body() dto: EditProfileDto, @UploadedFile() image) {

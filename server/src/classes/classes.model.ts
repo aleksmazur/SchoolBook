@@ -41,7 +41,10 @@ export class ClassRoom extends Model<ClassRoom, ClassRoomCreationAttrs> {
   @BelongsTo(() => User)
   classTeacher: User;
 
-  @ApiProperty({ description: "Children in the classroom", type: () => [Children] })
+  @ApiProperty({
+    description: "Children in the classroom",
+    type: () => [Children],
+  })
   @HasMany(() => Children)
   childrens: [Children];
 

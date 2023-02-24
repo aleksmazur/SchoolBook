@@ -36,7 +36,10 @@ export class UsersService {
     }
     const userExists = await this.getUserByUsername(dto.username);
     if (userExists) {
-      throw new HttpException(`User with username '${dto.username}' already exists!`, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        `User with username '${dto.username}' already exists!`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
     const user = await this.userRepository.create(dto);
     await user.$set("role", [userRole.id]);
@@ -123,7 +126,10 @@ export class UsersService {
       );
     }
     await user.destroy();
-    throw new HttpException(`User with ID '${id}' successfully removed`, HttpStatus.OK);
+    throw new HttpException(
+      `User with ID '${id}' successfully removed`,
+      HttpStatus.OK,
+    );
   }
 
   async getUserByUsername(username: string) {

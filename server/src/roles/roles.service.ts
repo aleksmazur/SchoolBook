@@ -11,11 +11,17 @@ export class RolesService {
 
   async createRole(dto: CreateRoleDto) {
     if (!assignedRoles.includes(dto.value)) {
-      throw new HttpException(`Role '${dto.value}' not assigned!`, HttpStatus.NOT_ACCEPTABLE);
+      throw new HttpException(
+        `Role '${dto.value}' not assigned!`,
+        HttpStatus.NOT_ACCEPTABLE,
+      );
     }
     const role = await this.getRoleByValue(dto.value);
     if (role) {
-      throw new HttpException(`Role '${dto.value}' already exists!`, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        `Role '${dto.value}' already exists!`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
     const roleCreated = await this.roleRepository.create(dto);
     return roleCreated;

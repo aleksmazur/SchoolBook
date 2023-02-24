@@ -16,7 +16,7 @@ import { ClassesModule } from "src/classes/classes.module";
     SequelizeModule.forFeature([Grade, Children, Subject]),
     ChildrensModule,
     forwardRef(() => SubjectsModule),
-    ClassesModule
+    ClassesModule,
   ],
   exports: [GradesService],
 })

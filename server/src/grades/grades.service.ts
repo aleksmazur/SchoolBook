@@ -37,7 +37,7 @@ export class GradesService {
     @Inject(forwardRef(() => SubjectsService))
     private subjectsService: SubjectsService,
     private childrensService: ChildrensService,
-    private classesService: ClassesService
+    private classesService: ClassesService,
   ) {}
 
   async createGrade(dto: CreateGradeDto) {
@@ -73,7 +73,10 @@ export class GradesService {
 
   async getCurrentGrades(classid: number, childrenid: number) {
     const child = await this.childrensService.getChildren(childrenid);
-    const classItem = await this.classesService.getClassByChild(childrenid, classid);
+    const classItem = await this.classesService.getClassByChild(
+      childrenid,
+      classid,
+    );
     const data = await this.subjectsService.findByChildrenClass(
       classItem.id,
       child.id,
@@ -111,7 +114,10 @@ export class GradesService {
 
   async getFinalGrades(classid: number, childrenid: number) {
     const child = await this.childrensService.getChildren(childrenid);
-    const classItem = await this.classesService.getClassByChild(childrenid, classid);
+    const classItem = await this.classesService.getClassByChild(
+      childrenid,
+      classid,
+    );
     const data = await this.subjectsService.findByChildrenClass(
       classItem.id,
       child.id,

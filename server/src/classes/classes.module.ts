@@ -12,10 +12,8 @@ import { ClassesService } from "./classes.service";
   providers: [ClassesService],
   imports: [
     SequelizeModule.forFeature([ClassRoom, User, Subject]),
-    forwardRef(() => UsersModule)
+    forwardRef(() => UsersModule),
   ],
-  exports: [
-    ClassesService
-  ]
+  exports: [ClassesService],
 })
 export class ClassesModule {}

@@ -12,7 +12,7 @@ import { DiarySign } from "./diary_sign.model";
   imports: [
     SequelizeModule.forFeature([DiarySign]),
     SubjectsModule,
-    ChildrensModule
+    ChildrensModule,
   ],
 })
 export class DiaryModule {}

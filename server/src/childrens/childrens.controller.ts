@@ -11,7 +11,16 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from "@nestjs/swagger";
 import { Children } from "./childrens.model";
 import { ChildrensService } from "./childrens.service";
 import { CreateChildrenDto } from "./dto/create-children.dto";
@@ -23,8 +32,11 @@ export class ChildrensController {
   constructor(private childrenService: ChildrensService) {}
 
   @ApiOperation({ summary: "Create a child" })
-  @ApiCreatedResponse({type: Children})
-  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Parent or class for children not found!" })
+  @ApiCreatedResponse({ type: Children })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: "Parent or class for children not found!",
+  })
   @Post()
   create(@Body() dto: CreateChildrenDto) {
     return this.childrenService.createChildren(dto);
@@ -32,7 +44,12 @@ export class ChildrensController {
 
   @ApiOperation({ summary: "Get a list of children" })
   @ApiOkResponse({ type: [Children] })
-  @ApiQuery({ name: "parent", description: "Parent ID to display its children", example: "2", required: false })
+  @ApiQuery({
+    name: "parent",
+    description: "Parent ID to display its children",
+    example: "2",
+    required: false,
+  })
   @ApiNotFoundResponse({ description: "Children or parent not found!" })
   @Get()
   getAll(@Query("parent") parentId?: number) {
@@ -45,7 +62,12 @@ export class ChildrensController {
   @ApiOperation({ summary: "Get a child by ID" })
   @ApiOkResponse({ type: Children })
   @ApiNotFoundResponse({ description: "Child not found!" })
-  @ApiParam({ name: "id", description: "Child ID to display information about him", example: "3", required: true })
+  @ApiParam({
+    name: "id",
+    description: "Child ID to display information about him",
+    example: "3",
+    required: true,
+  })
   @Get(":id")
   getChildrenByID(@Param("id") id: number) {
     return this.childrenService.getChildren(id);

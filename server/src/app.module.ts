@@ -28,7 +28,7 @@ import { Quarter } from "./quarters/quarters.model";
 import { DiarySign } from "./diary/diary_sign.model";
 // import { APP_GUARD } from "@nestjs/core";
 // import { JwtAuthGuard } from "./auth/jwt-auth.guard";
-import { InfoModule } from './info/info.module';
+import { InfoModule } from "./info/info.module";
 
 @Module({
   // providers: [

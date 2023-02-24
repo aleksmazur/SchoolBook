@@ -1,4 +1,10 @@
-import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Grade } from "../grades/grades.model";
 import { Children } from "../childrens/childrens.model";
@@ -14,7 +20,7 @@ export enum CustomError {
   //User dont have 'teacher' role
   NotHaveRole = 433,
   //User already have a class
-  UserHaveClass = 434
+  UserHaveClass = 434,
 }
 
 @Injectable()
@@ -23,25 +29,34 @@ export class ClassesService {
     @InjectModel(ClassRoom)
     private classesRepository: typeof ClassRoom,
     @Inject(forwardRef(() => UsersService))
-    private usersService: UsersService
+    private usersService: UsersService,
   ) {}
 
   async createClassRoom(dto: CreateClassRoomDto) {
-    const className = await this.classesRepository.findOne(({
+    const className = await this.classesRepository.findOne({
       where: {
-        className: dto.className
-      }
-    }));
+        className: dto.className,
+      },
+    });
     if (className) {
-      throw new HttpException(`Class with name '${dto.className}' already exists!`, CustomError.ClassExists);
+      throw new HttpException(
+        `Class with name '${dto.className}' already exists!`,
+        CustomError.ClassExists,
+      );
     }
     const teacher = await this.usersService.getUserByID(dto.classTeacherId);
     const teacherRole = await this.usersService.getUserRoles(teacher.id);
     if (!teacherRole.includes("teacher")) {
-      throw new HttpException(`User with ID '${teacher.id}' is not have 'teacher' role`, CustomError.NotHaveRole);
+      throw new HttpException(
+        `User with ID '${teacher.id}' is not have 'teacher' role`,
+        CustomError.NotHaveRole,
+      );
     }
     if (teacher.class !== null) {
-      throw new HttpException(`User with ID '${teacher.id}' already have a class`, CustomError.UserHaveClass);
+      throw new HttpException(
+        `User with ID '${teacher.id}' already have a class`,
+        CustomError.UserHaveClass,
+      );
     }
     const classRoom = await this.classesRepository.create(dto);
     return classRoom;
@@ -72,24 +87,27 @@ export class ClassesService {
     if (!classes.length) {
       throw new HttpException(`Classes not found!`, HttpStatus.NOT_FOUND);
     }
-  
+
     return classes;
   }
 
   async getClassByChild(childid: number, classid: number) {
     const classItem = await this.classesRepository.findOne({
       where: {
-        id: classid
+        id: classid,
       },
       include: [
         {
           model: Children,
-          where: { id: childid }
-        }
-      ]
+          where: { id: childid },
+        },
+      ],
     });
     if (!classItem) {
-      throw new HttpException(`Class ID '${classid}' by child ID '${childid}' not found!`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `Class ID '${classid}' by child ID '${childid}' not found!`,
+        HttpStatus.NOT_FOUND,
+      );
     }
     return classItem;
   }

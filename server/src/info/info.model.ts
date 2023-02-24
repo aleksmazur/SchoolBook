@@ -28,32 +28,28 @@ export class Info extends Model<Info, InfoCreationAttrs> {
   name: string;
 
   @ApiProperty({
-    example:
-      "city Minsk",
+    example: "city Minsk",
     description: "School location",
   })
   @Column({ type: DataType.STRING, unique: false, allowNull: false })
   location: string;
 
   @ApiProperty({
-    example:
-      "220000, Minsk, Mira street, 1",
+    example: "220000, Minsk, Mira street, 1",
     description: "School address",
   })
   @Column({ type: DataType.STRING, unique: false, allowNull: true })
   adress: string;
 
   @ApiProperty({
-    example:
-      "+375 214 52-32-61S",
+    example: "+375 214 52-32-61S",
     description: "chool phone number",
   })
   @Column({ type: DataType.STRING, unique: false, allowNull: true })
   phone: string;
 
   @ApiProperty({
-    example:
-      "imn1@edum.by",
+    example: "imn1@edum.by",
     description: "School email addressg",
   })
   @Column({ type: DataType.STRING, unique: false, allowNull: true })

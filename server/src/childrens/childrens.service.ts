@@ -24,7 +24,7 @@ export class ChildrensService {
     @Inject(forwardRef(() => UsersService))
     private userService: UsersService,
     private filesService: FilesService,
-    private classesService: ClassesService
+    private classesService: ClassesService,
   ) {}
 
   async createChildren(dto: CreateChildrenDto) {

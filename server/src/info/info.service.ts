@@ -1,13 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { CreateInfoDto } from './dto/create-info.dto';
-import { Info } from './info.model';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/sequelize";
+import { CreateInfoDto } from "./dto/create-info.dto";
+import { Info } from "./info.model";
 
 @Injectable()
 export class InfoService {
-  constructor(
-    @InjectModel(Info) private infoRepository: typeof Info
-  ) {}
+  constructor(@InjectModel(Info) private infoRepository: typeof Info) {}
 
   async createInfo(dto: CreateInfoDto) {
     const info = await this.infoRepository.create(dto);

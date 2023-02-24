@@ -12,7 +12,7 @@ export class DiaryService {
     @InjectModel(DiarySign)
     private diarySignRepository: typeof DiarySign,
     private subjectsService: SubjectsService,
-    private childrensService: ChildrensService
+    private childrensService: ChildrensService,
   ) {}
 
   async getChildrenDiaryByClass(
@@ -114,6 +114,9 @@ export class DiaryService {
       });
       return sign;
     }
-    throw new HttpException("Need week and year query params", HttpStatus.BAD_REQUEST);
+    throw new HttpException(
+      "Need week and year query params",
+      HttpStatus.BAD_REQUEST,
+    );
   }
 }

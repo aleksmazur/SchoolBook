@@ -8,7 +8,14 @@ import {
   Put,
   Query,
 } from "@nestjs/common";
-import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiQuery,
+  ApiTags,
+} from "@nestjs/swagger";
 import { AddGradeDto } from "./dto/add-grade.dto";
 import { CreateGradeDto } from "./dto/create-grade.dto";
 import { Grade } from "./grades.model";
@@ -28,7 +35,12 @@ export class GradesController {
   }
 
   @ApiOperation({ summary: "Get all existing grades" })
-  @ApiQuery({ name: "children", example: "2", description: "Child ID to get their grades", required: false })
+  @ApiQuery({
+    name: "children",
+    example: "2",
+    description: "Child ID to get their grades",
+    required: false,
+  })
   @ApiOkResponse({ description: "Child's grades in specific subjects" })
   @ApiNotFoundResponse({ description: "Subjects or child not found!" })
   @Get()
@@ -41,8 +53,18 @@ export class GradesController {
   }
 
   @ApiOperation({ summary: "Get chilren's current grades" })
-  @ApiQuery({ name: "children", example: "2", description: "ID of the child whose grades you want to get", required: true })
-  @ApiQuery({ name: "class", example: "3", description: "The ID of the class the child belongs to", required: true })
+  @ApiQuery({
+    name: "children",
+    example: "2",
+    description: "ID of the child whose grades you want to get",
+    required: true,
+  })
+  @ApiQuery({
+    name: "class",
+    example: "3",
+    description: "The ID of the class the child belongs to",
+    required: true,
+  })
   @ApiNotFoundResponse({ description: "Subjects, class or child not found!" })
   @Get("/current")
   getCurrent(
@@ -55,8 +77,18 @@ export class GradesController {
   }
 
   @ApiOperation({ summary: "Get your child's quarterly and yearly grades" })
-  @ApiQuery({ name: "children", example: "2", description: "ID of the child whose grades you want to get", required: true })
-  @ApiQuery({ name: "class", example: "3", description: "The ID of the class the child belongs to", required: true })
+  @ApiQuery({
+    name: "children",
+    example: "2",
+    description: "ID of the child whose grades you want to get",
+    required: true,
+  })
+  @ApiQuery({
+    name: "class",
+    example: "3",
+    description: "The ID of the class the child belongs to",
+    required: true,
+  })
   @ApiNotFoundResponse({ description: "Subjects, class or child not found!" })
   @Get("/final")
   getFinal(

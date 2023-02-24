@@ -1,15 +1,19 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { CreateInfoDto } from './dto/create-info.dto';
-import { Info } from './info.model';
-import { InfoService } from './info.service';
+import { Body, Controller, Get, Post } from "@nestjs/common";
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from "@nestjs/swagger";
+import { CreateInfoDto } from "./dto/create-info.dto";
+import { Info } from "./info.model";
+import { InfoService } from "./info.service";
 
 @ApiTags("Info")
-@Controller('info')
+@Controller("info")
 export class InfoController {
-  constructor(
-    private infoService: InfoService
-  ) {}
+  constructor(private infoService: InfoService) {}
 
   @ApiOperation({ summary: "Create info" })
   @ApiCreatedResponse({ type: Info })
