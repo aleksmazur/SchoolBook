@@ -11,6 +11,7 @@ import { ChildrensService } from "../childrens/childrens.service";
 import { CreateGradeDto } from "./dto/create-grade.dto";
 import { Grade } from "./grades.model";
 import { AddGradeDto } from "./dto/add-grade.dto";
+import { ClassesService } from "src/classes/classes.service";
 
 interface SubjectGrades {
   name: string;
@@ -36,9 +37,12 @@ export class GradesService {
     @Inject(forwardRef(() => SubjectsService))
     private subjectsService: SubjectsService,
     private childrensService: ChildrensService,
+    private classesService: ClassesService
   ) {}
 
   async createGrade(dto: CreateGradeDto) {
+    await this.subjectsService.getSubjectByID(dto.subjectId);
+    await this.childrensService.getChildren(dto.childrenId);
     const grade = await this.gradesRepository.create(dto);
     return grade;
   }
@@ -68,9 +72,11 @@ export class GradesService {
   }
 
   async getCurrentGrades(classid: number, childrenid: number) {
+    const child = await this.childrensService.getChildren(childrenid);
+    const classItem = await this.classesService.getClassByChild(childrenid, classid);
     const data = await this.subjectsService.findByChildrenClass(
-      classid,
-      childrenid,
+      classItem.id,
+      child.id,
     );
     if (!data.length) {
       throw new HttpException(
@@ -104,9 +110,11 @@ export class GradesService {
   }
 
   async getFinalGrades(classid: number, childrenid: number) {
+    const child = await this.childrensService.getChildren(childrenid);
+    const classItem = await this.classesService.getClassByChild(childrenid, classid);
     const data = await this.subjectsService.findByChildrenClass(
-      classid,
-      childrenid,
+      classItem.id,
+      child.id,
     );
     if (!data.length) {
       throw new HttpException(
@@ -180,14 +188,14 @@ export class GradesService {
 
   async addGrade(dto: AddGradeDto) {
     const { value, childrenId, subjectId } = dto;
-    const grade = await this.gradesRepository.findOne({
-      where: {
-        childrenId,
-        subjectId,
-      },
-    });
     const children = await this.childrensService.getChildren(childrenId);
     const subject = await this.subjectsService.getSubjectByID(subjectId);
+    const grade = await this.gradesRepository.findOne({
+      where: {
+        childrenId: children.id,
+        subjectId: subject.id,
+      },
+    });
     if (children && subject) {
       if (grade) {
         return await grade.update({ value });
@@ -208,6 +216,6 @@ export class GradesService {
       );
     }
     await grade.destroy();
-    throw new HttpException(`Grade successfully remove`, HttpStatus.OK);
+    throw new HttpException(`Grade successfully removed`, HttpStatus.OK);
   }
 }
