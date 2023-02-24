@@ -13,7 +13,7 @@ import {
 } from "sequelize-typescript";
 import { Grade } from "../grades/grades.model";
 import { ClassRoom } from "../classes/classes.model";
-import { UserChildrens } from "../users/dto/user-childrens.model";
+import { UserChildrens } from "../users/user-childrens.model";
 import { User } from "../users/users.model";
 import { DiarySign } from "../diary/diary_sign.model";
 

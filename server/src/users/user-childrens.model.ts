@@ -5,8 +5,8 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { Children } from "../../childrens/childrens.model";
-import { User } from "../users.model";
+import { Children } from "../childrens/childrens.model";
+import { User } from "./users.model";
 
 @Table({ tableName: "user_childrens", createdAt: false, updatedAt: false })
 export class UserChildrens extends Model<UserChildrens> {

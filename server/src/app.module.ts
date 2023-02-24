@@ -11,7 +11,7 @@ import { Children } from "./childrens/childrens.model";
 import { ClassesModule } from "./classes/classes.module";
 import { ClassRoom } from "./classes/classes.model";
 import { AuthModule } from "./auth/auth.module";
-import { UserChildrens } from "./users/dto/user-childrens.model";
+import { UserChildrens } from "./users/user-childrens.model";
 import { NewsModule } from "./news/news.module";
 import { News } from "./news/news.model";
 import { SubjectsModule } from "./subjects/subjects.module";
