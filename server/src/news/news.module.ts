@@ -4,10 +4,11 @@ import { FilesModule } from "../files/files.module";
 import { NewsController } from "./news.controller";
 import { News } from "./news.model";
 import { NewsService } from "./news.service";
+import { AuthModule } from "src/auth/auth.module";
 
 @Module({
   providers: [NewsService],
   controllers: [NewsController],
-  imports: [SequelizeModule.forFeature([News]), FilesModule],
+  imports: [SequelizeModule.forFeature([News]), FilesModule, AuthModule],
 })
 export class NewsModule {}

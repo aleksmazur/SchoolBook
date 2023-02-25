@@ -12,6 +12,7 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -27,6 +28,7 @@ import { CreateChildrenDto } from "./dto/create-children.dto";
 import { EditChildProfileDto } from "./dto/edit-child-profile.dto";
 
 @ApiTags("Childrens")
+@ApiBearerAuth()
 @Controller("childrens")
 export class ChildrensController {
   constructor(private childrenService: ChildrensService) {}

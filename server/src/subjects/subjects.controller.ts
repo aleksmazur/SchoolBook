@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put, Query } from "@nestjs/common";
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -14,6 +15,7 @@ import { Subject } from "./subjects.model";
 import { SubjectsService } from "./subjects.service";
 
 @ApiTags("Subjects")
+@ApiBearerAuth()
 @Controller("subjects")
 export class SubjectsController {
   constructor(private subjectsService: SubjectsService) {}

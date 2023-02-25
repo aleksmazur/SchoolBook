@@ -1,5 +1,6 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import {
+  ApiBearerAuth,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
@@ -9,6 +10,7 @@ import {
 import { SheduleService } from "./shedule.service";
 
 @ApiTags("Shedule")
+@ApiBearerAuth()
 @Controller("shedule")
 export class SheduleController {
   constructor(private sheduleService: SheduleService) {}

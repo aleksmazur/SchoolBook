@@ -12,6 +12,7 @@ async function run() {
       "REST API documentation for project School Book by task RS Clone from Rolling Scopes School",
     )
     .setVersion("1.0.0")
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

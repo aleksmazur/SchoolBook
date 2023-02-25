@@ -1,4 +1,5 @@
 import {
+  AfterSync,
   Column,
   DataType,
   ForeignKey,
@@ -7,6 +8,8 @@ import {
 } from "sequelize-typescript";
 import { User } from "../users/users.model";
 import { Role } from "./roles.model";
+import * as bcrypt from "bcryptjs";
+import { CreateUserDto } from "src/users/dto/create-user.dto";
 
 @Table({ tableName: "user_roles", createdAt: false, updatedAt: false })
 export class UserRoles extends Model<UserRoles> {
@@ -25,4 +28,33 @@ export class UserRoles extends Model<UserRoles> {
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
   userId: number;
+
+  @AfterSync
+  static async createDefaultUser() {
+    const userExists = await User.findOne({
+      where: { username: process.env.ADMIN_LOGIN },
+    });
+    if (!userExists) {
+      const userRole = await Role.findOne({ where: { value: "admin" } });
+      if (!userRole) {
+        const userRole = await Role.create({
+          value: "admin",
+          description: "Admin role",
+        });
+        const defaultUser: CreateUserDto = {
+          username: process.env.ADMIN_LOGIN,
+          password: process.env.ADMIN_PASS,
+          firstName: "admin",
+          lastName: "admin",
+        };
+        const hashPassword = await bcrypt.hash(defaultUser.password, 5);
+        const user = await User.create({
+          ...defaultUser,
+          password: hashPassword,
+        });
+        await user.$set("role", [userRole.id]);
+        user.role = [userRole];
+      }
+    }
+  }
 }

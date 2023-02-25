@@ -14,27 +14,29 @@ import {
 import { FileInterceptor } from "@nestjs/platform-express";
 import {
   ApiBadRequestResponse,
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
-  // ApiHeader,
   ApiOperation,
   ApiParam,
   ApiQuery,
   ApiTags,
 } from "@nestjs/swagger";
 import { Children } from "../childrens/childrens.model";
-import { Role } from "../auth/role-auth.decorator";
+import { RoleControl } from "../auth/role-auth.decorator";
 import { RoleGuard } from "../auth/role.guard";
 import { AddRoleDto } from "./dto/add-role.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { EditProfileDto } from "./dto/edit-profile.dto";
 import { User } from "./users.model";
 import { UsersService } from "./users.service";
+import { Roles } from "../roles/roles.enum";
 
 @ApiTags("Users")
+@ApiBearerAuth()
 @Controller("users")
 export class UsersController {
   constructor(private usersService: UsersService) {}
@@ -44,7 +46,7 @@ export class UsersController {
   @ApiBadRequestResponse({ description: "User with username already exists!" })
   @ApiForbiddenResponse({ description: "No access!" })
   @ApiNotFoundResponse({ description: "Role not found!" })
-  @Role("teacher")
+  @RoleControl(Roles.Admin)
   @UseGuards(RoleGuard)
   @Post()
   create(@Body() userDto: CreateUserDto) {
@@ -60,12 +62,6 @@ export class UsersController {
     required: false,
   })
   @ApiNotFoundResponse({ description: "Users not found!" })
-  // @ApiHeader({
-  //   name: "Authorization",
-  //   description: "Auth token",
-  // })
-  // @Role("teacher")
-  // @UseGuards(RoleGuard)
   @Get()
   getAll(@Query("role") role?: string) {
     if (role) {
@@ -128,6 +124,8 @@ export class UsersController {
   @ApiOperation({ summary: "Remove user by ID" })
   @ApiOkResponse({ description: "User successfully removed!" })
   @ApiNotFoundResponse({ description: "User not found" })
+  @RoleControl(Roles.Admin)
+  @UseGuards(RoleGuard)
   @Delete(":id")
   deleteUserByID(@Param("id") id: number) {
     return this.usersService.deleteUserByID(id);
@@ -137,6 +135,8 @@ export class UsersController {
   @ApiCreatedResponse({ type: AddRoleDto })
   @ApiNotFoundResponse({ description: "User or role not found" })
   @ApiBadRequestResponse({ description: "User already has this role" })
+  @RoleControl(Roles.Admin)
+  @UseGuards(RoleGuard)
   @Post("/role")
   addRole(@Body() dto: AddRoleDto) {
     return this.usersService.addUserRole(dto);
@@ -146,6 +146,8 @@ export class UsersController {
   @ApiCreatedResponse({ type: AddRoleDto })
   @ApiNotFoundResponse({ description: "User or role not found" })
   @ApiBadRequestResponse({ description: "User already has this role" })
+  @RoleControl(Roles.Admin)
+  @UseGuards(RoleGuard)
   @Put("/role/update")
   changeRole(@Body() dto: AddRoleDto) {
     return this.usersService.changeUserRole(dto);

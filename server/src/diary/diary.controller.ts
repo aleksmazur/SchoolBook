@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -13,6 +14,7 @@ import { DiaryService } from "./diary.service";
 import { DiarySign } from "./diary_sign.model";
 
 @ApiTags("Diary")
+@ApiBearerAuth()
 @Controller("diary")
 export class DiaryController {
   constructor(private diaryService: DiaryService) {}
