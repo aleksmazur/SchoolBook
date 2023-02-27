@@ -9,7 +9,8 @@ import {
 import { User } from "../users/users.model";
 import { Role } from "./roles.model";
 import * as bcrypt from "bcryptjs";
-import { CreateUserDto } from "src/users/dto/create-user.dto";
+import { CreateUserDto } from "../users/dto/create-user.dto";
+import { DefaultUser } from "../default-user.enum";
 
 @Table({ tableName: "user_roles", createdAt: false, updatedAt: false })
 export class UserRoles extends Model<UserRoles> {
@@ -32,7 +33,7 @@ export class UserRoles extends Model<UserRoles> {
   @AfterSync
   static async createDefaultUser() {
     const userExists = await User.findOne({
-      where: { username: process.env.ADMIN_LOGIN },
+      where: { username: process.env.ADMIN_LOGIN || DefaultUser.Login },
     });
     if (!userExists) {
       const userRole = await Role.findOne({ where: { value: "admin" } });
@@ -42,8 +43,8 @@ export class UserRoles extends Model<UserRoles> {
           description: "Admin role",
         });
         const defaultUser: CreateUserDto = {
-          username: process.env.ADMIN_LOGIN,
-          password: process.env.ADMIN_PASS,
+          username: process.env.ADMIN_LOGIN || DefaultUser.Login,
+          password: process.env.ADMIN_PASS || DefaultUser.Password,
           firstName: "admin",
           lastName: "admin",
         };
