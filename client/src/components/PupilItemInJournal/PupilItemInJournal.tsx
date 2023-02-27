@@ -36,6 +36,8 @@ const PupilItemInJournal = ({ num, id, fullName }: IPropsPupil) => {
 
   const handleReset = async (e: MouseEvent<HTMLInputElement>) => {
     const currentCell = e.target as HTMLInputElement;
+    const clue = currentCell.nextSibling as HTMLSpanElement;
+    clue.style.opacity = '0';
     if (currentCell.value) {
       const currentCellOptions = currentCell.getAttribute('data-cell')?.split('_') as string[];
       const currentCellId = currentCell.getAttribute('data-id') as string;
