@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../constants/baseUrl';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -8,6 +9,8 @@ import Preloader from '../Preloader/Preloader';
 import './pupil.css';
 
 const PupilCard = () => {
+  const { t } = useTranslation();
+
   const path = window.location.pathname.split('/');
   const pupilId = +path[path.length - 1];
   const dispatch = useAppDispatch();
@@ -48,15 +51,17 @@ const PupilCard = () => {
             <h3 className="pupil__title">{fullName}</h3>
             <div className="pupil__birthday">
               {' '}
-              Дата рождения: {moment(birthday).utc().format('YYYY-MM-DD')}
+              {t('class.birth')}: {moment(birthday).utc().format('YYYY-MM-DD')}
             </div>
-            <div className="pupil__adress">Адрес: {adress}</div>
+            <div className="pupil__adress">
+              {t('class.address')}: {adress}
+            </div>
             <div className="pupil__class">
-              Класс: <Link to={`/class/${classInfo.id}`}>{classInfo.className}</Link>
+              {t('profile.class')} <Link to={`/class/${classInfo.id}`}>{classInfo.className}</Link>
             </div>
             {
               <div className="pupil__info-relative">
-                Родители:
+                {t('profile.parents')}:
                 {parents ? renderInfoParents() : 'Нет зарегистрированных родителей'}
               </div>
             }

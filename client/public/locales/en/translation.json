@@ -69,13 +69,16 @@
         "grades": "Academic performance",
         "currentGrades": "Current grades",
         "finalGrades": "Final grades",
-        "rating": "Class rating"
+        "rating": "Class rating",
+        "subject": "Subject",
+        "average": "GPA"
     },
     "profile": {
         "profileTitle": "Users profile",
         "teacher": "Teacher",
         "father": "Father",
         "mother": "Mother",
+        "parents": "Parents",
         "phone": "Сontact number",
         "pupil": "Pupil: ",
         "class": "Class: ",

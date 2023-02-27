@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '../../store/hooks';
 import './currentGrade.css';
 
 const CurrentGrades = () => {
+  const { t } = useTranslation();
   const finalGrade = useAppSelector((state) => state.diary.finalDiary);
   const { currentQuarter } = useAppSelector((state) => state.quarter);
 
@@ -11,9 +13,9 @@ const CurrentGrades = () => {
         <thead>
           <tr>
             <th></th>
-            <th>Предмет</th>
-            <th>Текущие оценки</th>
-            <th>Средний балл</th>
+            <th>{t('grades.subject')}</th>
+            <th>{t('grades.currentGrades')}</th>
+            <th>{t('grades.average')}</th>
           </tr>
         </thead>
         <tbody>
