@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { getWeekDay } from '../../helpers/dataHelper';
 import { IDiaryDay } from '../../reducers/diaryReducer';
 import './diaryDay.css';
@@ -9,6 +10,8 @@ type IDiaryProps = {
 };
 
 const DiaryDay = ({ lessons, date, index }: IDiaryProps) => {
+  const { t } = useTranslation();
+
   const dayFromDate = new Date(date).getDay();
   const today = new Date(Date.now()).toLocaleDateString('ru-RU').split('.').reverse().join('.');
 
@@ -26,8 +29,8 @@ const DiaryDay = ({ lessons, date, index }: IDiaryProps) => {
               <br />
               <span>{date}</span>
             </th>
-            <th className="hw">Домашнее задание</th>
-            <th className="mark">Отметка</th>
+            <th className="hw">{t('diary.task')}</th>
+            <th className="mark">{t('diary.mark')}</th>
           </tr>
         </thead>
         <tbody>

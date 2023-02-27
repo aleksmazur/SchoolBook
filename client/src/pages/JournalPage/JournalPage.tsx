@@ -89,7 +89,7 @@ const JournalPage = () => {
 
       <PupilsInJornal />
       <button className={openHomework ? 'btn btn-active' : 'btn'} onClick={toggleHomework}>
-        {openHomework ? 'Скрыть домашние задания' : 'Показать домашние задания'}
+        {openHomework ? t('journal.hideHomework') : t('journal.showHomework')}
         <div
           className={openHomework ? 'homework__less-button-img' : 'homework__more-button-img'}
         ></div>

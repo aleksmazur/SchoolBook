@@ -41,7 +41,9 @@
         "signed": "Signed",
         "sign": "Sign",
         "quarter": "quarter",
-        "lastPage": "Last Page"
+        "lastPage": "Last Page",
+        "task": "Hometask",
+        "mark": "Mark"
     },
     "schedule": {
         "scheduleTitle": "Schedule",
@@ -55,7 +57,6 @@
         "name": "Pupil",
         "birth": "Birthday",
         "address": "Address"
-
     },
     "auth": {
         "authTitle": "Authorization",
@@ -91,7 +92,9 @@
         "quarter": "quarter",
         "name": "Pupil",
         "date": "Date",
-        "task": "Hometask"
+        "task": "Hometask",
+        "hideHomework": "Hide hometasks",
+        "showHomework": "Show hometasks"
     },
     "info": {
         "about": "About school",
