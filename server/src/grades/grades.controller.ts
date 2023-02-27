@@ -9,6 +9,7 @@ import {
   Query,
 } from "@nestjs/common";
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -22,6 +23,7 @@ import { Grade } from "./grades.model";
 import { GradesService } from "./grades.service";
 
 @ApiTags("Grades")
+@ApiBearerAuth()
 @Controller("grades")
 export class GradesController {
   constructor(private gradesService: GradesService) {}

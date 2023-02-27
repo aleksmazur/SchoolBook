@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -10,10 +11,12 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import { ClassRoom } from "./classes.model";
-import { ClassesService, CustomError } from "./classes.service";
+import { ClassesService } from "./classes.service";
+import { ClassesErrors } from "./errors.enum";
 import { CreateClassRoomDto } from "./dto/create-classroom.dto";
 
 @ApiTags("Classes")
+@ApiBearerAuth()
 @Controller("classes")
 export class ClassesController {
   constructor(private classService: ClassesService) {}
@@ -21,15 +24,15 @@ export class ClassesController {
   @ApiOperation({ summary: "Create class" })
   @ApiCreatedResponse({ type: ClassRoom })
   @ApiResponse({
-    status: CustomError.ClassExists,
+    status: ClassesErrors.ClassExists,
     description: "Class already exists!",
   })
   @ApiResponse({
-    status: CustomError.NotHaveRole,
+    status: ClassesErrors.NotHaveRole,
     description: "User not have 'teacher' role!",
   })
   @ApiResponse({
-    status: CustomError.UserHaveClass,
+    status: ClassesErrors.UserHaveClass,
     description: "User already have a class!",
   })
   @Post()

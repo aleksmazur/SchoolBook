@@ -12,16 +12,8 @@ import { Subject } from "../subjects/subjects.model";
 import { User } from "../users/users.model";
 import { ClassRoom } from "./classes.model";
 import { CreateClassRoomDto } from "./dto/create-classroom.dto";
-import { UsersService } from "src/users/users.service";
-
-export enum CustomError {
-  //Class already exists
-  ClassExists = 432,
-  //User dont have 'teacher' role
-  NotHaveRole = 433,
-  //User already have a class
-  UserHaveClass = 434,
-}
+import { UsersService } from "../users/users.service";
+import { ClassesErrors } from "./errors.enum";
 
 @Injectable()
 export class ClassesService {
@@ -41,7 +33,7 @@ export class ClassesService {
     if (className) {
       throw new HttpException(
         `Class with name '${dto.className}' already exists!`,
-        CustomError.ClassExists,
+        ClassesErrors.ClassExists,
       );
     }
     const teacher = await this.usersService.getUserByID(dto.classTeacherId);
@@ -49,13 +41,13 @@ export class ClassesService {
     if (!teacherRole.includes("teacher")) {
       throw new HttpException(
         `User with ID '${teacher.id}' is not have 'teacher' role`,
-        CustomError.NotHaveRole,
+        ClassesErrors.NotHaveRole,
       );
     }
     if (teacher.class !== null) {
       throw new HttpException(
         `User with ID '${teacher.id}' already have a class`,
-        CustomError.UserHaveClass,
+        ClassesErrors.UserHaveClass,
       );
     }
     const classRoom = await this.classesRepository.create(dto);

@@ -18,32 +18,44 @@ export class RoleGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
+    const requiredRoles = this.reflector.getAllAndOverride<string[]>(ROLE_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    if (!requiredRoles) {
+      return true;
+    }
+    const req = context.switchToHttp().getRequest();
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      throw new UnauthorizedException({
+        error: HttpStatus.UNAUTHORIZED,
+        message: "User not authorized",
+      });
+    }
+
+    const token = authHeader.split(" ")[1];
+
     try {
-      const requiredRoles = this.reflector.getAllAndOverride<string[]>(
-        ROLE_KEY,
-        [context.getHandler(), context.getClass()],
-      );
-      if (!requiredRoles) {
-        return true;
-      }
-      const req = context.switchToHttp().getRequest();
-      const authHeader = req.headers.authorization;
-      const bearer = authHeader.split(" ")[0];
-      const token = authHeader.split(" ")[1];
-
-      if (bearer !== "Bearer" || !token) {
-        throw new UnauthorizedException({
-          message: "User not authorized",
-        });
-      }
-
       const user = this.jwtService.verify(token);
       req.user = user;
-      return user.role.some((role: { value: string }) =>
-        requiredRoles.includes(role.value),
-      );
-    } catch (e) {
-      throw new HttpException("No access", HttpStatus.FORBIDDEN);
+      if (
+        user &&
+        user.role &&
+        !user.role.some((role: { value: string }) =>
+          requiredRoles.includes(role.value),
+        )
+      ) {
+        throw new UnauthorizedException({
+          error: HttpStatus.FORBIDDEN,
+          message: "No access!",
+        });
+      } else {
+        return true;
+      }
+    } catch (error) {
+      throw new HttpException(`Auth error`, HttpStatus.FORBIDDEN);
     }
   }
 }

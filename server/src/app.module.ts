@@ -26,17 +26,17 @@ import { QuartersModule } from "./quarters/quarters.module";
 import * as path from "path";
 import { Quarter } from "./quarters/quarters.model";
 import { DiarySign } from "./diary/diary_sign.model";
-// import { APP_GUARD } from "@nestjs/core";
-// import { JwtAuthGuard } from "./auth/jwt-auth.guard";
+import { APP_GUARD } from "@nestjs/core";
+import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 import { InfoModule } from "./info/info.module";
 
 @Module({
-  // providers: [
-  //   {
-  //      provide: APP_GUARD,
-  //      useClass: JwtAuthGuard,
-  //   },
-  // ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
   imports: [
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`,

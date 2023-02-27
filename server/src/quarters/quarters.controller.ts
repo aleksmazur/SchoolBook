@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -12,6 +13,7 @@ import { Quarter } from "./quarters.model";
 import { QuartersService } from "./quarters.service";
 
 @ApiTags("Quarters")
+@ApiBearerAuth()
 @Controller("quarters")
 export class QuartersController {
   constructor(private quartersService: QuartersService) {}
