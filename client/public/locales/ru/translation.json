@@ -68,13 +68,16 @@
         "grades": "Успеваемость",
         "currentGrades": "Текущие оценки",
         "finalGrades": "Итоговые  оценки",
-        "rating": "Рейтинг класса"
+        "rating": "Рейтинг класса",
+        "subject": "Предмет",
+        "average": "Средний балл"
     },
     "profile": {
         "profileTitle": "Профиль пользователя",
         "teacher": "Учитель",
         "father": "Отец",
         "mother": "Мать",
+        "parents": "Родители",
         "phone": "Телефон",
         "pupil": "Ученик: ",
         "class": "Класс: ",

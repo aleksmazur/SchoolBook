@@ -186,11 +186,13 @@ const DiaryPage = () => {
           ) : (
             <div className="error__text">{errorDiary}</div>
           )}
-          {role === 'parent' && (
-            <button className="diary__action-button btn" disabled={sign} onClick={subscribeDiary}>
-              {sign ? t('diary.signed') : t('diary.sign')}
-            </button>
-          )}
+          {role === 'parent' &&
+            (new Date().getFullYear() > year ||
+              (getWeekNumber(new Date()) >= week && new Date().getFullYear() === year)) && (
+              <button className="diary__action-button btn" disabled={sign} onClick={subscribeDiary}>
+                {sign ? t('diary.signed') : t('diary.sign')}
+              </button>
+            )}
         </>
       )}
     </div>

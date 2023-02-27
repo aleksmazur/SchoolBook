@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '../../store/hooks';
 import './finalGrades.css';
 
 const FinalGrades = () => {
+  const { t } = useTranslation();
   const { finalDiary } = useAppSelector((state) => state.diary);
   const { currentQuarter } = useAppSelector((state) => state.quarter);
   return (
@@ -10,12 +12,12 @@ const FinalGrades = () => {
         <thead>
           <tr>
             <th></th>
-            <th>Предмет</th>
-            <th>1 четверть</th>
-            <th>2 четверть</th>
-            <th>3 четверть</th>
-            <th>4 четверть</th>
-            <th>Годовая</th>
+            <th>{t('grades.subject')}</th>
+            <th>I {t('diary.quarter')}</th>
+            <th>II {t('diary.quarter')}</th>
+            <th>III {t('diary.quarter')}</th>
+            <th>IV {t('diary.quarter')}</th>
+            <th>{t('grades.finalGrades')}</th>
           </tr>
         </thead>
         <tbody>

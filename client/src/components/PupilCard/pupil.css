@@ -1,7 +1,9 @@
 .pupil__content {
+    margin-top: 10px;
     display: flex;
     gap: 20px;
     align-items: center;
+    justify-content: center;
 }
 
 .pupil__info h3, .pupil__info div {
